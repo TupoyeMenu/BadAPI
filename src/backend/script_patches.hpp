@@ -28,14 +28,14 @@ namespace big
 		 *
 		 * @return PUSH_CONST_1; LEAVE 1, 1
 		 */
-		g_script_patcher_service->add_patch({RAGE_JOAAT("shop_controller"), "2D 01 04 00 00 2C ? ? ? 56 ? ? 71", 5, {0x71, 0x2E, 0x01, 0x01}, nullptr});
+		g_script_patcher_service->add_patch({RAGE_JOAAT("shop_controller"), "despawn bypass", "2D 01 04 00 00 2C ? ? ? 56 ? ? 71", 5, {0x71, 0x2E, 0x01, 0x01}, nullptr});
 
 		/**
 		 * @brief Godmode/Invisibility detection bypass.
 		 * @details Function hash: 0xC0E97F83
 		 * @details Has `NETSHOPPING::NET_GAMESERVER_CHECKOUT_START(*piParam0)`
 		 */
-		g_script_patcher_service->add_patch({RAGE_JOAAT("shop_controller"), "38 00 5D ? ? ? 38 00 5D ? ? ? 38 00 41", 0, std::vector<uint8_t>(12, 0x0), nullptr});
+		g_script_patcher_service->add_patch({RAGE_JOAAT("shop_controller"), "godmode/invisibility detection bypass", "38 00 5D ? ? ? 38 00 5D ? ? ? 38 00 41", 0, std::vector<uint8_t>(12, 0x0), nullptr});
 
 		for (auto& entry : *g_pointers->m_script_program_table)
 		{

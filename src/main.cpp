@@ -11,11 +11,14 @@
 #include "gui.hpp"
 #include "hooking.hpp"
 #include "logger/exception_handler.hpp"
+#include "lua/lua_manager.hpp"
 #include "native_hooks/native_hooks.hpp"
 #include "pointers.hpp"
 #include "renderer.hpp"
 #include "script_mgr.hpp"
+#include "services/players/player_service.hpp"
 #include "services/script_patcher/script_patcher_service.hpp"
+#include "services/tunables/tunables_service.hpp"
 #include "thread_pool.hpp"
 
 #include <rage/gameSkeleton.hpp>
@@ -33,7 +36,7 @@ namespace big
 					continue;
 				rage::game_skeleton_update_group* group = reinterpret_cast<rage::game_skeleton_update_group*>(update_node);
 				for (rage::game_skeleton_update_base* group_child_node = group->m_head; group_child_node;
-				     group_child_node                                  = group_child_node->m_next)
+				    group_child_node                                   = group_child_node->m_next)
 				{
 					// TamperActions is a leftover from the old AC, but still useful to block anyway
 					if (group_child_node->m_hash != 0xA0F39FB6 && group_child_node->m_hash != RAGE_JOAAT("TamperActions"))
@@ -116,6 +119,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				    auto hooking_instance = std::make_unique<hooking>();
 				    LOG(INFO) << "Hooking initialized.";
 
+				    auto player_service_instance         = std::make_unique<player_service>();
+				    auto tunables_service_instance       = std::make_unique<tunables_service>();
 				    auto script_patcher_service_instance = std::make_unique<script_patcher_service>();
 				    LOG(INFO) << "Script Patcher initialized.";
 
@@ -129,6 +134,10 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				    auto native_hooks_instance = std::make_unique<native_hooks>();
 				    LOG(INFO) << "Dynamic native hooker initialized.";
 
+				    auto lua_manager_instance =
+				        std::make_unique<lua_manager>(g_file_manager.get_project_folder("scripts"), g_file_manager.get_project_folder("scripts_config"));
+				    LOG(INFO) << "Lua manager initialized.";
+
 				    while (g_running)
 					    std::this_thread::sleep_for(500ms);
 
@@ -137,6 +146,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 				    g_script_mgr.remove_all_scripts();
 				    LOG(INFO) << "Scripts unregistered.";
+
+				    lua_manager_instance.reset();
+				    LOG(INFO) << "Lua manager uninitialized.";
 
 				    // cleans up the thread responsible for saving settings
 				    g.destroy();
@@ -148,6 +160,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 				    script_patcher_service_instance.reset();
 				    LOG(INFO) << "Script Patcher Service reset.";
+				    player_service_instance.reset();
+				    LOG(INFO) << "Player Service reset.";
 
 				    hooking_instance.reset();
 				    LOG(INFO) << "Hooking uninitialized.";

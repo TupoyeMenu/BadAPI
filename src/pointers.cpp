@@ -12,7 +12,7 @@ namespace big
 {
 	pointers::pointers()
 	{
-		memory::pattern_batch main_batch;
+		memory::batch main_batch;
 
 		main_batch.add("Game state", "83 3D ? ? ? ? ? 75 17 8B 43 20 25", [this](memory::handle ptr) {
 			m_game_state = ptr.add(2).rip().add(1).as<eGameState*>();
@@ -89,7 +89,128 @@ namespace big
 			m_nullsub = ptr.as<void (*)()>();
 		});
 
-		main_batch.run(memory::module(nullptr));
+		main_batch.add("Ped Pool", "4C 8B 35 ? ? ? ? B8 ? ? ? ? 0F 57 F6 89 05 ? ? ? ? 49 63 76 10 4C 8B FE 85 F6 0F 84 ? ? ? ? 49 8B 46 08 49 FF CF FF CE 42 0F B6 0C 38", [this](memory::handle ptr) {
+			m_ped_pool = ptr.add(3).rip().as<GenericPool**>();
+		});
+
+		main_batch.add("Prop Pool", "48 8B 05 ? ? ? ? 0F B7 50 10 48 8B 05", [this](memory::handle ptr) {
+			m_prop_pool = ptr.add(3).rip().as<GenericPool**>();
+		});
+
+		main_batch.add("Vehicle Pool", "4C 8B 25 ? ? ? ? 8B 29 33 F6 49 8B 04 24 33 DB 4C 8D 71 08 44 8B 78 08 45 85 FF 0F 8E ? ? ? ? 4D 8B 0C 24 41 3B 59 08 7D 29 49 8B 51 30 44 8B C3 8B CB 49 C1 E8 05 83 E1 1F 44 8B D3 42 8B 04 82", [this](memory::handle ptr) {
+			m_vehicle_pool = ptr.add(3).rip().as<VehiclePool***>();
+		});
+
+		main_batch.add("Network", "48 8B 0D ? ? ? ? 45 33 C9 48 8B D7", [this](memory::handle ptr) {
+			m_network = ptr.add(3).rip().as<Network**>();
+		});
+
+		main_batch.add("Get Connection Peer", "48 89 5C 24 08 48 89 74 24 18 89 54 24 10 57 48 83 EC 40 48", [this](memory::handle ptr) {
+			m_get_connection_peer = ptr.as<functions::get_connection_peer>();
+		});
+
+		main_batch.add("Send Network Damage", "E8 ? ? ? ? E9 E9 01 00 00 48 8B CB", [this](memory::handle ptr) {
+			m_send_network_damage = ptr.add(1).rip().as<functions::send_network_damage>();
+		});
+
+		main_batch.add("Give Pickup Reward", "48 8B C8 33 C0 48 85 C9 74 0A 44 8B C3 8B D7 E8", [this](memory::handle ptr) {
+			m_give_pickup_rewards = ptr.sub(0x28).as<decltype(m_give_pickup_rewards)>();
+		});
+
+		main_batch.add("Trigger Script Event", "48 8B C4 48 89 58 08 44 89 48 20 55 56 57 48 83 EC 30", [this](memory::handle ptr) {
+			m_trigger_script_event = ptr.as<decltype(pointers::m_trigger_script_event)>();
+		});
+
+		// Received Event Hook
+		main_batch.add("REH", "66 41 83 F9 ? 0F 83", [this](memory::handle ptr) {
+			m_received_event = ptr.as<decltype(pointers::m_received_event)>();
+		});
+
+		main_batch.add("Send Event Acknowledge", "E8 ? ? ? ? 66 83 7B 08 5B", [this](memory::handle ptr) {
+			m_send_event_ack = ptr.add(1).rip().as<decltype(pointers::m_send_event_ack)>();
+		});
+
+		main_batch.add("Read Bitbuffer WORD/DWORD", "48 89 74 24 ? 57 48 83 EC 20 48 8B D9 33 C9 41 8B F0 8A", [this](memory::handle ptr) {
+			m_read_bitbuf_dword = ptr.sub(5).as<decltype(pointers::m_read_bitbuf_dword)>();
+		});
+
+		main_batch.add("Read Bitbuffer Array", "48 89 5C 24 ? 57 48 83 EC 30 41 8B F8 4C", [this](memory::handle ptr) {
+			m_read_bitbuf_array = ptr.as<decltype(pointers::m_read_bitbuf_array)>();
+		});
+
+		main_batch.add("Read Bitbuffer String", "48 89 5C 24 08 48 89 6C 24 18 56 57 41 56 48 83 EC 20 48 8B F2 45", [this](memory::handle ptr) {
+			m_read_bitbuf_string = ptr.as<decltype(pointers::m_read_bitbuf_string)>();
+		});
+
+		main_batch.add("Read Bitbuffer Boolean", "48 8B C4 48 89 58 08 55 56 57 48 83 EC 20 48 83 60", [this](memory::handle ptr) {
+			m_read_bitbuf_bool = ptr.as<decltype(pointers::m_read_bitbuf_bool)>();
+		});
+
+		main_batch.add("Write Bitbuffer WORD/DWORD", "48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 56 48 83 EC 20 8B EA BF 01", [this](memory::handle ptr) {
+			m_write_bitbuf_dword = ptr.as<decltype(pointers::m_write_bitbuf_dword)>();
+		});
+
+		main_batch.add("Write Bitbuffer QWORD", "48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 48 83 EC 20 41 8B F0 48 8B EA 48 8B D9 41 83 F8 20", [this](memory::handle ptr) {
+			m_write_bitbuf_qword = ptr.as<decltype(pointers::m_write_bitbuf_qword)>();
+		});
+
+		main_batch.add("Write Bitbuffer Int64", "E8 ? ? ? ? 8A 53 39 48 8B CF", [this](memory::handle ptr) {
+			m_write_bitbuf_int64 = ptr.add(1).rip().as<decltype(pointers::m_write_bitbuf_int64)>();
+		});
+
+		main_batch.add("Write Bitbuffer Int32", "E8 ? ? ? ? 8A 53 74", [this](memory::handle ptr) {
+			m_write_bitbuf_int32 = ptr.add(1).rip().as<decltype(pointers::m_write_bitbuf_int32)>();
+		});
+
+		main_batch.add("Write Bitbuffer Boolean", "E8 ? ? ? ? 8A 57 39", [this](memory::handle ptr) {
+			m_write_bitbuf_bool = ptr.add(1).rip().as<decltype(pointers::m_write_bitbuf_bool)>();
+		});
+
+		main_batch.add("Write Bitbuffer Array", "E8 ? ? ? ? 01 7E 08", [this](memory::handle ptr) {
+			m_write_bitbuf_array = ptr.add(1).rip().as<decltype(pointers::m_write_bitbuf_array)>();
+		});
+
+		main_batch.add("World Model Spawn Bypass", "48 85 C0 0F 84 ? ? ? ? 8B 48 50", [this](memory::handle ptr) {
+			m_world_model_spawn_bypass = ptr.as<PVOID>();
+		});
+
+		main_batch.add("Blame Explode", "0F 85 EE 00 00 00 84 C0", [this](memory::handle ptr) {
+			m_blame_explode = ptr;
+		});
+
+		main_batch.add("Patch blocked explosions", "E8 ? ? ? ? 48 8D 4C 24 20 E8 ? ? ? ? 4C 8D 9C 24 80 01 00 00", [this](memory::handle ptr) {
+			m_explosion_patch = ptr;
+		});
+
+		main_batch.add("Queue Packet", "E8 ? ? ? ? 84 C0 74 4D B3 01", [this](memory::handle ptr) {
+			m_queue_packet = ptr.add(1).rip().as<functions::queue_packet>();
+		});
+
+		main_batch.add("Send Packet", "48 8B C4 48 89 58 08 48 89 70 10 48 89 78 18 4C 89 48 20 55 41 54 41 55 41 56 41 57 48 8D A8 98", [this](memory::handle ptr) {
+			m_send_packet = ptr.as<functions::send_packet>();
+		});
+
+		// Received clone sync & Get sync tree for type & Get net object for player & Get sync type info & Get net object
+		main_batch.add("RCS/GSTFT/GNOFP/GNO/GSTI", "48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 57 41 54 41 55 41 56 41 57 48 83 EC 40 4C 8B EA", [this](memory::handle ptr) {
+			m_received_clone_sync = ptr.as<decltype(pointers::m_received_clone_sync)>();
+			m_get_sync_tree_for_type = ptr.add(0x2F).add(1).rip().as<decltype(pointers::m_get_sync_tree_for_type)>(); // 0F B7 CA 83 F9 07 .as()
+			m_get_net_object = ptr.add(0x109).add(1).rip().as<decltype(pointers::m_get_net_object)>(); // E8 ? ? ? ? 0F B7 53 7C .add(1).rip().as()
+			m_get_sync_type_info = ptr.add(0x11F).add(1).rip().as<decltype(pointers::m_get_sync_type_info)>(); // 44 0F B7 C1 4C 8D 0D .as()
+		});
+
+		main_batch.add("GET_GAMEPLAY_CAM_COORDS", "8B 90 ? ? ? ? 89 13", [this](memory::handle ptr) {
+			m_get_gameplay_cam_coords = ptr.sub(0xE).as<functions::get_gameplay_cam_coords>();
+		});
+
+		main_batch.add("Request Control", "E8 ? ? ? ? EB 50 48 8B D3", [this](memory::handle ptr) {
+			m_request_control = ptr.add(1).rip().as<functions::request_control>();
+		});
+
+		main_batch.add("CNetworkObjectMgr", "48 8B 0D ? ? ? ? 45 33 C0 E8 ? ? ? ? 33 FF 4C 8B F0", [this](memory::handle ptr) {
+			m_network_object_mgr = ptr.add(3).rip().as<CNetworkObjectMgr**>();
+		});
+
+		main_batch.run(memory::module(""));
 
 		m_hwnd = FindWindowW(L"grcWindow", nullptr);
 		if (!m_hwnd)

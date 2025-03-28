@@ -27,6 +27,7 @@
 #include <new>
 
 #include <set>
+#include <unordered_set>
 #include <sstream>
 #include <string>
 #include <string_view>
@@ -58,6 +59,8 @@
 #include <ped/CPed.hpp>
 #include <script/types.hpp>
 
+#include "lua/sol_include.hpp"
+
 // clang-format on
 
 namespace big
@@ -77,6 +80,8 @@ namespace big
 		inline Ped ped;
 		inline Player id;
 		inline Vector3 pos;
+		inline Vector3 rot;
 		inline Vehicle veh;
+		inline int char_index;
 	}
 }

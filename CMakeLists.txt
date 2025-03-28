@@ -13,6 +13,7 @@ include(cmake/minhook.cmake)
 include(cmake/async-logger.cmake)
 include(cmake/json.cmake)
 include(cmake/fmt.cmake)
+include(cmake/luajit.cmake)
 
 message("\nFetching custom modules")
 include(cmake/imgui.cmake)
@@ -33,7 +34,7 @@ add_library(BigBaseV2 MODULE "${SRC_MAIN}")
 
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_property(TARGET BigBaseV2 PROPERTY CXX_STANDARD 20)
+set_property(TARGET BigBaseV2 PROPERTY CXX_STANDARD 23)
 
 source_group(TREE ${SRC_DIR} PREFIX "src" FILES ${SRC_MAIN} )
 
@@ -43,10 +44,12 @@ target_include_directories(BigBaseV2 PRIVATE
     "${gtav_classes_SOURCE_DIR}"
     "${imgui_SOURCE_DIR}"
     "${minhook_SOURCE_DIR}/src/hde"
+    "${luajit_SOURCE_DIR}/src"
+    "${luajit_BINARY_DIR}/src"
 )
 
 target_precompile_headers(BigBaseV2 PRIVATE "${SRC_DIR}/common.hpp")
-target_link_libraries(BigBaseV2 PRIVATE minhook AsyncLogger dbghelp imgui fmt d3dcompiler dwmapi winmm psapi)
+target_link_libraries(BigBaseV2 PRIVATE minhook AsyncLogger dbghelp imgui fmt libluajit d3dcompiler dwmapi winmm psapi)
 
 add_compile_definitions(BigBaseV2 
     "_CRT_SECURE_NO_WARNINGS"

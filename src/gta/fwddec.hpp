@@ -52,6 +52,9 @@ namespace rage
 	class rlSessionInfo;
 	class rlSessionByGamerTaskResult;
 	struct game_skeleton;
+
+	class netConnectionManager;
+	class netConnectionPeer;
 }
 
 class GtaThread;
@@ -75,3 +78,6 @@ class CNetworkPlayerMgr;
 class CPlayerInfo;
 class CNetworkObjectMgr;
 class CNetComplaintMgr;
+
+class GenericPool;
+class VehiclePool;

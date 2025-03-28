@@ -47,6 +47,57 @@ namespace big
 		functions::handle_to_ptr m_handle_to_ptr{};
 
 		PVOID m_queue_dependency;
+
+		GenericPool** m_ped_pool;
+		GenericPool** m_prop_pool;
+		VehiclePool*** m_vehicle_pool;
+
+		Network** m_network;
+
+		functions::get_connection_peer m_get_connection_peer;
+
+		functions::give_pickup_rewards m_give_pickup_rewards;
+		functions::send_network_damage m_send_network_damage;
+
+		functions::trigger_script_event m_trigger_script_event;
+
+		// Bitbuffer Read/Write START
+		functions::read_bitbuf_dword m_read_bitbuf_dword;
+		functions::read_bitbuf_string m_read_bitbuf_string;
+		functions::read_bitbuf_bool m_read_bitbuf_bool;
+		functions::read_bitbuf_array m_read_bitbuf_array;
+		functions::write_bitbuf_qword m_write_bitbuf_qword;
+		functions::write_bitbuf_dword m_write_bitbuf_dword;
+		functions::write_bitbuf_int64 m_write_bitbuf_int64;
+		functions::write_bitbuf_int32 m_write_bitbuf_int32;
+		functions::write_bitbuf_bool m_write_bitbuf_bool;
+		functions::write_bitbuf_array m_write_bitbuf_array;
+		// Bitbuffer Read/Write END
+
+		// Received Event Signatures START
+		PVOID m_received_event;
+		functions::send_event_ack m_send_event_ack;
+		// Received Event Signatures END
+
+		PVOID m_world_model_spawn_bypass;
+		memory::handle m_blame_explode;
+		memory::handle m_explosion_patch;
+
+		functions::queue_packet m_queue_packet;
+		functions::send_packet m_send_packet;
+
+		//Sync Signatures START
+		PVOID m_received_clone_sync;
+		functions::get_sync_tree_for_type m_get_sync_tree_for_type;
+		functions::get_sync_type_info m_get_sync_type_info;
+		functions::get_net_object m_get_net_object;
+		//Sync Signatures END
+
+		functions::get_gameplay_cam_coords m_get_gameplay_cam_coords;
+
+		functions::request_control m_request_control;
+
+		CNetworkObjectMgr** m_network_object_mgr;
 	};
 
 	inline pointers* g_pointers{};

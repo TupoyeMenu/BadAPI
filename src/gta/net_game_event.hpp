@@ -1,13 +1,3 @@
-/**
- * @file net_game_event.hpp
- * 
- * @copyright GNU General Public License Version 2.
- * This file is part of YimMenu.
- * YimMenu is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
- * YimMenu is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License along with YimMenu. If not, see <https://www.gnu.org/licenses/>.
- */
-
 #pragma once
 #include "fwddec.hpp"
 #include "pointers.hpp"
@@ -18,41 +8,51 @@
 #pragma pack(push, 1)
 namespace rage
 {
+#pragma pack(push, 8)
 	class CSyncDataBase
 	{
 	public:
 		virtual ~CSyncDataBase()                                                     = default;
-		virtual bool SerializeDword(uint32_t* dword, int size)                       = 0;
-		virtual bool SerializeWord(uint16_t* word, int size)                         = 0;
-		virtual bool SerializeByte(uint8_t* byte, int size)                          = 0;
-		virtual bool SerializeInt32(int32_t* i, int size)                            = 0;
-		virtual bool SerializeInt16(int16_t* i, int size)                            = 0;
-		virtual bool SerializeSignedByte(int8_t* byte, int size)                     = 0;
-		virtual bool SerializeBool(bool* flag)                                       = 0;
-		virtual bool SerializeInt64(int64_t* i, int size)                            = 0;
-		virtual bool SerializeInt32Alt(int32_t* i, int size)                         = 0;
-		virtual bool SerializeInt16Alt(int16_t* i, int size)                         = 0;
-		virtual bool SerializeSignedByteAlt(int8_t* byte, int size)                  = 0;
-		virtual bool SerializeQword(uint64_t* qword, int size)                       = 0;
-		virtual bool SerializeDwordAlt(uint32_t* dword, int size)                    = 0;
-		virtual bool SerializeWordAlt(uint16_t* word, int size)                      = 0;
-		virtual bool SerializeByteAlt(uint8_t* byte, int size)                       = 0;
-		virtual bool SerializeSignedFloat(float* flt, float divisor, int size)       = 0;
-		virtual bool SerializeFloat(float* flt, float divisor, int size)             = 0;
-		virtual bool SerializeNetworkId(uint16_t* net_id)                            = 0;
-		virtual bool SerializeVector3(rage::fvector3* vec3, float divisor, int size) = 0;
+		virtual bool SerializeDword(uint32_t* dword, int size)                       = 0; // 1
+		virtual bool SerializeWord(uint16_t* word, int size)                         = 0; // 2
+		virtual bool SerializeByte(uint8_t* byte, int size)                          = 0; // 3
+		virtual bool SerializeInt32(int32_t* i, int size)                            = 0; // 4
+		virtual bool SerializeInt16(int16_t* i, int size)                            = 0; // 5
+		virtual bool SerializeSignedByte(int8_t* byte, int size)                     = 0; // 6
+		virtual bool SerializeBool(bool* flag)                                       = 0; // 7
+		virtual bool SerializeInt64(int64_t* i, int size)                            = 0; // 8
+		virtual bool SerializeInt32Alt(int32_t* i, int size)                         = 0; // 9
+		virtual bool SerializeInt16Alt(int16_t* i, int size)                         = 0; // 10
+		virtual bool SerializeSignedByteAlt(int8_t* byte, int size)                  = 0; // 11
+		virtual bool SerializeQword(uint64_t* qword, int size)                       = 0; // 12
+		virtual bool SerializeDwordAlt(uint32_t* dword, int size)                    = 0; // 13
+		virtual bool SerializeWordAlt(uint16_t* word, int size)                      = 0; // 14
+		virtual bool SerializeByteAlt(uint8_t* byte, int size)                       = 0; // 15
+		virtual bool SerializeSignedFloat(float* flt, float divisor, int size)       = 0; // 16
+		virtual bool SerializeFloat(float* flt, float divisor, int size)             = 0; // 17
+		virtual bool SerializeNetworkId(uint16_t* net_id)                            = 0; // 18
+		virtual bool SerializeVector3(rage::fvector3* vec3, float divisor, int size) = 0; // 19
 		virtual bool SerializeQuaternion(void* unk)                                  = 0; // i have no clue what that is
-		virtual bool SerializeVector3SignedZComponent(rage::fvector3* vec3, float divisor, int size) = 0;
+		virtual bool SerializeVector3SignedZComponent(rage::fvector3* vec3, float divisor, int size) = 0; // 21
 		virtual bool SerializeOrientation(rage::fvector4* vec4, float size) = 0; // yes, the size is a float
 		virtual bool SerializeArray(void* array, int size)                  = 0;
 		virtual bool SerializeString(char* str, int max_length)             = 0;
 		virtual bool IsSizeCalculator()                                     = 0;
 		virtual bool IsSizeCalculator2()                                    = 0;
 
-		void* unk_0x8;
-		void* syncLog;
-		datBitBuffer* buffer;
+		enum class Type
+		{
+			Reader = 1,
+			Writer,
+			SizeCalculator,
+			Logger
+		};
+
+		Type m_type;
+		void* m_sync_log;
+		datBitBuffer* m_buffer;
 	};
+#pragma pack(pop)
 
 	class netPlayer;
 
@@ -73,7 +73,7 @@ namespace rage
 		{
 			return m_bitsRead;
 		}
-		bool Seek(uint32_t bits)
+		void Seek(uint32_t bits)
 		{
 			if (bits >= 0)
 			{
@@ -81,19 +81,24 @@ namespace rage
 				if (bits <= length)
 					m_bitsRead = bits;
 			}
-			return false;
 		}
-		bool WriteBool(bool integer)
+		void SeekForward(uint32_t bits)
 		{
-			return big::g_pointers->m_write_bitbuf_bool(this, integer, 1);
+			m_bitsRead += static_cast<uint32_t>(bits);
+			if (m_bitsRead > m_highestBitsRead)
+				m_highestBitsRead = m_bitsRead;
 		}
-		bool ReadBool(bool* integer)
+		bool WriteBool(bool boolean)
 		{
-			return big::g_pointers->m_read_bitbuf_bool(this, integer, 1);
+			return big::g_pointers->m_write_bitbuf_bool(this, boolean, 1);
 		}
-		bool ReadPeerId(uint64_t* integer)
+		bool ReadBool(bool* boolean)
 		{
-			return this->ReadQWord(integer, 0x40);
+			return big::g_pointers->m_read_bitbuf_bool(this, boolean, 1);
+		}
+		bool ReadRockstarId(int64_t* rockstar_id)
+		{
+			return this->ReadInt64(rockstar_id, sizeof(rockstar_id) * 8);
 		}
 		uint64_t ReadBits(size_t numBits)
 		{
@@ -207,6 +212,10 @@ namespace rage
 		{
 			return big::g_pointers->m_write_bitbuf_int64(this, integer, bits);
 		}
+		bool WriteRockstarId(int64_t rockstar_id)
+		{
+			return big::g_pointers->m_write_bitbuf_int64(this, rockstar_id, sizeof(rockstar_id) * 8);
+		}
 		bool ReadInt64(int64_t* integer, int bits)
 		{
 			uint32_t v8;
@@ -223,13 +232,13 @@ namespace rage
 			return big::g_pointers->m_write_bitbuf_array(this, array, size, 0);
 		}
 
-		void WriteString(char* string, int max_len)
+		void WriteString(const char* string, int max_len)
 		{
 			auto len      = std::min(max_len, (int)strlen(string) + 1);
 			bool extended = len > 127;
 			Write<bool>(extended, 1);
 			Write<int>(len, extended ? 15 : 7);
-			WriteArray(string, 8 * len);
+			WriteArray((void*)string, 8 * len);
 		}
 
 		bool ReadArray(PVOID array, int size)
@@ -240,10 +249,11 @@ namespace rage
 		template<typename T>
 		inline T Read(int length)
 		{
-			static_assert(sizeof(T) <= 4, "maximum of 32 bit read");
+			static_assert(sizeof(T) <= 8, "maximum of 64 bit read");
+			static_assert(!std::is_same_v<T, float>, "use ReadFloat to read floating point values from the bitbuffer");
 
-			uint32_t val = 0;
-			ReadDword(&val, length);
+			uint64_t val = 0;
+			ReadQWord(&val, length);
 
 			return T(val);
 		}
@@ -252,6 +262,7 @@ namespace rage
 		inline T ReadSigned(int length)
 		{
 			static_assert(sizeof(T) <= 4, "maximum of 32 bit read");
+			static_assert(!std::is_same_v<T, float>, "use ReadSignedFloat to read signed floating point values from the bitbuffer");
 
 			int val = 0;
 			ReadInt32(&val, length);
@@ -291,7 +302,7 @@ namespace rage
 			float max   = (1 << length) - 1;
 			int integer = (int)((value / divisor) * max);
 
-			Write<int>(length, integer);
+			Write<int>(integer, length);
 		}
 
 		inline float ReadSignedFloat(int length, float divisor)
@@ -307,7 +318,7 @@ namespace rage
 			float max   = (1 << (length - 1)) - 1;
 			int integer = (int)((value / divisor) * max);
 
-			WriteSigned<int>(length, integer);
+			WriteSigned<int>(integer, length);
 		}
 
 	public:
@@ -432,6 +443,7 @@ namespace rage
 		Msg_0x45             = 0x45,
 		Msg_0x89             = 0x89,
 		Msg_0x86             = 0x86,
+		MsgBattlEyeCmd       = 0x8F,
 	};
 
 	enum class eEventNetworkType : int64_t
@@ -537,6 +549,7 @@ namespace rage
 		virtual void unk_0038()                                         = 0; //0x0038 (7)
 	};                                                                       //Size: 0x0008
 
+#pragma pack(push, 8)
 	class sEntityDamagedData
 	{
 	public:
@@ -555,6 +568,7 @@ namespace rage
 		alignas(8) int m_hit_material;                  //0x0060
 	};                                                  //Size: 0x0068
 	static_assert(sizeof(sEntityDamagedData) == 0x68);
+#pragma pack(pop)
 
 	class netGameEvent
 	{
@@ -637,6 +651,7 @@ namespace rage
 		uint32_t m_0x28; // 0x28
 		char m_padding2[0x04];
 	};
+	static_assert(sizeof(rage::netGameEvent) == 0x30);
 }
 
 class CScriptedGameEvent : public rage::netGameEvent
@@ -653,5 +668,12 @@ class CNetworkIncrementStatEvent : public rage::netGameEvent
 public:
 	Hash m_stat;       // 0x30
 	uint32_t m_amount; // 0x34
+};
+
+class CDoorBreakEvent : public rage::netGameEvent
+{
+public:
+	std::uint16_t m_vehicle_id; // 0x30
+	std::uint8_t m_door_id;     // 0x32
 };
 #pragma pack(pop)

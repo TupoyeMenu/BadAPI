@@ -55,11 +55,11 @@ namespace big
 
 	void script_patcher_service::create_data_for_script(rage::scrProgram* program)
 	{
-		auto pages = new std::uint8_t*[program->get_num_code_pages()];
+		auto pages = new uint8_t*[program->get_num_code_pages()];
 
 		for (auto i = 0u; i < program->get_num_code_pages(); i++)
 		{
-			pages[i] = new std::uint8_t[program->get_code_page_size(i)];
+			pages[i] = new uint8_t[program->get_code_page_size(i)];
 			std::memcpy(pages[i], program->get_code_page(i), program->get_code_page_size(i));
 		}
 
@@ -80,6 +80,21 @@ namespace big
 		m_script_patches.push_back(std::move(patch));
 	}
 
+	void script_patcher_service::remove_patch(std::string_view patch_name)
+	{
+		for (auto it = m_script_patches.begin(); it != m_script_patches.end();)
+		{
+			if (it->get_name() == patch_name)
+			{
+				it = m_script_patches.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
+	}
+
 	void script_patcher_service::on_script_load(rage::scrProgram* program)
 	{
 		if (get_data_for_script(program->m_name_hash) == nullptr && does_script_have_patches(program->m_name_hash))
@@ -89,12 +104,10 @@ namespace big
 		}
 	}
 
-	std::uint8_t** script_patcher_service::get_script_bytecode(rage::joaat_t script)
+	uint8_t** script_patcher_service::get_script_bytecode(rage::joaat_t script)
 	{
 		if (auto data = get_data_for_script(script))
-		{
 			return data->m_bytecode;
-		}
 
 		return nullptr;
 	}
