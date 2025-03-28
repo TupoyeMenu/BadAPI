@@ -79,7 +79,7 @@ namespace big
 		main_batch.add("Queue Dependency", "48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 20 8B F2 49 8B F8", [this](memory::handle ptr) {
 			m_queue_dependency = ptr.as<PVOID>();
 		});
-		
+
 		main_batch.add("Game Skeleton", "48 8D 0D ? ? ? ? BA ? ? ? ? 74 05 BA ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8D 0D ? ? ? ? BA ? ? ? ? 84 DB 75 05 BA ? ? ? ? E8 ? ? ? ? 48 8B CD C6 05 ? ? ? ? ? E8 ? ? ? ? 84", [this](memory::handle ptr) {
 			m_game_skeleton = ptr.add(3).rip().as<rage::game_skeleton*>();
 		});
@@ -207,6 +207,26 @@ namespace big
 
 		main_batch.add("CNetworkObjectMgr", "48 8B 0D ? ? ? ? 45 33 C0 E8 ? ? ? ? 33 FF 4C 8B F0", [this](memory::handle ptr) {
 			m_network_object_mgr = ptr.add(3).rip().as<CNetworkObjectMgr**>();
+		});
+
+		main_batch.add("Receive Net Message", "48 83 EC 20 4C 8B 71 50 33 ED", [this](memory::handle ptr) {
+			m_receive_net_message = ptr.sub(0x19).as<PVOID>();
+		});
+
+		main_batch.add("Get Network Event Data", "53 43 52 49 50 54 5F 4E 45 54 57 4F 52 4B", [this](memory::handle ptr) {
+			m_get_network_event_data = *ptr.sub(0x38).as<PVOID*>();
+		});
+
+		main_batch.add("Assign Physical Index", "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 41 54 41 55 41 56 41 57 48 83 EC 20 41 8A E8", [this](memory::handle ptr) {
+			m_assign_physical_index = ptr.as<PVOID>();
+		});
+
+		main_batch.add("Network Player Mgr Init", "41 56 48 83 EC ? 48 8B F1 B9 ? ? ? ? 49 8B F9 41 8B E8 4C 8B F2 E8", [this](memory::handle ptr) {
+			m_network_player_mgr_init = ptr.sub(0x13).as<decltype(pointers::m_network_player_mgr_init)>();
+		});
+
+		main_batch.add("Network Player Mgr Shutdown", "48 8D 9F ? ? ? ? EB ? 48 8B 13 48 85 D2 74 ? 48 8B CB E8 ? ? ? ? 48 83 7B ? ? 75 ? 48 8D 9F", [this](memory::handle ptr) {
+			m_network_player_mgr_shutdown = ptr.sub(0x1A).as<decltype(pointers::m_network_player_mgr_shutdown)>();
 		});
 
 		main_batch.run(memory::module(""));

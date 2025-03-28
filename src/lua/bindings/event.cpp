@@ -12,7 +12,7 @@ namespace lua::event
 	// Event that is triggered when a player leave the game session.
 	// **Example Usage:**
 	// ```lua
-	// event.register_handler(menu_event.PlayerLeave, function (player_name)
+	// event.register_handler(menu_event.PlayerLeave, function (player_name, net_player_ptr)
 	//     log.info(player_name)
 	// end)
 	// ```
@@ -23,7 +23,7 @@ namespace lua::event
 	// Event that is triggered when a player join the game session.
 	// **Example Usage:**
 	// ```lua
-	// event.register_handler(menu_event.PlayerJoin, function (player_name, player_id)
+	// event.register_handler(menu_event.PlayerJoin, function (player_name, player_id, net_player_ptr)
 	//     log.info(player_name)
 	//     log.info(player_id)
 	// end)
@@ -35,7 +35,7 @@ namespace lua::event
 	// Event that is triggered when the player manager initialize. Usually called when we are joining a session.
 	// **Example Usage:**
 	// ```lua
-	// event.register_handler(menu_event.PlayerMgrInit, function ()
+	// event.register_handler(menu_event.PlayerMgrInit, function (net_player_mgr_ptr)
 	//     log.info("Player manager inited, we just joined a session.")
 	// end)
 	// ```
@@ -43,26 +43,11 @@ namespace lua::event
 	// Lua API: Field
 	// Table: menu_event
 	// Field: PlayerMgrShutdown: integer
-	// Event that is triggered when the player manager shutdown. Usually called when we are leaving a session.
+	// Event that is triggered when the player manager is about to be shutdown. Usually called when we are leaving a session.
 	// **Example Usage:**
 	// ```lua
-	// event.register_handler(menu_event.PlayerMgrShutdown, function ()
+	// event.register_handler(menu_event.PlayerMgrShutdown, function (net_player_mgr_ptr)
 	//     log.info("Player manager inited, we just left a session.")
-	// end)
-	// ```
-
-	// Lua API: Field
-	// Table: menu_event
-	// Field: ChatMessageReceived: integer
-	// Event that is triggered when we receive or send an in-game chat message.
-	// **Example Usage:**
-	// ```lua
-	// event.register_handler(menu_event.ChatMessageReceived, function (player_id, chat_message, target_id, draw, is_team)
-	//     log.info(player_id)
-	//     log.info(chat_message)
-	//     log.info(target_id)
-	//     log.info(draw)
-	//     log.info(is_team)
 	// end)
 	// ```
 
@@ -129,6 +114,23 @@ namespace lua::event
 		module->m_event_callbacks[menu_event].push_back(func);
 	}
 
+	// Lua API: Function
+	// Table: event
+	// Name: trigger
+	// Param: menu_event: integer: The menu_event that we want to trigger.
+	// Param: p2: any: Argument to pass down to the event.
+	// Param: p3: any: Argument to pass down to the event.
+	// Trigger a menu_event. Uses variadic_args.
+	static void trigger(const menu_event& menu_event, sol::variadic_args args, sol::this_state state)
+	{
+		big::lua_module* module = sol::state_view(state)["!this"];
+
+		for(auto callback : module->m_event_callbacks[menu_event])
+		{
+			callback(args);
+		}
+	}
+
 	void bind(sol::state& state)
 	{
 		state.new_enum<menu_event>("menu_event",
@@ -137,10 +139,7 @@ namespace lua::event
 		        {"PlayerJoin", menu_event::PlayerJoin},
 		        {"PlayerMgrInit", menu_event::PlayerMgrInit},
 		        {"PlayerMgrShutdown", menu_event::PlayerMgrShutdown},
-		        {"ChatMessageReceived", menu_event::ChatMessageReceived},
 		        {"ScriptedGameEventReceived", menu_event::ScriptedGameEventReceived},
-		        {"SendMetric", menu_event::SendMetric},
-		        {"NetworkBail", menu_event::NetworkBail},
 		        {"MenuUnloaded", menu_event::MenuUnloaded},
 		        {"ScriptsReloaded", menu_event::ScriptsReloaded},
 		        {"Wndproc", menu_event::Wndproc},
@@ -149,6 +148,7 @@ namespace lua::event
 
 		auto ns                = state["event"].get_or_create<sol::table>();
 		ns["register_handler"] = register_handler;
-		// TODO: triggering events through script?
+		ns["trigger"]          = trigger;
+		// TODO: Check if triggering events works.
 	}
 }

@@ -12,6 +12,7 @@
 
 #include "gta/script/natives.hpp"
 #include "gta/script/script.hpp"
+#include "lua/lua_manager.hpp"
 #include "renderer/renderer.hpp"
 #include "views/view.hpp"
 
@@ -28,9 +29,17 @@ namespace big
 			    dx_on_tick();
 		    },
 		    -1);
+		g_renderer->add_dx_callback(
+		    [] {
+			    g_lua_manager->draw_always_draw_gui();
+		    },
+		    -2);
 
 		g_renderer->add_wndproc_callback([this](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 			wndproc(hwnd, msg, wparam, lparam);
+		});
+		g_renderer->add_wndproc_callback([](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+			g_lua_manager->trigger_event<menu_event::Wndproc>(hwnd, msg, wparam, lparam);
 		});
 
 		dx_init();

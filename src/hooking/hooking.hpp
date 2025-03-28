@@ -24,6 +24,10 @@ namespace big
 		static int queue_dependency(void* a1, int a2, int64_t dependency);
 		static bool init_native_tables(rage::scrProgram* program);
 		static rage::eThreadState script_vm(uint64_t* start_stack, uint64_t** scr_globals, rage::scrProgram* program, rage::scrThreadContext* ctx);
+
+		static bool network_player_mgr_init(CNetworkPlayerMgr* _this, uint64_t a2, uint32_t a3, uint32_t a4[4]);
+		static void network_player_mgr_shutdown(CNetworkPlayerMgr* _this);
+		static void* assign_physical_index(CNetworkPlayerMgr* netPlayerMgr, CNetGamePlayer* player, uint8_t new_index);
 	};
 
 	class minhook_keepalive

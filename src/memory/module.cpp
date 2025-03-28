@@ -67,7 +67,7 @@ namespace memory
 		if (m_loaded)
 			return m_loaded;
 
-		const auto mod = GetModuleHandleA(m_name.data());
+		const auto mod = GetModuleHandleA(m_name.size() == 0 ? nullptr : m_name.data());
 		if (!mod)
 			return false;
 		m_loaded = true;

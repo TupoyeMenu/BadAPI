@@ -11,6 +11,7 @@
 #include "gta/script/fiber_pool.hpp"
 #include "gta/script/natives.hpp"
 #include "gui/components/components.hpp"
+#include "lua/lua_manager.hpp"
 #include "views/view.hpp"
 
 #include <imgui.h>
@@ -23,8 +24,9 @@ namespace big
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("Unload Menu Clean"))
+				if (ImGui::MenuItem("Unload Menu"))
 				{
+					g_lua_manager->trigger_event<menu_event::MenuUnloaded>();
 					g_running = false;
 				}
 

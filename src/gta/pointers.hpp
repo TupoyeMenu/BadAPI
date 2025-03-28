@@ -98,6 +98,13 @@ namespace big
 		functions::request_control m_request_control;
 
 		CNetworkObjectMgr** m_network_object_mgr;
+
+		PVOID m_receive_net_message;
+		PVOID m_get_network_event_data;
+		PVOID m_assign_physical_index;
+
+		PVOID m_network_player_mgr_init;
+		PVOID m_network_player_mgr_shutdown;
 	};
 
 	inline pointers* g_pointers{};
