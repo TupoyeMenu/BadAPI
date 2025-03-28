@@ -6,8 +6,8 @@
  */
 
 #pragma once
-#include "natives.hpp"
-#include "pointers.hpp"
+#include "gta/script/natives.hpp"
+#include "gta/pointers.hpp"
 
 template<typename T>
 class pool_iterator

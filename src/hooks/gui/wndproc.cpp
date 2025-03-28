@@ -1,5 +1,5 @@
-#include "hooking.hpp"
-#include "renderer.hpp"
+#include "hooking/hooking.hpp"
+#include "renderer/renderer.hpp"
 
 namespace big
 {

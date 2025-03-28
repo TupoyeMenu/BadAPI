@@ -4,14 +4,15 @@
  * Used to demonstrate basic ImGui functionality.
  */
 
-#include "fiber_pool.hpp"
 #include "gta/joaat.hpp"
+#include "gta/pointers.hpp"
+#include "gta/script//script.hpp"
+#include "gta/script/fiber_pool.hpp"
+#include "gta/script/natives.hpp"
 #include "gui/components/components.hpp"
-#include "natives.hpp"
-#include "pointers.hpp"
-#include "script.hpp"
 #include "views/view.hpp"
 #include "widgets/imgui_bitfield.h"
+
 #include <cstdint>
 
 namespace big

@@ -11,7 +11,7 @@
  */
 
 #pragma once
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 #include "services/script_patcher/script_patcher_service.hpp"
 #include "gta/joaat.hpp"
 

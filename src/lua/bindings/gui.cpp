@@ -1,10 +1,11 @@
+#include "gui/gui.hpp"
+
+#include "lua/bindings/gui.hpp"
+#include "lua/lua_module.hpp"
 #include "lua/sol_include.hpp"
 
+#include <imgui_internal.h>
 #include <memory>
-	#include "../../gui.hpp"
-	#include "lua/lua_module.hpp"
-	#include "lua/bindings/gui.hpp"
-	#include <imgui_internal.h>
 
 namespace lua::gui
 {
@@ -262,14 +263,14 @@ namespace lua::gui
 
 	void bind(sol::state& state)
 	{
-		auto ns            = state["gui"].get_or_create<sol::table>();
-		ns["get_tab"]      = get_tab;
-		ns["add_tab"]      = add_tab;
-		ns["is_open"]      = is_open;
+		auto ns                     = state["gui"].get_or_create<sol::table>();
+		ns["get_tab"]               = get_tab;
+		ns["add_tab"]               = add_tab;
+		ns["is_open"]               = is_open;
 		ns["toggle"]                = toggle;
 		ns["mouse_override"]        = mouse_override;
 		ns["override_mouse"]        = override_mouse;
-		ns["add_imgui"]    = add_imgui;
+		ns["add_imgui"]             = add_imgui;
 		ns["add_always_draw_imgui"] = add_always_draw_imgui;
 
 		auto button_ut        = ns.new_usertype<lua::gui::button>("button");

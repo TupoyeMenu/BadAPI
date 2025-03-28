@@ -10,15 +10,8 @@
  */
 
 #pragma once
-#include "fiber_pool.hpp"
-#include "gta/script_handler.hpp"
-#include "gta_util.hpp"
-#include "natives.hpp"
-#include "packet.hpp"
-#include "script.hpp"
-#include "script_local.hpp"
-#include "services/players/player_service.hpp"
-
+#include "gta/script/natives.hpp"
+#include "gta/script/script.hpp"
 #include "memory/pattern.hpp"
 
 #include <script/scrProgram.hpp>

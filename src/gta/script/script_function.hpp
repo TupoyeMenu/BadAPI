@@ -1,8 +1,8 @@
 #pragma once
 
-#include "gta_util.hpp"
-#include "pointers.hpp"
-#include "util/scripts.hpp"
+#include "gta/gta_util.hpp"
+#include "gta/pointers.hpp"
+#include "memory/pattern.hpp"
 
 #include <script/scrProgram.hpp>
 

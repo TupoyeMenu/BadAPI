@@ -18,9 +18,7 @@
 #include "bindings/stats.hpp"
 #include "bindings/tunables.hpp"
 #include "bindings/vector.hpp"
-#include "file_manager.hpp"
 #include "lua_manager.hpp"
-#include "script_mgr.hpp"
 
 namespace big
 {

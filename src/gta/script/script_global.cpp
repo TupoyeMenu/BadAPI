@@ -8,10 +8,9 @@
  * You should have received a copy of the GNU General Public License along with YimMenu. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "script_global.hpp"
+#include "gta/script/script_global.hpp"
 
-#include "common.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 namespace big
 {

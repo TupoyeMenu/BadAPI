@@ -8,9 +8,9 @@
  * You should have received a copy of the GNU General Public License along with TupoyeMenu. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "fiber_pool.hpp"
+#include "gta/script/fiber_pool.hpp"
+#include "gta/script/natives.hpp"
 #include "gui/components/components.hpp"
-#include "natives.hpp"
 #include "views/view.hpp"
 
 #include <imgui.h>

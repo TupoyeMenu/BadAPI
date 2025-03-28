@@ -11,18 +11,16 @@
 
 #include "core/data/all_script_names.hpp"
 #include "core/data/stack_sizes.hpp"
-#include "fiber_pool.hpp"
-#include "gta/joaat.hpp"
+#include "gta/pointers.hpp"
+#include "gta/script/fiber_pool.hpp"
+#include "gta/script/natives.hpp"
+#include "gta/script/script.hpp"
 #include "gta/script_handler.hpp"
 #include "gta/script_thread.hpp"
-#include "gta_util.hpp"
 #include "gui/components/components.hpp"
-#include "natives.hpp"
-#include "network/Network.hpp"
-#include "script.hpp"
-#include "script_global.hpp"
-#include "util/scripts.hpp"
 #include "views/view.hpp"
+
+#include <network/CNetGamePlayer.hpp>
 
 static GtaThread* selected_thread;
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "pointers.hpp"
-#include "natives.hpp"
+#include "gta/pointers.hpp"
+#include "gta/script/natives.hpp"
 
 #include <random>
 

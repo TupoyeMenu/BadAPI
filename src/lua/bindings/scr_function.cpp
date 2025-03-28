@@ -1,9 +1,9 @@
 #include "scr_function.hpp"
 
-#include "gta_util.hpp"
+#include "gta/gta_util.hpp"
 #include "memory.hpp"
 #include "memory/pattern.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 #include "util/scripts.hpp"
 
 namespace lua::scr_function

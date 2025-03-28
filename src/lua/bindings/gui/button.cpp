@@ -1,6 +1,6 @@
 #include "button.hpp"
 
-#include "fiber_pool.hpp"
+#include "gta/script/fiber_pool.hpp"
 #include "lua/lua_manager.hpp"
 
 namespace lua::gui

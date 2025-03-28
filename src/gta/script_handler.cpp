@@ -10,7 +10,7 @@
 
 #include "script_handler.hpp"
 
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 #include <network/CNetworkPlayerMgr.hpp>
 

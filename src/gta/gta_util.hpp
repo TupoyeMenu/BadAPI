@@ -1,6 +1,6 @@
 #pragma once
 #include "gta/script_thread.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 #include <network/CNetworkPlayerMgr.hpp>
 #include <ped/CPedFactory.hpp>

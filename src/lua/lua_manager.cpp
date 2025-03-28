@@ -1,6 +1,6 @@
 #include "lua_manager.hpp"
 
-#include "file_manager.hpp"
+#include "file_manager/file_manager.hpp"
 
 namespace big
 {

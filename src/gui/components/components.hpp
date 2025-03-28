@@ -11,7 +11,8 @@
 
 #pragma once
 
-#include "fiber_pool.hpp"
+#include "gta/script/fiber_pool.hpp"
+
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 

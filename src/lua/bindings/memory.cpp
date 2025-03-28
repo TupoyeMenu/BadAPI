@@ -3,7 +3,7 @@
 #include "lua/lua_manager.hpp"
 #include "memory/module.hpp"
 #include "memory/pattern.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 namespace lua::memory
 {

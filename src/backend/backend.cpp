@@ -6,7 +6,7 @@
 #include "backend.hpp"
 
 #include "looped/looped.hpp"
-#include "script.hpp"
+#include "gta/script/script.hpp"
 #include "script_patches.hpp"
 
 namespace big

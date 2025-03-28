@@ -5,15 +5,9 @@
 
 #include "hooking.hpp"
 
-#include "common.hpp"
-#include "function_types.hpp"
-#include "gta/script_thread.hpp"
-#include "gui.hpp"
-#include "memory/module.hpp"
-#include "natives.hpp"
-#include "pointers.hpp"
-#include "renderer.hpp"
-#include "script_mgr.hpp"
+#include "gta/pointers.hpp"
+#include "gta/script/invoker.hpp"
+#include "gta/script/script_mgr.hpp"
 
 #include <MinHook.h>
 #include <fibersapi.h>

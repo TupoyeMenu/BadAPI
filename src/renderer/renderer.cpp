@@ -11,11 +11,9 @@
 
 #include "renderer.hpp"
 
-#include "common.hpp"
-#include "file_manager.hpp"
+#include "file_manager/file_manager.hpp"
 #include "fonts/fonts.hpp"
-#include "gui.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 #include <backends/imgui_impl_dx11.h>
 #include <backends/imgui_impl_win32.h>

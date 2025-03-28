@@ -6,7 +6,7 @@
 #pragma once
 #include "entity.hpp"
 #include "memory/byte_patch.hpp"
-#include "natives.hpp"
+#include "gta/script/natives.hpp"
 
 struct world_model_bypass
 {

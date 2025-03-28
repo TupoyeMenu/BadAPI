@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-#include "gta_util.hpp"
+#include "gta/gta_util.hpp"
 #include "network/CNetGamePlayer.hpp"
 
 #include <network/Network.hpp>

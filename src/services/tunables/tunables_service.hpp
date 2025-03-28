@@ -1,8 +1,8 @@
 #pragma once
-#include "fiber_pool.hpp"
-#include "script.hpp"
+#include "gta/script/fiber_pool.hpp"
+#include "gta/script/script.hpp"
+#include "gta/script/script_global.hpp"
 #include "services/gta_data/cache_file.hpp"
-#include "script_global.hpp"
 
 namespace big
 {
@@ -97,7 +97,7 @@ namespace big
 		cache_file m_cache_file;
 
 		std::unordered_map<rage::joaat_t, int> m_tunables{};
-		std::unique_ptr<uint64_t[]> m_tunables_backup; 
+		std::unique_ptr<uint64_t[]> m_tunables_backup;
 		int m_num_tunables;
 
 		void save();

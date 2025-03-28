@@ -1,4 +1,4 @@
-#include "natives.hpp"
+#include "gta/script/natives.hpp"
 
 namespace lua::stats
 {

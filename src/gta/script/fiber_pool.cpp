@@ -10,8 +10,8 @@
 
 #include "fiber_pool.hpp"
 
-#include "script.hpp"
-#include "script_mgr.hpp"
+#include "gta/script/script.hpp"
+#include "gta/script/script_mgr.hpp"
 
 namespace big
 {

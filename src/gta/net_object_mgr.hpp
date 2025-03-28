@@ -15,7 +15,7 @@
  */
 
 #pragma once
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 #include "enums.hpp"
 #include "script/dataList.hpp"
 

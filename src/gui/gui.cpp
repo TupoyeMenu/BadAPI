@@ -10,9 +10,9 @@
 
 #include "gui.hpp"
 
-#include "natives.hpp"
-#include "renderer.hpp"
-#include "script.hpp"
+#include "gta/script/natives.hpp"
+#include "gta/script/script.hpp"
+#include "renderer/renderer.hpp"
 #include "views/view.hpp"
 
 #include <imgui.h>

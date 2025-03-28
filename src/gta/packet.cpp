@@ -1,6 +1,6 @@
 #include "packet.hpp"
 
-#include "gta_util.hpp"
+#include "gta/gta_util.hpp"
 
 #include <network/Network.hpp>
 #include <network/netConnection.hpp>

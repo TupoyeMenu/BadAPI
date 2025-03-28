@@ -1,6 +1,6 @@
 #pragma once
 
-#include "script_function.hpp"
+#include "gta/script/script_function.hpp"
 
 namespace lua::scr_function
 {

@@ -1,6 +1,6 @@
 #include "scr_patch.hpp"
 
-#include "gta_util.hpp"
+#include "gta/gta_util.hpp"
 #include "lua/lua_module.hpp"
 #include "lua/bindings/network.hpp" // For convert_sequence
 #include "services/script_patcher/script_patcher_service.hpp"

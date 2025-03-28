@@ -10,9 +10,9 @@
 
 #include "byte_patch_manager.hpp"
 
-#include "hooking.hpp"
+#include "hooking/hooking.hpp"
 #include "memory/byte_patch.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 #include "util/explosion_anti_cheat_bypass.hpp"
 #include "util/world_model.hpp"
 

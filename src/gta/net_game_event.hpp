@@ -1,6 +1,6 @@
 #pragma once
 #include "fwddec.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 #include <base/atRTTI.hpp>
 #include <cstdint>

@@ -5,8 +5,8 @@
 
 #include "backend/looped/looped.hpp"
 #include "gta/joaat.hpp"
-#include "natives.hpp"
-#include "pointers.hpp"
+#include "gta/script/natives.hpp"
+#include "gta/pointers.hpp"
 
 #include <network/CNetworkPlayerMgr.hpp>
 

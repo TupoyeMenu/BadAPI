@@ -1,6 +1,6 @@
 #pragma once
-#include "gta_util.hpp"
-#include "script_local.hpp"
+#include "gta/gta_util.hpp"
+#include "gta/script/script_local.hpp"
 
 namespace lua::locals
 {

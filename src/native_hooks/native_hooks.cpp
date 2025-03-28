@@ -12,9 +12,8 @@
 #include "native_hooks.hpp"
 
 #include "all_scripts.hpp"
-#include "crossmap.hpp"
-#include "gta_util.hpp"
-
+#include "gta/script/crossmap.hpp"
+#include "gta/pointers.hpp"
 #include <script/scrProgram.hpp>
 #include <script/scrProgramTable.hpp>
 

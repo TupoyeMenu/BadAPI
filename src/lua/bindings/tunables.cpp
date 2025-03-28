@@ -1,4 +1,3 @@
-#include "../../script.hpp"
 #include "tunables.hpp"
 
 namespace lua::tunables

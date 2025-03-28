@@ -1,5 +1,7 @@
 #include "script_function.hpp"
 
+#include "util/scripts.hpp"
+
 namespace big
 {
 	script_function::script_function(const std::string& name, const rage::joaat_t script, const std::string& pattern) :

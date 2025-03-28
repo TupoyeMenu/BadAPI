@@ -1,6 +1,6 @@
 #include "network.hpp"
 
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 #include "services/players/player_service.hpp"
 
 namespace lua::network

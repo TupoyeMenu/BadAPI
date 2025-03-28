@@ -9,11 +9,10 @@
  */
 
 #pragma once
-#include "fiber_pool.hpp"
 #include "gta/enums.hpp"
-#include "hooking.hpp"
+#include "gta/script/fiber_pool.hpp"
+#include "gta/script/natives.hpp"
 #include "native_hooks.hpp"
-#include "natives.hpp"
 #include "util/scripts.hpp"
 
 namespace big

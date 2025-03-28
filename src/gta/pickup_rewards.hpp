@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gta/joaat.hpp"
-#include "natives.hpp"
+#include "gta/script/natives.hpp"
 
 enum Rewards : Hash
 {

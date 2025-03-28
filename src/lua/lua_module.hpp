@@ -1,8 +1,8 @@
 #pragma once
-#include "../script.hpp"
 #include "bindings/gui.hpp"
 #include "bindings/gui/gui_element.hpp"
 #include "core/data/menu_event.hpp"
+#include "gta/script/script.hpp"
 #include "lua/bindings/scr_patch.hpp"
 #include "lua_patch.hpp"
 

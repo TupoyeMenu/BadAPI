@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "natives.hpp"
+#include "gta/script/natives.hpp"
 
 namespace rage
 {

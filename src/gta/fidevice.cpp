@@ -25,8 +25,8 @@
 #if 0
 #include "fidevice.hpp"
 
-#include "hooking.hpp"
-#include "pointers.hpp"
+#include "hooking/hooking.hpp"
+#include "gta/pointers.hpp"
 
 namespace rage
 {

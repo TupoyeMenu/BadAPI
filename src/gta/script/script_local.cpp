@@ -12,7 +12,7 @@
 
 #include "common.hpp"
 #include "gta/script_thread.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 namespace big
 {

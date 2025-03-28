@@ -9,7 +9,7 @@
  */
 
 #pragma once
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 #include <array>
 

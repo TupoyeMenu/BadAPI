@@ -1,14 +1,12 @@
 #include "tunables_service.hpp"
 
 #include "memory/module.hpp"
-#include "natives.hpp"
-#include "pointers.hpp"
-#include "script.hpp"
+#include "gta/script/natives.hpp"
+#include "gta/pointers.hpp"
+#include "gta/script/script.hpp"
 //#include "services/script_connection/script_connection_service.hpp" // for the stack size
 constexpr int DEFAULT_STACK_SIZE = 1424;
-#include "services/script_patcher/script_patcher_service.hpp"
-#include "thread_pool.hpp"
-#include "util/scripts.hpp"
+#include "gta/gta_util.hpp"
 
 namespace big
 {

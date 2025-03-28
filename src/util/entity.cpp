@@ -1,13 +1,12 @@
 #include "entity.hpp"
 
-#include "gta/joaat.hpp"
 #include "gta/net_object_mgr.hpp"
-#include "gta_util.hpp"
+#include "gta/gta_util.hpp"
 #include "math.hpp"
-#include "natives.hpp"
-#include "packet.hpp"
+#include "gta/script/natives.hpp"
+#include "gta/packet.hpp"
 #include "pools.hpp"
-#include "script.hpp"
+#include "gta/script/script.hpp"
 #include "services/players/player_service.hpp"
 
 #include <entities/CDynamicEntity.hpp>
@@ -25,13 +24,6 @@ namespace
 		return 0;
 	}
 }
-
-#include "gta_util.hpp"
-#include "math.hpp"
-#include "natives.hpp"
-#include "pools.hpp"
-#include "script.hpp"
-#include "services/players/player_service.hpp"
 
 namespace big::entity
 {

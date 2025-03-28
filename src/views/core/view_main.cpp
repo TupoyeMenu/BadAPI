@@ -3,7 +3,7 @@
  * @brief Main window you can add new tabs - tab bars here.
  */
 
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 #include "views/view.hpp"
 
 namespace big

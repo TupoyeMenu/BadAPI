@@ -5,7 +5,7 @@
 #include "invoker.hpp"
 
 #include "crossmap.hpp"
-#include "pointers.hpp"
+#include "gta/pointers.hpp"
 
 namespace big
 {

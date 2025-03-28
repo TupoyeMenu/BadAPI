@@ -1,5 +1,5 @@
 #include "memory.hpp"
-#include "script_global.hpp"
+#include "gta/script/script_global.hpp"
 
 namespace lua::globals
 {

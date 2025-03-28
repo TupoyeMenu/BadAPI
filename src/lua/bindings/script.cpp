@@ -1,7 +1,7 @@
 #include "script.hpp"
 
 #include "lua/lua_manager.hpp"
-#include "gta_util.hpp"
+#include "gta/gta_util.hpp"
 #include "memory/pattern.hpp"
 #include "util/scripts.hpp"
 

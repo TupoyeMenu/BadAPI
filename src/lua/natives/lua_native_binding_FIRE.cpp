@@ -1,5 +1,5 @@
 #include "lua_native_binding.hpp"
-#include "natives.hpp"
+#include "gta/script/natives.hpp"
 #include "util/explosion_anti_cheat_bypass.hpp"
 
 namespace lua::native

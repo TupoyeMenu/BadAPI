@@ -9,7 +9,7 @@
  * You should have received a copy of the GNU General Public License along with YimMenu. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "gui.hpp"
+#include "gui/gui.hpp"
 #include "views/view.hpp"
 
 #include <imgui.h>
