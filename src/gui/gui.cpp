@@ -31,7 +31,10 @@ namespace big
 		    -1);
 		g_renderer->add_dx_callback(
 		    [] {
-			    g_lua_manager->draw_always_draw_gui();
+			    if (g_lua_manager)
+			    {
+				    g_lua_manager->draw_always_draw_gui();
+			    }
 		    },
 		    -2);
 
@@ -39,7 +42,10 @@ namespace big
 			wndproc(hwnd, msg, wparam, lparam);
 		});
 		g_renderer->add_wndproc_callback([](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
-			g_lua_manager->trigger_event<menu_event::Wndproc>(hwnd, msg, wparam, lparam);
+			if (g_lua_manager)
+			{
+				g_lua_manager->trigger_event<menu_event::Wndproc>(hwnd, msg, wparam, lparam);
+			}
 		});
 
 		dx_init();
