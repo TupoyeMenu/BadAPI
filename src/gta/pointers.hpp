@@ -105,6 +105,11 @@ namespace big
 
 		PVOID m_network_player_mgr_init;
 		PVOID m_network_player_mgr_shutdown;
+
+		PVOID m_network_can_access_multiplayer;
+		PVOID m_terminate_game;
+
+		PVOID m_update_script_threads;
 	};
 
 	inline pointers* g_pointers{};

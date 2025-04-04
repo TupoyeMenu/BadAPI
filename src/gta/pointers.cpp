@@ -120,8 +120,7 @@ namespace big
 			m_trigger_script_event = ptr.as<decltype(pointers::m_trigger_script_event)>();
 		});
 
-		// Received Event Hook
-		main_batch.add("REH", "66 41 83 F9 ? 0F 83", [this](memory::handle ptr) {
+		main_batch.add("Received Event Hook", "66 41 83 F9 ? 0F 83", [this](memory::handle ptr) {
 			m_received_event = ptr.as<decltype(pointers::m_received_event)>();
 		});
 
@@ -227,6 +226,19 @@ namespace big
 
 		main_batch.add("Network Player Mgr Shutdown", "48 8D 9F ? ? ? ? EB ? 48 8B 13 48 85 D2 74 ? 48 8B CB E8 ? ? ? ? 48 83 7B ? ? 75 ? 48 8D 9F", [this](memory::handle ptr) {
 			m_network_player_mgr_shutdown = ptr.sub(0x1A).as<decltype(pointers::m_network_player_mgr_shutdown)>();
+		});
+
+		main_batch.add("Network Can Access Multiplayer", "E9 36 01 00 00 33 D2 8B CB", [this](memory::handle ptr) {
+			m_network_can_access_multiplayer = ptr.add(10).rip().as<PVOID>();
+		});
+
+		main_batch.add("Terminate Game", "E8 ? ? ? ? EB 14 41 83", [this](memory::handle ptr) {
+			// Multiple results but they all point to the same function.
+			m_terminate_game = ptr.add(1).rip().as<PVOID>();
+		});
+
+		main_batch.add("Update Script Threads", "40 53 48 83 EC 30 48 8D 0D ? ? ? ? E8 ? ? ? ? 48", [this](memory::handle ptr) {
+			m_update_script_threads = ptr.as<PVOID>();
 		});
 
 		main_batch.run(memory::module(""));

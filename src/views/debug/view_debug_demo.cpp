@@ -27,7 +27,6 @@ namespace big
 		ImGui::SliderInt("Int", &g.demo.demo_int, 0, 10);
 		ImGui::SliderScalar("Double", ImGuiDataType_Double, &g.demo.demo_double, &min, &max); //JSON does not describe rational numbers as integer/float/double/etc types, it is just "number". See: https://nlohmann.github.io/json/features/types/
 		ImGui::Combo("Combo", &g.demo.demo_combo, demo_combo, sizeof(demo_combo) / sizeof(*demo_combo));
-		ImGui::Bitfield("Bitfield", &g.demo.demo_bitset);
 
 		components::input_text_with_hint("##Vehicle", "Vehicle model", &g.demo.demo_vehicle_model, ImGuiInputTextFlags_None);
 
@@ -59,14 +58,14 @@ namespace big
 
 		if (ImGui::Button("Test g3log crash within ImGui"))
 		{
-			*((uint64_t*)0) = 0xDEADBEEF;
+			*((volatile uint64_t*)0) = 0xDEADBEEF;
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Test g3log crash within GTA V Script"))
 		{
 			g_fiber_pool->queue_job([] {
 				//PED::SPAWNPOINTS_GET_SEARCH_RESULT_FLAGS(PLAYER::PLAYER_PED_ID(), nullptr); //This causes a crash at GTA5.exe+5845356 and nothing of value was in the log in the stack dump because of the context switch to GTA 5's memory. If you encounter something similar, you will have to figure out where the crash occured in the GTA 5 exe, and trace back that native, and figure out which function is calling the native that is crashing.
-				*((PINT) nullptr) = 0xDEADBEEF;
+				*((volatile uint64_t*)0) = 0xDEADBEEF;
 			});
 		}
 	}

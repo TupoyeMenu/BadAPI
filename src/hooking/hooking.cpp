@@ -31,10 +31,15 @@ namespace big
 		detour_hook_helper::add<hooks::queue_dependency>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
 		detour_hook_helper::add<hooks::init_native_tables>("Init Native Tables", (void*)g_pointers->m_init_native_tables);
 		detour_hook_helper::add<hooks::script_vm>("Script VM", (void*)g_pointers->m_script_vm);
+		detour_hook_helper::add<hooks::update_script_threads>("Update Script Threads", (void*)g_pointers->m_update_script_threads);
 
 		detour_hook_helper::add<hooks::network_player_mgr_init>("NPMI", (void*)g_pointers->m_network_player_mgr_init);
 		detour_hook_helper::add<hooks::network_player_mgr_shutdown>("NPMS", (void*)g_pointers->m_network_player_mgr_shutdown);
 		detour_hook_helper::add<hooks::assign_physical_index>("API", (void*)g_pointers->m_assign_physical_index);
+
+		detour_hook_helper::add<hooks::network_can_access_multiplayer>("NCAM", (void*)g_pointers->m_network_can_access_multiplayer);
+
+		detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game);
 
 		g_hooking = this;
 	}

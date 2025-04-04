@@ -39,6 +39,8 @@ namespace
 	}
 }
 
+extern int updates_per_update;
+
 namespace big
 {
 	void view::debug_threads()
@@ -97,7 +99,7 @@ namespace big
 			ImGui::Text("Stack Pointer / Stack Size %d/%d",
 			    selected_thread->m_context.m_stack_pointer,
 			    selected_thread->m_context.m_stack_size);
-			ImGui::Text("IP: %X", selected_thread->m_context.m_instruction_pointer);
+			ImGui::Text("IP: 0x%X", selected_thread->m_context.m_instruction_pointer);
 			if (selected_thread->m_context.m_state == rage::eThreadState::killed)
 				ImGui::Text("Exit Reason: %s", selected_thread->m_exit_message);
 
@@ -171,6 +173,15 @@ namespace big
 		});
 
 		ImGui::EndGroup();
+
+		components::help_marker("Runs the script update function multiple times per frame.\nThis is for having fun, breaks everything.");
+		if(ImGui::InputInt("Updates per update", &updates_per_update))
+		{
+			if(updates_per_update < 0)
+			{
+				updates_per_update = 0;
+			}
+		}
 
 		if (*g_pointers->m_game_state != eGameState::Invalid && std::chrono::high_resolution_clock::now() - last_stack_update_time > 100ms)
 		{
