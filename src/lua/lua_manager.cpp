@@ -443,7 +443,7 @@ namespace big
 
 	void lua_manager::handle_error(const sol::error& error, const sol::state_view& state)
 	{
-		LOG(FATAL) << state["!module_name"].get<std::string_view>() << ": " << error.what();
+		LOG(WARNING) << state["!module_name"].get<std::string_view>() << ": " << error.what();
 		Logger::FlushQueue();
 	}
 }

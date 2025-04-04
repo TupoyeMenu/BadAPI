@@ -11,9 +11,9 @@
 #include "bindings/memory.hpp"
 #include "bindings/native.hpp"
 #include "bindings/network.hpp"
-#include "bindings/script.hpp"
 #include "bindings/scr_function.hpp"
 #include "bindings/scr_patch.hpp"
+#include "bindings/script.hpp"
 #include "bindings/self.hpp"
 #include "bindings/stats.hpp"
 #include "bindings/tunables.hpp"
@@ -167,7 +167,7 @@ namespace big
 			if (!entry.is_directory())
 				continue;
 
-			if(std::filesystem::relative(entry, scripts_folder.get_path()).wstring().contains(L"disabled"))
+			if (std::filesystem::relative(entry, scripts_folder.get_path()).wstring().contains(L"disabled"))
 				continue;
 
 			scripts_search_path += entry.path().string() + "/?.lua;";
