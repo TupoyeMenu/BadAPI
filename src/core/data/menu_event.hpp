@@ -6,8 +6,11 @@ enum class menu_event
     PlayerJoin,
     PlayerMgrInit,
     PlayerMgrShutdown,
-    ScriptedGameEventReceived,
     MenuUnloaded,
-    ScriptsReloaded,
     Wndproc,
+    Draw,
+
+    // Gameplay functions
+    AddPlaneLift,
+    ApplyPlaneThrust,
 };

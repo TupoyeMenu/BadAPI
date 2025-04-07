@@ -110,6 +110,9 @@ namespace big
 		PVOID m_terminate_game;
 
 		PVOID m_update_script_threads;
+
+		PVOID m_add_plane_lift;
+		PVOID m_apply_plane_thrust;
 	};
 
 	inline pointers* g_pointers{};

@@ -1,4 +1,5 @@
 
+#include "lua/sol_include.hpp"
 namespace lua::log
 {
 	// Lua API: Table
@@ -35,11 +36,24 @@ namespace lua::log
 		LOG(VERBOSE) << sol::state_view(state)["!module_name"].get<std::string>() << ": " << data;
 	}
 
+	// Lua API: Function
+	// Table: log
+	// Name: fatal
+	// Param: data: string
+	// Logs a fatal message.
+	static void fatal(const std::string& data, sol::this_state state)
+	{
+		LOG(FATAL) << sol::state_view(state)["!module_name"].get<std::string>() << ": " << data;
+	}
+
 	void bind(sol::state& state)
 	{
 		auto ns       = state["log"].get_or_create<sol::table>();
 		ns["info"]    = info;
 		ns["warning"] = warning;
 		ns["debug"]   = debug;
+		ns["fatal"]   = fatal;
+
+		state.new_enum("eLogLevel", "VERBOSE", eLogLevel::VERBOSE, "INFO", eLogLevel::INFO, "WARNING", eLogLevel::WARNING, "FATAL", eLogLevel::FATAL);
 	}
 }

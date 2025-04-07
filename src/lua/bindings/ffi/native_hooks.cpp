@@ -3,7 +3,7 @@
 
 #include "native_hooks/native_hooks.hpp"
 
-extern "C" __declspec(dllexport) void ffi_hook_native(rage::joaat_t script_hash, uint64_t native_hash, rage::scrNativeHandler detour)
+extern "C" __declspec(dllexport) void ffi_add_native_detour(rage::joaat_t script_hash, uint64_t native_hash, rage::scrNativeHandler detour)
 {
 	big::g_native_hooks->add_native_detour(script_hash, native_hash, detour);
 }

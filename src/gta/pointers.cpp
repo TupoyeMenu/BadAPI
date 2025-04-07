@@ -241,6 +241,11 @@ namespace big
 			m_update_script_threads = ptr.as<PVOID>();
 		});
 
+		main_batch.add("Add plane lift", "F3 44 0F 11 74 24 20 ? ? ? ? ? 41 0F 28 D7", [this](memory::handle ptr) {
+			m_add_plane_lift = ptr.add(8).rip().as<PVOID>();
+			m_apply_plane_thrust = ptr.sub(0x3FA).rip().as<PVOID>();
+		});
+
 		main_batch.run(memory::module(""));
 
 		m_hwnd = FindWindowW(L"grcWindow", nullptr);

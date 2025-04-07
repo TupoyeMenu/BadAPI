@@ -41,6 +41,10 @@ namespace big
 
 		detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game);
 
+
+		detour_hook_helper::add<hooks::add_plane_lift>("Add Plane Lift", (void*)g_pointers->m_add_plane_lift);
+		detour_hook_helper::add<hooks::apply_plane_thrust>("Add Plane Thrust", (void*)g_pointers->m_apply_plane_thrust);
+
 		g_hooking = this;
 	}
 

@@ -6,6 +6,7 @@
 #define SOL_SAFE_NUMERICS 1
 #define SOL_SAFE_GETTER 1
 #define SOL_NO_CHECK_NUMBER_PRECISION 1
+#define SOL_EXCEPTIONS_SAFE_PROPAGATION 1
 
 // This is intended to be disabled.
 // Allow functions to be called without giving all of its args.

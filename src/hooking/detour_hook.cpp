@@ -37,7 +37,7 @@ namespace big
 		}
 		else
 		{
-			LOGF(FATAL, fmt::format("Failed to create hook '{}' at 0x{:X} (error: {})", m_name, reinterpret_cast<std::uintptr_t>(m_target), MH_StatusToString(status)));
+			LOGF(FATAL, "Failed to create hook '{}' at 0x{:X} (error: {})", m_name, reinterpret_cast<std::uintptr_t>(m_target), MH_StatusToString(status));
 		}
 	}
 
@@ -54,18 +54,13 @@ namespace big
 	void detour_hook::enable()
 	{
 		if (auto status = MH_QueueEnableHook(m_target); status != MH_OK)
-			throw std::runtime_error(fmt::format("Failed to enable hook 0x{:X} ({})", uintptr_t(m_target), MH_StatusToString(status)));
+		LOGF(FATAL, "Failed to enable hook 0x{:X} ({})", uintptr_t(m_target), MH_StatusToString(status));
 	}
 
 	void detour_hook::disable()
 	{
 		if (auto status = MH_QueueDisableHook(m_target); status != MH_OK)
 			LOG(WARNING) << "Failed to disable hook '" << m_name << "'.";
-	}
-
-	DWORD exp_handler(PEXCEPTION_POINTERS exp, std::string const& name)
-	{
-		return exp->ExceptionRecord->ExceptionCode == STATUS_ACCESS_VIOLATION ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH;
 	}
 
 	void detour_hook::fix_hook_address()

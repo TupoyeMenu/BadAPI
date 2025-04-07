@@ -1,6 +1,5 @@
 #pragma once
 #include "bindings/gui.hpp"
-#include "bindings/gui/gui_element.hpp"
 #include "core/data/menu_event.hpp"
 #include "gta/script/script.hpp"
 #include "lua/bindings/scr_patch.hpp"
@@ -19,22 +18,15 @@ namespace big
 		std::string m_module_name;
 		rage::joaat_t m_module_id;
 
-		std::chrono::time_point<std::chrono::file_clock> m_last_write_time;
-
 		bool m_disabled;
 		std::mutex m_registered_scripts_mutex;
 
 	public:
-		std::vector<std::unique_ptr<script>> m_registered_scripts;
+		std::unordered_map<rage::joaat_t, std::unique_ptr<script>> m_registered_scripts;
 		std::vector<std::unique_ptr<lua_patch>> m_registered_patches;
 		std::vector<std::unique_ptr<lua::scr_patch::scr_patch>> m_registered_script_patches;
 
-		std::vector<std::unique_ptr<lua::gui::gui_element>> m_independent_gui;
-		std::vector<std::unique_ptr<lua::gui::gui_element>> m_always_draw_gui;
-		std::unordered_map<rage::joaat_t, std::vector<std::shared_ptr<lua::gui::gui_element>>> m_gui;
-		std::vector<std::shared_ptr<lua::gui::tab>> m_gui_tabs;
-		std::unordered_map<rage::joaat_t, std::vector<std::shared_ptr<lua::gui::tab>>> m_tab_to_sub_tabs;
-		std::unordered_map<menu_event, std::vector<sol::protected_function>> m_event_callbacks;
+		std::unordered_map<menu_event, std::unordered_map<rage::joaat_t, sol::protected_function>> m_event_callbacks;
 		std::vector<void*> m_allocated_memory;
 
 		lua_module(const std::filesystem::path& module_path, folder& scripts_folder, bool disabled = false);
@@ -44,7 +36,6 @@ namespace big
 
 		rage::joaat_t module_id() const;
 		const std::string& module_name() const;
-		const std::chrono::time_point<std::chrono::file_clock> last_write_time() const;
 		const bool is_disabled() const;
 
 		// used for sandboxing and limiting to only our custom search path for the lua require function
@@ -56,7 +47,7 @@ namespace big
 
 		void init_lua_api(folder& scripts_folder);
 
-		void load_and_call_script();
+		void load_and_call_script(const std::filesystem::path& file_path);
 
 		inline void for_each_script(auto func)
 		{
@@ -64,7 +55,7 @@ namespace big
 
 			for (auto& script : m_registered_scripts)
 			{
-				func(script.get());
+				func(script.second.get());
 			}
 		}
 

@@ -33,6 +33,9 @@ namespace big
 		static uint32_t network_can_access_multiplayer(uint32_t a1, uint64_t* a2);
 
 		static void terminate_game(int p1);
+
+		static void add_plane_lift(CVehicle* _this, rage::fvector3* velocity, float, float, float, bool);
+		static void apply_plane_thrust(CVehicle* _this, float, float, float, float, float, bool);
 	};
 
 	class minhook_keepalive

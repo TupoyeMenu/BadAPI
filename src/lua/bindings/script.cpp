@@ -83,7 +83,7 @@ namespace lua::script
 		    },
 		    name);
 
-		module->m_registered_scripts.push_back(std::move(lua_script));
+		module->m_registered_scripts[rage::joaat(name)] = std::move(lua_script);
 	}
 
 	// Lua API: Function
@@ -149,7 +149,7 @@ namespace lua::script
 		    },
 		    job_name);
 
-		module->m_registered_scripts.push_back(std::move(lua_script));
+		module->m_registered_scripts[rage::joaat(job_name)] = std::move(lua_script);
 	}
 
 	// Lua API: function

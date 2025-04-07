@@ -53,35 +53,12 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: ScriptedGameEventReceived: integer
-	// Event that is triggered when we receive a scripted game event.
-	// **Example Usage:**
-	// ```lua
-	// event.register_handler(menu_event.ScriptedGameEventReceived, function (player_id, script_event_args)
-	//     log.info(player_id)
-	//     log.info(script_event_args)
-	// end)
-	// ```
-
-	// Lua API: Field
-	// Table: menu_event
 	// Field: MenuUnloaded: integer
-	// Event that is triggered when we unload YimMenu.
+	// Event that is triggered when we unload.. whatever this is.
 	// **Example Usage:**
 	// ```lua
 	// event.register_handler(menu_event.MenuUnloaded, function ()
 	//     log.info("Menu unloaded.")
-	// end)
-	// ```
-
-	// Lua API: Field
-	// Table: menu_event
-	// Field: ScriptsReloaded: integer
-	// Event that is triggered when we reload the Lua scripts.
-	// **Example Usage:**
-	// ```lua
-	// event.register_handler(menu_event.ScriptsReloaded, function ()
-	//     log.info("Scripts reloaded.")
 	// end)
 	// ```
 
@@ -97,6 +74,11 @@ namespace lua::event
 	// end)
 	// ```
 
+	// Lua API: Field
+	// Table: menu_event
+	// Field: Draw: integer
+	// Called every frame, you can draw ImGui here.
+
 	// Lua API: Table
 	// Name: event
 	// Table for responding to various events. The list of events is available in the menu_event table.
@@ -105,13 +87,14 @@ namespace lua::event
 	// Table: event
 	// Name: register_handler
 	// Param: menu_event: integer: The menu_event that we want to respond to.
+	// Param: identifier: string: A unique identifier for this event, calling this function again with the same identifier will override the previous one.
 	// Param: func: function: The function that will be called.
 	// Register a function that will be called each time the corresponding menu_event is triggered.
-	static void register_handler(const menu_event& menu_event, sol::protected_function func, sol::this_state state)
+	static void register_handler(const menu_event& menu_event, const std::string_view& identifier, sol::protected_function func, sol::this_state state)
 	{
 		big::lua_module* module = sol::state_view(state)["!this"];
 
-		module->m_event_callbacks[menu_event].push_back(func);
+		module->m_event_callbacks[menu_event][rage::joaat(identifier)] = func;
 	}
 
 	// Lua API: Function
@@ -125,9 +108,9 @@ namespace lua::event
 	{
 		big::lua_module* module = sol::state_view(state)["!this"];
 
-		for(auto callback : module->m_event_callbacks[menu_event])
+		for (auto event : module->m_event_callbacks[menu_event])
 		{
-			callback(args);
+			event.second(args);
 		}
 	}
 
@@ -138,11 +121,11 @@ namespace lua::event
 		        {"PlayerLeave", menu_event::PlayerLeave},
 		        {"PlayerJoin", menu_event::PlayerJoin},
 		        {"PlayerMgrInit", menu_event::PlayerMgrInit},
-		        {"PlayerMgrShutdown", menu_event::PlayerMgrShutdown},
-		        {"ScriptedGameEventReceived", menu_event::ScriptedGameEventReceived},
 		        {"MenuUnloaded", menu_event::MenuUnloaded},
-		        {"ScriptsReloaded", menu_event::ScriptsReloaded},
 		        {"Wndproc", menu_event::Wndproc},
+		        {"Draw", menu_event::Draw},
+		        {"AddPlaneLift", menu_event::AddPlaneLift},
+		        {"ApplyPlaneThrust", menu_event::ApplyPlaneThrust},
 		    });
 
 

@@ -19,6 +19,7 @@
 #include "bindings/tunables.hpp"
 #include "bindings/vector.hpp"
 #include "lua_manager.hpp"
+#include "util/filesystem.hpp"
 
 namespace big
 {
@@ -116,8 +117,6 @@ namespace big
 			m_state.set_panic(sol::c_call<decltype(&panic_handler), &panic_handler>);
 			lua_CFunction traceback_function = sol::c_call<decltype(&traceback_error_handler), &traceback_error_handler>;
 			sol::protected_function::set_default_handler(sol::object(m_state.lua_state(), sol::in_place, traceback_function));
-
-			m_last_write_time = std::filesystem::last_write_time(m_module_path);
 		}
 	}
 
@@ -146,11 +145,6 @@ namespace big
 	const std::filesystem::path& lua_module::module_path() const
 	{
 		return m_module_path;
-	}
-
-	const std::chrono::time_point<std::chrono::file_clock> lua_module::last_write_time() const
-	{
-		return m_last_write_time;
 	}
 
 	const bool lua_module::is_disabled() const
@@ -191,18 +185,6 @@ namespace big
 		m_state["os"] = sandbox_os;
 	}
 
-	static std::optional<std::filesystem::path> make_absolute(const std::filesystem::path& root, const std::filesystem::path& user_path)
-	{
-		auto final_path = std::filesystem::weakly_canonical(root / user_path);
-
-		auto [root_end, nothing] = std::mismatch(root.begin(), root.end(), final_path.begin());
-
-		if (root_end != root.end())
-			return std::nullopt;
-
-		return final_path;
-	};
-
 	void lua_module::sandbox_lua_io_library()
 	{
 		auto io = m_state["io"];
@@ -215,7 +197,7 @@ namespace big
 		// Table for file manipulation. Modified for security purposes.
 
 		sandbox_io["open"] = [this](const std::string& filename, const std::string& mode) {
-			const auto scripts_config_sub_path = make_absolute(g_lua_manager->get_scripts_config_folder().get_path(), filename);
+			const auto scripts_config_sub_path = filesystem::make_absolute(g_lua_manager->get_scripts_config_folder().get_path(), filename);
 			if (!scripts_config_sub_path)
 			{
 				LOG(WARNING) << "io.open is restricted to the scripts_config folder, and the filename provided (" << filename << ") is outside of it.";
@@ -239,7 +221,7 @@ namespace big
 		// Param: filename: string
 		// Returns: boolean: exists: True if the passed file path exists
 		sandbox_io["exists"] = [](const std::string& filename) -> bool {
-			const auto scripts_config_sub_path = make_absolute(g_lua_manager->get_scripts_config_folder().get_path(), filename);
+			const auto scripts_config_sub_path = filesystem::make_absolute(g_lua_manager->get_scripts_config_folder().get_path(), filename);
 			if (!scripts_config_sub_path)
 			{
 				LOG(WARNING) << "io.open is restricted to the scripts_config folder, and the filename provided (" << filename << ") is outside of it.";
@@ -318,18 +300,18 @@ namespace big
 		lua::stats::bind(m_state);
 	}
 
-	void lua_module::load_and_call_script()
+	void lua_module::load_and_call_script(const std::filesystem::path& file_path)
 	{
-		auto result = m_state.safe_script_file(m_module_path.string(), &sol::script_pass_on_error, sol::load_mode::text);
+		auto result = m_state.safe_script_file(file_path.string(), &sol::script_pass_on_error, sol::load_mode::text);
 
 		if (!result.valid())
 		{
-			LOG(FATAL) << m_module_name << " failed to load: " << result.get<sol::error>().what();
+			LOG(FATAL) << file_path.filename().string() << " failed to load: " << result.get<sol::error>().what();
 			Logger::FlushQueue();
 		}
 		else
 		{
-			LOG(INFO) << "Loaded " << m_module_name;
+			LOG(INFO) << "Loaded " << file_path.filename().string();
 		}
 	}
 
@@ -337,14 +319,13 @@ namespace big
 	{
 		std::lock_guard guard(m_registered_scripts_mutex);
 
-		const auto script_count = m_registered_scripts.size();
-		for (size_t i = 0; i < script_count; i++)
+		//const auto script_count = m_registered_scripts.size();
+		//for (size_t i = 0; i < script_count; i++)
+		for (const auto& script : m_registered_scripts)
 		{
-			const auto script = m_registered_scripts[i].get();
-
-			if (script->is_enabled())
+			if (script.second->is_enabled())
 			{
-				script->tick();
+				script.second->tick();
 			}
 		}
 	}
@@ -354,7 +335,7 @@ namespace big
 		std::lock_guard guard(m_registered_scripts_mutex);
 
 		std::erase_if(m_registered_scripts, [](auto& script) {
-			return script->is_done();
+			return script.second->is_done();
 		});
 	}
 }

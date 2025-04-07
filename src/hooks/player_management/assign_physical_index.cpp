@@ -29,7 +29,7 @@ namespace big
 
 			if (net_player_data)
 			{
-				g_lua_manager->trigger_event<menu_event::PlayerLeave>(net_player_data->m_name, lua::memory::pointer((uint64_t)player));
+				g_lua_manager->trigger_event<menu_event::PlayerLeave>(net_player_data->m_name, (uint64_t)player);
 			}
 
 			return g_hooking->get_original<hooks::assign_physical_index>()(netPlayerMgr, player, new_index);
@@ -39,7 +39,7 @@ namespace big
 		g_player_service->player_join(player);
 		if (net_player_data)
 		{
-			g_lua_manager->trigger_event<menu_event::PlayerJoin>(net_player_data->m_name, player->m_player_id, lua::memory::pointer((uint64_t)player));
+			g_lua_manager->trigger_event<menu_event::PlayerJoin>(net_player_data->m_name, player->m_player_id, (uint64_t)player);
 		}
 		return result;
 	}

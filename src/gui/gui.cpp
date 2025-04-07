@@ -33,7 +33,7 @@ namespace big
 		    [] {
 			    if (g_lua_manager)
 			    {
-				    g_lua_manager->draw_always_draw_gui();
+				    g_lua_manager->trigger_event<menu_event::Draw>();
 			    }
 		    },
 		    -2);
