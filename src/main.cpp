@@ -100,13 +100,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto pointers_instance = std::make_unique<pointers>();
 			    LOG(INFO) << "Pointers initialized.";
 
-			    while (!disable_anticheat_skeleton())
-			    {
-				    LOG(WARNING) << "Failed patching anticheat gameskeleton (injected too early?). Waiting 500ms and trying again";
-				    std::this_thread::sleep_for(500ms);
-			    }
-			    LOG(INFO) << "Disabled anticheat gameskeleton.";
-
 			    auto renderer_instance = std::make_unique<renderer>();
 			    LOG(INFO) << "Renderer initialized.";
 			    auto gui_instance = std::make_unique<gui>();
@@ -131,6 +124,13 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 			    auto native_hooks_instance = std::make_unique<native_hooks>();
 			    LOG(INFO) << "Dynamic native hooker initialized.";
+
+			    while (!disable_anticheat_skeleton())
+			    {
+				    LOG(WARNING) << "Failed patching anticheat gameskeleton (injected too early?). Waiting 500ms and trying again";
+				    std::this_thread::sleep_for(500ms);
+			    }
+			    LOG(INFO) << "Disabled anticheat gameskeleton.";
 
 			    auto lua_manager_instance =
 			        std::make_unique<lua_manager>(g_file_manager.get_project_folder("scripts"), g_file_manager.get_project_folder("scripts_config"));

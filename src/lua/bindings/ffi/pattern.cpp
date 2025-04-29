@@ -9,5 +9,13 @@ extern "C" __declspec(dllexport) uint64_t ffi_scan_pattern(const char* pattern, 
 	{
 		module = "";
 	}
-	return ::memory::module(module).scan(::memory::pattern(pattern)).value().as<uint64_t>();
+	try
+	{
+		return ::memory::module(module).scan(::memory::pattern(pattern)).value().as<uint64_t>();
+	}
+	catch(const std::exception& e)
+	{
+		LOG(WARNING) << "Failed to find pattern: " << pattern;
+		return 0;
+	}
 }

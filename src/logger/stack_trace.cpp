@@ -143,7 +143,7 @@ namespace big
 				
 				if (module_info)
 				{
-					m_dump << module_info->m_name << ' ' << std::string_view(symbol->Name, symbol->NameLen) << ' ' << HEX_TO_UPPER(addr);
+					m_dump << module_info->m_name << '+' << HEX_TO_UPPER(addr - module_info->m_base) << ' ' << std::string_view(symbol->Name, symbol->NameLen) << ' ' << HEX_TO_UPPER(addr);
 
 					continue;
 				}
