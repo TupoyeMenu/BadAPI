@@ -16,6 +16,7 @@
 #include "lua/lua_manager.hpp"
 #include "native_hooks/native_hooks.hpp"
 #include "renderer/renderer.hpp"
+#include "backend/byte_patch_manager.hpp"
 #include "services/players/player_service.hpp"
 #include "services/script_patcher/script_patcher_service.hpp"
 #include "services/tunables/tunables_service.hpp"
@@ -100,6 +101,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto pointers_instance = std::make_unique<pointers>();
 			    LOG(INFO) << "Pointers initialized.";
 
+			    auto byte_patch_manager_instance = std::make_unique<byte_patch_manager>();
+			    LOG(INFO) << "Byte Patch Manager initialized.";
+
 			    auto renderer_instance = std::make_unique<renderer>();
 			    LOG(INFO) << "Renderer initialized.";
 			    auto gui_instance = std::make_unique<gui>();
@@ -156,6 +160,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    thread_pool_instance->destroy();
 			    LOG(INFO) << "Destroyed thread pool.";
 
+			    tunables_service_instance.reset();
+			    LOG(INFO) << "Tunables Service reset.";
 			    script_patcher_service_instance.reset();
 			    LOG(INFO) << "Script Patcher Service reset.";
 			    player_service_instance.reset();
@@ -172,6 +178,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 			    renderer_instance.reset();
 			    LOG(INFO) << "Renderer uninitialized.";
+
+			    byte_patch_manager_instance.reset();
+			    LOG(INFO) << "Byte Patch Manager uninitialized.";
 
 			    pointers_instance.reset();
 			    LOG(INFO) << "Pointers uninitialized.";

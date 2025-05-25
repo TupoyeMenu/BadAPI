@@ -30,6 +30,9 @@ namespace big
 		static void network_player_mgr_shutdown(CNetworkPlayerMgr* _this);
 		static void* assign_physical_index(CNetworkPlayerMgr* netPlayerMgr, CNetGamePlayer* player, uint8_t new_index);
 
+		static bool receive_net_message(void* a1, rage::netConnectionManager* mgr, rage::netEvent* event);
+
+		static bool handle_join_request(Network* network, rage::snSession* session, rage::rlGamerInfo* player_info, CJoinRequestContext* ctx, BOOL is_transition_session);
 		static uint32_t network_can_access_multiplayer(uint32_t a1, uint64_t* a2);
 
 		static void terminate_game(int p1);

@@ -73,7 +73,9 @@ namespace big
 
 		bool in_script_vm = false;
 
-		NLOHMANN_DEFINE_TYPE_INTRUSIVE(menu_settings, demo, window, settings)
+		int packet_logs = 1;
+
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(menu_settings, demo, window, settings, packet_logs)
 	};
 
 	inline auto g = menu_settings();

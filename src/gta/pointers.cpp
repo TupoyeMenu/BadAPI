@@ -33,6 +33,7 @@ namespace big
 			m_init_native_tables        = ptr.sub(37).as<PVOID>();
 			m_native_registration_table = ptr.add(3).rip().as<rage::scrNativeRegistrationTable*>();
 			m_get_native_handler        = ptr.add(12).rip().as<functions::get_native_handler_t>();
+			m_unk_native                = ptr.add(24).rip().as<PVOID>();
 		});
 
 		main_batch.add("Fix vectors", "83 79 18 00 48 8B D1 74 4A FF 4A 18 48 63 4A 18 48 8D 41 04 48 8B 4C CA", [this](memory::handle ptr) {
@@ -118,6 +119,7 @@ namespace big
 
 		main_batch.add("Trigger Script Event", "48 8B C4 48 89 58 08 44 89 48 20 55 56 57 48 83 EC 30", [this](memory::handle ptr) {
 			m_trigger_script_event = ptr.as<decltype(pointers::m_trigger_script_event)>();
+			m_trigger_script_event_internal = ptr.add(0x62).rip();
 		});
 
 		main_batch.add("Received Event Hook", "66 41 83 F9 ? 0F 83", [this](memory::handle ptr) {
@@ -220,7 +222,7 @@ namespace big
 			m_assign_physical_index = ptr.as<PVOID>();
 		});
 
-		main_batch.add("Network Player Mgr Init", "41 56 48 83 EC ? 48 8B F1 B9 ? ? ? ? 49 8B F9 41 8B E8 4C 8B F2 E8", [this](memory::handle ptr) {
+		main_batch.add("Network Player Mgr Init", "57 41 54 41 55 41 56 41 57 48 83 EC 40 48 8B F1 B9 07 00 00 00", [this](memory::handle ptr) {
 			m_network_player_mgr_init = ptr.sub(0x13).as<decltype(pointers::m_network_player_mgr_init)>();
 		});
 
@@ -228,7 +230,7 @@ namespace big
 			m_network_player_mgr_shutdown = ptr.sub(0x1A).as<decltype(pointers::m_network_player_mgr_shutdown)>();
 		});
 
-		main_batch.add("Network Can Access Multiplayer", "E9 36 01 00 00 33 D2 8B CB", [this](memory::handle ptr) {
+		main_batch.add("Network Can Access Multiplayer", "E9 ? 01 00 00 33 D2 8B CB", [this](memory::handle ptr) {
 			m_network_can_access_multiplayer = ptr.add(10).rip().as<PVOID>();
 		});
 
@@ -244,6 +246,22 @@ namespace big
 		main_batch.add("Add plane lift", "F3 44 0F 11 74 24 20 ? ? ? ? ? 41 0F 28 D7", [this](memory::handle ptr) {
 			m_add_plane_lift = ptr.add(8).rip().as<PVOID>();
 			m_apply_plane_thrust = ptr.sub(0x3FA).rip().as<PVOID>();
+		});
+
+		main_batch.add("Handle Join Request", "48 8B C4 48 89 58 08 4C 89 48 20 4C 89 40 18 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 18", [this](memory::handle ptr) {
+			m_handle_join_request = ptr.as<PVOID>();
+		});
+
+		main_batch.add("Write Join Response Data", "E8 ? ? ? ? 41 8B DF 84 C0 74 06", [this](memory::handle ptr) {
+			m_write_join_response_data = ptr.add(1).rip().as<functions::write_join_response_data>();
+		});
+
+		main_batch.add("Get Peer By Security Id", "76 E0 8B 4C 24 30 E8", [this](memory::handle ptr) {
+			m_get_peer_by_security_id = ptr.add(7).rip().as<functions::get_peer_by_security_id>();
+		});
+
+		main_batch.add("Print Script Stack Trace", "48 89 0D ? ? ? ? 48 8B C8 E8", [this](memory::handle ptr) {
+			m_print_script_stack_trace = ptr.add(11).rip().as<decltype(pointers::m_print_script_stack_trace)>();
 		});
 
 		main_batch.run(memory::module(""));

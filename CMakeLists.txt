@@ -19,6 +19,9 @@ message("\nFetching custom modules")
 include(cmake/imgui.cmake)
 include(cmake/gtav-classes.cmake)
 
+set(RESOURCES
+    "${minhook_SOURCE_DIR}/dll_resources/MinHook.def"
+)
 
 # BigBaseV2
 message(STATUS "BigBaseV2")
@@ -30,13 +33,13 @@ file(GLOB_RECURSE SRC_MAIN
     "${SRC_DIR}/**.cxx"
     "${SRC_DIR}/**.asm"
 )
-add_library(BigBaseV2 MODULE "${SRC_MAIN}")
+add_library(BigBaseV2 MODULE "${SRC_MAIN}" ${RESOURCES})
 
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(TARGET BigBaseV2 PROPERTY CXX_STANDARD 23)
 
-source_group(TREE ${SRC_DIR} PREFIX "src" FILES ${SRC_MAIN} )
+source_group(TREE ${SRC_DIR} PREFIX "src" FILES ${SRC_MAIN})
 
 target_include_directories(BigBaseV2 PRIVATE 
     "${SRC_DIR}"

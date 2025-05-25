@@ -16,5 +16,8 @@ FetchContent_Declare(
     GIT_PROGRESS TRUE
 )
 
-add_compile_definitions("_CRT_SECURE_NO_WARNINGS")
 FetchContent_MakeAvailable(luajit)
+target_compile_definitions(libluajit PRIVATE
+    "_CRT_SECURE_NO_WARNINGS"
+    "LUAJIT_ENABLE_LUA52COMPAT"
+)

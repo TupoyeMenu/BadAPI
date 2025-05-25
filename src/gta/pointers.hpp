@@ -28,6 +28,7 @@ namespace big
 
 		rage::scrNativeRegistrationTable* m_native_registration_table{};
 		functions::get_native_handler_t m_get_native_handler{};
+		PVOID m_unk_native{};
 		functions::fix_vectors_t m_fix_vectors{};
 
 		rage::atArray<GtaThread*>* m_script_threads{};
@@ -60,6 +61,7 @@ namespace big
 		functions::send_network_damage m_send_network_damage;
 
 		functions::trigger_script_event m_trigger_script_event;
+		memory::handle m_trigger_script_event_internal;
 
 		// Bitbuffer Read/Write START
 		functions::read_bitbuf_dword m_read_bitbuf_dword;
@@ -113,6 +115,12 @@ namespace big
 
 		PVOID m_add_plane_lift;
 		PVOID m_apply_plane_thrust;
+
+		PVOID m_handle_join_request;
+		functions::write_join_response_data m_write_join_response_data;
+		functions::get_peer_by_security_id m_get_peer_by_security_id;
+		
+		functions::print_script_stack_trace m_print_script_stack_trace;
 	};
 
 	inline pointers* g_pointers{};

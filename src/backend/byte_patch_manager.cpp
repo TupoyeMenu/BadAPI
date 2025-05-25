@@ -14,6 +14,7 @@
 #include "memory/byte_patch.hpp"
 #include "gta/pointers.hpp"
 #include "util/explosion_anti_cheat_bypass.hpp"
+#include "util/old_style_script_event.hpp"
 #include "util/world_model.hpp"
 
 namespace big
@@ -31,6 +32,11 @@ namespace big
 		    memory::byte_patch::make(g_pointers->m_blame_explode.as<uint16_t*>(), 0xE990).get();
 		explosion_anti_cheat_bypass::m_can_use_blocked_explosions =
 		    memory::byte_patch::make(g_pointers->m_explosion_patch.sub(12).as<uint16_t*>(), 0x9090).get();
+
+		old_style_script_event::m_set_event_hash =
+		    memory::byte_patch::make(g_pointers->m_trigger_script_event_internal.add(30).as<uint16_t*>(), 0x9090).get();
+		old_style_script_event::m_set_player_bits =
+		    memory::byte_patch::make(g_pointers->m_trigger_script_event_internal.add(67).as<PVOID>(), std::vector{0x90,0x90,0x90, 0x90,0x90,0x90,0x90}).get();
 	}
 
 	byte_patch_manager::byte_patch_manager()

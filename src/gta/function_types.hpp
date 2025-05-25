@@ -54,4 +54,9 @@ namespace big::functions
 	using get_gameplay_cam_coords = Vector3 (*)();
 
 	using request_control = void (*)(rage::netObject* net_object);
+
+	using write_join_response_data = bool (*)(CMsgJoinResponse* response, void* data, int size, uint32_t* size_used);
+	using get_peer_by_security_id = rage::SecurityPeer*(*)(int id);
+
+	using print_script_stack_trace = bool (*)(rage::scrThread* thread, void(*)(const char* fmt, ...));
 }

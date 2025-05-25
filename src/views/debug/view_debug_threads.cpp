@@ -18,6 +18,7 @@
 #include "gta/script_handler.hpp"
 #include "gta/script_thread.hpp"
 #include "gui/components/components.hpp"
+#include "logger/stack_trace.hpp"
 #include "views/view.hpp"
 
 #include <network/CNetGamePlayer.hpp>
@@ -26,13 +27,26 @@ static GtaThread* selected_thread;
 
 static int selected_stack_size             = 128;
 static int free_stacks                     = -1;
-static const char* selected_stack_size_str = "MULTIPLAYER_MISSION";
+static std::string selected_stack_size_str = "MULTIPLAYER_MISSION";
 static const char* selected_script         = "<SELECT>";
 
 static std::chrono::high_resolution_clock::time_point last_stack_update_time{};
 
+static std::vector<std::string> callstack;
+
 namespace
 {
+	static void update_callstack(const char* fmt, ...)
+	{
+		char buf[64];
+		va_list args;
+		va_start(args, fmt);
+		vsnprintf(buf, sizeof(buf), fmt, args);
+		va_end(args);
+
+		callstack.emplace_back(buf);
+	}
+
 	static void update_free_stacks_count()
 	{
 		free_stacks = MISC::GET_NUMBER_OF_FREE_STACKS_OF_THIS_SIZE(selected_stack_size);
@@ -94,21 +108,59 @@ namespace big
 					if (CNetGamePlayer* host_net_player = host->m_net_game_player)
 						ImGui::Text("Host: %s", host_net_player->get_name());
 
+			ImGui::TextUnformatted("Script Pointer: ");
+			ImGui::SameLine();
+			if (ImGui::SmallButton(std::format("0x{:X}", (DWORD64)selected_thread).c_str()))
+			{
+				ImGui::SetClipboardText(std::format("0x{:X}", (DWORD64)selected_thread).c_str());
+			}
+
 			ImGui::Text("m_safe_for_network_game: %s", selected_thread->m_safe_for_network_game ? "Yes" : "No");
 			ImGui::Text("m_can_be_paused: %s", selected_thread->m_can_be_paused ? "Yes" : "No");
-			ImGui::Text("Stack Pointer / Stack Size %d/%d",
+			ImGui::TextUnformatted("Stack Pointer: ");
+			ImGui::SameLine();
+			if (ImGui::SmallButton(std::format("0x{:X}", (DWORD64)selected_thread->m_stack).c_str()))
+			{
+				ImGui::SetClipboardText(std::format("0x{:X}", (DWORD64)selected_thread->m_stack).c_str());
+			}
+			ImGui::Text("Internal Stack Pointer: %d Stack Size: %d",
 			    selected_thread->m_context.m_stack_pointer,
 			    selected_thread->m_context.m_stack_size);
-			ImGui::Text("IP: 0x%X", selected_thread->m_context.m_instruction_pointer);
+			ImGui::Text("Instruction Pointer: %X", selected_thread->m_context.m_instruction_pointer);
+
 			if (selected_thread->m_context.m_state == rage::eThreadState::killed)
+			{
 				ImGui::Text("Exit Reason: %s", selected_thread->m_exit_message);
+			}
 
 			if (ImGui::Button("Kill"))
 			{
 				if (selected_thread->m_context.m_stack_size != 0)
+				{
 					selected_thread->kill();
+				}
 
 				selected_thread->m_context.m_state = rage::eThreadState::killed;
+			}
+
+
+			if (ImGui::TreeNode("Callstack"))
+			{
+				if (ImGui::BeginListBox("##callstack_list"))
+				{
+					callstack.clear();
+					g_pointers->m_print_script_stack_trace(selected_thread, &update_callstack);
+					for (const std::string& trace : callstack)
+					{
+						if (ImGui::Selectable(trace.c_str()))
+						{
+							ImGui::SetClipboardText(trace.c_str());
+						}
+					}
+
+					ImGui::EndListBox();
+				}
+				ImGui::TreePop();
 			}
 		}
 
@@ -129,13 +181,13 @@ namespace big
 			ImGui::EndCombo();
 		}
 
-		if (ImGui::BeginCombo("Stack Size", selected_stack_size_str))
+		if (ImGui::BeginCombo("Stack Size", selected_stack_size_str.c_str()))
 		{
 			for (auto& p : stack_sizes)
 			{
 				if (ImGui::Selectable(fmt::format("{} ({})", p.first, p.second).data(), selected_stack_size == p.second))
 				{
-					selected_stack_size_str = fmt::format("{} ({})", p.first, p.second).data();
+					selected_stack_size_str = fmt::format("{} ({})", p.first, p.second);
 					selected_stack_size     = p.second;
 
 					g_fiber_pool->queue_job([] {
@@ -175,13 +227,18 @@ namespace big
 		ImGui::EndGroup();
 
 		components::help_marker("Runs the script update function multiple times per frame.\nThis is for having fun, breaks everything.");
-		if(ImGui::InputInt("Updates per update", &updates_per_update))
+		if (ImGui::InputInt("Updates per update", &updates_per_update))
 		{
-			if(updates_per_update < 0)
+			if (updates_per_update < 0)
 			{
 				updates_per_update = 0;
 			}
 		}
+
+		extern bool use_custom_vm;
+		extern bool log_opcodes;
+		ImGui::Checkbox("use_custom_vm", &use_custom_vm);
+		ImGui::Checkbox("log_opcodes", &log_opcodes);
 
 		if (*g_pointers->m_game_state != eGameState::Invalid && std::chrono::high_resolution_clock::now() - last_stack_update_time > 100ms)
 		{

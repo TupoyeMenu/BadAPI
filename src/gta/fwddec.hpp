@@ -55,9 +55,15 @@ namespace rage
 
 	class netConnectionManager;
 	class netConnectionPeer;
+	class snSession;
+	class netEvent;
+	class SecurityPeer;
 }
 
 class GtaThread;
+
+class CJoinRequestContext;
+class CMsgJoinResponse;
 
 class CGameScriptId;
 class CGameScriptHandler;

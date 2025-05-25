@@ -37,6 +37,9 @@ namespace big
 		detour_hook_helper::add<hooks::network_player_mgr_shutdown>("NPMS", (void*)g_pointers->m_network_player_mgr_shutdown);
 		detour_hook_helper::add<hooks::assign_physical_index>("API", (void*)g_pointers->m_assign_physical_index);
 
+		detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
+		detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
+
 		detour_hook_helper::add<hooks::network_can_access_multiplayer>("NCAM", (void*)g_pointers->m_network_can_access_multiplayer);
 
 		detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game);
