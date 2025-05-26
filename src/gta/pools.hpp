@@ -5,145 +5,194 @@
  * Thanks to menyoo for most of these!!
  */
 
-#pragma once
-#include "gta/script/natives.hpp"
-#include "gta/pointers.hpp"
 
-template<typename T>
-class pool_iterator
+#if !POOLS_HPP_LEGACY && !POOLS_HPP_ENHANCED
+
+template<typename Wrapper, typename PoolType>
+class PoolIterator
 {
 public:
-	T* pool        = nullptr;
-	uint32_t index = 0;
+	PoolType* m_Pool = nullptr;
+	uint32_t m_Index = 0;
 
-	explicit pool_iterator(T* pool, int32_t index = 0)
+	explicit PoolIterator(PoolType* pool, int32_t index = 0)
 	{
-		this->pool  = pool;
-		this->index = index;
+		this->m_Pool  = pool;
+		this->m_Index = index;
 	}
 
-	pool_iterator& operator++()
+	PoolIterator& operator++()
 	{
-		for (index++; index < pool->m_size; index++)
+		for (m_Index++; m_Index < m_Pool->m_Size; m_Index++)
 		{
-			if (pool->is_valid(index))
+			if (m_Pool->IsValid(m_Index))
 			{
 				return *this;
 			}
 		}
 
-		index = pool->m_size;
+		m_Index = m_Pool->m_Size;
 		return *this;
 	}
 
-	rage::CEntity* operator*()
+	Wrapper operator*()
 	{
-		auto addr = pool->get_address(index);
-		return (rage::CEntity*)addr;
+		auto addr = reinterpret_cast<void*>(m_Pool->GetAt(m_Index));
+		return Wrapper(addr);
 	}
 
-	bool operator!=(const pool_iterator& other) const
+	bool operator!=(const PoolIterator& other) const
 	{
-		return this->index != other.index;
+		return this->m_Index != other.m_Index;
 	}
 };
 
-template<typename T>
-/**
- * @brief Common functions for VehiclePool and GenericPool
- */
+// Common functions for VehiclePool and GenericPool
+template<typename Wrapper, typename PoolType>
 class PoolUtils
 {
+	PoolType* m_Pool;
+
 public:
-	inline auto to_array()
+	PoolUtils(PoolType* pool) :
+	    m_Pool(pool)
 	{
-		std::vector<Entity> arr;
-		for (auto entity : *static_cast<T*>(this))
-		{
-			if (entity)
-				arr.push_back(big::g_pointers->m_ptr_to_handle(entity));
-		}
-
-		return arr;
-	}
-
-	inline auto to_int_array(int* arr, int max)
-	{
-		auto entities = to_array();
-
-		if (entities.size() > max)
-			entities.resize(max);
-
-		for (int i = 0; i < entities.size(); ++i)
-		{
-			arr[i] = entities[i];
-		}
-
-		return entities.size();
 	}
 
 	auto begin()
 	{
-		return ++pool_iterator<T>(static_cast<T*>(this), -1);
+		return ++PoolIterator<Wrapper, PoolType>(m_Pool, -1);
 	}
 
 	auto end()
 	{
-		return ++pool_iterator<T>(static_cast<T*>(this), static_cast<T*>(this)->m_size);
+		return ++PoolIterator<Wrapper, PoolType>(m_Pool, m_Pool->m_Size);
+	}
+
+	auto size()
+	{
+		return m_Pool->m_Size;
 	}
 };
 
-class VehiclePool : public PoolUtils<VehiclePool>
+#endif
+
+#if !POOLS_HPP_LEGACY || !POOLS_HPP_ENHANCED
+	#if ENHANCED
+		#define POOLS_HPP_ENHANCED 1
+	#else
+		#define POOLS_HPP_LEGACY 1
+	#endif
+
+	#if ENHANCED
+// of all the things they backported from RDR this is probably the dumbest
+class PoolEncryption
 {
 public:
-	UINT64* m_pool_address;
-	UINT32 m_size;
-	char _Padding2[36];
-	UINT32* m_bit_array;
-	char _Padding3[40];
-	UINT32 m_item_count;
+	bool m_IsSet;      //0x0000
+	uint64_t m_First;  //0x0008
+	uint64_t m_Second; //0x0010
+}; //Size: 0x0018
+static_assert(sizeof(PoolEncryption) == 0x18);
+	#endif
 
-	inline bool is_valid(UINT32 i)
-	{
-		return (m_bit_array[i >> 5] >> (i & 0x1F)) & 1;
-	}
-
-	inline UINT64 get_address(UINT32 i)
-	{
-		return m_pool_address[i];
-	}
-};
-
-class GenericPool : public PoolUtils<GenericPool>
+namespace GAME_BRANCH
 {
-public:
-	UINT64 m_pool_address; // 0x0
-	BYTE* m_bit_array;     // 0x8
-	UINT32 m_size;         // 0x10
-	UINT32 m_item_size;    // 0x14
-	UINT32 m_pad[2];       // 0x18
-	UINT32 m_item_count;   // 0x20
-
-	inline bool is_valid(UINT32 i)
+	namespace rage
 	{
-		return mask(i) != 0;
-	}
+		class fwBasePool
+		{
+		public:
+	#if ENHANCED
+			virtual ~fwBasePool() = 0; // 0x0000
+	#endif
+			uintptr_t m_Entries;      // 0x0008
+			uint8_t* m_Flags;         // 0x0010
+			uint32_t m_Size;          // 0x0018
+			uint32_t m_ItemSize;      // 0x001C
+			uint32_t m_NextSlotIndex; // 0x0020
+			uint32_t m_0024;          // 0x0024
+			uint32_t m_FreeSlotIndex; // 0x0028
 
-	inline UINT64 get_address(UINT32 i)
-	{
-		return mask(i) & (m_pool_address + (uint64_t)i * m_item_size);
-	}
+			bool Full() const
+			{
+				return m_Size - (m_FreeSlotIndex & 0x3FFFFFFF) <= 256;
+			}
 
-	inline int get_item_count()
-	{
-		return (4 * m_item_count) >> 2;
-	}
+			int64_t GetNumFreeSlots() const
+			{
+				return static_cast<int64_t>(m_Size) - static_cast<int>((m_FreeSlotIndex * 4) >> 2);
+			}
 
-private:
-	inline long long mask(UINT32 i)
-	{
-		long long num1 = m_bit_array[i] & 0x80;
-		return ~((num1 | -num1) >> 63);
+			int32_t GetScriptGuid(int32_t Index) const
+			{
+				return (Index << 8) + m_Flags[Index];
+			}
+
+			int32_t GetIndex(int32_t ScriptGuid) const
+			{
+				return ScriptGuid >> 8;
+			}
+
+			bool IsValid(int32_t Index) const
+			{
+				return !(m_Flags[Index] & 0x80);
+			}
+
+			void* GetAt(size_t Index) const
+			{
+				if (m_Flags[Index])
+				{
+					if (_fwObj* obj = reinterpret_cast<_fwObj*>(m_Entries + Index * m_ItemSize); obj->m_0010)
+						return obj;
+				}
+
+				return nullptr;
+			}
+
+			// Helper class to check object validity (m_0010)
+			class _fwObj
+			{
+			public:
+				virtual ~_fwObj() = 0;
+				uint64_t m_0008;
+				void* m_0010;
+			};
+
+		}; //Size: 0x0030
+	#if ENHANCED
+		static_assert(sizeof(fwBasePool) == 0x30);
+	#else
+		static_assert(sizeof(fwBasePool) == 0x28);
+	#endif
+
+		class fwVehiclePool
+		{
+		public:
+	#if ENHANCED
+			virtual ~fwVehiclePool() = 0;
+	#endif
+			void** m_PoolAddress;
+			std::uint32_t m_Size;
+			char _Padding2[36];
+			std::uint32_t* m_BitArray;
+			char _Padding3[40];
+			std::uint32_t m_ItemCount;
+
+			inline bool IsValid(int i) const
+			{
+				return (m_BitArray[i >> 5] >> (i & 0x1F)) & 1;
+			}
+
+			inline void* GetAt(int i) const
+			{
+				if (IsValid(i))
+					return m_PoolAddress[i];
+
+				return nullptr;
+			}
+		};
 	}
-};
-static_assert(offsetof(GenericPool, m_item_count) == 0x20);
+}
+
+#endif

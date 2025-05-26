@@ -14,29 +14,16 @@
 #include "memory/byte_patch.hpp"
 #include "gta/pointers.hpp"
 #include "util/explosion_anti_cheat_bypass.hpp"
-#include "util/old_style_script_event.hpp"
-#include "util/world_model.hpp"
 
 namespace big
 {
 	static void init()
 	{
-		// Patch World Model Spawn Bypass
-		std::array<uint8_t, 24> world_spawn_patch;
-		std::fill(world_spawn_patch.begin(), world_spawn_patch.end(), 0x90);
-		world_model_bypass::m_world_model_spawn_bypass =
-		    memory::byte_patch::make(g_pointers->m_world_model_spawn_bypass, world_spawn_patch).get();
-
 		// Patch blocked explosions
 		explosion_anti_cheat_bypass::m_can_blame_others =
 		    memory::byte_patch::make(g_pointers->m_blame_explode.as<uint16_t*>(), 0xE990).get();
 		explosion_anti_cheat_bypass::m_can_use_blocked_explosions =
-		    memory::byte_patch::make(g_pointers->m_explosion_patch.sub(12).as<uint16_t*>(), 0x9090).get();
-
-		old_style_script_event::m_set_event_hash =
-		    memory::byte_patch::make(g_pointers->m_trigger_script_event_internal.add(30).as<uint16_t*>(), 0x9090).get();
-		old_style_script_event::m_set_player_bits =
-		    memory::byte_patch::make(g_pointers->m_trigger_script_event_internal.add(67).as<PVOID>(), std::vector{0x90,0x90,0x90, 0x90,0x90,0x90,0x90}).get();
+		    memory::byte_patch::make(g_pointers->m_explosion_patch.as<uint16_t*>(), 0x9090).get();
 	}
 
 	byte_patch_manager::byte_patch_manager()

@@ -4,6 +4,7 @@
  */
 
 #include "backend/backend.hpp"
+#include "backend/byte_patch_manager.hpp"
 #include "common.hpp"
 #include "file_manager/file_manager.hpp"
 #include "gta/joaat.hpp"
@@ -16,11 +17,13 @@
 #include "lua/lua_manager.hpp"
 #include "native_hooks/native_hooks.hpp"
 #include "renderer/renderer.hpp"
-#include "backend/byte_patch_manager.hpp"
+#include "renderer/renderer_dx11.hpp"
+#include "renderer/renderer_dx12.hpp"
 #include "services/players/player_service.hpp"
 #include "services/script_patcher/script_patcher_service.hpp"
 #include "services/tunables/tunables_service.hpp"
 #include "thread_pool.hpp"
+#include "util/is_enhanced.hpp"
 
 #include <rage/gameSkeleton.hpp>
 
@@ -68,6 +71,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 	{
 		DisableThreadLibraryCalls(hmod);
 
+		g_is_enhanced = big::is_enhanced();
+
 		g_hmodule     = hmod;
 		g_main_thread = CreateThread(
 		    nullptr,
@@ -76,7 +81,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto handler = exception_handler();
 			    std::srand(std::chrono::system_clock::now().time_since_epoch().count());
 
-			    while (!FindWindow("grcWindow", "Grand Theft Auto V"))
+			    LPCSTR lpClassName = g_is_enhanced ? "sgaWindow" : "grcWindow";
+			    while (!FindWindow(lpClassName, nullptr))
 				    std::this_thread::sleep_for(1s);
 
 			    std::filesystem::path base_dir = std::getenv("appdata");
@@ -104,7 +110,20 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto byte_patch_manager_instance = std::make_unique<byte_patch_manager>();
 			    LOG(INFO) << "Byte Patch Manager initialized.";
 
-			    auto renderer_instance = std::make_unique<renderer>();
+			    std::unique_ptr<renderer_dx11> dx11_renderer_instance;
+			    std::unique_ptr<renderer_dx12> dx12_renderer_instance;
+			    if (g_is_enhanced)
+			    {
+				    while (!*g_pointers->m_resolution_x)
+				    {
+					    std::this_thread::sleep_for(1s);
+				    }
+				    dx12_renderer_instance = std::make_unique<renderer_dx12>();
+			    }
+			    else
+			    {
+				    dx11_renderer_instance = std::make_unique<renderer_dx11>();
+			    }
 			    LOG(INFO) << "Renderer initialized.";
 			    auto gui_instance = std::make_unique<gui>();
 
@@ -129,10 +148,13 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto native_hooks_instance = std::make_unique<native_hooks>();
 			    LOG(INFO) << "Dynamic native hooker initialized.";
 
-			    while (!disable_anticheat_skeleton())
+			    if (!g_is_enhanced)
 			    {
-				    LOG(WARNING) << "Failed patching anticheat gameskeleton (injected too early?). Waiting 500ms and trying again";
-				    std::this_thread::sleep_for(500ms);
+				    while (!disable_anticheat_skeleton())
+				    {
+					    LOG(WARNING) << "Failed patching anticheat gameskeleton (injected too early?). Waiting 500ms and trying again";
+					    std::this_thread::sleep_for(500ms);
+				    }
 			    }
 			    LOG(INFO) << "Disabled anticheat gameskeleton.";
 
@@ -176,7 +198,10 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    fiber_pool_instance.reset();
 			    LOG(INFO) << "Fiber pool uninitialized.";
 
-			    renderer_instance.reset();
+			    if (g_is_enhanced)
+				    dx12_renderer_instance.reset();
+			    else
+				    dx11_renderer_instance.reset();
 			    LOG(INFO) << "Renderer uninitialized.";
 
 			    byte_patch_manager_instance.reset();

@@ -14,12 +14,8 @@
 
 namespace big
 {
-	hooking::hooking() :
-	    m_swapchain_hook(*g_pointers->m_swapchain, hooks::swapchain_num_funcs)
+	hooking::hooking()
 	{
-		m_swapchain_hook.hook(hooks::swapchain_present_index, (void*)&hooks::swapchain_present);
-		m_swapchain_hook.hook(hooks::swapchain_resizebuffers_index, (void*)&hooks::swapchain_resizebuffers);
-
 		// The only instances in that vector at this point should only be the "lazy" hooks
 		// aka the ones that still don't have their m_target assigned
 		for (auto& detour_hook_helper : m_detour_hook_helpers)
@@ -27,26 +23,31 @@ namespace big
 			detour_hook_helper->m_detour_hook->set_target_and_create_hook(detour_hook_helper->m_on_hooking_available());
 		}
 
+		auto swapchain_vft = *reinterpret_cast<void***>(*g_pointers->m_swapchain);
+		detour_hook_helper::add<hooks::swapchain_present>("Present", swapchain_vft[hooks::swapchain_present_index]);
+		detour_hook_helper::add<hooks::swapchain_resizebuffers>("ResizeBuffers", swapchain_vft[hooks::swapchain_resizebuffers_index]);
+
+		if (g_is_enhanced)
+		{
+			detour_hook_helper::add<hooks::queue_dependency_enhanced>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
+		}
+		else
+		{
+			detour_hook_helper::add<hooks::queue_dependency_legacy>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
+			detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game); // Inlined in enhanced
+			detour_hook_helper::add<hooks::network_can_access_multiplayer>("NCAM", (void*)g_pointers->m_network_can_access_multiplayer);
+
+			detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
+			detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
+		}
+
 		detour_hook_helper::add<hooks::run_script_threads>("Script hook", (void*)g_pointers->m_run_script_threads);
-		detour_hook_helper::add<hooks::queue_dependency>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
 		detour_hook_helper::add<hooks::init_native_tables>("Init Native Tables", (void*)g_pointers->m_init_native_tables);
 		detour_hook_helper::add<hooks::script_vm>("Script VM", (void*)g_pointers->m_script_vm);
-		detour_hook_helper::add<hooks::update_script_threads>("Update Script Threads", (void*)g_pointers->m_update_script_threads);
 
 		detour_hook_helper::add<hooks::network_player_mgr_init>("NPMI", (void*)g_pointers->m_network_player_mgr_init);
 		detour_hook_helper::add<hooks::network_player_mgr_shutdown>("NPMS", (void*)g_pointers->m_network_player_mgr_shutdown);
 		detour_hook_helper::add<hooks::assign_physical_index>("API", (void*)g_pointers->m_assign_physical_index);
-
-		detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
-		detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
-
-		detour_hook_helper::add<hooks::network_can_access_multiplayer>("NCAM", (void*)g_pointers->m_network_can_access_multiplayer);
-
-		detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game);
-
-
-		detour_hook_helper::add<hooks::add_plane_lift>("Add Plane Lift", (void*)g_pointers->m_add_plane_lift);
-		detour_hook_helper::add<hooks::apply_plane_thrust>("Add Plane Thrust", (void*)g_pointers->m_apply_plane_thrust);
 
 		g_hooking = this;
 	}
@@ -61,7 +62,6 @@ namespace big
 
 	void hooking::enable()
 	{
-		m_swapchain_hook.enable();
 		m_og_wndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtrW(g_pointers->m_hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&hooks::wndproc)));
 
 		for (const auto& detour_hook_helper : m_detour_hook_helpers)
@@ -84,7 +84,6 @@ namespace big
 		}
 
 		SetWindowLongPtrW(g_pointers->m_hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(m_og_wndproc));
-		m_swapchain_hook.disable();
 
 		MH_ApplyQueued();
 

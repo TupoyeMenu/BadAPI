@@ -2,6 +2,7 @@
 
 #include "gta/pointers.hpp"
 #include "services/players/player_service.hpp"
+#include "gta/script/natives.hpp"
 
 namespace lua::network
 {
@@ -27,7 +28,7 @@ namespace lua::network
 		for (auto arg : args)
 			actual_args.push_back((uint32_t)arg);
 
-		big::g_pointers->m_trigger_script_event(1, actual_args.data(), actual_args.size(), bitset, args[0]);
+		SCRIPT::_SEND_TU_SCRIPT_EVENT_NEW(1, (Any*)actual_args.data(), actual_args.size(), bitset, args[0]);
 	}
 
 	// Lua API: Function

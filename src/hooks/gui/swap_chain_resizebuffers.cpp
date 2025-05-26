@@ -8,17 +8,12 @@ namespace big
 		if (g_running)
 		{
 			g_renderer->pre_reset();
-
-			auto result = g_hooking->m_swapchain_hook.get_original<decltype(&swapchain_resizebuffers)>(swapchain_resizebuffers_index)(this_, buffer_count, width, height, new_format, swapchain_flags);
-
-			if (SUCCEEDED(result))
-			{
-				g_renderer->post_reset();
-			}
+			auto result = g_hooking->get_original<hooks::swapchain_resizebuffers>()(this_, buffer_count, width, height, new_format, swapchain_flags);
+			g_renderer->post_reset();
 
 			return result;
 		}
 
-		return g_hooking->m_swapchain_hook.get_original<decltype(&swapchain_resizebuffers)>(swapchain_resizebuffers_index)(this_, buffer_count, width, height, new_format, swapchain_flags);
+		return g_hooking->get_original<hooks::swapchain_resizebuffers>()(this_, buffer_count, width, height, new_format, swapchain_flags);
 	}
 }

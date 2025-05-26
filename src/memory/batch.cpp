@@ -2,6 +2,7 @@
 
 #include "common.hpp"
 #include "range.hpp"
+#include "util/is_enhanced.hpp"
 
 #include <future>//std::async
 
@@ -13,6 +14,10 @@ namespace memory
 	void batch::add(std::string name, pattern pattern, std::function<void(handle)> callback)
 	{
 		m_entries.emplace_back(std::move(name), std::move(pattern), std::move(callback));
+	}
+	void batch::add(std::string name, pattern pattern, int min_version, int max_version, eGameBranch game_branch, std::function<void(handle)> callback)
+	{
+		m_entries.emplace_back(std::move(name), std::move(pattern), min_version, max_version, game_branch, std::move(callback));
 	}
 
 	bool scan_pattern_and_execute_callback(range region, memory::batch::entry entry)
@@ -40,6 +45,19 @@ namespace memory
 	{
 		for (auto& entry : m_entries)
 		{
+			if(entry.m_game_branch != eGameBranch::DontCare && entry.m_game_branch != big::get_game_branch())
+			{
+				continue;
+			}
+			if(entry.m_min_version != -1 && entry.m_min_version > big::g_game_version) // g_game_version is not implemented
+			{
+				continue;
+			}
+			if(entry.m_max_version != -1 && entry.m_max_version < big::g_game_version)
+			{
+				continue;
+			}
+
 			g_futures.emplace_back(std::async(&scan_pattern_and_execute_callback, region, entry));
 		}
 

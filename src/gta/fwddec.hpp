@@ -84,6 +84,3 @@ class CNetworkPlayerMgr;
 class CPlayerInfo;
 class CNetworkObjectMgr;
 class CNetComplaintMgr;
-
-class GenericPool;
-class VehiclePool;

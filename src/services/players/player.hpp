@@ -40,11 +40,6 @@ namespace big
 		[[nodiscard]] CNetGamePlayer* get_net_game_player() const;
 		[[nodiscard]] CPed* get_ped() const;
 		[[nodiscard]] CPlayerInfo* get_player_info() const;
-		[[nodiscard]] class rage::snPlayer* get_session_player();
-		[[nodiscard]] class rage::snPeer* get_session_peer();
-		[[nodiscard]] class rage::netConnectionPeer* get_connection_peer();
-		[[nodiscard]] std::optional<netAddress> get_ip_address();
-		[[nodiscard]] uint16_t get_port();
 
 		[[nodiscard]] uint8_t id() const;
 

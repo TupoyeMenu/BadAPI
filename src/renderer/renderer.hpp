@@ -1,85 +1,65 @@
-/**
- * @file renderer.hpp
- * 
- * @copyright GNU General Public License Version 2.
- * This file is part of YimMenu.
- * YimMenu is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
- * YimMenu is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License along with YimMenu. If not, see <https://www.gnu.org/licenses/>.
- */
-
 #pragma once
 
-typedef void (*PresentCallback)(void*);
+#include "fonts/fonts.hpp"
+#include "imgui_internal.h"
 
-
-class state_saver
-{
-	// Public functions
-
-public:
-	state_saver();
-	~state_saver();
-
-	bool save_current_state(ID3D11DeviceContext* pContext);
-	bool restore_saved_state();
-	void release_saved_state();
-
-	// Internal data
-
-private:
-	bool m_savedState;
-	D3D_FEATURE_LEVEL m_featureLevel;
-	ID3D11DeviceContext* m_pContext;
-	D3D11_PRIMITIVE_TOPOLOGY m_primitiveTopology;
-	ID3D11InputLayout* m_pInputLayout;
-	ID3D11BlendState* m_pBlendState;
-	FLOAT m_blendFactor[4];
-	UINT m_sampleMask;
-	ID3D11DepthStencilState* m_pDepthStencilState;
-	UINT m_stencilRef;
-	ID3D11RasterizerState* m_pRasterizerState;
-	ID3D11ShaderResourceView* m_pPSSRV;
-	ID3D11SamplerState* m_pSamplerState;
-	ID3D11VertexShader* m_pVS;
-	ID3D11ClassInstance* m_pVSClassInstances[256];
-	UINT m_numVSClassInstances;
-	ID3D11Buffer* m_pVSConstantBuffer;
-	ID3D11GeometryShader* m_pGS;
-	ID3D11ClassInstance* m_pGSClassInstances[256];
-	UINT m_numGSClassInstances;
-	ID3D11Buffer* m_pGSConstantBuffer;
-	ID3D11ShaderResourceView* m_pGSSRV;
-	ID3D11PixelShader* m_pPS;
-	ID3D11ClassInstance* m_pPSClassInstances[256];
-	UINT m_numPSClassInstances;
-	ID3D11HullShader* m_pHS;
-	ID3D11ClassInstance* m_pHSClassInstances[256];
-	UINT m_numHSClassInstances;
-	ID3D11DomainShader* m_pDS;
-	ID3D11ClassInstance* m_pDSClassInstances[256];
-	UINT m_numDSClassInstances;
-	ID3D11Buffer* m_pVB;
-	UINT m_vertexStride;
-	UINT m_vertexOffset;
-	ID3D11Buffer* m_pIndexBuffer;
-	DXGI_FORMAT m_indexFormat;
-	UINT m_indexOffset;
-
-	state_saver(const state_saver&);
-};
+#include <d3d12.h>
+#include <dxgi1_4.h>
+#include <wrl/client.h>
 
 namespace big
 {
 	using dx_callback      = std::function<void()>;
 	using wndproc_callback = std::function<void(HWND, UINT, WPARAM, LPARAM)>;
 
-	class renderer final
+	struct ExampleDescriptorHeapAllocator
+	{
+		ID3D12DescriptorHeap* Heap          = nullptr;
+		D3D12_DESCRIPTOR_HEAP_TYPE HeapType = D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES;
+		D3D12_CPU_DESCRIPTOR_HANDLE HeapStartCpu;
+		D3D12_GPU_DESCRIPTOR_HANDLE HeapStartGpu;
+		UINT HeapHandleIncrement;
+		ImVector<int> FreeIndices;
+
+		void Create(ID3D12Device* device, ID3D12DescriptorHeap* heap)
+		{
+			IM_ASSERT(Heap == nullptr && FreeIndices.empty());
+			Heap                            = heap;
+			D3D12_DESCRIPTOR_HEAP_DESC desc = heap->GetDesc();
+			HeapType                        = desc.Type;
+			HeapStartCpu                    = Heap->GetCPUDescriptorHandleForHeapStart();
+			HeapStartGpu                    = Heap->GetGPUDescriptorHandleForHeapStart();
+			HeapHandleIncrement             = device->GetDescriptorHandleIncrementSize(HeapType);
+			FreeIndices.reserve((int)desc.NumDescriptors);
+			for (int n = desc.NumDescriptors; n > 0; n--)
+				FreeIndices.push_back(n - 1);
+		}
+		void Destroy()
+		{
+			Heap = nullptr;
+			FreeIndices.clear();
+		}
+		void Alloc(D3D12_CPU_DESCRIPTOR_HANDLE* out_cpu_desc_handle, D3D12_GPU_DESCRIPTOR_HANDLE* out_gpu_desc_handle)
+		{
+			IM_ASSERT(FreeIndices.Size > 0);
+			int idx = FreeIndices.back();
+			FreeIndices.pop_back();
+			out_cpu_desc_handle->ptr = HeapStartCpu.ptr + (idx * HeapHandleIncrement);
+			out_gpu_desc_handle->ptr = HeapStartGpu.ptr + (idx * HeapHandleIncrement);
+		}
+		void Free(D3D12_CPU_DESCRIPTOR_HANDLE out_cpu_desc_handle, D3D12_GPU_DESCRIPTOR_HANDLE out_gpu_desc_handle)
+		{
+			int cpu_idx = (int)((out_cpu_desc_handle.ptr - HeapStartCpu.ptr) / HeapHandleIncrement);
+			int gpu_idx = (int)((out_gpu_desc_handle.ptr - HeapStartGpu.ptr) / HeapHandleIncrement);
+			IM_ASSERT(cpu_idx == gpu_idx);
+			FreeIndices.push_back(cpu_idx);
+		}
+	};
+
+
+	class renderer
 	{
 	public:
-		explicit renderer();
-		~renderer();
-
 		/**
 		 * @brief Add a callback function to draw your ImGui content in
 		 * 
@@ -88,46 +68,120 @@ namespace big
 		 * @return true 
 		 * @return false 
 		 */
-		bool add_dx_callback(dx_callback callback, std::uint32_t priority);
+		virtual bool add_dx_callback(dx_callback callback, std::uint32_t priority) = 0;
 		/**
 		 * @brief Add a callback function on wndproc
 		 * 
 		 * @param callback Function
 		 */
-		void add_wndproc_callback(wndproc_callback callback);
+		virtual void add_wndproc_callback(wndproc_callback callback) = 0;
 
-		void on_present();
+		virtual void on_present() = 0;
 
-		void rescale(float rel_size);
+		virtual void pre_reset()  = 0;
+		virtual void post_reset() = 0;
 
-		void pre_reset();
-		void post_reset();
+		virtual void wndproc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) = 0;
 
-		bool add_callback(PresentCallback callback)
+		// DO NOT CALL THIS OUTSIDE OF DX12 CODE
+		virtual ExampleDescriptorHeapAllocator* dx12_get_heap_allocator() = 0;
+		virtual bool is_resizing()                                        = 0;
+
+		static void init_imgui_config()
 		{
-			return m_present_callbacks.insert(callback).second;
+			auto file_path = g_file_manager.get_project_file("./imgui.ini").get_path();
+
+			ImGuiContext* ctx = ImGui::CreateContext();
+
+			static std::string path = file_path.make_preferred().string();
+			ctx->IO.IniFilename     = path.c_str();
+
+			auto& io = ImGui::GetIO();
+
+			/**
+			 * @todo Add a toggle for Keyboard Controls, as they partially broken in Wine.
+			 */
+			io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+			// io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
+			// io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // Enable Multi-Viewport / Platform Windows // broken on DX12
 		}
-		bool remove_callback(PresentCallback callback)
+
+		static void init_imgui_fonts()
 		{
-			return m_present_callbacks.erase(callback) != 0;
+			auto& io = ImGui::GetIO();
+			folder windows_fonts(std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts");
+
+			file font_file_path = windows_fonts.get_file("./msyh.ttc");
+			if (!font_file_path.exists())
+				font_file_path = windows_fonts.get_file("./msyh.ttf");
+
+			if (!font_file_path.exists())
+			{
+				LOG(WARNING) << "msyh font not found";
+				return;
+			}
+
+			auto font_file            = std::ifstream(font_file_path.get_path(), std::ios::binary | std::ios::ate);
+			const auto font_data_size = static_cast<int>(font_file.tellg());
+			const auto font_data      = std::make_unique<std::uint8_t[]>(font_data_size);
+
+			font_file.seekg(0);
+			font_file.read(reinterpret_cast<char*>(font_data.get()), font_data_size);
+			font_file.close();
+
+			{
+				ImFontConfig fnt_cfg{};
+				fnt_cfg.FontDataOwnedByAtlas = false;
+				strcpy(fnt_cfg.Name, "Fnt20px");
+
+				io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_rubik),
+				    sizeof(font_rubik),
+				    20.f,
+				    &fnt_cfg,
+				    io.Fonts->GetGlyphRangesDefault());
+				fnt_cfg.MergeMode = true;
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 20.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 20.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
+				io.Fonts->Build();
+			}
+
+			{
+				ImFontConfig fnt_cfg{};
+				fnt_cfg.FontDataOwnedByAtlas = false;
+				strcpy(fnt_cfg.Name, "Fnt28px");
+
+				g.window.font_title = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_rubik), sizeof(font_rubik), 28.f, &fnt_cfg);
+				fnt_cfg.MergeMode = true;
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 28.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 28.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
+				io.Fonts->Build();
+			}
+
+			{
+				ImFontConfig fnt_cfg{};
+				fnt_cfg.FontDataOwnedByAtlas = false;
+				strcpy(fnt_cfg.Name, "Fnt24px");
+
+				g.window.font_sub_title = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_rubik), sizeof(font_rubik), 24.f, &fnt_cfg);
+				fnt_cfg.MergeMode = true;
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 24.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 24.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
+				io.Fonts->Build();
+			}
+
+			{
+				ImFontConfig fnt_cfg{};
+				fnt_cfg.FontDataOwnedByAtlas = false;
+				strcpy(fnt_cfg.Name, "Fnt18px");
+
+				g.window.font_small = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_rubik), sizeof(font_rubik), 18.f, &fnt_cfg);
+				fnt_cfg.MergeMode = true;
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 18.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+				io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 18.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
+				io.Fonts->Build();
+			}
 		}
-
-		void wndproc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
-
-	private:
-		static void new_frame();
-		static void end_frame();
-
-	private:
-		IDXGISwapChain* m_dxgi_swapchain;
-		ID3D11Device* m_d3d_device;
-		ID3D11DeviceContext* m_d3d_device_context;
-
-		std::map<std::uint32_t, dx_callback> m_dx_callbacks;
-		std::vector<wndproc_callback> m_wndproc_callbacks;
-		std::set<PresentCallback> m_present_callbacks;
-		std::unique_ptr<state_saver> m_state_saver;
-		bool m_restoreState = false;
 	};
 
 	inline renderer* g_renderer{};

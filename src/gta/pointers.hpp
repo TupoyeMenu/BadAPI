@@ -27,11 +27,9 @@ namespace big
 		CNetworkPlayerMgr** m_network_player_mgr{};
 
 		rage::scrNativeRegistrationTable* m_native_registration_table{};
-		functions::get_native_handler_t m_get_native_handler{};
 		PVOID m_unk_native{};
-		functions::fix_vectors_t m_fix_vectors{};
 
-		rage::atArray<GtaThread*>* m_script_threads{};
+		rage::atArray<rage::scrThread*>* m_script_threads{};
 		rage::scrProgramTable* m_script_program_table{};
 		functions::run_script_threads_t m_run_script_threads{};
 		std::int64_t** m_script_globals{};
@@ -41,6 +39,10 @@ namespace big
 		CGameScriptHandlerMgr** m_script_handler_mgr{};
 
 		IDXGISwapChain** m_swapchain{};
+		ID3D12CommandQueue** m_command_queue;
+
+		uint32_t* m_resolution_x;
+		uint32_t* m_resolution_y;
 
 		PVOID m_model_spawn_bypass;
 
@@ -48,10 +50,11 @@ namespace big
 		functions::handle_to_ptr m_handle_to_ptr{};
 
 		PVOID m_queue_dependency;
+		PVOID m_sig_scan_memory;
 
-		GenericPool** m_ped_pool;
-		GenericPool** m_prop_pool;
-		VehiclePool*** m_vehicle_pool;
+		void** m_ped_pool;
+		void** m_prop_pool;
+		void*** m_vehicle_pool;
 
 		Network** m_network;
 
@@ -60,39 +63,17 @@ namespace big
 		functions::give_pickup_rewards m_give_pickup_rewards;
 		functions::send_network_damage m_send_network_damage;
 
-		functions::trigger_script_event m_trigger_script_event;
-		memory::handle m_trigger_script_event_internal;
-
-		// Bitbuffer Read/Write START
-		functions::read_bitbuf_dword m_read_bitbuf_dword;
-		functions::read_bitbuf_string m_read_bitbuf_string;
-		functions::read_bitbuf_bool m_read_bitbuf_bool;
-		functions::read_bitbuf_array m_read_bitbuf_array;
-		functions::write_bitbuf_qword m_write_bitbuf_qword;
-		functions::write_bitbuf_dword m_write_bitbuf_dword;
-		functions::write_bitbuf_int64 m_write_bitbuf_int64;
-		functions::write_bitbuf_int32 m_write_bitbuf_int32;
-		functions::write_bitbuf_bool m_write_bitbuf_bool;
-		functions::write_bitbuf_array m_write_bitbuf_array;
-		// Bitbuffer Read/Write END
-
-		// Received Event Signatures START
-		PVOID m_received_event;
-		functions::send_event_ack m_send_event_ack;
-		// Received Event Signatures END
-
-		PVOID m_world_model_spawn_bypass;
 		memory::handle m_blame_explode;
 		memory::handle m_explosion_patch;
 
 		functions::queue_packet m_queue_packet;
-		functions::send_packet m_send_packet;
 
 		//Sync Signatures START
 		PVOID m_received_clone_sync;
 		functions::get_sync_tree_for_type m_get_sync_tree_for_type;
 		functions::get_sync_type_info m_get_sync_type_info;
 		functions::get_net_object m_get_net_object;
+		functions::get_net_object_by_id m_get_net_object_by_id;
 		//Sync Signatures END
 
 		functions::get_gameplay_cam_coords m_get_gameplay_cam_coords;
@@ -102,7 +83,6 @@ namespace big
 		CNetworkObjectMgr** m_network_object_mgr;
 
 		PVOID m_receive_net_message;
-		PVOID m_get_network_event_data;
 		PVOID m_assign_physical_index;
 
 		PVOID m_network_player_mgr_init;
@@ -111,15 +91,10 @@ namespace big
 		PVOID m_network_can_access_multiplayer;
 		PVOID m_terminate_game;
 
-		PVOID m_update_script_threads;
-
-		PVOID m_add_plane_lift;
-		PVOID m_apply_plane_thrust;
-
 		PVOID m_handle_join_request;
 		functions::write_join_response_data m_write_join_response_data;
 		functions::get_peer_by_security_id m_get_peer_by_security_id;
-		
+
 		functions::print_script_stack_trace m_print_script_stack_trace;
 	};
 

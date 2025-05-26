@@ -1,0 +1,2 @@
+#undef GAME_BRANCH
+#undef ENHANCED

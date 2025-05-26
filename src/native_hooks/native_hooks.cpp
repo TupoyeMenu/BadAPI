@@ -17,6 +17,8 @@
 #include <script/scrProgram.hpp>
 #include <script/scrProgramTable.hpp>
 
+#include "gta/script/invoker.hpp"
+
 namespace big
 {
 	static bool map_native(rage::scrNativeHash* hash)
@@ -70,7 +72,7 @@ namespace big
 			auto native = replacement_hash;
 			map_native(&native);
 
-			auto og_handler = g_pointers->m_get_native_handler(g_pointers->m_native_registration_table, native);
+			auto og_handler = g_native_invoker.get_native_handler(native);
 			if (!og_handler)
 				continue;
 

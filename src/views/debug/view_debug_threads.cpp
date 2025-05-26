@@ -19,11 +19,10 @@
 #include "gta/script_thread.hpp"
 #include "gui/components/components.hpp"
 #include "logger/stack_trace.hpp"
+#include "gta/gta_util.hpp"
 #include "views/view.hpp"
 
-#include <network/CNetGamePlayer.hpp>
-
-static GtaThread* selected_thread;
+static rage::scrThread* selected_thread;
 
 static int selected_stack_size             = 128;
 static int free_stacks                     = -1;
@@ -53,8 +52,6 @@ namespace
 	}
 }
 
-extern int updates_per_update;
-
 namespace big
 {
 	void view::debug_threads()
@@ -71,15 +68,15 @@ namespace big
 			{
 				if (script)
 				{
-					if (script->m_context.m_state != rage::eThreadState::killed && script->m_context.m_stack_size == 0)
+					if (CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, script, ->m_context.m_state) != rage::eThreadState::killed && CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, script, ->m_context.m_stack_size) == 0)
 						continue;
 
-					ImGui::PushID(script->m_context.m_thread_id);
+					ImGui::PushID(CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, script, ->m_context.m_thread_id));
 
-					if (script->m_context.m_state == rage::eThreadState::killed)
+					if (CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, script, ->m_context.m_state) == rage::eThreadState::killed)
 						ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.1f, 0.1f, 1.f));
 
-					if (ImGui::Selectable(script->m_name, selected_thread == script))
+					if (ImGui::Selectable(CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, script, ->m_name), selected_thread == script))
 					{
 						selected_thread = script;
 					}
@@ -87,7 +84,7 @@ namespace big
 					if (selected_thread == script)
 						ImGui::SetItemDefaultFocus();
 
-					if (script->m_context.m_state == rage::eThreadState::killed)
+					if (CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, script, ->m_context.m_state) == rage::eThreadState::killed)
 						ImGui::PopStyleColor();
 
 					ImGui::PopID();
@@ -101,48 +98,22 @@ namespace big
 
 		if (selected_thread)
 		{
-			ImGui::Combo("State", (int*)&selected_thread->m_context.m_state, "RUNNING\0WAITING\0KILLED\0PAUSED\0STATE_4\0");
+			ImGui::Combo("State", (int*)&CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_state), "RUNNING\0WAITING\0KILLED\0PAUSED\0STATE_4\0");
 
-			if (CGameScriptHandlerNetComponent* net_component = (CGameScriptHandlerNetComponent*)selected_thread->m_net_component)
-				if (CScriptParticipant* host = net_component->m_host)
-					if (CNetGamePlayer* host_net_player = host->m_net_game_player)
-						ImGui::Text("Host: %s", host_net_player->get_name());
-
-			ImGui::TextUnformatted("Script Pointer: ");
-			ImGui::SameLine();
-			if (ImGui::SmallButton(std::format("0x{:X}", (DWORD64)selected_thread).c_str()))
-			{
-				ImGui::SetClipboardText(std::format("0x{:X}", (DWORD64)selected_thread).c_str());
-			}
-
-			ImGui::Text("m_safe_for_network_game: %s", selected_thread->m_safe_for_network_game ? "Yes" : "No");
-			ImGui::Text("m_can_be_paused: %s", selected_thread->m_can_be_paused ? "Yes" : "No");
-			ImGui::TextUnformatted("Stack Pointer: ");
-			ImGui::SameLine();
-			if (ImGui::SmallButton(std::format("0x{:X}", (DWORD64)selected_thread->m_stack).c_str()))
-			{
-				ImGui::SetClipboardText(std::format("0x{:X}", (DWORD64)selected_thread->m_stack).c_str());
-			}
-			ImGui::Text("Internal Stack Pointer: %d Stack Size: %d",
-			    selected_thread->m_context.m_stack_pointer,
-			    selected_thread->m_context.m_stack_size);
-			ImGui::Text("Instruction Pointer: %X", selected_thread->m_context.m_instruction_pointer);
-
-			if (selected_thread->m_context.m_state == rage::eThreadState::killed)
-			{
-				ImGui::Text("Exit Reason: %s", selected_thread->m_exit_message);
-			}
+			ImGui::Text("Stack Pointer / Stack Size %d/%d",
+			    CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_stack_pointer),
+			    CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_stack_size));
+			ImGui::Text("IP: %X", CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_instruction_pointer));
+			if (CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_state) == rage::eThreadState::killed)
+				ImGui::Text("Exit Reason: %s", CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_exit_message));
 
 			if (ImGui::Button("Kill"))
 			{
-				if (selected_thread->m_context.m_stack_size != 0)
-				{
+				if (CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_stack_size) != 0)
 					selected_thread->kill();
-				}
 
-				selected_thread->m_context.m_state = rage::eThreadState::killed;
+				CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, selected_thread, ->m_context.m_state) = rage::eThreadState::killed;
 			}
-
 
 			if (ImGui::TreeNode("Callstack"))
 			{
@@ -185,9 +156,9 @@ namespace big
 		{
 			for (auto& p : stack_sizes)
 			{
-				if (ImGui::Selectable(fmt::format("{} ({})", p.first, p.second).data(), selected_stack_size == p.second))
+				if (ImGui::Selectable(std::format("{} ({})", p.first, p.second).data(), selected_stack_size == p.second))
 				{
-					selected_stack_size_str = fmt::format("{} ({})", p.first, p.second);
+					selected_stack_size_str = std::format("{} ({})", p.first, p.second);
 					selected_stack_size     = p.second;
 
 					g_fiber_pool->queue_job([] {
@@ -225,20 +196,6 @@ namespace big
 		});
 
 		ImGui::EndGroup();
-
-		components::help_marker("Runs the script update function multiple times per frame.\nThis is for having fun, breaks everything.");
-		if (ImGui::InputInt("Updates per update", &updates_per_update))
-		{
-			if (updates_per_update < 0)
-			{
-				updates_per_update = 0;
-			}
-		}
-
-		extern bool use_custom_vm;
-		extern bool log_opcodes;
-		ImGui::Checkbox("use_custom_vm", &use_custom_vm);
-		ImGui::Checkbox("log_opcodes", &log_opcodes);
 
 		if (*g_pointers->m_game_state != eGameState::Invalid && std::chrono::high_resolution_clock::now() - last_stack_update_time > 100ms)
 		{

@@ -1,4 +1,6 @@
 #include "stack_trace.hpp"
+#include "gta/gta_util.hpp"
+#include "gta/tls_context.hpp"
 
 #include <dbghelp.h>
 #include <winternl.h>
@@ -166,7 +168,7 @@ namespace big
 
 	void stack_trace::dump_script_info()
 	{
-		m_dump << "Currently executing script: " << rage::tlsContext::get()->m_script_thread->m_name << '\n';
+		m_dump << "Currently executing script: " << CROSS_CLASS_ACCESS(rage::tlsContext, rage_enhanced::tlsContext, rage::tlsContext::get(), ->m_script_thread->m_name) << '\n';
 		m_dump << "Thread program counter (could be inaccurate): "
 		       << m_totally_not_exception_info->ContextRecord->Rdi - m_totally_not_exception_info->ContextRecord->Rsi << '\n';
 	}

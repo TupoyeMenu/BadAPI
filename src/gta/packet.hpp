@@ -41,13 +41,5 @@ namespace big
 				write<rage::eNetMessage>(message, 8);
 			}
 		}
-
-		inline void write_peer_id(uint64_t peer_id)
-		{
-			char b[8];
-			rage::datBitBuffer buf(b, 8);
-			buf.WriteQWord(peer_id, 64);
-			m_buffer.WriteArray(b, 8 * buf.GetDataLength());
-		}
 	};
 }

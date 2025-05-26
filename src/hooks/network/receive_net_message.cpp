@@ -1,9 +1,10 @@
+#include "common.hpp"
 #include "core/data/packet_types.hpp"
-#include "gta/net_game_event.hpp"
 #include "gta/gta_util.hpp"
+#include "gta/net_game_event.hpp"
 #include "hooking/hooking.hpp"
-#include "services/players/player_service.hpp"
 #include "network/netConnection.hpp"
+#include "services/players/player_service.hpp"
 
 #include <network/Network.hpp>
 #include <network/P2pSecurity.hpp>
@@ -204,53 +205,32 @@ namespace big
 			return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
 		}
 
-		rage::snSession* session = nullptr; // game unless proven otherwise
+		int sec_id               = 0;
+		rage::SecurityPeer* peer = nullptr;
 
-		if (gta_util::get_network()->m_transition_session_ptr
-		    && gta_util::get_network()->m_transition_session_ptr->m_connection_identifier == event->m_connection_identifier)
+		if (!g_is_enhanced)
 		{
-			session = gta_util::get_network()->m_transition_session_ptr;
-		}
-		else
-		{
-			session = gta_util::get_network()->m_game_session_ptr;
-		}
-
-		player_ptr player = nullptr; // WILL be null until we get their physical
-
-		for (uint32_t i = 0; i < gta_util::get_network()->m_game_session_ptr->m_player_count; i++)
-		{
-			if (auto player_iter = gta_util::get_network()->m_game_session_ptr->m_players[i])
+			if (frame)
 			{
-				if (player_iter->m_player_data.m_peer_id_2 == event->m_peer_id)
-				{
-					player = g_player_service->get_by_host_token(
-					    gta_util::get_network()->m_game_session_ptr->m_players[i]->m_player_data.m_host_token);
-					break;
-				}
+				sec_id = frame->m_security_id;
 			}
-		}
+			else
+			{
+				if (auto cxn = g_pointers->m_get_connection_peer(net_cxn_mgr, error->m_peer_id))
+					sec_id = cxn->m_security_id;
+			}
 
-		int sec_id = 0;
+			peer = g_pointers->m_get_peer_by_security_id(sec_id); // shouldn't be null in most cases, contains unspoofable data
 
-		if (frame)
-			sec_id = frame->m_security_id;
-		else
-		{
-			if (auto cxn = g_pointers->m_get_connection_peer(net_cxn_mgr, error->m_peer_id))
-				sec_id = cxn->m_security_id;
-		}
-
-		auto peer = g_pointers->m_get_peer_by_security_id(sec_id); // shouldn't be null in most cases, contains unspoofable data
-
-		if (error && msgType != rage::eNetMessage::MsgJoinResponse)
-		{
-			if (peer)
-				LOGF(stream::net_messages,
-				    WARNING,
-				    "Received an error packet that isn't MsgJoinResponse from {}",
-				    peer->m_info.name);
-			return true;
+			if (error && msgType != rage::eNetMessage::MsgJoinResponse)
+			{
+				if (peer)
+					LOGF(stream::net_messages,
+					    WARNING,
+					    "Received an error packet that isn't MsgJoinResponse from {}",
+					    peer->m_info.name);
+				return true;
+			}
 		}
 
 		if (g.packet_logs)
