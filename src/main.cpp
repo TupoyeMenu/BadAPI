@@ -86,9 +86,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				    std::this_thread::sleep_for(1s);
 
 			    std::filesystem::path base_dir = std::getenv("appdata");
-			    base_dir /= "BigBaseV2";
+			    base_dir /= PROJECT_NAME;
 			    g_file_manager.init(base_dir);
-			    g_log.initialize("BigBaseV2", g_file_manager.get_project_file("./cout.log"));
+			    g_log.initialize(PROJECT_NAME, g_file_manager.get_project_file("./cout.log"));
 			    LOG(INFO) << R"kek(
  ______  _       ______                        ______  
 (____  \(_)     (____  \                      (_____ \
