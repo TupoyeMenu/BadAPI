@@ -3,7 +3,7 @@
 
 #include "memory/module.hpp"
 
-extern "C" __declspec(dllexport) uint64_t ffi_scan_pattern(const char* pattern, const char* module)
+extern "C" __declspec(dllexport) uint64_t scan_pattern(const char* pattern, const char* module)
 {
 	if (module == nullptr)
 	{

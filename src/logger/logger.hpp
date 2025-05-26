@@ -67,7 +67,7 @@ namespace big
 		void destroy();
 
 		void toggle_external_console(bool toggle);
-		std::vector<LogMessagePtr> get_log_messages() { return m_log_messages; }
+		std::vector<LogMessagePtr>& get_log_messages() { return m_log_messages; }
 		void clear_log_messages();
 	private:
 		void create_backup();
