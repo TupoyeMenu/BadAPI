@@ -1505,6 +1505,20 @@ namespace lua::imgui
 		bool selected = ImGui::InputText(label.c_str(), text.data(), buf_size, flags);
 		return std::make_tuple(text.c_str(), selected);
 	}
+	inline std::tuple<std::string, bool> InputText(const std::string& label, std::string text, unsigned int buf_size, int flags, sol::protected_function func)
+	{
+		text.resize(buf_size);
+		static sol::protected_function& tmp_callback = func;
+		bool selected = ImGui::InputText(label.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int
+		{
+			auto result = tmp_callback(data);
+			if(result.get_type() == sol::type::number)
+				return result.get<int>();
+			else
+				return 0;
+		});
+		return std::make_tuple(text.c_str(), selected);
+	}
 	inline std::tuple<std::string, bool> InputTextMultiline(const std::string& label, std::string text, unsigned int buf_size)
 	{
 		text.resize(buf_size);
@@ -1523,6 +1537,21 @@ namespace lua::imgui
 		bool selected = ImGui::InputTextMultiline(label.c_str(), text.data(), buf_size, {sizeX, sizeY}, flags);
 		return std::make_tuple(text.c_str(), selected);
 	}
+	inline std::tuple<std::string, bool> InputTextMultiline(const std::string& label, std::string text, unsigned int buf_size, float sizeX, float sizeY, int flags, sol::protected_function func)
+	{
+		text.resize(buf_size);
+
+		static sol::protected_function& tmp_callback = func;
+		bool selected = ImGui::InputTextMultiline(label.c_str(), text.data(), buf_size, {sizeX, sizeY}, flags, [](ImGuiInputTextCallbackData* data) -> int
+		{
+			auto result = tmp_callback(data);
+			if(result.get_type() == sol::type::number)
+				return result.get<int>();
+			else
+				return 0;
+		});
+		return std::make_tuple(text.c_str(), selected);
+	}
 	inline std::tuple<std::string, bool> InputTextWithHint(const std::string& label, const std::string& hint, std::string text, unsigned int buf_size)
 	{
 		text.resize(buf_size);
@@ -1533,6 +1562,20 @@ namespace lua::imgui
 	{
 		text.resize(buf_size);
 		bool selected = ImGui::InputTextWithHint(label.c_str(), hint.c_str(), text.data(), buf_size, flags);
+		return std::make_tuple(text.c_str(), selected);
+	}
+	inline std::tuple<std::string, bool> InputTextWithHint(const std::string& label, const std::string& hint, std::string text, unsigned int buf_size, int flags, sol::protected_function func)
+	{
+		text.resize(buf_size);
+		static sol::protected_function& tmp_callback = func;
+		bool selected = ImGui::InputTextWithHint(label.c_str(), hint.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int
+		{
+			auto result = tmp_callback(data);
+			if(result.get_type() == sol::type::number)
+				return result.get<int>();
+			else
+				return 0;
+		});
 		return std::make_tuple(text.c_str(), selected);
 	}
 	inline std::tuple<float, bool> InputFloat(const std::string& label, float v)
@@ -2859,6 +2902,26 @@ namespace lua::imgui
 		luaGlobals.new_usertype<ImGuiStyle>("ImGuiStyle", "Alpha", &ImGuiStyle::Alpha, "DisabledAlpha", &ImGuiStyle::DisabledAlpha, "WindowPadding", &ImGuiStyle::WindowPadding, "WindowRounding", &ImGuiStyle::WindowRounding, "WindowBorderSize", &ImGuiStyle::WindowBorderSize, "WindowMinSize", &ImGuiStyle::WindowMinSize, "WindowTitleAlign", &ImGuiStyle::WindowTitleAlign, "WindowMenuButtonPosition", &ImGuiStyle::WindowMenuButtonPosition, "ChildRounding", &ImGuiStyle::ChildRounding, "ChildBorderSize", &ImGuiStyle::ChildBorderSize, "PopupRounding", &ImGuiStyle::PopupRounding, "PopupBorderSize", &ImGuiStyle::PopupBorderSize, "FramePadding", &ImGuiStyle::FramePadding, "FrameRounding", &ImGuiStyle::FrameRounding, "FrameBorderSize", &ImGuiStyle::FrameBorderSize, "ItemSpacing", &ImGuiStyle::ItemSpacing, "ItemInnerSpacing", &ImGuiStyle::ItemInnerSpacing, "CellPadding", &ImGuiStyle::CellPadding, "TouchExtraPadding", &ImGuiStyle::TouchExtraPadding, "IndentSpacing", &ImGuiStyle::IndentSpacing, "ColumnsMinSpacing", &ImGuiStyle::ColumnsMinSpacing, "ScrollbarSize", &ImGuiStyle::ScrollbarSize, "ScrollbarRounding", &ImGuiStyle::ScrollbarRounding, "GrabMinSize", &ImGuiStyle::GrabMinSize, "GrabRounding", &ImGuiStyle::GrabRounding, "LogSliderDeadzone", &ImGuiStyle::LogSliderDeadzone, "TabRounding", &ImGuiStyle::TabRounding, "TabBorderSize", &ImGuiStyle::TabBorderSize, "TabCloseButtonMinWidthUnselected", &ImGuiStyle::TabCloseButtonMinWidthUnselected, "ColorButtonPosition", &ImGuiStyle::ColorButtonPosition, "ButtonTextAlign", &ImGuiStyle::ButtonTextAlign, "SelectableTextAlign", &ImGuiStyle::SelectableTextAlign, "DisplayWindowPadding", &ImGuiStyle::DisplayWindowPadding, "DisplaySafeAreaPadding", &ImGuiStyle::DisplaySafeAreaPadding, "MouseCursorScale", &ImGuiStyle::MouseCursorScale, "AntiAliasedLines", &ImGuiStyle::AntiAliasedLines, "AntiAliasedLinesUseTex", &ImGuiStyle::AntiAliasedLinesUseTex, "AntiAliasedFill", &ImGuiStyle::AntiAliasedFill, "CurveTessellationTol", &ImGuiStyle::CurveTessellationTol, "CircleTessellationMaxError", &ImGuiStyle::CircleTessellationMaxError, "ScaleAllSizes", &ImGuiStyle::ScaleAllSizes);
 
 		luaGlobals.new_usertype<ImGuiListClipper>("ImGuiListClipper", sol::constructors<ImGuiListClipper()>(), "Begin", &ImGuiListClipper::Begin, "Step", &ImGuiListClipper::Step, "DisplayStart", &ImGuiListClipper::DisplayStart, "DisplayEnd", &ImGuiListClipper::DisplayEnd);
+
+		luaGlobals.new_usertype<ImGuiInputTextCallbackData>("ImGuiInputTextCallbackData", sol::no_constructor,
+			"EventFlag", sol::readonly(&ImGuiInputTextCallbackData::EventFlag),
+			"Flags", sol::readonly(&ImGuiInputTextCallbackData::Flags),
+			"UserData", sol::readonly(&ImGuiInputTextCallbackData::UserData),
+			"EventChar", &ImGuiInputTextCallbackData::EventChar,
+			"EventKey", sol::readonly(&ImGuiInputTextCallbackData::EventKey),
+			"Buf", sol::readonly(&ImGuiInputTextCallbackData::Buf),
+			"BufTextLen", &ImGuiInputTextCallbackData::BufTextLen,
+			"BufSize", sol::readonly(&ImGuiInputTextCallbackData::BufSize),
+			"BufDirty", sol::writeonly_property(&ImGuiInputTextCallbackData::BufDirty),
+			"CursorPos", &ImGuiInputTextCallbackData::CursorPos,
+			"SelectionStart", &ImGuiInputTextCallbackData::SelectionStart,
+			"SelectionEnd", &ImGuiInputTextCallbackData::SelectionEnd,
+			"DeleteChars", &ImGuiInputTextCallbackData::DeleteChars,
+			"InsertChars", &ImGuiInputTextCallbackData::InsertChars,
+			"SelectAll", &ImGuiInputTextCallbackData::SelectAll,
+			"ClearSelection", &ImGuiInputTextCallbackData::ClearSelection,
+			"HasSelection", &ImGuiInputTextCallbackData::HasSelection
+		);
 	}
 
 	inline void InitEnums(sol::table luaGlobals)
@@ -3397,9 +3460,9 @@ namespace lua::imgui
 #pragma endregion Widgets : Sliders
 
 #pragma region Widgets : Inputs using Keyboard
-		ImGui.set_function("InputText", sol::overload(sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int)>(InputText), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, int)>(InputText)));
-		ImGui.set_function("InputTextMultiline", sol::overload(sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int)>(InputTextMultiline), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, float, float)>(InputTextMultiline), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, float, float, int)>(InputTextMultiline)));
-		ImGui.set_function("InputTextWithHint", sol::overload(sol::resolve<std::tuple<std::string, bool>(const std::string&, const std::string&, std::string, unsigned int)>(InputTextWithHint), sol::resolve<std::tuple<std::string, bool>(const std::string&, const std::string&, std::string, unsigned int, int)>(InputTextWithHint)));
+		ImGui.set_function("InputText", sol::overload(sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int)>(InputText), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, int)>(InputText), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, int, sol::protected_function func)>(InputText)));
+		ImGui.set_function("InputTextMultiline", sol::overload(sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int)>(InputTextMultiline), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, float, float)>(InputTextMultiline), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, float, float, int)>(InputTextMultiline), sol::resolve<std::tuple<std::string, bool>(const std::string&, std::string, unsigned int, float, float, int, sol::protected_function func)>(InputTextMultiline)));
+		ImGui.set_function("InputTextWithHint", sol::overload(sol::resolve<std::tuple<std::string, bool>(const std::string&, const std::string&, std::string, unsigned int)>(InputTextWithHint), sol::resolve<std::tuple<std::string, bool>(const std::string&, const std::string&, std::string, unsigned int, int)>(InputTextWithHint), sol::resolve<std::tuple<std::string, bool>(const std::string&, const std::string&, std::string, unsigned int, int, sol::protected_function func)>(InputTextWithHint)));
 		ImGui.set_function("InputFloat", sol::overload(sol::resolve<std::tuple<float, bool>(const std::string&, float)>(InputFloat), sol::resolve<std::tuple<float, bool>(const std::string&, float, float)>(InputFloat), sol::resolve<std::tuple<float, bool>(const std::string&, float, float, float)>(InputFloat), sol::resolve<std::tuple<float, bool>(const std::string&, float, float, float, const std::string&)>(InputFloat), sol::resolve<std::tuple<float, bool>(const std::string&, float, float, float, const std::string&, int)>(InputFloat)));
 		ImGui.set_function("InputFloat2", sol::overload(sol::resolve<std::tuple<sol::as_table_t<std::vector<float>>, bool>(const std::string&, const sol::table&)>(InputFloat2), sol::resolve<std::tuple<sol::as_table_t<std::vector<float>>, bool>(const std::string&, const sol::table&, const std::string&)>(InputFloat2), sol::resolve<std::tuple<sol::as_table_t<std::vector<float>>, bool>(const std::string&, const sol::table&, const std::string&, int)>(InputFloat2)));
 		ImGui.set_function("InputFloat3", sol::overload(sol::resolve<std::tuple<sol::as_table_t<std::vector<float>>, bool>(const std::string&, const sol::table&)>(InputFloat3), sol::resolve<std::tuple<sol::as_table_t<std::vector<float>>, bool>(const std::string&, const sol::table&, const std::string&)>(InputFloat3), sol::resolve<std::tuple<sol::as_table_t<std::vector<float>>, bool>(const std::string&, const sol::table&, const std::string&, int)>(InputFloat3)));

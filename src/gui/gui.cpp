@@ -213,7 +213,7 @@ namespace big
 		{
 			//Persist and restore the cursor position between menu instances.
 			static POINT cursor_coords{};
-			if (g_gui->m_is_open)
+			if (g_gui->m_is_open || g_gui->m_override_mouse)
 			{
 				GetCursorPos(&cursor_coords);
 			}
