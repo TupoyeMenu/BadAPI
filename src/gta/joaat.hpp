@@ -45,6 +45,21 @@ namespace rage
 		return hash;
 	}
 	static_assert(consteval_joaat("test") == 0x3f75ccc1);
+
+	inline constexpr joaat_t literal_joaat(const std::string_view str)
+	{
+		joaat_t hash = 0;
+		for (auto c : str)
+		{
+			hash += c;
+			hash += (hash << 10);
+			hash ^= (hash >> 6);
+		}
+		hash += (hash << 3);
+		hash ^= (hash >> 11);
+		hash += (hash << 15);
+		return hash;
+	}
 }
 
 inline consteval char consteval_to_lower(char c)
@@ -53,7 +68,7 @@ inline consteval char consteval_to_lower(char c)
 }
 
 inline consteval rage::joaat_t operator""_J(const char* s, std::size_t n)
-{	
+{
 	rage::joaat_t result = 0;
 
 	for (std::size_t i = 0; i < n; i++)

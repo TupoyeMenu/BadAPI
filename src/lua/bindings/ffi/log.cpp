@@ -17,3 +17,8 @@ extern "C" __declspec(dllexport) void logf_level(eLogLevel log_level, const char
 
 	va_end(args);
 }
+
+extern "C" __declspec(dllexport) void clear_log_messages()
+{
+	big::g_log.clear_log_messages();
+}

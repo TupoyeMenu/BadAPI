@@ -1,7 +1,7 @@
 #include "script.hpp"
 
-#include "lua/lua_manager.hpp"
 #include "gta/gta_util.hpp"
+#include "lua/lua_manager.hpp"
 #include "memory/pattern.hpp"
 #include "util/scripts.hpp"
 
@@ -9,11 +9,28 @@ namespace lua::script
 {
 	static script_util dummy_script_util;
 
+	// Lua API: Function
+	// Table: script
+	// Name: yield
+	// Returns: integer: 0
+	int yield()
+	{
+		return 0;
+	}
 	int script_util::yield()
 	{
 		return 0;
 	}
 
+	// Lua API: Function
+	// Table: script
+	// Name: sleep
+	// Param: ms: number: time to sleep for, in milliseconds
+	// Returns: integer: time slept for
+	int sleep(int ms)
+	{
+		return ms;
+	}
 	int script_util::sleep(int ms)
 	{
 		return ms;
@@ -181,11 +198,14 @@ namespace lua::script
 
 	void bind(sol::state& state)
 	{
-		auto ns               = state["script"].get_or_create<sol::table>();
-		ns["register_looped"] = register_looped;
-		ns["run_in_fiber"]    = run_in_fiber;
-		ns["is_active"]             = is_active;
+		auto ns                 = state["script"].get_or_create<sol::table>();
+		ns["register_looped"]   = register_looped;
+		ns["run_in_fiber"]      = run_in_fiber;
+		ns["is_active"]         = is_active;
 		ns["execute_as_script"] = execute_as_script;
+
+		ns["yield"] = sol::yielding(&yield);
+		ns["sleep"] = sol::yielding(&sleep);
 
 		auto usertype = state.new_usertype<script_util>("script_util");
 

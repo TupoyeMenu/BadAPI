@@ -1,3 +1,4 @@
+#include "gta/joaat.hpp"
 #include "lua/lua_manager.hpp"
 #include "lua/sol_include.hpp"
 #include "util/filesystem.hpp"
@@ -53,9 +54,10 @@ namespace lua::global_table
 
 	void bind(sol::state& state)
 	{
-		state["joaat"]        = rage::joaat;
-		state["include"]      = include;
-		state["dofile"]       = include;
-		state["get_dll_path"] = get_dll_path;
+		state["joaat"]         = rage::joaat;
+		state["literal_joaat"] = rage::literal_joaat;
+		state["include"]       = include;
+		state["dofile"]        = include;
+		state["get_dll_path"]  = get_dll_path;
 	}
 }
