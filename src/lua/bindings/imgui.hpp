@@ -1509,10 +1509,9 @@ namespace lua::imgui
 	{
 		text.resize(buf_size);
 		static sol::protected_function& tmp_callback = func;
-		bool selected = ImGui::InputText(label.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int
-		{
+		bool selected = ImGui::InputText(label.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int {
 			auto result = tmp_callback(data);
-			if(result.get_type() == sol::type::number)
+			if (result.get_type() == sol::type::number)
 				return result.get<int>();
 			else
 				return 0;
@@ -1542,10 +1541,9 @@ namespace lua::imgui
 		text.resize(buf_size);
 
 		static sol::protected_function& tmp_callback = func;
-		bool selected = ImGui::InputTextMultiline(label.c_str(), text.data(), buf_size, {sizeX, sizeY}, flags, [](ImGuiInputTextCallbackData* data) -> int
-		{
+		bool selected = ImGui::InputTextMultiline(label.c_str(), text.data(), buf_size, {sizeX, sizeY}, flags, [](ImGuiInputTextCallbackData* data) -> int {
 			auto result = tmp_callback(data);
-			if(result.get_type() == sol::type::number)
+			if (result.get_type() == sol::type::number)
 				return result.get<int>();
 			else
 				return 0;
@@ -1568,10 +1566,9 @@ namespace lua::imgui
 	{
 		text.resize(buf_size);
 		static sol::protected_function& tmp_callback = func;
-		bool selected = ImGui::InputTextWithHint(label.c_str(), hint.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int
-		{
+		bool selected = ImGui::InputTextWithHint(label.c_str(), hint.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int {
 			auto result = tmp_callback(data);
-			if(result.get_type() == sol::type::number)
+			if (result.get_type() == sol::type::number)
 				return result.get<int>();
 			else
 				return 0;
@@ -2903,25 +2900,7 @@ namespace lua::imgui
 
 		luaGlobals.new_usertype<ImGuiListClipper>("ImGuiListClipper", sol::constructors<ImGuiListClipper()>(), "Begin", &ImGuiListClipper::Begin, "Step", &ImGuiListClipper::Step, "DisplayStart", &ImGuiListClipper::DisplayStart, "DisplayEnd", &ImGuiListClipper::DisplayEnd);
 
-		luaGlobals.new_usertype<ImGuiInputTextCallbackData>("ImGuiInputTextCallbackData", sol::no_constructor,
-			"EventFlag", sol::readonly(&ImGuiInputTextCallbackData::EventFlag),
-			"Flags", sol::readonly(&ImGuiInputTextCallbackData::Flags),
-			"UserData", sol::readonly(&ImGuiInputTextCallbackData::UserData),
-			"EventChar", &ImGuiInputTextCallbackData::EventChar,
-			"EventKey", sol::readonly(&ImGuiInputTextCallbackData::EventKey),
-			"Buf", sol::readonly(&ImGuiInputTextCallbackData::Buf),
-			"BufTextLen", &ImGuiInputTextCallbackData::BufTextLen,
-			"BufSize", sol::readonly(&ImGuiInputTextCallbackData::BufSize),
-			"BufDirty", sol::writeonly_property(&ImGuiInputTextCallbackData::BufDirty),
-			"CursorPos", &ImGuiInputTextCallbackData::CursorPos,
-			"SelectionStart", &ImGuiInputTextCallbackData::SelectionStart,
-			"SelectionEnd", &ImGuiInputTextCallbackData::SelectionEnd,
-			"DeleteChars", &ImGuiInputTextCallbackData::DeleteChars,
-			"InsertChars", &ImGuiInputTextCallbackData::InsertChars,
-			"SelectAll", &ImGuiInputTextCallbackData::SelectAll,
-			"ClearSelection", &ImGuiInputTextCallbackData::ClearSelection,
-			"HasSelection", &ImGuiInputTextCallbackData::HasSelection
-		);
+		luaGlobals.new_usertype<ImGuiInputTextCallbackData>("ImGuiInputTextCallbackData", sol::no_constructor, "EventFlag", sol::readonly(&ImGuiInputTextCallbackData::EventFlag), "Flags", sol::readonly(&ImGuiInputTextCallbackData::Flags), "UserData", sol::readonly(&ImGuiInputTextCallbackData::UserData), "EventChar", &ImGuiInputTextCallbackData::EventChar, "EventKey", sol::readonly(&ImGuiInputTextCallbackData::EventKey), "Buf", sol::readonly(&ImGuiInputTextCallbackData::Buf), "BufTextLen", &ImGuiInputTextCallbackData::BufTextLen, "BufSize", sol::readonly(&ImGuiInputTextCallbackData::BufSize), "BufDirty", sol::writeonly_property(&ImGuiInputTextCallbackData::BufDirty), "CursorPos", &ImGuiInputTextCallbackData::CursorPos, "SelectionStart", &ImGuiInputTextCallbackData::SelectionStart, "SelectionEnd", &ImGuiInputTextCallbackData::SelectionEnd, "DeleteChars", &ImGuiInputTextCallbackData::DeleteChars, "InsertChars", &ImGuiInputTextCallbackData::InsertChars, "SelectAll", &ImGuiInputTextCallbackData::SelectAll, "ClearSelection", &ImGuiInputTextCallbackData::ClearSelection, "HasSelection", &ImGuiInputTextCallbackData::HasSelection);
 	}
 
 	inline void InitEnums(sol::table luaGlobals)
@@ -3023,6 +3002,14 @@ namespace lua::imgui
 		luaGlobals.new_enum("ImGuiInputTextFlags", "None", ImGuiInputTextFlags_None, "CharsDecimal", ImGuiInputTextFlags_CharsDecimal, "CharsHexadecimal", ImGuiInputTextFlags_CharsHexadecimal, "CharsUppercase", ImGuiInputTextFlags_CharsUppercase, "CharsNoBlank", ImGuiInputTextFlags_CharsNoBlank, "AutoSelectAll", ImGuiInputTextFlags_AutoSelectAll, "EnterReturnsTrue", ImGuiInputTextFlags_EnterReturnsTrue, "CallbackCompletion", ImGuiInputTextFlags_CallbackCompletion, "CallbackHistory", ImGuiInputTextFlags_CallbackHistory, "CallbackAlways", ImGuiInputTextFlags_CallbackAlways, "CallbackCharFilter", ImGuiInputTextFlags_CallbackCharFilter, "AllowTabInput", ImGuiInputTextFlags_AllowTabInput, "CtrlEnterForNewLine", ImGuiInputTextFlags_CtrlEnterForNewLine, "NoHorizontalScroll", ImGuiInputTextFlags_NoHorizontalScroll, "AlwaysOverwrite", ImGuiInputTextFlags_AlwaysOverwrite, "ReadOnly", ImGuiInputTextFlags_ReadOnly, "Password", ImGuiInputTextFlags_Password, "NoUndoRedo", ImGuiInputTextFlags_NoUndoRedo, "CharsScientific", ImGuiInputTextFlags_CharsScientific, "CallbackResize", ImGuiInputTextFlags_CallbackResize, "CallbackEdit", ImGuiInputTextFlags_CallbackEdit);
 #pragma endregion InputText Flags
 
+#pragma region Child Flags
+		luaGlobals.new_enum("ImGuiChildFlags", "None", ImGuiChildFlags_None, "Borders", ImGuiChildFlags_Borders, "AlwaysUseWindowPadding", ImGuiChildFlags_AlwaysUseWindowPadding, "ResizeX", ImGuiChildFlags_ResizeX, "ResizeY", ImGuiChildFlags_ResizeY, "AutoResizeX", ImGuiChildFlags_AutoResizeX, "AutoResizeY", ImGuiChildFlags_AutoResizeY, "AlwaysAutoResize", ImGuiChildFlags_AlwaysAutoResize, "FrameStyle", ImGuiChildFlags_FrameStyle, "NavFlattened", ImGuiChildFlags_NavFlattened);
+#pragma endregion Child Flags
+
+#pragma region Item Flags
+		luaGlobals.new_enum("ImGuiItemFlags", "None", ImGuiItemFlags_None, "NoTabStop", ImGuiItemFlags_NoTabStop, "NoNav", ImGuiItemFlags_NoNav, "NoNavDefaultFocus", ImGuiItemFlags_NoNavDefaultFocus, "ButtonRepeat", ImGuiItemFlags_ButtonRepeat, "AutoClosePopups,", ImGuiItemFlags_AutoClosePopups, "AllowDuplicateId", ImGuiItemFlags_AllowDuplicateId);
+#pragma endregion Item Flags
+
 #pragma region Slider Flags
 		luaGlobals.new_enum("ImGuiSliderFlags", "None", ImGuiSliderFlags_None, "AlwaysClamp", ImGuiSliderFlags_AlwaysClamp, "Logarithmic", ImGuiSliderFlags_Logarithmic, "NoRoundToFormat", ImGuiSliderFlags_NoRoundToFormat, "NoInput", ImGuiSliderFlags_NoInput);
 #pragma endregion Slider Flags
@@ -3095,7 +3082,7 @@ namespace lua::imgui
 #pragma endregion ColorEdit Flags
 
 #pragma region TreeNode Flags
-		luaGlobals.new_enum("ImGuiTreeNodeFlags", "None", ImGuiTreeNodeFlags_None, "Selected", ImGuiTreeNodeFlags_Selected, "Framed", ImGuiTreeNodeFlags_Framed, "AllowOverlap", ImGuiTreeNodeFlags_AllowOverlap, "NoTreePushOnOpen", ImGuiTreeNodeFlags_NoTreePushOnOpen, "NoAutoOpenOnLog", ImGuiTreeNodeFlags_NoAutoOpenOnLog, "DefaultOpen", ImGuiTreeNodeFlags_DefaultOpen, "OpenOnDoubleClick", ImGuiTreeNodeFlags_OpenOnDoubleClick, "OpenOnArrow", ImGuiTreeNodeFlags_OpenOnArrow, "Leaf", ImGuiTreeNodeFlags_Leaf, "Bullet", ImGuiTreeNodeFlags_Bullet, "FramePadding", ImGuiTreeNodeFlags_FramePadding, "SpanAvailWidth", ImGuiTreeNodeFlags_SpanAvailWidth, "SpanFullWidth", ImGuiTreeNodeFlags_SpanFullWidth, "SpanTextWidth", ImGuiTreeNodeFlags_SpanTextWidth,"SpanAllColumns", ImGuiTreeNodeFlags_SpanAllColumns,  "NavLeftJumpsBackHere", ImGuiTreeNodeFlags_NavLeftJumpsBackHere, "CollapsingHeader", ImGuiTreeNodeFlags_CollapsingHeader);
+		luaGlobals.new_enum("ImGuiTreeNodeFlags", "None", ImGuiTreeNodeFlags_None, "Selected", ImGuiTreeNodeFlags_Selected, "Framed", ImGuiTreeNodeFlags_Framed, "AllowOverlap", ImGuiTreeNodeFlags_AllowOverlap, "NoTreePushOnOpen", ImGuiTreeNodeFlags_NoTreePushOnOpen, "NoAutoOpenOnLog", ImGuiTreeNodeFlags_NoAutoOpenOnLog, "DefaultOpen", ImGuiTreeNodeFlags_DefaultOpen, "OpenOnDoubleClick", ImGuiTreeNodeFlags_OpenOnDoubleClick, "OpenOnArrow", ImGuiTreeNodeFlags_OpenOnArrow, "Leaf", ImGuiTreeNodeFlags_Leaf, "Bullet", ImGuiTreeNodeFlags_Bullet, "FramePadding", ImGuiTreeNodeFlags_FramePadding, "SpanAvailWidth", ImGuiTreeNodeFlags_SpanAvailWidth, "SpanFullWidth", ImGuiTreeNodeFlags_SpanFullWidth, "SpanTextWidth", ImGuiTreeNodeFlags_SpanTextWidth, "SpanAllColumns", ImGuiTreeNodeFlags_SpanAllColumns, "NavLeftJumpsBackHere", ImGuiTreeNodeFlags_NavLeftJumpsBackHere, "CollapsingHeader", ImGuiTreeNodeFlags_CollapsingHeader);
 #pragma endregion TreeNode Flags
 
 #pragma region Selectable Flags

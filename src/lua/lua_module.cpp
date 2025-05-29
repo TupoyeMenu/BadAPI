@@ -6,6 +6,7 @@
 #include "bindings/globals.hpp"
 #include "bindings/gui.hpp"
 #include "bindings/imgui.hpp"
+#include "bindings/imguitextselect.hpp"
 #include "bindings/locals.hpp"
 #include "bindings/log.hpp"
 #include "bindings/memory.hpp"
@@ -295,6 +296,7 @@ namespace big
 		lua::vector::bind(m_state);
 		lua::global_table::bind(m_state);
 		lua::imgui::bind(m_state, m_state.globals());
+		lua::imguitextselect::bind(m_state);
 		lua::entities::bind(m_state);
 		lua::self::bind(m_state);
 		lua::stats::bind(m_state);

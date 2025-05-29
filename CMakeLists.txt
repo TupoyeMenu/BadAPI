@@ -17,6 +17,8 @@ include(cmake/luajit.cmake)
 
 message("\nFetching custom modules")
 include(cmake/imgui.cmake)
+include(cmake/utfcpp.cmake)
+include(cmake/imguitextselect.cmake)
 include(cmake/gtav-classes.cmake)
 
 set(RESOURCES
@@ -49,10 +51,11 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     "${minhook_SOURCE_DIR}/src/hde"
     "${luajit_SOURCE_DIR}/src"
     "${luajit_BINARY_DIR}/src"
+    "${imguitextselect_SOURCE_DIR}"
 )
 
 target_precompile_headers(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_DIR}/common.hpp")
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE minhook AsyncLogger dbghelp imgui fmt libluajit d3dcompiler dwmapi winmm psapi dxgi)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE minhook AsyncLogger dbghelp imgui imguitextselect fmt libluajit d3dcompiler dwmapi winmm psapi dxgi)
 
 add_compile_definitions(
     "_CRT_SECURE_NO_WARNINGS"
