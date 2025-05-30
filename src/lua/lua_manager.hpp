@@ -10,9 +10,6 @@ namespace big
 		std::shared_ptr<lua_module> m_module;
 		std::mutex m_disabled_module_lock;
 
-		static constexpr std::chrono::seconds m_delay_between_changed_scripts_check = 3s;
-		std::chrono::high_resolution_clock::time_point m_wake_time_changed_scripts_check;
-
 		folder m_disabled_scripts_folder;
 		folder m_scripts_folder;
 		folder m_scripts_config_folder;

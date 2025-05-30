@@ -182,6 +182,7 @@ namespace big
 		sandbox_os["date"]     = os["date"];
 		sandbox_os["difftime"] = os["difftime"];
 		sandbox_os["time"]     = os["time"];
+		sandbox_os["exit"]     = os["exit"];
 
 		m_state["os"] = sandbox_os;
 	}

@@ -29,7 +29,6 @@ namespace big
 	    m_scripts_config_folder(scripts_config_folder),
 	    m_disabled_scripts_folder(scripts_folder.get_folder("./disabled"))
 	{
-		m_wake_time_changed_scripts_check = std::chrono::high_resolution_clock::now() + m_delay_between_changed_scripts_check;
 		m_module = std::make_shared<lua_module>("main", m_scripts_folder, false);
 
 		load_file(m_scripts_folder.get_path() / "init.lua");
@@ -37,6 +36,8 @@ namespace big
 		g_lua_manager = this;
 
 		load_all_files();
+
+		trigger_event<menu_event::LuaInitFinished>();
 	}
 
 	lua_manager::~lua_manager()

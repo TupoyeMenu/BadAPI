@@ -9,8 +9,5 @@ enum class menu_event
     MenuUnloaded,
     Wndproc,
     Draw,
-
-    // Gameplay functions
-    AddPlaneLift,
-    ApplyPlaneThrust,
+    LuaInitFinished,
 };

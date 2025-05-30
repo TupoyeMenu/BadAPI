@@ -79,6 +79,11 @@ namespace lua::event
 	// Field: Draw: integer
 	// Called every frame, you can draw ImGui here.
 
+	// Lua API: Field
+	// Table: menu_event
+	// Field: LuaInitFinished: integer
+	// Called when lua_manager has finished constructing and all lua files have been loaded.
+
 	// Lua API: Table
 	// Name: event
 	// Table for responding to various events. The list of events is available in the menu_event table.
@@ -124,8 +129,7 @@ namespace lua::event
 		        {"MenuUnloaded", menu_event::MenuUnloaded},
 		        {"Wndproc", menu_event::Wndproc},
 		        {"Draw", menu_event::Draw},
-		        {"AddPlaneLift", menu_event::AddPlaneLift},
-		        {"ApplyPlaneThrust", menu_event::ApplyPlaneThrust},
+		        {"LuaInitFinished", menu_event::LuaInitFinished},
 		    });
 
 
