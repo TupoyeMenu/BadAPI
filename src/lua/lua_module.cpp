@@ -105,7 +105,8 @@ namespace big
 				sol::lib::ffi,
 				sol::lib::jit,
 #endif
-				sol::lib::utf8
+				sol::lib::utf8,
+				sol::lib::debug
 			);
 			// clang-format on
 
@@ -250,27 +251,6 @@ namespace big
 
 	void lua_module::sandbox_lua_loads(folder& scripts_folder)
 	{
-		// That's from lua base lib, luaB
-		m_state["load"]       = not_supported_lua_function("load");
-		m_state["loadstring"] = not_supported_lua_function("loadstring");
-		m_state["loadfile"]   = not_supported_lua_function("loadfile");
-		m_state["dofile"]     = not_supported_lua_function("dofile");
-
-		// That's from lua package lib.
-		// We only allow dependencies between .lua files, no DLLs.
-		m_state["package"]["loadlib"] = not_supported_lua_function("package.loadlib");
-		m_state["package"]["cpath"]   = "";
-
-		// 1                   2               3            4
-		// {searcher_preload, searcher_Lua, searcher_C, searcher_Croot, NULL};
-#if SOL_LUA_VERSION_I_ < 502
-		m_state["package"]["loaders"][3] = not_supported_lua_function("package.loaders C");
-		m_state["package"]["loaders"][4] = not_supported_lua_function("package.loaders Croot");
-#else
-		m_state["package"]["searchers"][3] = not_supported_lua_function("package.searcher C");
-		m_state["package"]["searchers"][4] = not_supported_lua_function("package.searcher Croot");
-#endif
-
 		set_folder_for_lua_require(scripts_folder);
 	}
 
@@ -307,12 +287,7 @@ namespace big
 	{
 		auto result = m_state.safe_script_file(file_path.string(), &sol::script_pass_on_error, sol::load_mode::text);
 
-		if (!result.valid())
-		{
-			LOG(FATAL) << file_path.filename().string() << " failed to load: " << result.get<sol::error>().what();
-			Logger::FlushQueue();
-		}
-		else
+		if (result.valid())
 		{
 			LOG(INFO) << "Loaded " << file_path.filename().string();
 		}

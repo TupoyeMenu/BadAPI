@@ -85,7 +85,10 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    while (!FindWindow(lpClassName, nullptr))
 				    std::this_thread::sleep_for(1s);
 
-			    std::filesystem::path base_dir = std::getenv("appdata");
+			    wchar_t gta_path[MAX_PATH];
+			    GetModuleFileNameW(NULL, gta_path, sizeof(gta_path));
+
+			    std::filesystem::path base_dir = std::filesystem::path(gta_path).parent_path();
 			    base_dir /= PROJECT_NAME;
 			    g_file_manager.init(base_dir);
 			    g_log.initialize(PROJECT_NAME, g_file_manager.get_project_file("./cout.log"));
