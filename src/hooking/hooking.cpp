@@ -41,6 +41,8 @@ namespace big
 			detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
 		}
 
+		detour_hook_helper::add<hooks::prepare_metric_for_sending>("Prepare Metric For Sending", (void*)g_pointers->m_prepare_metric_for_sending);
+
 		detour_hook_helper::add<hooks::run_script_threads>("Script hook", (void*)g_pointers->m_run_script_threads);
 		detour_hook_helper::add<hooks::init_native_tables>("Init Native Tables", (void*)g_pointers->m_init_native_tables);
 		detour_hook_helper::add<hooks::script_vm>("Script VM", (void*)g_pointers->m_script_vm);

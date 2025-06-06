@@ -96,6 +96,14 @@ namespace big
 		functions::get_peer_by_security_id m_get_peer_by_security_id;
 
 		functions::print_script_stack_trace m_print_script_stack_trace;
+
+		int* m_be_restart_status;
+		bool* m_needs_be_restart;
+		bool* m_is_be_banned;
+
+		uint8_t* m_battleye_status_update_patch;
+
+		PVOID m_prepare_metric_for_sending;
 	};
 
 	inline pointers* g_pointers{};

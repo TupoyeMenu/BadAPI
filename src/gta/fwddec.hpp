@@ -58,6 +58,8 @@ namespace rage
 	class snSession;
 	class netEvent;
 	class SecurityPeer;
+	class json_serializer;
+	class rlMetric;
 }
 
 class GtaThread;

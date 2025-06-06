@@ -106,8 +106,7 @@ namespace big
 			    memory::byte_patch::make(ptr.add(8).as<PVOID>(), std::to_array<uint8_t>({0x90, 0x90})).get();
 		});
 		main_batch.add("Model Spawn Bypass", "E8 ? ? ? ? 48 8B 78 48", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			m_model_spawn_bypass =
-			    memory::byte_patch::make(ptr.add(1).rip().add(0x2B).as<uint8_t*>(), 0xEB).get();
+			m_model_spawn_bypass = memory::byte_patch::make(ptr.add(1).rip().add(0x2B).as<uint8_t*>(), 0xEB).get();
 		});
 
 		main_batch.add("Ptr To Handle", "48 8B F9 48 83 C1 10 33 DB", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
@@ -227,7 +226,7 @@ namespace big
 			m_network_object_mgr = ptr.add(3).rip().as<CNetworkObjectMgr**>();
 		});
 		main_batch.add("CNetworkObjectMgr", "41 83 7E FA 02 40 0F 9C C5 C1 E5 02", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			m_network_object_mgr = ptr.add(0xC).add(3).rip().as<CNetworkObjectMgr**>();
+			m_network_object_mgr     = ptr.add(0xC).add(3).rip().as<CNetworkObjectMgr**>();
 			m_get_sync_tree_for_type = ptr.add(0x13).add(1).rip().as<decltype(pointers::m_get_sync_tree_for_type)>();
 		});
 
@@ -286,6 +285,23 @@ namespace big
 		main_batch.add("Print Script Stack Trace", "48 8D 15 ? ? ? ? 48 89 C1 E8 ? ? ? ? 48 C7 05", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
 			m_print_script_stack_trace = ptr.add(11).rip().as<decltype(pointers::m_print_script_stack_trace)>();
 		});
+
+		main_batch.add("BE Data", "48 C7 05 ? ? ? ? 00 00 00 00 E8 ? ? ? ? 48 89 C1 E8 ? ? ? ? E8 ? ? ? ? BD 0A 00 00 00", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_be_restart_status = ptr.add(3).rip().add(8).add(4).as<int*>();
+			m_needs_be_restart  = ptr.add(3).rip().add(8).add(4).add(8).as<bool*>();
+			m_is_be_banned      = ptr.add(3).rip().add(8).add(4).add(8).add(4).as<bool*>();
+		});
+		main_batch.add("BattlEye Status Update Patch", "80 B9 92 0A 00 00 01", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_battleye_status_update_patch = ptr.sub(0x26).as<uint8_t*>();
+		});
+
+		main_batch.add("Prepare Metric For Sending", "48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 56 48 83 EC 30 49 8B F0 4C", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_prepare_metric_for_sending = ptr.as<PVOID>();
+		});
+		main_batch.add("Prepare Metric For Sending", "48 89 F9 FF 50 20 48 8D 15", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_prepare_metric_for_sending = ptr.sub(0x26).as<PVOID>();
+		});
+
 
 		main_batch.run(memory::module(""));
 

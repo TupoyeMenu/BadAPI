@@ -2,8 +2,10 @@
 #include "core/data/packet_types.hpp"
 #include "gta/gta_util.hpp"
 #include "gta/net_game_event.hpp"
+#include "gta/packet.hpp"
 #include "hooking/hooking.hpp"
 #include "network/netConnection.hpp"
+#include "services/anti_cheat_bypass/anti_cheat_bypass.hpp"
 #include "services/players/player_service.hpp"
 
 #include <network/Network.hpp>
@@ -203,6 +205,63 @@ namespace big
 		{
 			LOGF(stream::net_messages, WARNING, "Received message that we cannot parse from cxn id {}", event->m_connection_identifier);
 			return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
+		}
+
+		switch (msgType)
+		{
+		case rage::eNetMessage::MsgKickPlayer:
+		{
+			if (g_is_enhanced && !anti_cheat_bypass::is_fsl_providing_be_bypass())
+				return false;
+			break;
+		}
+		case rage::eNetMessage::MsgBattlEyeCmd:
+		{
+			if (g_is_enhanced && !anti_cheat_bypass::is_fsl_providing_be_bypass() && !anti_cheat_bypass::is_battleye_running())
+			{
+				char data[1028]{};
+				int size         = buffer.Read<int>(11);
+				bool from_client = buffer.Read<bool>(1);
+				buffer.Seek(4); // normalize before we read
+				buffer.ReadArrayBytes(&data, size);
+
+				if (from_client)
+					break;
+
+				packet reply;
+				char reply_buf[1028]{};
+				int reply_sz = 0;
+
+				auto op = data[0];
+
+				if (op == 0)
+				{
+					char payload[] = {0x0, 0x5};
+					reply_sz       = sizeof(payload);
+					memcpy(reply_buf, payload, reply_sz);
+				}
+				else if (op == 2 || op == 4)
+				{
+					char payload[] = {op, data[1]};
+					reply_sz       = sizeof(payload);
+					memcpy(reply_buf, payload, reply_sz);
+				}
+				else if (op == 9)
+				{
+					reply_sz = size;
+					memcpy(reply_buf, data, reply_sz);
+				}
+
+				reply.write_message(rage::eNetMessage::MsgBattlEyeCmd);
+				reply.write<int>(reply_sz, 11);
+				reply.write<bool>(true, 1);
+				reply.seek(4);
+				reply.write_array_bytes(reply_buf, reply_sz);
+				reply.send(event->m_msg_id);
+			}
+			break;
+		}
+		default: break;
 		}
 
 		int sec_id               = 0;

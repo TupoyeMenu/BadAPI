@@ -23,6 +23,7 @@ namespace big
 
 		static int queue_dependency_legacy(void* a1, int a2, int64_t dependency);
 		static void queue_dependency_enhanced(intptr_t a1);
+		static bool prepare_metric_for_sending(rage::json_serializer* bit_buffer, int unk, int time, rage::rlMetric* metric);
 		static bool init_native_tables(rage::scrProgram* program);
 		static rage::eThreadState script_vm(uint64_t* start_stack, uint64_t** scr_globals, rage::scrProgram* program, rage::scrThreadContext* ctx);
 		static void update_script_threads();

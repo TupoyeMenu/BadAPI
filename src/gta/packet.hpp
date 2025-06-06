@@ -27,6 +27,15 @@ namespace big
 			m_buffer.Write<T>(data, length);
 		}
 
+		inline void seek(int bits)
+		{
+			m_buffer.Seek(bits);
+		}
+		inline void write_array_bytes(const void* array, int bytes)
+		{
+			m_buffer.WriteArrayBytes(array, bytes);
+		}
+
 		inline void write_message(rage::eNetMessage message)
 		{
 			write<int>(0x3246, 14);

@@ -19,6 +19,7 @@
 #include "renderer/renderer.hpp"
 #include "renderer/renderer_dx11.hpp"
 #include "renderer/renderer_dx12.hpp"
+#include "services/anti_cheat_bypass/anti_cheat_bypass.hpp"
 #include "services/players/player_service.hpp"
 #include "services/script_patcher/script_patcher_service.hpp"
 #include "services/tunables/tunables_service.hpp"
@@ -141,8 +142,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto script_patcher_service_instance = std::make_unique<script_patcher_service>();
 			    LOG(INFO) << "Script Patcher initialized.";
 
-			    g_script_mgr.add_script(std::make_unique<script>(&backend::loop));
-			    g_script_mgr.add_script(std::make_unique<script>(&gui::script_func));
+			    g_script_mgr.add_script(std::make_unique<script>(&backend::loop, "backend"));
+			    g_script_mgr.add_script(std::make_unique<script>(&gui::script_func, "gui"));
+			    g_script_mgr.add_script(std::make_unique<script>(&anti_cheat_bypass::run_script, "anti cheat bypass"));
 			    LOG(INFO) << "Scripts registered.";
 
 			    g_hooking->enable();
@@ -201,10 +203,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    fiber_pool_instance.reset();
 			    LOG(INFO) << "Fiber pool uninitialized.";
 
-			    if (g_is_enhanced)
-				    dx12_renderer_instance.reset();
-			    else
-				    dx11_renderer_instance.reset();
+				dx12_renderer_instance.reset();
+				dx11_renderer_instance.reset();
 			    LOG(INFO) << "Renderer uninitialized.";
 
 			    byte_patch_manager_instance.reset();

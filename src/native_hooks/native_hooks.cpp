@@ -117,6 +117,7 @@ namespace big
 		add_native_detour(0xB8BA7F44DF1575E1, all_scripts::START_NEW_SCRIPT_WITH_ARGS);
 		add_native_detour(0xEB1C67C3A5333A92, all_scripts::START_NEW_SCRIPT_WITH_NAME_HASH);
 		add_native_detour(0xC4BB298BD441BE78, all_scripts::START_NEW_SCRIPT_WITH_NAME_HASH_AND_ARGS);
+		add_native_detour(0x8D30F648014A92B5, all_scripts::RETURN_FALSE); // GET_EVER_HAD_BAD_PACK_ORDER
 
 		add_native_detour(RAGE_JOAAT("shop_controller"), 0x34616828CD07F1A1, all_scripts::RETURN_FALSE); // prevent exploit reports
 
