@@ -130,6 +130,10 @@ namespace lua::imgui
 	{
 		ImGui::SetNextWindowSizeConstraints({minX, minY}, {maxX, maxY});
 	}
+	inline void SetNextWindowSizeConstraints(float minX, float minY, float maxX, float maxY, sol::protected_function func)
+	{
+		ImGui::SetNextWindowSizeConstraints({minX, minY}, {maxX, maxY}, func);
+	}
 	inline void SetNextWindowContentSize(float sizeX, float sizeY)
 	{
 		ImGui::SetNextWindowContentSize({sizeX, sizeY});
@@ -1508,14 +1512,7 @@ namespace lua::imgui
 	inline std::tuple<std::string, bool> InputText(const std::string& label, std::string text, unsigned int buf_size, int flags, sol::protected_function func)
 	{
 		text.resize(buf_size);
-		static sol::protected_function& tmp_callback = func;
-		bool selected = ImGui::InputText(label.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int {
-			auto result = tmp_callback(data);
-			if (result.get_type() == sol::type::number)
-				return result.get<int>();
-			else
-				return 0;
-		});
+		bool selected = ImGui::InputText(label.c_str(), text.data(), buf_size, flags, func);
 		return std::make_tuple(text.c_str(), selected);
 	}
 	inline std::tuple<std::string, bool> InputTextMultiline(const std::string& label, std::string text, unsigned int buf_size)
@@ -1539,15 +1536,7 @@ namespace lua::imgui
 	inline std::tuple<std::string, bool> InputTextMultiline(const std::string& label, std::string text, unsigned int buf_size, float sizeX, float sizeY, int flags, sol::protected_function func)
 	{
 		text.resize(buf_size);
-
-		static sol::protected_function& tmp_callback = func;
-		bool selected = ImGui::InputTextMultiline(label.c_str(), text.data(), buf_size, {sizeX, sizeY}, flags, [](ImGuiInputTextCallbackData* data) -> int {
-			auto result = tmp_callback(data);
-			if (result.get_type() == sol::type::number)
-				return result.get<int>();
-			else
-				return 0;
-		});
+		bool selected = ImGui::InputTextMultiline(label.c_str(), text.data(), buf_size, {sizeX, sizeY}, flags, func);
 		return std::make_tuple(text.c_str(), selected);
 	}
 	inline std::tuple<std::string, bool> InputTextWithHint(const std::string& label, const std::string& hint, std::string text, unsigned int buf_size)
@@ -1565,14 +1554,7 @@ namespace lua::imgui
 	inline std::tuple<std::string, bool> InputTextWithHint(const std::string& label, const std::string& hint, std::string text, unsigned int buf_size, int flags, sol::protected_function func)
 	{
 		text.resize(buf_size);
-		static sol::protected_function& tmp_callback = func;
-		bool selected = ImGui::InputTextWithHint(label.c_str(), hint.c_str(), text.data(), buf_size, flags, [](ImGuiInputTextCallbackData* data) -> int {
-			auto result = tmp_callback(data);
-			if (result.get_type() == sol::type::number)
-				return result.get<int>();
-			else
-				return 0;
-		});
+		bool selected = ImGui::InputTextWithHint(label.c_str(), hint.c_str(), text.data(), buf_size, flags, func);
 		return std::make_tuple(text.c_str(), selected);
 	}
 	inline std::tuple<float, bool> InputFloat(const std::string& label, float v)
@@ -3301,7 +3283,7 @@ namespace lua::imgui
 		// Prefer  SetNext...
 		ImGui.set_function("SetNextWindowPos", sol::overload(sol::resolve<void(float, float)>(SetNextWindowPos), sol::resolve<void(float, float, int)>(SetNextWindowPos), sol::resolve<void(float, float, int, float, float)>(SetNextWindowPos)));
 		ImGui.set_function("SetNextWindowSize", sol::overload(sol::resolve<void(float, float)>(SetNextWindowSize), sol::resolve<void(float, float, int)>(SetNextWindowSize)));
-		ImGui.set_function("SetNextWindowSizeConstraints", SetNextWindowSizeConstraints);
+		ImGui.set_function("SetNextWindowSizeConstraints", sol::overload(sol::resolve<void(float, float, float, float)>(SetNextWindowSizeConstraints), sol::resolve<void(float, float, float, float, sol::protected_function)>(SetNextWindowSizeConstraints)));
 		ImGui.set_function("SetNextWindowContentSize", SetNextWindowContentSize);
 		ImGui.set_function("SetNextWindowCollapsed", sol::overload(sol::resolve<void(bool)>(SetNextWindowCollapsed), sol::resolve<void(bool, int)>(SetNextWindowCollapsed)));
 		ImGui.set_function("SetNextWindowFocus", SetNextWindowFocus);
