@@ -21,7 +21,7 @@ namespace big::pools
 {
 	inline legacy::rage::fwBasePool* get_all_peds_legacy()
 	{
-		return *(legacy::rage::fwBasePool**)g_pointers;
+		return *(legacy::rage::fwBasePool**)g_pointers->m_ped_pool;
 	}
 	inline enhanced::rage::fwBasePool* get_all_peds_enhaced()
 	{
