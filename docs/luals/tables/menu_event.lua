@@ -1,0 +1,12 @@
+---@meta
+---@class menu_event
+---Table containing all possible events to which you can respond.
+---@field PlayerLeave integer Event that is triggered when a player leave the game session. **Example Usage:** ```lua event.register_handler(menu_event.PlayerLeave, function (player_name, net_player_ptr)     log.info(player_name) end) ```
+---@field PlayerJoin integer Event that is triggered when a player join the game session. **Example Usage:** ```lua event.register_handler(menu_event.PlayerJoin, function (player_name, player_id, net_player_ptr)     log.info(player_name)     log.info(player_id) end) ```
+---@field PlayerMgrInit integer Event that is triggered when the player manager initialize. Usually called when we are joining a session. **Example Usage:** ```lua event.register_handler(menu_event.PlayerMgrInit, function (net_player_mgr_ptr)     log.info("Player manager inited, we just joined a session.") end) ```
+---@field PlayerMgrShutdown integer Event that is triggered when the player manager is about to be shutdown. Usually called when we are leaving a session. **Example Usage:** ```lua event.register_handler(menu_event.PlayerMgrShutdown, function (net_player_mgr_ptr)     log.info("Player manager inited, we just left a session.") end) ```
+---@field MenuUnloaded integer Event that is triggered when we unload.. whatever this is. **Example Usage:** ```lua event.register_handler(menu_event.MenuUnloaded, function ()     log.info("Menu unloaded.") end) ```
+---@field Wndproc integer Event that is triggered when Wndproc is called **Example Usage:** ```lua event.register_handler(menu_event.Wndproc, function (hwnd, msg, wparam, lparam)     if msg == 132 then return end     log.debug("hwnd = " .. tostring(hwnd) .. ", msg = " .. tostring(msg) .. ", wparam = " .. tostring(wparam) .. ", lparam = " .. tostring(lparam)) end) ```
+---@field Draw integer Called every frame, you can draw ImGui here.
+---@field LuaInitFinished integer Called when lua_manager has finished constructing and all lua files have been loaded.
+menu_event = {}

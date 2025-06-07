@@ -5,7 +5,6 @@
 
 # output directory
 build/
-docs/
 
 # precompiled headers
 *.ipch
