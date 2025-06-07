@@ -8,7 +8,7 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: PlayerLeave: integer
+	// Field: PlayerLeave: string
 	// Event that is triggered when a player leave the game session.
 	// **Example Usage:**
 	// ```lua
@@ -19,7 +19,7 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: PlayerJoin: integer
+	// Field: PlayerJoin: string
 	// Event that is triggered when a player join the game session.
 	// **Example Usage:**
 	// ```lua
@@ -31,7 +31,7 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: PlayerMgrInit: integer
+	// Field: PlayerMgrInit: string
 	// Event that is triggered when the player manager initialize. Usually called when we are joining a session.
 	// **Example Usage:**
 	// ```lua
@@ -42,7 +42,7 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: PlayerMgrShutdown: integer
+	// Field: PlayerMgrShutdown: string
 	// Event that is triggered when the player manager is about to be shutdown. Usually called when we are leaving a session.
 	// **Example Usage:**
 	// ```lua
@@ -53,7 +53,7 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: MenuUnloaded: integer
+	// Field: MenuUnloaded: string
 	// Event that is triggered when we unload.. whatever this is.
 	// **Example Usage:**
 	// ```lua
@@ -64,7 +64,7 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: Wndproc: integer
+	// Field: Wndproc: string
 	// Event that is triggered when Wndproc is called
 	// **Example Usage:**
 	// ```lua
@@ -76,12 +76,12 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: Draw: integer
+	// Field: Draw: string
 	// Called every frame, you can draw ImGui here.
 
 	// Lua API: Field
 	// Table: menu_event
-	// Field: LuaInitFinished: integer
+	// Field: LuaInitFinished: string
 	// Called when lua_manager has finished constructing and all lua files have been loaded.
 
 	// Lua API: Table
@@ -91,28 +91,28 @@ namespace lua::event
 	// Lua API: Function
 	// Table: event
 	// Name: register_handler
-	// Param: menu_event: integer: The menu_event that we want to respond to.
+	// Param: menu_event: string: The menu_event that we want to respond to.
 	// Param: identifier: string: A unique identifier for this event, calling this function again with the same identifier will override the previous one.
 	// Param: func: function: The function that will be called.
 	// Register a function that will be called each time the corresponding menu_event is triggered.
-	static void register_handler(const menu_event& menu_event, const std::string_view& identifier, sol::protected_function func, sol::this_state state)
+	static void register_handler(const std::string& menu_event, const std::string_view& identifier, sol::protected_function func, sol::this_state state)
 	{
 		big::lua_module* module = sol::state_view(state)["!this"];
 
-		module->m_event_callbacks[menu_event][rage::joaat(identifier)] = func;
+		module->m_event_callbacks[rage::joaat(menu_event)][rage::joaat(identifier)] = func;
 	}
 
 	// Lua API: Function
 	// Table: event
 	// Name: trigger
-	// Param: menu_event: integer: The menu_event that we want to trigger.
+	// Param: menu_event: string: The menu_event that we want to trigger.
 	// Param: ...: any: Argument to pass down to the event.
 	// Trigger a menu_event. Uses variadic_args.
-	static void trigger(const menu_event& menu_event, sol::variadic_args args, sol::this_state state)
+	static void trigger(const std::string& menu_event, sol::variadic_args args, sol::this_state state)
 	{
 		big::lua_module* module = sol::state_view(state)["!this"];
 
-		for (auto event : module->m_event_callbacks[menu_event])
+		for (auto event : module->m_event_callbacks[rage::joaat(menu_event)])
 		{
 			event.second(args);
 		}
@@ -120,15 +120,15 @@ namespace lua::event
 
 	void bind(sol::state& state)
 	{
-		state.new_enum<menu_event>("menu_event",
+		state.new_enum<std::string>("menu_event",
 		    {
-		        {"PlayerLeave", menu_event::PlayerLeave},
-		        {"PlayerJoin", menu_event::PlayerJoin},
-		        {"PlayerMgrInit", menu_event::PlayerMgrInit},
-		        {"MenuUnloaded", menu_event::MenuUnloaded},
-		        {"Wndproc", menu_event::Wndproc},
-		        {"Draw", menu_event::Draw},
-		        {"LuaInitFinished", menu_event::LuaInitFinished},
+		        {"PlayerLeave", "PlayerLeave"},
+		        {"PlayerJoin", "PlayerJoin"},
+		        {"PlayerMgrInit", "PlayerMgrInit"},
+		        {"MenuUnloaded", "MenuUnloaded"},
+		        {"Wndproc", "Wndproc"},
+		        {"Draw", "Draw"},
+		        {"LuaInitFinished", "LuaInitFinished"},
 		    });
 
 

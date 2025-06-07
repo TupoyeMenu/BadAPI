@@ -9,7 +9,7 @@ event = {}
 ---```lua
 ---event.register_handler(menu_event, identifier, func)
 ---```
----@param menu_event integer The menu_event that we want to respond to.
+---@param menu_event string The menu_event that we want to respond to.
 ---@param identifier string A unique identifier for this event, calling this function again with the same identifier will override the previous one.
 ---@param func function The function that will be called.
 function event.register_handler(menu_event, identifier, func) end
@@ -20,7 +20,7 @@ function event.register_handler(menu_event, identifier, func) end
 ---```lua
 ---event.trigger(menu_event, ...)
 ---```
----@param menu_event integer The menu_event that we want to trigger.
+---@param menu_event string The menu_event that we want to trigger.
 ---@param ... any Argument to pass down to the event.
 function event.trigger(menu_event, ...) end
 

@@ -26,7 +26,7 @@ namespace big
 			{
 				if (ImGui::MenuItem("Unload Menu"))
 				{
-					g_lua_manager->trigger_event<menu_event::MenuUnloaded>();
+					g_lua_manager->trigger_event<"MenuUnloaded">();
 					g_running = false;
 				}
 

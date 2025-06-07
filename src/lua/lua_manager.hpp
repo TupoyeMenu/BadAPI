@@ -1,4 +1,5 @@
 #pragma once
+#include "gta/joaat.hpp"
 #include "lua_module.hpp"
 
 namespace big
@@ -38,12 +39,12 @@ namespace big
 
 		void handle_error(const sol::error& error, const sol::state_view& state);
 
-		template<menu_event menu_event_, typename Return = void, typename... Args>
+		template<template_str menu_event_, typename Return = void, typename... Args>
 		inline std::conditional_t<std::is_void_v<Return>, void, std::optional<Return>> trigger_event(Args&&... args)
 		{
 			std::lock_guard guard(m_module_lock);
 
-			if (auto vec = m_module->m_event_callbacks.find(menu_event_); vec != m_module->m_event_callbacks.end())
+			if (auto vec = m_module->m_event_callbacks.find(rage::joaat(menu_event_.value)); vec != m_module->m_event_callbacks.end())
 			{
 				for (auto& cb : vec->second)
 				{

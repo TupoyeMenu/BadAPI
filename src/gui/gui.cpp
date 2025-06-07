@@ -33,7 +33,7 @@ namespace big
 		    [] {
 			    if (g_lua_manager)
 			    {
-				    g_lua_manager->trigger_event<menu_event::Draw>();
+				    g_lua_manager->trigger_event<"Draw">();
 			    }
 		    },
 		    -2);
@@ -44,7 +44,7 @@ namespace big
 		g_renderer->add_wndproc_callback([](HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 			if (g_lua_manager)
 			{
-				g_lua_manager->trigger_event<menu_event::Wndproc>(hwnd, msg, wparam, lparam);
+				g_lua_manager->trigger_event<"Wndproc">(hwnd, msg, wparam, lparam);
 			}
 		});
 

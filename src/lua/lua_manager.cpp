@@ -37,7 +37,7 @@ namespace big
 
 		load_all_files();
 
-		trigger_event<menu_event::LuaInitFinished>();
+		trigger_event<"LuaInitFinished">();
 	}
 
 	lua_manager::~lua_manager()

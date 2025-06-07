@@ -1,4 +1,3 @@
-#include "core/data/menu_event.hpp"
 #include "hooking/hooking.hpp"
 #include "services/players/player_service.hpp"
 
@@ -15,7 +14,7 @@ namespace big
 
 		g_player_service->player_join(_this->m_local_net_player);
 
-		g_lua_manager->trigger_event<menu_event::PlayerMgrInit>(lua::memory::pointer((uint64_t)_this));
+		g_lua_manager->trigger_event<"PlayerMgrInit">(lua::memory::pointer((uint64_t)_this));
 
 		return result;
 	}
@@ -24,7 +23,7 @@ namespace big
 	{
 		g_player_service->do_cleanup();
 
-		g_lua_manager->trigger_event<menu_event::PlayerMgrShutdown>(lua::memory::pointer((uint64_t)_this));
+		g_lua_manager->trigger_event<"PlayerMgrShutdown">(lua::memory::pointer((uint64_t)_this));
 
 		g_hooking->get_original<hooks::network_player_mgr_shutdown>()(_this);
 	}
