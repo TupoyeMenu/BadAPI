@@ -18,12 +18,11 @@ function event.register_handler(menu_event, identifier, func) end
 ---Trigger a menu_event. Uses variadic_args.
 ---**Example Usage:**
 ---```lua
----event.trigger(menu_event, p2, p3)
+---event.trigger(menu_event, ...)
 ---```
 ---@param menu_event integer The menu_event that we want to trigger.
----@param p2 any Argument to pass down to the event.
----@param p3 any Argument to pass down to the event.
-function event.trigger(menu_event, p2, p3) end
+---@param ... any Argument to pass down to the event.
+function event.trigger(menu_event, ...) end
 
 
 

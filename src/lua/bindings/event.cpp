@@ -106,8 +106,7 @@ namespace lua::event
 	// Table: event
 	// Name: trigger
 	// Param: menu_event: integer: The menu_event that we want to trigger.
-	// Param: p2: any: Argument to pass down to the event.
-	// Param: p3: any: Argument to pass down to the event.
+	// Param: ...: any: Argument to pass down to the event.
 	// Trigger a menu_event. Uses variadic_args.
 	static void trigger(const menu_event& menu_event, sol::variadic_args args, sol::this_state state)
 	{
