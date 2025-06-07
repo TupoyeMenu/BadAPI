@@ -50,7 +50,7 @@ namespace lua::log
 	// Lua API: Function
 	// Table: log
 	// Name: get_log_messages
-	// Returns a table of LogMessages
+	// Returns: table<integer, LogMessage>: An array of LogMessages
 	static const std::vector<LogMessagePtr>& get_log_messages()
 	{
 		return big::g_log.get_log_messages();
@@ -64,6 +64,22 @@ namespace lua::log
 	{
 		big::g_log.clear_log_messages();
 	}
+
+	// Lua API: Class
+	// Name: LogMessage
+	// Class representing a LogMessage object.
+
+	// Lua API: Function
+	// Class: LogMessage
+	// Name: Level
+	// Returns: integer
+	// Gets the log level of the message.
+
+	// Lua API: Function
+	// Class: LogMessage
+	// Name: Message
+	// Returns: string
+	// Gets the string contents of the message.
 
 	void bind(sol::state& state)
 	{
