@@ -12,7 +12,6 @@ message("\nFetching modules")
 include(cmake/minhook.cmake)
 include(cmake/async-logger.cmake)
 include(cmake/json.cmake)
-include(cmake/fmt.cmake)
 include(cmake/luajit.cmake)
 
 message("\nFetching custom modules")
@@ -55,7 +54,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 target_precompile_headers(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_DIR}/common.hpp")
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE minhook AsyncLogger dbghelp imgui imguitextselect fmt libluajit d3dcompiler dwmapi winmm psapi dxgi)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE minhook AsyncLogger dbghelp imgui imguitextselect libluajit d3dcompiler dwmapi winmm psapi dxgi)
 
 add_compile_definitions(
     "_CRT_SECURE_NO_WARNINGS"
