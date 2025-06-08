@@ -3,9 +3,13 @@ A Lua API for Grand Theft Auto V.
 Strictly for educational purposes.
 
 ## How to use
-1. Build the binary
+1. Build the binary or download it from github CI
 2. Download https://github.com/TupoyeMenu/BadAPI-Lua and install it as `Grand Theft Auto V/BadAPI/scripts/`
-3. Inject the binary into the game
+3. Download https://github.com/DurtyFree/gta-v-data-dumps/raw/refs/heads/master/vehicles.json into `Grand Theft Auto V/BadAPI/scripts_config`
+4. Inject the binary into the game
+
+
+###### Note: `Grand Theft Auto V` above is where `GTA5.exe` or `GTA5_Enhanced.exe` is located.
 
 ## Building
 
