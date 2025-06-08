@@ -51,7 +51,6 @@
 #include <optional>
 #include <variant>
 
-#include <fmt/format.h>
 #include <nlohmann/json.hpp>
 
 #include "logger/logger.hpp"

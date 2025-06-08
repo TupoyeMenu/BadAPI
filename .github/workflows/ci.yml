@@ -16,22 +16,22 @@ jobs:
         uses: microsoft/setup-msbuild@v1
 
       - name: Generate CMake project
-        run: cmake -S. -Bbuild -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CONFIGURATION_TYPES=Release
+        run: cmake -S. -Bbuild -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CONFIGURATION_TYPES=RelWithDebInfo
 
       - name: Build 64bit release DLL
         run: cmake --build build --config RelWithDebInfo
 
       - name: Rename DLL to BadAPI-dev-{GITHUB_SHA}.dll
         run: ren BadAPI.dll BadAPI-dev-${{github.sha}}.dll
-        working-directory: build/Release/
+        working-directory: build/
 
       - name: Upload Artifact (dll)
         uses: actions/upload-artifact@v4
         with:
           name: binary
-          path: build/Release/BadAPI-dev-*.dll
+          path: build/BadAPI-dev-*.dll
       - name: Upload Artifact (pdb)
         uses: actions/upload-artifact@v4
         with:
           name: pdb
-          path: build/Release/BadAPI.pdb
+          path: build/BadAPI.pdb

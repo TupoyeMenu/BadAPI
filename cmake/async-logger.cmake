@@ -1,6 +1,6 @@
 include(FetchContent)
 
-set(USE_FMT ON)
+set(USE_FMT OFF)
 
 message("AsyncLogger")
 FetchContent_Declare(
@@ -10,5 +10,7 @@ FetchContent_Declare(
     GIT_PROGRESS TRUE
 )
 FetchContent_MakeAvailable(AsyncLogger)
+
+target_compile_definitions(AsyncLogger PRIVATE CXX_FORMAT_SUPPORT)
 
 set_property(TARGET AsyncLogger PROPERTY CXX_STANDARD 20)

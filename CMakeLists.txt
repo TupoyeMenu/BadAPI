@@ -61,5 +61,6 @@ add_compile_definitions(
     "NOMINMAX"
     "WIN32_LEAN_AND_MEAN"
     "_WIN32_WINNT=0x0600"
+    "CXX_FORMAT_SUPPORT"
 )
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE PROJECT_NAME="${CMAKE_PROJECT_NAME}")
