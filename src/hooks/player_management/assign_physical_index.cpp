@@ -6,7 +6,14 @@
 #include "lua/bindings/memory.hpp"
 
 #include <network/Network.hpp>
-#include <network/CNetGamePlayer.hpp>
+
+#include "gta/gta_util.hpp"
+
+#include "util/header_wrappers/include_as_enhaced.hpp"
+#include "gta/netPlayer.hpp"
+#include "util/header_wrappers/include_as_legacy.hpp"
+#include "gta/netPlayer.hpp"
+#include "util/header_wrappers/clear_include.hpp"
 
 
 namespace big
@@ -21,7 +28,7 @@ namespace big
 
 	void* hooks::assign_physical_index(CNetworkPlayerMgr* netPlayerMgr, CNetGamePlayer* player, uint8_t new_index)
 	{
-		const auto* net_player_data = player->get_net_data();
+		const auto* net_player_data = CROSS_CLASS_ACCESS(legacy::CNetGamePlayer, enhanced::CNetGamePlayer, player, ->GetGamerInfo());
 
 		if (new_index == static_cast<uint8_t>(-1))
 		{
@@ -39,7 +46,7 @@ namespace big
 		g_player_service->player_join(player);
 		if (net_player_data)
 		{
-			g_lua_manager->trigger_event<"PlayerJoin">(net_player_data->m_name, player->m_player_id, (uint64_t)player);
+			g_lua_manager->trigger_event<"PlayerJoin">(net_player_data->m_name, CROSS_CLASS_ACCESS(legacy::CNetGamePlayer, enhanced::CNetGamePlayer, player, ->m_PlayerIndex), (uint64_t)player);
 		}
 		return result;
 	}

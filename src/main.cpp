@@ -142,9 +142,9 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto script_patcher_service_instance = std::make_unique<script_patcher_service>();
 			    LOG(INFO) << "Script Patcher initialized.";
 
+			    anti_cheat_bypass::init();
 			    g_script_mgr.add_script(std::make_unique<script>(&backend::loop, "backend"));
 			    g_script_mgr.add_script(std::make_unique<script>(&gui::script_func, "gui"));
-			    g_script_mgr.add_script(std::make_unique<script>(&anti_cheat_bypass::run_script, "anti cheat bypass"));
 			    LOG(INFO) << "Scripts registered.";
 
 			    g_hooking->enable();

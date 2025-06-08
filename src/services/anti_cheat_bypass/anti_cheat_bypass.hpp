@@ -1,5 +1,6 @@
 #pragma once
 #include "memory/byte_patch.hpp"
+#include "thread_pool.hpp"
 
 namespace big
 {
@@ -8,9 +9,11 @@ namespace big
 	public:
 		explicit anti_cheat_bypass() = default;
 		~anti_cheat_bypass()         = default;
-		static void run_script()
+		static void init()
 		{
-			get_instance().run_script_internal();
+			g_thread_pool->push([] {
+				get_instance().run_internal();
+			});
 		}
 
 		static bool is_fsl_loaded()
@@ -43,7 +46,7 @@ namespace big
 			return instance;
 		}
 
-		void run_script_internal();
+		void run_internal();
 
 
 		bool m_fsl_loaded = false;

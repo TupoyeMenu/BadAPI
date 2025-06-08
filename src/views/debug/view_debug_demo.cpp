@@ -39,9 +39,7 @@ namespace big
 				script::get_current()->yield();
 			}
 
-			*(unsigned short*)g_pointers->m_model_spawn_bypass = 0x9090;
 			Vehicle vehicle = VEHICLE::CREATE_VEHICLE(hash, self::pos.x, self::pos.y, self::pos.z, 0.f, TRUE, FALSE, FALSE);
-			*(unsigned short*)g_pointers->m_model_spawn_bypass = 0x0574; //By writing the "old" bypass to the function, running CREATE_VEHICLE, then restoring it, the anti-cheat does not have enough time to catch the function in a dirty state.
 
 			script::get_current()->yield();
 			STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(hash);

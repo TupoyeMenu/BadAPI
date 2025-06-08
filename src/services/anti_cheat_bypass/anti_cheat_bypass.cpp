@@ -4,6 +4,7 @@
 #include "util/dll_hijacking.hpp"
 #include "gta/script/natives.hpp"
 #include "gta/script/script.hpp"
+#include <thread>
 
 using FnGetVersion = int(*)();
 using FnLocalSaves = bool(*)();
@@ -11,13 +12,13 @@ using FnBattlEyeBypass = bool(*)();
 
 namespace big
 {
-	void anti_cheat_bypass::run_script_internal()
+	void anti_cheat_bypass::run_internal()
 	{
 		if(!g_is_enhanced)
 			return;
 
 		m_fsl_loaded = is_dll_hijacked(L"WINMM.dll");
-		m_battleye_running = (NETWORK::_NETWORK_GET_GAME_RESTART_REASON() == 0 && GetModuleHandleA("BEClient_x64.dll")) && !m_fsl_loaded;
+		m_battleye_running = (*g_pointers->m_be_restart_status == 0 && GetModuleHandleA("BEClient_x64.dll")) && !m_fsl_loaded;
 
 		const char* mode = "Vanilla";
 
@@ -58,17 +59,15 @@ namespace big
 			LOGF(WARNING, "If you are not running an actual BattlEye bypass, exit the game immediately and ensure that BE is properly disabled");
 
 		if (!m_fsl_provides_be_bypass)
-			m_battleye_status_update_patch->apply();
-
-		while (true)
 		{
-			if (!m_fsl_provides_be_bypass)
+			m_battleye_status_update_patch->apply();
+			while (true)
 			{
 				*g_pointers->m_be_restart_status = 0;
 				*g_pointers->m_needs_be_restart = false;
 				*g_pointers->m_is_be_banned = false;
+				std::this_thread::yield();
 			}
-			script::get_current()->yield();
 		}
 	}
 }
