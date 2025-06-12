@@ -26,12 +26,6 @@ inline void gamer_handle_deserialize(rage::rlGamerHandle& hnd, rage::datBitBuffe
 
 namespace big
 {
-	bool try_read_secondary_header(rage::datBitBuffer& buffer)
-	{
-		auto data = buffer.Read<std::uint32_t>(20);
-		return data == 0x8C253 || data == 0x8924F;
-	}
-
 	bool get_msg_type(rage::eNetMessage& msgType, rage::datBitBuffer& buffer)
 	{
 		if (g_is_enhanced)
@@ -173,47 +167,12 @@ namespace big
 
 	bool hooks::receive_net_message(void* a1, rage::netConnectionManager* net_cxn_mgr, rage::netEvent* event)
 	{
-		void* message_data;
-		int message_size;
-		rage::netConnection::InFrame* frame  = nullptr;
-		rage::netEventConnectionError* error = nullptr;
-
-		if (event->get_event_type() == rage::netEvent::Type::ConnectionRequested || event->get_event_type() == rage::netEvent::Type::FrameReceived)
-		{
-			frame = reinterpret_cast<rage::netConnection::InFrame*>(event);
-			if (frame->m_data == nullptr || frame->m_length == 0 || frame->m_connection_identifier == 2)
-				return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
-
-			message_data = frame->m_data;
-			message_size = frame->m_length;
-		}
-		else if (event->get_event_type() == rage::netEvent::Type::ConnectionError)
-		{
-			error = reinterpret_cast<rage::netEventConnectionError*>(event);
-			if (error->m_size == 0)
-				return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
-
-			message_data = error->m_data;
-			message_size = error->m_size;
-		}
-		else
-		{
+		if (event->get_event_type() != rage::netEvent::Type::FrameReceived)
 			return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
-		}
 
+		rage::netConnection::InFrame* frame = (rage::netConnection::InFrame*)event;
 
-		rage::datBitBuffer buffer(message_data, message_size);
-		buffer.m_flagBits = 1;
-
-		if (try_read_secondary_header(buffer))
-		{
-			buffer            = rage::datBitBuffer(((char*)message_data) + 7, message_size - 7);
-			buffer.m_flagBits = 1;
-		}
-		else
-		{
-			buffer.Seek(0);
-		}
+		rage::datBitBuffer buffer(frame->m_data, frame->m_length, true);
 
 		rage::eNetMessage msgType;
 
@@ -294,23 +253,8 @@ namespace big
 			{
 				sec_id = frame->m_security_id;
 			}
-			else
-			{
-				if (auto cxn = g_pointers->m_get_connection_peer(net_cxn_mgr, error->m_peer_id))
-					sec_id = cxn->m_security_id;
-			}
 
 			peer = g_pointers->m_get_peer_by_security_id(sec_id); // shouldn't be null in most cases, contains unspoofable data
-
-			if (error && msgType != rage::eNetMessage::MsgJoinResponse)
-			{
-				if (peer)
-					LOGF(stream::net_messages,
-					    WARNING,
-					    "Received an error packet that isn't MsgJoinResponse from {}",
-					    peer->m_info.name);
-				return true;
-			}
 		}
 
 		if (g.packet_logs)
