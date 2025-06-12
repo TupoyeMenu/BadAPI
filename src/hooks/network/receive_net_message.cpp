@@ -4,6 +4,7 @@
 #include "gta/net_game_event.hpp"
 #include "gta/packet.hpp"
 #include "hooking/hooking.hpp"
+#include "lua/lua_manager.hpp"
 #include "network/netConnection.hpp"
 #include "services/anti_cheat_bypass/anti_cheat_bypass.hpp"
 #include "services/players/player_service.hpp"
@@ -33,22 +34,37 @@ namespace big
 
 	bool get_msg_type(rage::eNetMessage& msgType, rage::datBitBuffer& buffer)
 	{
-		uint32_t pos;
-		uint32_t magic;
-		uint32_t length;
-		uint32_t extended{};
-		if ((buffer.m_flagBits & 2) != 0 || (buffer.m_flagBits & 1) == 0 ? (pos = buffer.m_curBit) : (pos = buffer.m_maxBit),
-		    buffer.m_bitsRead + 15 > pos || !buffer.ReadDword(&magic, 14) || magic != 0x3246 || !buffer.ReadDword(&extended, 1))
+		if (g_is_enhanced)
 		{
-			msgType = rage::eNetMessage::MsgInvalid;
-			return false;
-		}
-		length = extended ? 16 : 8;
-		if ((buffer.m_flagBits & 1) == 0 ? (pos = buffer.m_curBit) : (pos = buffer.m_maxBit),
-		    length + buffer.m_bitsRead <= pos && buffer.ReadDword((uint32_t*)&msgType, length))
+			if (buffer.Read<int>(14) != 0x3246)
+			{
+				msgType = rage::eNetMessage::MsgInvalid;
+				return false;
+			}
+
+			auto extended = buffer.Read<bool>(1);
+			msgType       = buffer.Read<rage::eNetMessage>(extended ? 16 : 8);
 			return true;
+		}
 		else
-			return false;
+		{
+			uint32_t pos;
+			uint32_t magic;
+			uint32_t length;
+			uint32_t extended{};
+			if ((buffer.m_flagBits & 2) != 0 || (buffer.m_flagBits & 1) == 0 ? (pos = buffer.m_curBit) : (pos = buffer.m_maxBit),
+			    buffer.m_bitsRead + 15 > pos || !buffer.ReadDword(&magic, 14) || magic != 0x3246 || !buffer.ReadDword(&extended, 1))
+			{
+				msgType = rage::eNetMessage::MsgInvalid;
+				return false;
+			}
+			length = extended ? 16 : 8;
+			if ((buffer.m_flagBits & 1) == 0 ? (pos = buffer.m_curBit) : (pos = buffer.m_maxBit),
+			    length + buffer.m_bitsRead <= pos && buffer.ReadDword((uint32_t*)&msgType, length))
+				return true;
+			else
+				return false;
+		}
 	}
 
 	static void script_id_deserialize(CGameScriptId& id, rage::datBitBuffer& buffer)
@@ -203,7 +219,7 @@ namespace big
 
 		if (!get_msg_type(msgType, buffer))
 		{
-			LOGF(stream::net_messages, WARNING, "Received message that we cannot parse from cxn id {}", event->m_connection_identifier);
+			//LOGF(stream::net_messages, WARNING, "Received message that we cannot parse from cxn id {}", event->m_connection_identifier);
 			return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
 		}
 
@@ -263,6 +279,11 @@ namespace big
 		}
 		default: break;
 		}
+
+		auto event_ret = g_lua_manager->trigger_event<"ReceiveNetMessage", bool>((uint64_t)a1, (uint64_t)net_cxn_mgr, (uint64_t)event, (uint32_t)msgType, (uint64_t)&buffer);
+		if (event_ret.has_value())
+			return event_ret.value();
+
 
 		int sec_id               = 0;
 		rage::SecurityPeer* peer = nullptr;
