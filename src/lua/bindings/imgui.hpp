@@ -3,6 +3,38 @@
 
 namespace lua::imgui
 {
+	// Main
+	inline ImGuiIO& GetIO()
+	{
+		return ImGui::GetIO();
+	}
+	inline ImGuiPlatformIO& GetPlatformIO()
+	{
+		return ImGui::GetPlatformIO();
+	}
+	/* TODO: SetStateStorage(), GetStateStorage(), CalcListClipping() ==> UNSUPPORTED */
+	inline ImGuiStyle& GetStyle()
+	{
+		return ImGui::GetStyle();
+	}
+	inline void NewFrame()
+	{
+		ImGui::NewFrame();
+	}
+	inline void EndFrame()
+	{
+		ImGui::EndFrame();
+	}
+	inline void Render()
+	{
+		ImGui::Render();
+	}
+	inline ImDrawData* GetDrawData()
+	{
+		return ImGui::GetDrawData();
+	}
+
+
 	// Windows
 	inline bool Begin(const std::string& name)
 	{
@@ -281,7 +313,6 @@ namespace lua::imgui
 	}
 
 // Parameters stacks (shared)
-#ifdef SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 	inline void PushFont(ImFont* pFont)
 	{
 		ImGui::PushFont(pFont);
@@ -290,7 +321,6 @@ namespace lua::imgui
 	{
 		ImGui::PopFont();
 	}
-#endif // SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 	inline void PushStyleColor(int idx, int col)
 	{
 		ImGui::PushStyleColor(idx, static_cast<ImU32>(col));
@@ -336,12 +366,10 @@ namespace lua::imgui
 		const auto col{ImGui::GetStyleColorVec4(idx)};
 		return std::make_tuple(col.x, col.y, col.z, col.w);
 	}
-#ifdef SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 	inline ImFont* GetFont()
 	{
 		return ImGui::GetFont();
 	}
-#endif // SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 	inline float GetFontSize()
 	{
 		return ImGui::GetFontSize();
@@ -2622,11 +2650,6 @@ namespace lua::imgui
 	{
 		return std::string(ImGui::GetStyleColorName(idx));
 	}
-	/* TODO: SetStateStorage(), GetStateStorage(), CalcListClipping() ==> UNSUPPORTED */
-	inline ImGuiStyle& GetStyle()
-	{
-		return ImGui::GetStyle();
-	}
 
 	// Text Utilities
 	inline std::tuple<float, float> CalcTextSize(const std::string& text)
@@ -2872,12 +2895,263 @@ namespace lua::imgui
 		drawlist->AddBezierQuadratic({p1X, p1Y}, {p2X, p2Y}, {p3X, p3Y}, static_cast<ImU32>(col), thickness, num_segments);
 	}
 
+	inline bool ImFontGlyphColored(ImFontGlyph* glyph)
+	{
+		return glyph->Colored;
+	}
+	inline bool ImFontGlyphVisible(ImFontGlyph* glyph)
+	{
+		return glyph->Visible;
+	}
+	inline unsigned int ImFontGlyphCodepoint(ImFontGlyph* glyph)
+	{
+		return glyph->Codepoint;
+	}
+
 	inline void InitUserType(sol::table luaGlobals)
 	{
 		luaGlobals.new_usertype<ImVec2>("ImVec2", sol::constructors<ImVec2(), ImVec2(float, float)>(), "x", &ImVec2::x, "y", &ImVec2::y);
 
 		luaGlobals.new_usertype<ImVec4>("ImVec4", sol::constructors<ImVec4(), ImVec4(float, float, float, float)>(), "x", &ImVec4::x, "y", &ImVec4::y, "z", &ImVec4::z, "w", &ImVec4::w);
 
+		luaGlobals.new_usertype<ImFontConfig>("ImFontConfig",
+			"FontData", &ImFontConfig::FontData,
+			"FontDataSize", &ImFontConfig::FontDataSize,
+			"FontDataOwnedByAtlas", &ImFontConfig::FontDataOwnedByAtlas,
+			"MergeMode", &ImFontConfig::MergeMode,
+			"PixelSnapH", &ImFontConfig::PixelSnapH,
+			"FontNo", &ImFontConfig::FontNo,
+			"OversampleH", &ImFontConfig::OversampleH,
+			"OversampleV", &ImFontConfig::OversampleV,
+			"SizePixels", &ImFontConfig::SizePixels,
+			"GlyphOffset", &ImFontConfig::GlyphOffset,
+			"GlyphRanges", &ImFontConfig::GlyphRanges,
+			"GlyphMinAdvanceX", &ImFontConfig::GlyphMinAdvanceX,
+			"GlyphMaxAdvanceX", &ImFontConfig::GlyphMaxAdvanceX,
+			"GlyphExtraAdvanceX", &ImFontConfig::GlyphExtraAdvanceX,
+			"FontBuilderFlags", &ImFontConfig::FontBuilderFlags,
+			"RasterizerMultiply", &ImFontConfig::RasterizerMultiply,
+			"RasterizerDensity", &ImFontConfig::RasterizerDensity,
+			"EllipsisChar", &ImFontConfig::EllipsisChar
+		);
+
+		luaGlobals.new_usertype<ImFontGlyph>("ImFontGlyph",
+			"Colored", &ImFontGlyphColored,
+			"Visible", &ImFontGlyphVisible,
+			"Codepoint", &ImFontGlyphCodepoint,
+			"X0", &ImFontGlyph::X0,
+			"Y0", &ImFontGlyph::Y0,
+			"X1", &ImFontGlyph::X1,
+			"Y1", &ImFontGlyph::Y1,
+			"U0", &ImFontGlyph::U0,
+			"V0", &ImFontGlyph::V0,
+			"U1", &ImFontGlyph::U1,
+			"V1", &ImFontGlyph::V1
+		);
+
+		luaGlobals.new_usertype<ImFontAtlas>("ImFontAtlas",
+			"AddFont", &ImFontAtlas::AddFont,
+			"AddFontDefault", &ImFontAtlas::AddFontDefault,
+			"AddFontFromFileTTF", &ImFontAtlas::AddFontFromFileTTF,
+			"AddFontFromMemoryTTF", &ImFontAtlas::AddFontFromMemoryTTF,
+			"AddFontFromMemoryCompressedTTF", &ImFontAtlas::AddFontFromMemoryCompressedTTF,
+			"AddFontFromMemoryCompressedBase85TTF", &ImFontAtlas::AddFontFromMemoryCompressedBase85TTF,
+			"ClearInputData", &ImFontAtlas::ClearInputData,
+			"ClearFonts", &ImFontAtlas::ClearFonts,
+			"ClearTexData", &ImFontAtlas::ClearTexData,
+			"Clear", &ImFontAtlas::Clear,
+			"Build", &ImFontAtlas::Build,
+			"GetTexDataAsAlpha8", &ImFontAtlas::GetTexDataAsAlpha8,
+			"GetTexDataAsRGBA32", &ImFontAtlas::GetTexDataAsRGBA32,
+			"IsBuilt", &ImFontAtlas::IsBuilt,
+			"SetTexID", &ImFontAtlas::SetTexID,
+			"GetGlyphRangesDefault", &ImFontAtlas::GetGlyphRangesDefault,
+			"GetGlyphRangesGreek", &ImFontAtlas::GetGlyphRangesGreek,
+			"GetGlyphRangesKorean", &ImFontAtlas::GetGlyphRangesKorean,
+			"GetGlyphRangesJapanese", &ImFontAtlas::GetGlyphRangesJapanese,
+			"GetGlyphRangesChineseFull", &ImFontAtlas::GetGlyphRangesChineseFull,
+			"GetGlyphRangesChineseSimplifiedCommon", &ImFontAtlas::GetGlyphRangesChineseSimplifiedCommon,
+			"GetGlyphRangesCyrillic", &ImFontAtlas::GetGlyphRangesCyrillic,
+			"GetGlyphRangesThai", &ImFontAtlas::GetGlyphRangesThai,
+			"GetGlyphRangesVietnamese", &ImFontAtlas::GetGlyphRangesVietnamese,
+			"AddCustomRectRegular", &ImFontAtlas::AddCustomRectRegular,
+			"AddCustomRectFontGlyph", &ImFontAtlas::AddCustomRectFontGlyph,
+			"GetCustomRectByIndex", &ImFontAtlas::GetCustomRectByIndex,
+			"Flags", &ImFontAtlas::Flags,
+			"TexID", &ImFontAtlas::TexID,
+			"TexDesiredWidth", &ImFontAtlas::TexDesiredWidth,
+			"TexGlyphPadding", &ImFontAtlas::TexGlyphPadding,
+			"UserData", &ImFontAtlas::UserData,
+			"Locked", &ImFontAtlas::Locked,
+			"TexReady", &ImFontAtlas::TexReady,
+			"TexPixelsUseColors", &ImFontAtlas::TexPixelsUseColors,
+			"TexPixelsAlpha8", &ImFontAtlas::TexPixelsAlpha8,
+			"TexPixelsRGBA32", &ImFontAtlas::TexPixelsRGBA32,
+			"TexWidth", &ImFontAtlas::TexWidth,
+			"TexHeight", &ImFontAtlas::TexHeight,
+			"TexUvScale", &ImFontAtlas::TexUvScale,
+			"TexUvWhitePixel", &ImFontAtlas::TexUvWhitePixel,
+			"Fonts", &ImFontAtlas::Fonts,
+			//"CustomRects", &ImFontAtlas::CustomRects, // TODO
+			//"Sources", &ImFontAtlas::Sources, // TODO
+			"TexUvLines", &ImFontAtlas::TexUvLines
+		);
+
+		luaGlobals.new_usertype<ImFont>("ImFont",
+			"IndexAdvanceX", &ImFont::IndexAdvanceX,
+			"FallbackAdvanceX", &ImFont::FallbackAdvanceX,
+			"FontSize", &ImFont::FontSize,
+			"IndexLookup", &ImFont::IndexLookup,
+			//"Glyphs", &ImFont::Glyphs, // TODO
+			"FallbackGlyph", &ImFont::FallbackGlyph,
+			"ContainerAtlas", &ImFont::ContainerAtlas,
+			"Sources", &ImFont::Sources,
+			"SourcesCount", &ImFont::SourcesCount,
+			"EllipsisCharCount", &ImFont::EllipsisCharCount,
+			"EllipsisChar", &ImFont::EllipsisChar,
+			"FallbackChar", &ImFont::FallbackChar,
+			"EllipsisWidth", &ImFont::EllipsisWidth,
+			"EllipsisCharStep", &ImFont::EllipsisCharStep,
+			"Scale", &ImFont::Scale,
+			"Ascent", &ImFont::Ascent,
+			"Descent", &ImFont::Descent,
+			"MetricsTotalSurface", &ImFont::MetricsTotalSurface,
+			"DirtyLookupTables", &ImFont::DirtyLookupTables,
+			"Used8kPagesMap", &ImFont::Used8kPagesMap,
+			"FindGlyph", &ImFont::FindGlyph,
+			"FindGlyphNoFallback", &ImFont::FindGlyphNoFallback,
+			"GetCharAdvance", &ImFont::GetCharAdvance,
+			"IsLoaded", &ImFont::IsLoaded,
+			"GetDebugName", &ImFont::GetDebugName
+		);
+
+		luaGlobals.new_usertype<ImGuiIO>("ImGuiIO",
+			"ConfigFlags", &ImGuiIO::ConfigFlags, // TODO
+			"BackendFlags", &ImGuiIO::BackendFlags, // TODO
+			"DisplaySize", &ImGuiIO::DisplaySize,
+			"DisplayFramebufferScale", &ImGuiIO::DisplayFramebufferScale,
+			"DeltaTime", &ImGuiIO::DeltaTime,
+			"IniSavingRate", &ImGuiIO::IniSavingRate,
+			"IniFilename", &ImGuiIO::IniFilename,
+			"LogFilename", &ImGuiIO::LogFilename,
+			"UserData", &ImGuiIO::UserData,
+			"Fonts", &ImGuiIO::Fonts,
+			"FontGlobalScale", &ImGuiIO::FontGlobalScale,
+			"FontAllowUserScaling", &ImGuiIO::FontAllowUserScaling, // [OBSOLETE]
+			"FontDefault", &ImGuiIO::FontDefault,
+			"ConfigNavSwapGamepadButtons", &ImGuiIO::ConfigNavSwapGamepadButtons,
+			"ConfigNavMoveSetMousePos", &ImGuiIO::ConfigNavMoveSetMousePos,
+			"ConfigNavCaptureKeyboard", &ImGuiIO::ConfigNavCaptureKeyboard,
+			"ConfigNavEscapeClearFocusItem", &ImGuiIO::ConfigNavEscapeClearFocusItem,
+			"ConfigNavEscapeClearFocusWindow", &ImGuiIO::ConfigNavEscapeClearFocusWindow,
+			"ConfigNavCursorVisibleAuto", &ImGuiIO::ConfigNavCursorVisibleAuto,
+			"ConfigNavCursorVisibleAlways", &ImGuiIO::ConfigNavCursorVisibleAlways,
+			"ConfigDockingNoSplit", &ImGuiIO::ConfigDockingNoSplit,
+			"ConfigDockingWithShift", &ImGuiIO::ConfigDockingWithShift,
+			"ConfigDockingAlwaysTabBar", &ImGuiIO::ConfigDockingAlwaysTabBar,
+			"ConfigDockingTransparentPayload", &ImGuiIO::ConfigDockingTransparentPayload,
+			"ConfigViewportsNoAutoMerge", &ImGuiIO::ConfigViewportsNoAutoMerge,
+			"ConfigViewportsNoTaskBarIcon", &ImGuiIO::ConfigViewportsNoTaskBarIcon,
+			"ConfigViewportsNoDecoration", &ImGuiIO::ConfigViewportsNoDecoration,
+			"ConfigViewportsNoDefaultParent", &ImGuiIO::ConfigViewportsNoDefaultParent,
+			"MouseDrawCursor", &ImGuiIO::MouseDrawCursor,
+			"ConfigMacOSXBehaviors", &ImGuiIO::ConfigMacOSXBehaviors,
+			"ConfigInputTrickleEventQueue", &ImGuiIO::ConfigInputTrickleEventQueue,
+			"ConfigInputTextCursorBlink", &ImGuiIO::ConfigInputTextCursorBlink,
+			"ConfigInputTextEnterKeepActive", &ImGuiIO::ConfigInputTextEnterKeepActive,
+			"ConfigDragClickToInputText", &ImGuiIO::ConfigDragClickToInputText,
+			"ConfigWindowsResizeFromEdges", &ImGuiIO::ConfigWindowsResizeFromEdges,
+			"ConfigWindowsMoveFromTitleBarOnly", &ImGuiIO::ConfigWindowsMoveFromTitleBarOnly,
+			"ConfigWindowsCopyContentsWithCtrlC", &ImGuiIO::ConfigWindowsCopyContentsWithCtrlC,
+			"ConfigScrollbarScrollByPage", &ImGuiIO::ConfigScrollbarScrollByPage,
+			"ConfigMemoryCompactTimer", &ImGuiIO::ConfigMemoryCompactTimer,
+			"MouseDoubleClickTime", &ImGuiIO::MouseDoubleClickTime,
+			"MouseDoubleClickMaxDist", &ImGuiIO::MouseDoubleClickMaxDist,
+			"MouseDragThreshold", &ImGuiIO::MouseDragThreshold,
+			"KeyRepeatDelay", &ImGuiIO::KeyRepeatDelay,
+			"KeyRepeatRate", &ImGuiIO::KeyRepeatRate,
+			"ConfigErrorRecovery", &ImGuiIO::ConfigErrorRecovery,
+			"ConfigErrorRecoveryEnableAssert", &ImGuiIO::ConfigErrorRecoveryEnableAssert,
+			"ConfigErrorRecoveryEnableDebugLog", &ImGuiIO::ConfigErrorRecoveryEnableDebugLog,
+			"ConfigErrorRecoveryEnableTooltip", &ImGuiIO::ConfigErrorRecoveryEnableTooltip,
+			"ConfigDebugIsDebuggerPresent", &ImGuiIO::ConfigDebugIsDebuggerPresent,
+			"ConfigDebugHighlightIdConflicts", &ImGuiIO::ConfigDebugHighlightIdConflicts,
+			"ConfigDebugHighlightIdConflictsShowItemPicker", &ImGuiIO::ConfigDebugHighlightIdConflictsShowItemPicker,
+			"ConfigDebugBeginReturnValueOnce", &ImGuiIO::ConfigDebugBeginReturnValueOnce,
+			"ConfigDebugBeginReturnValueLoop", &ImGuiIO::ConfigDebugBeginReturnValueLoop,
+			"ConfigDebugIgnoreFocusLoss", &ImGuiIO::ConfigDebugIgnoreFocusLoss,
+			"ConfigDebugIniSettings", &ImGuiIO::ConfigDebugIniSettings,
+			"BackendPlatformName", &ImGuiIO::BackendPlatformName,
+			"BackendRendererName", &ImGuiIO::BackendRendererName,
+			"BackendPlatformUserData", &ImGuiIO::BackendPlatformUserData,
+			"BackendRendererUserData", &ImGuiIO::BackendRendererUserData,
+			"BackendLanguageUserData", &ImGuiIO::BackendLanguageUserData,
+			"AddKeyEvent", &ImGuiIO::AddKeyEvent,
+			"AddKeyAnalogEvent", &ImGuiIO::AddKeyAnalogEvent,
+			"AddMousePosEvent", &ImGuiIO::AddMousePosEvent,
+			"AddMouseButtonEvent", &ImGuiIO::AddMouseButtonEvent,
+			"AddMouseWheelEvent", &ImGuiIO::AddMouseWheelEvent,
+			"AddMouseSourceEvent", &ImGuiIO::AddMouseSourceEvent,
+			"AddMouseViewportEvent", &ImGuiIO::AddMouseViewportEvent,
+			"AddFocusEvent", &ImGuiIO::AddFocusEvent,
+			"AddInputCharacter", &ImGuiIO::AddInputCharacter,
+			"AddInputCharacterUTF16", &ImGuiIO::AddInputCharacterUTF16,
+			"AddInputCharactersUTF8", &ImGuiIO::AddInputCharactersUTF8,
+			"SetKeyEventNativeData", &ImGuiIO::SetKeyEventNativeData,
+			"SetAppAcceptingEvents", &ImGuiIO::SetAppAcceptingEvents,
+			"ClearEventsQueue", &ImGuiIO::ClearEventsQueue,
+			"ClearInputKeys", &ImGuiIO::ClearInputKeys,
+			"ClearInputMouse", &ImGuiIO::ClearInputMouse,
+			"WantCaptureMouse", &ImGuiIO::WantCaptureMouse,
+			"WantCaptureKeyboard", &ImGuiIO::WantCaptureKeyboard,
+			"WantTextInput", &ImGuiIO::WantTextInput,
+			"WantSetMousePos", &ImGuiIO::WantSetMousePos,
+			"WantSaveIniSettings", &ImGuiIO::WantSaveIniSettings,
+			"NavActive", &ImGuiIO::NavActive,
+			"NavVisible", &ImGuiIO::NavVisible,
+			"Framerate", &ImGuiIO::Framerate,
+			"MetricsRenderVertices", &ImGuiIO::MetricsRenderVertices,
+			"MetricsRenderIndices", &ImGuiIO::MetricsRenderIndices,
+			"MetricsRenderWindows", &ImGuiIO::MetricsRenderWindows,
+			"MetricsActiveWindows", &ImGuiIO::MetricsActiveWindows,
+			"MouseDelta", &ImGuiIO::MouseDelta,
+			"MousePos", &ImGuiIO::MousePos,
+			"MouseDown", &ImGuiIO::MouseDown,
+			"MouseWheel", &ImGuiIO::MouseWheel,
+			"MouseWheelH", &ImGuiIO::MouseWheelH,
+			"MouseSource", &ImGuiIO::MouseSource,
+			"MouseHoveredViewport", &ImGuiIO::MouseHoveredViewport,
+			"KeyCtrl", &ImGuiIO::KeyCtrl,
+			"KeyShift", &ImGuiIO::KeyShift,
+			"KeyAlt", &ImGuiIO::KeyAlt,
+			"KeySuper", &ImGuiIO::KeySuper,
+			"KeyMods", &ImGuiIO::KeyMods,
+			"KeysData", &ImGuiIO::KeysData,
+			"WantCaptureMouseUnlessPopupClose", &ImGuiIO::WantCaptureMouseUnlessPopupClose,
+			"MousePosPrev", &ImGuiIO::MousePosPrev,
+			"MouseClickedPos", &ImGuiIO::MouseClickedPos,
+			"MouseClickedTime", &ImGuiIO::MouseClickedTime,
+			"MouseClicked", &ImGuiIO::MouseClicked,
+			"MouseDoubleClicked", &ImGuiIO::MouseDoubleClicked,
+			"MouseClickedCount", &ImGuiIO::MouseClickedCount,
+			"MouseClickedLastCount", &ImGuiIO::MouseClickedLastCount,
+			"MouseReleased", &ImGuiIO::MouseReleased,
+			"MouseReleasedTime", &ImGuiIO::MouseReleasedTime,
+			"MouseDownOwned", &ImGuiIO::MouseDownOwned,
+			"MouseDownOwnedUnlessPopupClose", &ImGuiIO::MouseDownOwnedUnlessPopupClose,
+			"MouseWheelRequestAxisSwap", &ImGuiIO::MouseWheelRequestAxisSwap,
+			"MouseCtrlLeftAsRightClick", &ImGuiIO::MouseCtrlLeftAsRightClick,
+			"MouseDownDuration", &ImGuiIO::MouseDownDuration,
+			"MouseDownDurationPrev", &ImGuiIO::MouseDownDurationPrev,
+			"MouseDragMaxDistanceAbs", &ImGuiIO::MouseDragMaxDistanceAbs,
+			"MouseDragMaxDistanceSqr", &ImGuiIO::MouseDragMaxDistanceSqr,
+			"PenPressure", &ImGuiIO::PenPressure,
+			"AppFocusLost", &ImGuiIO::AppFocusLost,
+			"AppAcceptingEvents", &ImGuiIO::AppAcceptingEvents,
+			"InputQueueSurrogate", &ImGuiIO::InputQueueSurrogate,
+			"InputQueueCharacters", &ImGuiIO::InputQueueCharacters
+			);
+		
 		luaGlobals.new_usertype<ImGuiStyle>("ImGuiStyle", "Alpha", &ImGuiStyle::Alpha, "DisabledAlpha", &ImGuiStyle::DisabledAlpha, "WindowPadding", &ImGuiStyle::WindowPadding, "WindowRounding", &ImGuiStyle::WindowRounding, "WindowBorderSize", &ImGuiStyle::WindowBorderSize, "WindowBorderHoverPadding", &ImGuiStyle::WindowBorderHoverPadding, "WindowMinSize", &ImGuiStyle::WindowMinSize, "WindowTitleAlign", &ImGuiStyle::WindowTitleAlign, "WindowMenuButtonPosition", &ImGuiStyle::WindowMenuButtonPosition, "ChildRounding", &ImGuiStyle::ChildRounding, "ChildBorderSize", &ImGuiStyle::ChildBorderSize, "PopupRounding", &ImGuiStyle::PopupRounding, "PopupBorderSize", &ImGuiStyle::PopupBorderSize, "FramePadding", &ImGuiStyle::FramePadding, "FrameRounding", &ImGuiStyle::FrameRounding, "FrameBorderSize", &ImGuiStyle::FrameBorderSize, "ItemSpacing", &ImGuiStyle::ItemSpacing, "ItemInnerSpacing", &ImGuiStyle::ItemInnerSpacing, "CellPadding", &ImGuiStyle::CellPadding, "TouchExtraPadding", &ImGuiStyle::TouchExtraPadding, "IndentSpacing", &ImGuiStyle::IndentSpacing, "ColumnsMinSpacing", &ImGuiStyle::ColumnsMinSpacing, "ScrollbarSize", &ImGuiStyle::ScrollbarSize, "ScrollbarRounding", &ImGuiStyle::ScrollbarRounding, "GrabMinSize", &ImGuiStyle::GrabMinSize, "GrabRounding", &ImGuiStyle::GrabRounding, "LogSliderDeadzone", &ImGuiStyle::LogSliderDeadzone, "ImageBorderSize", &ImGuiStyle::ImageBorderSize, "TabRounding", &ImGuiStyle::TabRounding, "TabBorderSize", &ImGuiStyle::TabBorderSize, "TabCloseButtonMinWidthSelected", &ImGuiStyle::TabCloseButtonMinWidthSelected, "TabCloseButtonMinWidthUnselected", &ImGuiStyle::TabCloseButtonMinWidthUnselected, "TabBarBorderSize", &ImGuiStyle::TabBarBorderSize, "TabBarOverlineSize", &ImGuiStyle::TabBarOverlineSize, "TableAngledHeadersAngle", &ImGuiStyle::TableAngledHeadersAngle, "TableAngledHeadersTextAlign", &ImGuiStyle::TableAngledHeadersTextAlign, "TreeLinesFlags", &ImGuiStyle::TreeLinesFlags, "TreeLinesSize", &ImGuiStyle::TreeLinesSize, "TreeLinesRounding", &ImGuiStyle::TreeLinesRounding, "ColorButtonPosition", &ImGuiStyle::ColorButtonPosition, "ButtonTextAlign", &ImGuiStyle::ButtonTextAlign, "SelectableTextAlign", &ImGuiStyle::SelectableTextAlign, "SeparatorTextBorderSize", &ImGuiStyle::SeparatorTextBorderSize, "SeparatorTextAlign", &ImGuiStyle::SeparatorTextAlign, "SeparatorTextPadding", &ImGuiStyle::SeparatorTextPadding, "DisplayWindowPadding", &ImGuiStyle::DisplayWindowPadding, "DisplaySafeAreaPadding", &ImGuiStyle::DisplaySafeAreaPadding, "DockingSeparatorSize", &ImGuiStyle::DockingSeparatorSize, "MouseCursorScale", &ImGuiStyle::MouseCursorScale, "AntiAliasedLines", &ImGuiStyle::AntiAliasedLines, "AntiAliasedLinesUseTex", &ImGuiStyle::AntiAliasedLinesUseTex, "AntiAliasedFill", &ImGuiStyle::AntiAliasedFill, "CurveTessellationTol", &ImGuiStyle::CurveTessellationTol, "CircleTessellationMaxError", &ImGuiStyle::CircleTessellationMaxError, "Colors", &ImGuiStyle::Colors, "HoverStationaryDelay", &ImGuiStyle::HoverStationaryDelay, "HoverDelayShort", &ImGuiStyle::HoverDelayShort, "HoverDelayNormal", &ImGuiStyle::HoverDelayNormal, "HoverFlagsForTooltipMouse", &ImGuiStyle::HoverFlagsForTooltipMouse, "HoverFlagsForTooltipNav", &ImGuiStyle::HoverFlagsForTooltipNav, "ScaleAllSizes", &ImGuiStyle::ScaleAllSizes);
 
 		luaGlobals.new_usertype<ImGuiListClipper>("ImGuiListClipper", sol::constructors<ImGuiListClipper()>(), "Begin", &ImGuiListClipper::Begin, "Step", &ImGuiListClipper::Step, "IncludeItemsByIndex", &ImGuiListClipper::IncludeItemsByIndex, "SeekCursorForItem", &ImGuiListClipper::SeekCursorForItem, "DisplayStart", &ImGuiListClipper::DisplayStart, "DisplayEnd", &ImGuiListClipper::DisplayEnd);
@@ -3259,6 +3533,16 @@ namespace lua::imgui
 
 		sol::table ImGui(lua, sol::create);
 
+#pragma region Main
+		ImGui.set_function("GetIO", GetIO);
+		ImGui.set_function("GetPlatformIO", GetPlatformIO);
+		ImGui.set_function("GetStyle", GetStyle);
+		ImGui.set_function("NewFrame", NewFrame);
+		ImGui.set_function("EndFrame", EndFrame);
+		ImGui.set_function("Render", Render);
+		ImGui.set_function("GetDrawData", GetDrawData);
+#pragma endregion Main
+
 #pragma region Windows
 		ImGui.set_function("Begin", sol::overload(sol::resolve<bool(const std::string&)>(Begin), sol::resolve<bool(const std::string&, int)>(Begin), sol::resolve<std::tuple<bool, bool>(const std::string&, bool)>(Begin), sol::resolve<std::tuple<bool, bool>(const std::string&, bool, int)>(Begin)));
 		ImGui.set_function("End", End);
@@ -3313,10 +3597,8 @@ namespace lua::imgui
 #pragma endregion Windows Scrolling
 
 #pragma region Parameters stacks(shared)
-#ifdef SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 		ImGui.set_function("PushFont", PushFont);
 		ImGui.set_function("PopFont", PopFont);
-#endif // SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 		ImGui.set_function("PushStyleColor", sol::overload(sol::resolve<void(int, int)>(PushStyleColor), sol::resolve<void(int, float, float, float, float)>(PushStyleColor)));
 		ImGui.set_function("PopStyleColor", sol::overload(sol::resolve<void()>(PopStyleColor), sol::resolve<void(int)>(PopStyleColor)));
 		ImGui.set_function("PushStyleVar", sol::overload(sol::resolve<void(int, float)>(PushStyleVar), sol::resolve<void(int, float, float)>(PushStyleVar)));
@@ -3324,9 +3606,7 @@ namespace lua::imgui
 		ImGui.set_function("PushItemFlag", PushItemFlag);
 		ImGui.set_function("PopItemFlag", PopItemFlag);
 		ImGui.set_function("GetStyleColorVec4", GetStyleColorVec4);
-#ifdef SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 		ImGui.set_function("GetFont", GetFont);
-#endif // SOL_IMGUI_ENABLE_FONT_MANIPULATORS
 		ImGui.set_function("GetFontSize", GetFontSize);
 		ImGui.set_function("GetFontTexUvWhitePixel", GetFontTexUvWhitePixel);
 		ImGui.set_function("GetColorU32", sol::overload(sol::resolve<int(int, float)>(GetColorU32), sol::resolve<int(float, float, float, float)>(GetColorU32), sol::resolve<int(int)>(GetColorU32)));
