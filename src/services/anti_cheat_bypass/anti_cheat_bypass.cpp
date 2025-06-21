@@ -57,17 +57,5 @@ namespace big
 
 		if (m_battleye_running)
 			LOGF(WARNING, "If you are not running an actual BattlEye bypass, exit the game immediately and ensure that BE is properly disabled");
-
-		if (!m_fsl_provides_be_bypass)
-		{
-			m_battleye_status_update_patch->apply();
-			while (true)
-			{
-				*g_pointers->m_be_restart_status = 0;
-				*g_pointers->m_needs_be_restart = false;
-				*g_pointers->m_is_be_banned = false;
-				std::this_thread::yield();
-			}
-		}
 	}
 }

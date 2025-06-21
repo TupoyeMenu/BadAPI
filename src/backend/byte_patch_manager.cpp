@@ -13,7 +13,6 @@
 #include "gta/pointers.hpp"
 #include "hooking/hooking.hpp"
 #include "memory/byte_patch.hpp"
-#include "services/anti_cheat_bypass/anti_cheat_bypass.hpp"
 #include "util/explosion_anti_cheat_bypass.hpp"
 
 namespace big
@@ -28,12 +27,6 @@ namespace big
 
 		// Patch script network check
 		g_pointers->m_model_spawn_bypass->apply();
-
-		if (g_is_enhanced)
-		{
-			anti_cheat_bypass::m_battleye_status_update_patch =
-			    memory::byte_patch::make(g_pointers->m_battleye_status_update_patch, 0xC3).get();
-		}
 	}
 
 	byte_patch_manager::byte_patch_manager()

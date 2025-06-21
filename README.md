@@ -8,6 +8,7 @@ Strictly for educational purposes.
 3. Download https://github.com/DurtyFree/gta-v-data-dumps/raw/refs/heads/master/vehicles.json into `Grand Theft Auto V/BadAPI/scripts_config`
 4. Inject the binary into the game
 
+**This does NOT include an anti-cheat bypass, you must use something else for it or play singleplayer**
 
 ###### Note: `Grand Theft Auto V` above is where `GTA5.exe` or `GTA5_Enhanced.exe` is located.
 

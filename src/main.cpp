@@ -28,43 +28,6 @@
 
 #include <rage/gameSkeleton.hpp>
 
-namespace big
-{
-	bool disable_anticheat_skeleton()
-	{
-		bool patched = false;
-		for (rage::game_skeleton_update_mode* mode = g_pointers->m_game_skeleton->m_update_modes; mode; mode = mode->m_next)
-		{
-			for (rage::game_skeleton_update_base* update_node = mode->m_head; update_node; update_node = update_node->m_next)
-			{
-				if (update_node->m_hash != RAGE_JOAAT("Common Main"))
-					continue;
-				rage::game_skeleton_update_group* group = reinterpret_cast<rage::game_skeleton_update_group*>(update_node);
-				for (rage::game_skeleton_update_base* group_child_node = group->m_head; group_child_node;
-				    group_child_node                                   = group_child_node->m_next)
-				{
-					// TamperActions is a leftover from the old AC, but still useful to block anyway
-					if (group_child_node->m_hash != 0xA0F39FB6 && group_child_node->m_hash != RAGE_JOAAT("TamperActions"))
-						continue;
-					patched = true;
-					//LOG(INFO) << "Patching problematic skeleton update";
-					reinterpret_cast<rage::game_skeleton_update_element*>(group_child_node)->m_function = g_pointers->m_nullsub;
-				}
-				break;
-			}
-		}
-
-		for (rage::skeleton_data& i : g_pointers->m_game_skeleton->m_sys_data)
-		{
-			if (i.m_hash != 0xA0F39FB6 && i.m_hash != RAGE_JOAAT("TamperActions"))
-				continue;
-			i.m_init_func     = reinterpret_cast<uint64_t>(g_pointers->m_nullsub);
-			i.m_shutdown_func = reinterpret_cast<uint64_t>(g_pointers->m_nullsub);
-		}
-		return patched;
-	}
-}
-
 BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 {
 	using namespace big;
@@ -152,16 +115,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 			    auto native_hooks_instance = std::make_unique<native_hooks>();
 			    LOG(INFO) << "Dynamic native hooker initialized.";
-
-			    if (!g_is_enhanced)
-			    {
-				    while (!disable_anticheat_skeleton())
-				    {
-					    LOG(WARNING) << "Failed patching anticheat gameskeleton (injected too early?). Waiting 500ms and trying again";
-					    std::this_thread::sleep_for(500ms);
-				    }
-			    }
-			    LOG(INFO) << "Disabled anticheat gameskeleton.";
 
 			    auto lua_manager_instance =
 			        std::make_unique<lua_manager>(g_file_manager.get_project_folder("scripts"), g_file_manager.get_project_folder("scripts_config"));
