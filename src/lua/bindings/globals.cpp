@@ -1,4 +1,3 @@
-#include "memory.hpp"
 #include "gta/script/script_global.hpp"
 
 namespace lua::globals
@@ -121,11 +120,11 @@ namespace lua::globals
 	// Table: globals
 	// Name: get_pointer
 	// Param: global: integer: index of the global
-	// Returns: pointer: value of the global
+	// Returns: integer: value of the global
 	// Retrieves a pointer global.
-	static memory::pointer get_pointer(int global)
+	static uint64_t get_pointer(int global)
 	{
-		return memory::pointer((uint64_t)big::script_global(global).as<void*>());
+		return (uint64_t)big::script_global(global).as<void*>();
 	}
 
 	void bind(sol::state& state)

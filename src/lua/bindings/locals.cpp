@@ -1,5 +1,4 @@
 #include "locals.hpp"
-#include "memory.hpp"
 
 namespace lua::locals
 {
@@ -99,10 +98,10 @@ namespace lua::locals
 	// Name: get_pointer
 	// Param: script: string: The name of the script
 	// Param: index: integer: Index of the script local.
-	// Returns: pointer: The pointer to the given local.
-	static memory::pointer get_pointer(const std::string& script, int index)
+	// Returns: integer: The pointer to the given local.
+	static uint64_t get_pointer(const std::string& script, int index)
 	{
-		return memory::pointer((uint64_t)get<int*>(script, index));
+		return (uint64_t)get<int*>(script, index);
 	}
 
 	void bind(sol::state& state)

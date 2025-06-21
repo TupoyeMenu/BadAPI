@@ -2,7 +2,6 @@
 #include "services/players/player_service.hpp"
 
 #include "lua/lua_manager.hpp"
-#include "lua/bindings/memory.hpp"
 
 #include <network/CNetworkPlayerMgr.hpp>
 
