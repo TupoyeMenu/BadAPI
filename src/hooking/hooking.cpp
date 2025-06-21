@@ -36,8 +36,8 @@ namespace big
 			detour_hook_helper::add<hooks::queue_dependency_legacy>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
 			detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game); // Inlined in enhanced
 			detour_hook_helper::add<hooks::network_can_access_multiplayer>("NCAM", (void*)g_pointers->m_network_can_access_multiplayer);
+			detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
 		}
-		detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
 		detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
 
 		detour_hook_helper::add<hooks::prepare_metric_for_sending>("Prepare Metric For Sending", (void*)g_pointers->m_prepare_metric_for_sending);

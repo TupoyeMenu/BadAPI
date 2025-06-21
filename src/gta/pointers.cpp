@@ -270,9 +270,6 @@ namespace big
 		main_batch.add("Handle Join Request", "48 8B C4 48 89 58 08 4C 89 48 20 4C 89 40 18 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 18", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_handle_join_request = ptr.as<PVOID>();
 		});
-		main_batch.add("Handle Join Request", "48 81 EC 98 02 00 00 4C 89 CE", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			m_handle_join_request = ptr.sub(12).as<PVOID>();
-		});
 
 		main_batch.add("Write Join Response Data", "E8 ? ? ? ? 41 8B DF 84 C0 74 06", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_write_join_response_data = ptr.add(1).rip().as<functions::write_join_response_data>();
