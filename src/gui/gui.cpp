@@ -50,6 +50,8 @@ namespace big
 
 		dx_init();
 
+		g_renderer->set_safe_to_render();
+
 		g_gui = this;
 	}
 

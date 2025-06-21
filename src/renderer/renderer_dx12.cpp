@@ -18,7 +18,11 @@ IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARA
 
 namespace big
 {
-	renderer_dx12::renderer_dx12()
+	renderer_dx12::renderer_dx12() :
+	    m_Initialized(false),
+	    m_Resizing(false),
+	    m_FontsUpdated(false),
+	    m_SafeToRender(false)
 	{
 		if (!g_pointers->m_swapchain)
 		{
@@ -174,11 +178,16 @@ namespace big
 		init_imgui_fonts();
 
 		LOG(INFO) << "DirectX 12 renderer has finished initializing.";
+
+		m_Initialized = true;
 	}
 
 	renderer_dx12::~renderer_dx12()
 	{
 		g_renderer = nullptr;
+
+		if (!m_Initialized)
+			return;
 
 		ImGui_ImplWin32_Shutdown();
 		wait_for_last_frame();
@@ -249,6 +258,9 @@ namespace big
 
 	void renderer_dx12::on_present()
 	{
+		if (!m_SafeToRender)
+			return;
+
 		new_frame();
 		for (const auto& cb : m_dx_callbacks)
 			cb.second();
@@ -305,6 +317,13 @@ namespace big
 
 	void renderer_dx12::end_frame()
 	{
+		if (m_FontsUpdated)
+		{
+			pre_reset();
+			post_reset();
+			m_FontsUpdated = false;
+		}
+
 		wait_for_next_frame();
 
 		FrameContext& CurrentFrameContext{m_FrameContext[m_SwapChain->GetCurrentBackBufferIndex()]};
