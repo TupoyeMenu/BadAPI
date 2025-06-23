@@ -107,10 +107,10 @@ function globals.set_vec3(global, param) end
 ---Retrieves a pointer global.
 ---**Example Usage:**
 ---```lua
----pointer = globals.get_pointer(global)
+---integer = globals.get_pointer(global)
 ---```
 ---@param global integer index of the global
----@return pointer value of the global
+---@return integer value of the global
 function globals.get_pointer(global) end
 
 

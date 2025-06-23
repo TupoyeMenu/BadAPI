@@ -86,11 +86,11 @@ function locals.set_vec3(script, index, val) end
 
 ---**Example Usage:**
 ---```lua
----pointer = locals.get_pointer(script, index)
+---integer = locals.get_pointer(script, index)
 ---```
 ---@param script string The name of the script
 ---@param index integer Index of the script local.
----@return pointer The pointer to the given local.
+---@return integer The pointer to the given local.
 function locals.get_pointer(script, index) end
 
 

@@ -45,6 +45,7 @@ namespace lua::script
 	// Name: register_looped
 	// Param: name: string: name of your new looped script
 	// Param: func: function: function that will be executed in a forever loop.
+	// Returns: internal_script: Script utils for this script
 	// Registers a function that will be looped as a gta script.
 	// **Example Usage:**
 	// ```lua
@@ -69,11 +70,11 @@ namespace lua::script
 	//     ENTITY.DELETE_ENTITY(spawnedVehicle)
 	// end)
 	// ```
-	static void register_looped(const std::string& name, sol::protected_function func_, sol::this_state state)
+	static std::shared_ptr<big::script> register_looped(const std::string& name, sol::protected_function func_, sol::this_state state)
 	{
 		big::lua_module* module = sol::state_view(state)["!this"];
 
-		std::unique_ptr<big::script> lua_script = std::make_unique<big::script>(
+		std::shared_ptr<big::script> lua_script = std::make_shared<big::script>(
 		    [func_, state]() mutable {
 			    sol::thread t       = sol::thread::create(state);
 			    sol::coroutine func = sol::coroutine(t.state(), func_);
@@ -100,13 +101,16 @@ namespace lua::script
 		    },
 		    name);
 
-		module->m_registered_scripts[rage::joaat(name)] = std::move(lua_script);
+		module->m_registered_scripts[rage::joaat(name)] = lua_script;
+
+		return lua_script;
 	}
 
 	// Lua API: Function
 	// Table: script
 	// Name: run_in_fiber
 	// Param: func: function: function that will be executed once in the fiber pool.
+	// Returns: internal_script: Script utils for this script
 	// Executes a function once inside the fiber pool, you can call natives inside it and yield or sleep.
 	// **Example Usage:**
 	// ```lua
@@ -131,7 +135,7 @@ namespace lua::script
 	//     ENTITY.DELETE_ENTITY(spawnedVehicle)
 	// end)
 	// ```
-	static void run_in_fiber(sol::protected_function func_, sol::this_state state)
+	static std::shared_ptr<big::script> run_in_fiber(sol::protected_function func_, sol::this_state state)
 	{
 		big::lua_module* module = sol::state_view(state)["!this"];
 
@@ -139,7 +143,7 @@ namespace lua::script
 		std::string job_name = module->module_name() + std::to_string(name_i++);
 
 		// We make a new script for lua state destruction timing purposes, see lua_module dctor for more info.
-		std::unique_ptr<big::script> lua_script = std::make_unique<big::script>(
+		std::shared_ptr<big::script> lua_script = std::make_shared<big::script>(
 		    [func_, state]() mutable {
 			    sol::thread t       = sol::thread::create(state);
 			    sol::coroutine func = sol::coroutine(t.state(), func_);
@@ -166,7 +170,9 @@ namespace lua::script
 		    },
 		    job_name);
 
-		module->m_registered_scripts[rage::joaat(job_name)] = std::move(lua_script);
+		module->m_registered_scripts[rage::joaat(job_name)] = lua_script;
+
+		return lua_script;
 	}
 
 	// Lua API: function
@@ -211,5 +217,12 @@ namespace lua::script
 
 		usertype["yield"] = sol::yielding(&script_util::yield);
 		usertype["sleep"] = sol::yielding(&script_util::sleep);
+
+		auto internal_script             = state.new_usertype<big::script>("internal_script");
+		internal_script["name"]          = &big::script::name;
+		internal_script["is_enabled"]    = &big::script::is_enabled;
+		internal_script["set_enabled"]   = &big::script::set_enabled;
+		internal_script["is_toggleable"] = &big::script::is_toggleable;
+		internal_script["is_done"]       = &big::script::is_done;
 	}
 }

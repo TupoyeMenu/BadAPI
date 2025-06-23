@@ -21,7 +21,7 @@ namespace big
 		std::mutex m_registered_scripts_mutex;
 
 	public:
-		std::unordered_map<rage::joaat_t, std::unique_ptr<script>> m_registered_scripts;
+		std::unordered_map<rage::joaat_t, std::shared_ptr<script>> m_registered_scripts;
 		std::vector<std::unique_ptr<lua_patch>> m_registered_patches;
 		std::vector<std::unique_ptr<lua::scr_patch::scr_patch>> m_registered_script_patches;
 

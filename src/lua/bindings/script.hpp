@@ -26,5 +26,33 @@ namespace lua::script
 		int sleep(int ms);
 	};
 
+	// Lua API: Class
+	// Name: internal_script
+	// Class for gta script utils, the instance is usually given to you.
+
+	// Lua API: Function
+	// Class: internal_script
+	// Name: name
+	// Returns: string: Name of this script
+
+	// Lua API: Function
+	// Class: internal_script
+	// Name: is_enabled
+	// Returns: boolean: Will this script be executed
+
+	// Lua API: Function
+	// Class: internal_script
+	// Name: set_enabled
+
+	// Lua API: Function
+	// Class: internal_script
+	// Name: is_toggleable
+	// Returns: boolean: Can `set_enabled` be used
+	
+	// Lua API: Function
+	// Class: internal_script
+	// Name: is_done
+	// Returns: boolean: Has this script finished executing
+
 	void bind(sol::state& state);
 }

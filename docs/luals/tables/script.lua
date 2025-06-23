@@ -47,10 +47,11 @@ function script.sleep(ms) end
 ---```
 ---**Example Usage:**
 ---```lua
----script.register_looped(name, func)
+---internal_script = script.register_looped(name, func)
 ---```
 ---@param name string name of your new looped script
 ---@param func function function that will be executed in a forever loop.
+---@return internal_script Script utils for this script
 function script.register_looped(name, func) end
 
 
@@ -80,9 +81,10 @@ function script.register_looped(name, func) end
 ---```
 ---**Example Usage:**
 ---```lua
----script.run_in_fiber(func)
+---internal_script = script.run_in_fiber(func)
 ---```
 ---@param func function function that will be executed once in the fiber pool.
+---@return internal_script Script utils for this script
 function script.run_in_fiber(func) end
 
 

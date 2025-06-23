@@ -31,7 +31,7 @@ namespace big
 	{
 		m_module = std::make_shared<lua_module>("main", m_scripts_folder, false);
 
-		load_file(m_scripts_folder.get_path() / "init.lua");
+		load_file(m_scripts_folder.get_path() / "core" / "init.lua");
 
 		g_lua_manager = this;
 
