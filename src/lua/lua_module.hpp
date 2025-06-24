@@ -26,7 +26,6 @@ namespace big
 		std::vector<std::unique_ptr<lua::scr_patch::scr_patch>> m_registered_script_patches;
 
 		std::unordered_map<rage::joaat_t, std::unordered_map<rage::joaat_t, sol::protected_function>> m_event_callbacks;
-		std::vector<void*> m_allocated_memory;
 
 		lua_module(const std::filesystem::path& module_path, folder& scripts_folder, bool disabled = false);
 		~lua_module();

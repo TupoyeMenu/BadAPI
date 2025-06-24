@@ -127,9 +127,6 @@ namespace big
 			m_registered_scripts.clear();
 			m_registered_script_patches.clear();
 		}
-
-		for (auto memory : m_allocated_memory)
-			delete[] memory;
 	}
 
 	rage::joaat_t lua_module::module_id() const

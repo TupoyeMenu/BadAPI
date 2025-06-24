@@ -104,6 +104,25 @@ namespace lua::event
 
 	// Lua API: Function
 	// Table: event
+	// Name: remove
+	// Param: menu_event: string: The menu_event.
+	// Param: identifier: string: A unique identifier for the event you want to remove.
+	// Returns: boolean: true if we removed the handler.
+	// Removes the handler registered with register_handler.
+	static bool remove(const std::string& menu_event, const std::string_view& identifier, sol::this_state state)
+	{
+		big::lua_module* module = sol::state_view(state)["!this"];
+
+		if (module->m_event_callbacks[rage::joaat(menu_event)].contains(rage::joaat(identifier)))
+		{
+			module->m_event_callbacks[rage::joaat(menu_event)].erase(rage::joaat(identifier));
+			return true;
+		}
+		return false;
+	}
+
+	// Lua API: Function
+	// Table: event
 	// Name: trigger
 	// Param: menu_event: string: The menu_event that we want to trigger.
 	// Param: ...: any: Argument to pass down to the event.
@@ -134,7 +153,7 @@ namespace lua::event
 
 		auto ns                = state["event"].get_or_create<sol::table>();
 		ns["register_handler"] = register_handler;
+		ns["remove"]           = remove;
 		ns["trigger"]          = trigger;
-		// TODO: Check if triggering events works.
 	}
 }

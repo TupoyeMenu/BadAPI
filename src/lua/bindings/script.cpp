@@ -177,6 +177,25 @@ namespace lua::script
 
 	// Lua API: function
 	// Table: script
+	// Name: remove
+	// Param: script_name: string: The name of the script.
+	// Returns: boolean: true if we removed the script
+	// Removes a script added with script.register_looped
+	static bool remove(const std::string& script_name, sol::this_state state)
+	{
+		big::lua_module* module = sol::state_view(state)["!this"];
+
+		if (module->m_registered_scripts.contains(rage::joaat(script_name)))
+		{
+			module->m_registered_scripts.erase(rage::joaat(script_name));
+			return true;
+		}
+
+		return false;
+	}
+
+	// Lua API: function
+	// Table: script
 	// Name: is_active
 	// Param: script_name: string: The name of the script.
 	// Returns true if the specified script is currently active/running.
@@ -207,6 +226,7 @@ namespace lua::script
 		auto ns                 = state["script"].get_or_create<sol::table>();
 		ns["register_looped"]   = register_looped;
 		ns["run_in_fiber"]      = run_in_fiber;
+		ns["remove"]            = remove;
 		ns["is_active"]         = is_active;
 		ns["execute_as_script"] = execute_as_script;
 

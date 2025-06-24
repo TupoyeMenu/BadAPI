@@ -2,7 +2,7 @@
 ---@class script
 ---Table containing helper functions related to gta scripts.
 script = {}
--- Functions (6)
+-- Functions (7)
 
 ---**Example Usage:**
 ---```lua
@@ -86,6 +86,16 @@ function script.register_looped(name, func) end
 ---@param func function function that will be executed once in the fiber pool.
 ---@return internal_script Script utils for this script
 function script.run_in_fiber(func) end
+
+
+---Removes a script added with script.register_looped
+---**Example Usage:**
+---```lua
+---boolean = script.remove(script_name)
+---```
+---@param script_name string The name of the script.
+---@return boolean true if we removed the script
+function script.remove(script_name) end
 
 
 ---Returns true if the specified script is currently active/running.
