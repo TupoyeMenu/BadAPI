@@ -9,7 +9,9 @@
 #include "file_manager/file_manager.hpp"
 #include "gta/joaat.hpp"
 #include "gta/pointers.hpp"
+#include "gta/script/big_program.hpp"
 #include "gta/script/fiber_pool.hpp"
+#include "gta/script/invoker.hpp"
 #include "gta/script/script_mgr.hpp"
 #include "gui/gui.hpp"
 #include "hooking/hooking.hpp"
@@ -26,6 +28,7 @@
 #include "thread_pool.hpp"
 #include "util/is_enhanced.hpp"
 
+#include <memory>
 #include <rage/gameSkeleton.hpp>
 
 BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
@@ -94,6 +97,10 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    LOG(INFO) << "Renderer initialized.";
 			    auto gui_instance = std::make_unique<gui>();
 
+			    auto script_program_instance = std::make_unique<big_program>("BadAPIInternal");
+			    create_script_thread("BadAPIInternal");
+			    LOG(INFO) << "Script Program initialized.";
+
 			    auto fiber_pool_instance = std::make_unique<fiber_pool>(10);
 			    LOG(INFO) << "Fiber pool initialized.";
 
@@ -115,6 +122,12 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 			    auto native_hooks_instance = std::make_unique<native_hooks>();
 			    LOG(INFO) << "Dynamic native hooker initialized.";
+
+			    while (!*g_pointers->m_natives_registered)
+				    std::this_thread::sleep_for(50ms);
+
+			    g_native_invoker.cache_handlers();
+			    LOG(INFO) << "Native handlers cached.";
 
 			    auto lua_manager_instance =
 			        std::make_unique<lua_manager>(g_file_manager.get_project_folder("scripts"), g_file_manager.get_project_folder("scripts_config"));
@@ -156,8 +169,12 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    fiber_pool_instance.reset();
 			    LOG(INFO) << "Fiber pool uninitialized.";
 
-				dx12_renderer_instance.reset();
-				dx11_renderer_instance.reset();
+			    destroy_script_thread();
+			    script_program_instance.reset();
+			    LOG(INFO) << "Script Program uninitialized.";
+
+			    dx12_renderer_instance.reset();
+			    dx11_renderer_instance.reset();
 			    LOG(INFO) << "Renderer uninitialized.";
 
 			    byte_patch_manager_instance.reset();

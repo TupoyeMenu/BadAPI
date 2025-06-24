@@ -5,10 +5,12 @@
 #include "invoker.hpp"
 
 #include "crossmap.hpp"
+#include "gta/script/big_program.hpp"
 #include "hooking/hooking.hpp"
 #include "gta/pointers.hpp"
 #include "script/scrNativeHandler.hpp"
 #include "script/scrProgram.hpp"
+#include "gta/gta_util.hpp"
 
 namespace big
 {
@@ -29,11 +31,9 @@ namespace big
 			m_handler_cache[i] = (rage::scrNativeHandler)mapping.second;
 			++i;
 		}
-		auto program = reinterpret_cast<rage::scrProgram*>(calloc(1, sizeof(rage::scrProgram)));
-		program->m_native_count = m_handler_cache.size();
-		program->m_native_entrypoints = m_handler_cache.data();
-		g_hooking->get_original<hooks::init_native_tables>()(program);
-		free(program);
+		g_main_program->m_native_count = m_handler_cache.size();
+		g_main_program->m_native_entrypoints = m_handler_cache.data();
+		g_hooking->get_original<hooks::init_native_tables>()(g_main_program);
 
 		m_handlers_cached = true;
 	}
@@ -82,9 +82,24 @@ namespace big
 		{
 			rage::scrNativeHandler handler = m_handler_cache.at(i);
 
+			auto tls_ctx = legacy::rage::tlsContext::get();
+			auto og_thread = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread);
+			bool og_thread_running = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active);
+			if (!og_thread)
+			{
+				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = g_main_script_thread;
+				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
+			}
+
 			// return address checks are no longer a thing
 			handler(&m_call_context);
 			fix_vectors(m_call_context);
+
+			if (!og_thread)
+			{
+				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
+				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread_running;
+			}
 		}
 		catch(const std::out_of_range& ex)
 		{

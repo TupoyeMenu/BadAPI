@@ -1,9 +1,9 @@
 
-#if !POOLS_HPP_LEGACY || !POOLS_HPP_ENHANCED
+#if !NET_PLAYER_HPP_LEGACY || !NET_PLAYER_HPP_ENHANCED
 	#if ENHANCED
-		#define POOLS_HPP_ENHANCED 1
+		#define NET_PLAYER_HPP_ENHANCED 1
 	#else
-		#define POOLS_HPP_LEGACY 1
+		#define NET_PLAYER_HPP_LEGACY 1
 	#endif
 
 	#include "player/CNonPhysicalPlayerData.hpp"

@@ -11,6 +11,7 @@
 #include "script_mgr.hpp"
 
 #include "gta/gta_util.hpp"
+#include "gta/script/big_program.hpp"
 #include "lua/lua_manager.hpp"
 
 namespace big

@@ -105,6 +105,9 @@ namespace big
 		uint8_t* m_battleye_status_update_patch;
 
 		PVOID m_prepare_metric_for_sending;
+
+		bool* m_natives_registered;
+		PVOID m_gta_thread_vtable;
 	};
 
 	inline pointers* g_pointers{};

@@ -1,21 +1,36 @@
-#pragma once
-#include <intrin.h>
+#if !TLS_CONTEXT_HPP_LEGACY || !TLS_CONTEXT_HPP_ENHANCED
+	#if ENHANCED
+		#define TLS_CONTEXT_HPP_ENHANCED 1
+	#else
+		#define TLS_CONTEXT_HPP_LEGACY 1
+	#endif
 
-namespace rage_enhanced
+	#include <intrin.h>
+
+namespace GAME_BRANCH
 {
-	class scrThread;
-	class tlsContext
+	namespace rage
 	{
-	public:
-		char m_Pad1[0x7A0];
-		rage::scrThread* m_script_thread;
-		bool m_is_script_thread_active;
-
-		static tlsContext* get()
+	#pragma pack(push, 1)
+		class tlsContext
 		{
-			constexpr std::uint32_t TlsIndex = 0x0;
-			return *reinterpret_cast<tlsContext**>(__readgsqword(0x58) + TlsIndex);
-		}
-	};
-	static_assert(sizeof(tlsContext) == 0x7B0);
+		public:
+	#if ENHANCED
+			char m_Pad1[0x7A0];
+	#else
+			char m_Pad1[0x2A50];
+	#endif
+			void* m_script_thread;
+			bool m_is_script_thread_active;
+
+			static tlsContext* get()
+			{
+				constexpr std::uint32_t TlsIndex = 0x0;
+				return *reinterpret_cast<tlsContext**>(__readgsqword(0x58) + TlsIndex);
+			}
+		};
+	#pragma pack(pop)
+	}
 }
+
+#endif

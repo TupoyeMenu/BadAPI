@@ -1,13 +1,21 @@
 #pragma once
+
+// clang-format off
+#include "util/header_wrappers/include_as_enhaced.hpp"
 #include "gta/script_thread.hpp"
 #include "gta/tls_context.hpp"
+#include "util/header_wrappers/include_as_legacy.hpp"
+#include "gta/script_thread.hpp"
+#include "gta/tls_context.hpp"
+#include "util/header_wrappers/clear_include.hpp"
+// clang-format on
+
+#include "gta/script/big_program.hpp"
 #include "pointers.hpp"
-#include "script/scrThread.hpp"
 
 #include <network/CNetworkPlayerMgr.hpp>
 #include <ped/CPedFactory.hpp>
 #include <script/scrProgramTable.hpp>
-#include <script/tlsContext.hpp>
 
 
 #define CROSS_CLASS_ACCESS(legacy_type, enhanced_type, variable, expression) \
@@ -62,24 +70,42 @@ namespace big::gta_util
 	}
 
 	template<typename F, typename... Args>
+	void execute_as_script(void* thread, F&& callback, Args&&... args)
+	{
+		if (!thread)
+			return;
+
+		auto tls_ctx = legacy::rage::tlsContext::get();
+		auto og_thread = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread);
+
+		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = thread;
+		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
+
+		std::invoke(std::forward<F>(callback), std::forward<Args>(args)...);
+
+		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
+		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread != nullptr;
+	}
+
+	template<typename F, typename... Args>
 	void execute_as_script(rage::joaat_t script_hash, F&& callback, Args&&... args)
 	{
-		auto tls_ctx = rage::tlsContext::get();
+		auto tls_ctx = legacy::rage::tlsContext::get();
 		for (auto thread : *g_pointers->m_script_threads)
 		{
-			if (!thread || !CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, thread, ->m_context.m_thread_id)
-			    || CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, thread, ->m_context.m_script_hash) != script_hash)
+			if (!thread || CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_thread_id) == 0
+			    || CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_script_hash) != script_hash)
 				continue;
 
-			auto og_thread = CROSS_CLASS_ACCESS(rage::tlsContext, rage_enhanced::tlsContext, tls_ctx, ->m_script_thread);
+			auto og_thread = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread);
 
-			CROSS_CLASS_ACCESS(rage::tlsContext, rage_enhanced::tlsContext, tls_ctx, ->m_script_thread) = thread;
-			CROSS_CLASS_ACCESS(rage::tlsContext, rage_enhanced::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
+			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = thread;
+			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
 
 			std::invoke(std::forward<F>(callback), std::forward<Args>(args)...);
 
-			CROSS_CLASS_ACCESS(rage::tlsContext, rage_enhanced::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
-			CROSS_CLASS_ACCESS(rage::tlsContext, rage_enhanced::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread != nullptr;
+			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
+			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread != nullptr;
 
 			return;
 		}
@@ -90,8 +116,8 @@ namespace big::gta_util
 	{
 		for (auto thread : *g_pointers->m_script_threads)
 		{
-			if (thread && CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, thread, ->m_context.m_thread_id)
-			    && CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, thread, ->m_context.m_script_hash) == hash)
+			if (thread && CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_thread_id)
+			    && CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_script_hash) == hash)
 			{
 				return thread;
 			}
@@ -104,7 +130,7 @@ namespace big::gta_util
 	{
 		for (auto thread : *g_pointers->m_script_threads)
 		{
-			if (thread && CROSS_CLASS_ACCESS(rage::scrThread, rage_enhanced::scrThread, thread, ->m_context.m_thread_id) == id)
+			if (thread && CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_thread_id) == id)
 			{
 				return thread;
 			}

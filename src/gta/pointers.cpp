@@ -301,6 +301,20 @@ namespace big
 		main_batch.add("Prepare Metric For Sending", "48 89 F9 FF 50 20 48 8D 15", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
 			m_prepare_metric_for_sending = ptr.sub(0x26).as<PVOID>();
 		});
+		
+		main_batch.add("Gta Thread Vtable", "48 83 A3 ? ? ? 00 00 48 8D 05 ? ? ? ? 48 8B CB 48 89 03 E8", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_gta_thread_vtable = ptr.add(11).rip().as<PVOID>();
+		});
+		main_batch.add("Gta Thread Vtable", "89 F3 31 FF 4C 8D 25", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_gta_thread_vtable = ptr.add(7).rip().as<PVOID>();
+		});
+
+		main_batch.add("Natives Registered", "48 8B CB 40 88 2D ? ? ? ? 48", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_natives_registered = ptr.add(6).rip().as<bool*>();
+		});
+		main_batch.add("Natives Registered", "C6 05 ? ? ? ? ? 48 89 F1 0F 28 74", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_natives_registered = ptr.add(3).rip().as<bool*>();
+		});
 
 
 		main_batch.run(memory::module(""));
