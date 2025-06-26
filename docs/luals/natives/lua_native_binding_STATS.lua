@@ -3,18 +3,17 @@
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
----@alias Blip integer
----@alias Cam integer
----@alias Entity integer
+---@alias BlipHandle integer
+---@alias CamHandle integer
+---@alias EntityHandle integer
 ---@alias FireId integer
----@alias Interior integer
----@alias ItemSet integer
----@alias Object integer
----@alias Ped integer
----@alias Pickup integer
----@alias Player integer
+---@alias InteriorHandle integer
+---@alias ObjectHandle integer
+---@alias PedHandle integer
+---@alias PickupHandle integer
+---@alias PlayerHandle integer
 ---@alias ScrHandle integer
----@alias Vehicle integer
+---@alias VehicleHandle integer
 ---@alias Any any
 ---@alias Vector3 vec3
 
