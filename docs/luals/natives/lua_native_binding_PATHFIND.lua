@@ -320,7 +320,6 @@ function PATHFIND.GET_RANDOM_VEHICLE_NODE(x, y, z, radius, p4, p5, p6, outPositi
 ---@param towardsCoorsZ float
 ---@param centrePoint Vector3
 ---@param heading float
----@return Vector3
 ---@return Vector3 centrePoint
 ---@return float heading
 function PATHFIND.GET_SPAWN_COORDS_FOR_VEHICLE_NODE(nodeAddress, towardsCoorsX, towardsCoorsY, towardsCoorsZ, centrePoint, heading) end

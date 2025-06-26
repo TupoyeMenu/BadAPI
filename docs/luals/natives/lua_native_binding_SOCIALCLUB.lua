@@ -110,7 +110,8 @@ function SOCIALCLUB.SC_EMAIL_GET_EMAIL_AT_INDEX(p0, p1) end
 
 
 ---@param index int
-function SOCIALCLUB.SC_EMAIL_MARKETING_EMAIL_OPENED_(index) end
+---@param type Hash
+function SOCIALCLUB.SC_EMAIL_MARKETING_EMAIL_OPENED_(index, type) end
 
 
 ---@param p0 number

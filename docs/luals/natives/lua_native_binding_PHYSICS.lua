@@ -244,6 +244,12 @@ function PHYSICS.SET_DAMPING(entity, vertex, value) end
 
 
 ---@param entity Entity
+---@param type int
+---@return Vector3
+function PHYSICS.GET_DAMPING(entity, type) end
+
+
+---@param entity Entity
 function PHYSICS.ACTIVATE_PHYSICS(entity) end
 
 

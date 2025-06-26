@@ -51,6 +51,13 @@ function PAD.IS_CONTROL_JUST_RELEASED(control, action) end
 
 ---@param control int
 ---@param action int
+---@param duration int
+---@return boolean
+function PAD.IS_CONTROL_HELD_DOWN_(control, action, duration) end
+
+
+---@param control int
+---@param action int
 ---@return int
 function PAD.GET_CONTROL_VALUE(control, action) end
 

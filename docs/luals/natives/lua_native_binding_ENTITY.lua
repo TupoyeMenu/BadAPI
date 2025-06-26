@@ -916,7 +916,8 @@ function ENTITY.SET_ENTITY_HEALTH(entity, health, instigator, weaponType) end
 
 ---@param entity Entity
 ---@param toggle BOOL
-function ENTITY.SET_ENTITY_INVINCIBLE(entity, toggle) end
+---@param dontResetOnCleanup BOOL
+function ENTITY.SET_ENTITY_INVINCIBLE(entity, toggle, dontResetOnCleanup) end
 
 
 ---@param entity Entity
@@ -964,9 +965,9 @@ function ENTITY.SET_ENTITY_ONLY_DAMAGED_BY_RELATIONSHIP_GROUP(entity, p1, p2) en
 ---@param collisionProof BOOL
 ---@param meleeProof BOOL
 ---@param steamProof BOOL
----@param p7 BOOL
+---@param dontResetOnCleanup BOOL
 ---@param waterProof BOOL
-function ENTITY.SET_ENTITY_PROOFS(entity, bulletProof, fireProof, explosionProof, collisionProof, meleeProof, steamProof, p7, waterProof) end
+function ENTITY.SET_ENTITY_PROOFS(entity, bulletProof, fireProof, explosionProof, collisionProof, meleeProof, steamProof, dontResetOnCleanup, waterProof) end
 
 
 ---@param entity Entity
@@ -1173,6 +1174,11 @@ function ENTITY.REMOVE_FORCED_OBJECT(x, y, z, p3, modelHash) end
 ---@param entity2 Entity
 ---@param thisFrameOnly BOOL
 function ENTITY.SET_ENTITY_NO_COLLISION_ENTITY(entity1, entity2, thisFrameOnly) end
+
+
+---@param entity1 Entity
+---@param entity2 Entity
+function ENTITY.SET_ENTITY_NO_COLLISION_WITH_NETWORKED_ENTITY_(entity1, entity2) end
 
 
 ---@param entity Entity

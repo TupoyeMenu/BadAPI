@@ -394,6 +394,15 @@ function STATS.PLAYSTATS_FLOW_LOW_(posX, posY, posZ, action, p4, p5) end
 function STATS.PLAYSTATS_FLOW_MEDIUM_(posX, posY, posZ, action, p4, p5) end
 
 
+---@param posX float
+---@param posY float
+---@param posZ float
+---@param action string
+---@param p4 BOOL
+---@param p5 int
+function STATS.PLAYSTATS_FLOW_HIGH_(posX, posY, posZ, action, p4, p5) end
+
+
 ---@param p0 string
 function STATS.PLAYSTATS_NPC_INVITE(p0) end
 
@@ -1608,7 +1617,8 @@ function STATS.PLAYSTATS_HEIST3_PREP(p0) end
 ---@param p1 Any
 ---@param p2 Any
 ---@param p3 Any
-function STATS.PLAYSTATS_MASTER_CONTROL(p0, p1, p2, p3) end
+---@param p4 Any
+function STATS.PLAYSTATS_MASTER_CONTROL(p0, p1, p2, p3, p4) end
 
 
 ---@param p0 Any
@@ -1712,6 +1722,12 @@ function STATS.PLAYSTATS_CARCLUB_PRIZE(p0, vehicleModel) end
 ---@param p2 Any
 ---@param p3 Any
 function STATS.PLAYSTATS_AWARD_NAV(p0, p1, p2, p3) end
+
+
+---@param p0 Any
+---@param p1 Any
+---@param p2 Any
+function STATS.PLAYSTATS_INIT_MULTIPLAYER_(p0, p1, p2) end
 
 
 ---@param p0 Any

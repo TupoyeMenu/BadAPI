@@ -2048,6 +2048,13 @@ function GRAPHICS.REQUEST_SCALEFORM_MOVIE_SKIP_RENDER_WHILE_PAUSED(scaleformName
 function GRAPHICS.HAS_SCALEFORM_MOVIE_LOADED(scaleformHandle) end
 
 
+---@param scaleformHandle int
+---@param scaleformName string
+---@return boolean
+---@return int scaleformHandle
+function GRAPHICS.HAS_SCALEFORM_MOVIE_NAMED_LOADED_(scaleformHandle, scaleformName) end
+
+
 ---@param val int
 ---@return boolean
 function GRAPHICS.IS_ACTIVE_SCALEFORM_MOVIE_DELETING(val) end
@@ -2070,6 +2077,11 @@ function GRAPHICS.HAS_SCALEFORM_CONTAINER_MOVIE_LOADED_INTO_PARENT(scaleformHand
 
 ---@param scaleformHandle int
 function GRAPHICS.SET_SCALEFORM_MOVIE_AS_NO_LONGER_NEEDED(scaleformHandle) end
+
+
+---@param scaleformHandle int
+---@param scaleformName string
+function GRAPHICS.SET_SCALEFORM_MOVIE_NAMED_AS_NO_LONGER_NEEDED_(scaleformHandle, scaleformName) end
 
 
 ---@param scaleform int
@@ -2344,6 +2356,7 @@ function GRAPHICS.SET_TV_CHANNEL_PLAYLIST_AT_HOUR(tvChannel, playlistName, hour)
 
 ---@param tvChannel int
 ---@param p1 BOOL
+---@return Any
 function GRAPHICS.SET_TV_CHANNEL_PLAYLIST_DIRTY_(tvChannel, p1) end
 
 

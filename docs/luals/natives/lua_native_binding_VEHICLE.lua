@@ -676,6 +676,11 @@ function VEHICLE.SET_VEHICLE_DISABLE_HEIGHT_MAP_AVOIDANCE(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
+---@param toggle BOOL
+function VEHICLE.SET_PLANE_AVOIDS_OTHERS_(vehicle, toggle) end
+
+
+---@param vehicle Vehicle
 ---@param p1 BOOL
 function VEHICLE.SET_BOAT_DISABLE_AVOIDANCE(vehicle, p1) end
 
@@ -3293,6 +3298,11 @@ function VEHICLE.DISABLE_INDIVIDUAL_PLANE_PROPELLER(vehicle, propeller) end
 
 
 ---@param vehicle Vehicle
+---@param propeller int
+function VEHICLE.ENABLE_INDIVIDUAL_PLANE_PROPELLER_(vehicle, propeller) end
+
+
+---@param vehicle Vehicle
 ---@param toggle BOOL
 function VEHICLE.SET_VEHICLE_FORCE_AFTERBURNER(vehicle, toggle) end
 
@@ -3519,6 +3529,12 @@ function VEHICLE.GET_VEHICLE_IS_DUMMY(p0) end
 ---@param p1 float
 ---@return boolean
 function VEHICLE.SET_VEHICLE_DAMAGE_SCALE(vehicle, p1) end
+
+
+---@param vehicle Vehicle
+---@param scale float
+---@return Any
+function VEHICLE.SET_VEHICLE_EXPLOSIVE_DAMAGE_SCALE_(vehicle, scale) end
 
 
 ---@param vehicle Vehicle
@@ -3754,14 +3770,19 @@ function VEHICLE.SET_OVERRIDE_VEHICLE_DOOR_TORQUE(p0, p1, p2) end
 function VEHICLE.SET_WHEELIE_ENABLED(vehicle, enabled) end
 
 
----@param p0 Any
----@param p1 Any
-function VEHICLE.SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE(p0, p1) end
+---@param vehicle Vehicle
+---@param disable BOOL
+function VEHICLE.SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE(vehicle, disable) end
 
 
 ---@param vehicle Vehicle
----@param value float
-function VEHICLE.SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION(vehicle, value) end
+---@param disable BOOL
+function VEHICLE.SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION(vehicle, disable) end
+
+
+---@param vehicle Vehicle
+---@param disable BOOL
+function VEHICLE.SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_RECEIVED_BY_AI_VEHICLE_(vehicle, disable) end
 
 
 ---@param p0 Any
@@ -3814,6 +3835,11 @@ function VEHICLE.SET_VEHICLE_DAMAGE_SCALES(vehicle, p1, p2, p3, p4) end
 ---@param p1 Any
 ---@param p2 Any
 function VEHICLE.SET_PLANE_SECTION_DAMAGE_SCALE(vehicle, p1, p2) end
+
+
+---@param vehicle Vehicle
+---@param toggle BOOL
+function VEHICLE.SET_PLANE_CONTROL_SECTIONS_SHOULD_BREAK_OFF_FROM_EXPLOSIONS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
@@ -3966,6 +3992,11 @@ function VEHICLE.SET_VEHICLE_SHUNT_ON_STICK(toggle) end
 
 ---@param vehicle Vehicle
 ---@return boolean
+function VEHICLE.IS_VEHICLE_ON_BOOST_PAD_(vehicle) end
+
+
+---@param vehicle Vehicle
+---@return boolean
 function VEHICLE.GET_IS_VEHICLE_SHUNTING(vehicle) end
 
 
@@ -3994,7 +4025,7 @@ function VEHICLE.SET_OVERRIDE_NITROUS_LEVEL(vehicle, toggle, level, power, recha
 
 ---@param vehicle Vehicle
 ---@param enabled BOOL
-function VEHICLE.SET_NITROUS_IS_ACTIVE(vehicle, enabled) end
+function VEHICLE.SET_NITROUS_IS_VISIBLE_(vehicle, enabled) end
 
 
 ---@param vehicle Vehicle
@@ -4019,6 +4050,11 @@ function VEHICLE.FULLY_CHARGE_NITROUS(vehicle) end
 
 
 ---@param vehicle Vehicle
+---@param duration float
+function VEHICLE.SET_REMAINING_NITROUS_DURATION_(vehicle, duration) end
+
+
+---@param vehicle Vehicle
 ---@return float
 function VEHICLE.GET_REMAINING_NITROUS_DURATION_(vehicle) end
 
@@ -4030,6 +4066,11 @@ function VEHICLE.IS_NITROUS_ACTIVE(vehicle) end
 
 ---@param vehicle Vehicle
 function VEHICLE.CLEAR_NITROUS(vehicle) end
+
+
+---@param vehicle Vehicle
+---@param toggle BOOL
+function VEHICLE.SET_NITROUS_IS_ACTIVE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle

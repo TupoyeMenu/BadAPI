@@ -1100,6 +1100,12 @@ function PED.SET_PED_GRAVITY(ped, toggle) end
 
 
 ---@param ped Ped
+---@param toggle BOOL
+---@return boolean
+function PED.SET_PED_SURVIVES_BEING_OUT_OF_WATER_(ped, toggle) end
+
+
+---@param ped Ped
 ---@param damageAmount int
 ---@param p2 BOOL
 ---@param p3 Any
@@ -2729,6 +2735,15 @@ function PED.SET_PED_DIES_INSTANTLY_IN_WATER(ped, toggle) end
 ---@param ped Ped
 ---@param p1 int
 function PED.SET_LADDER_CLIMB_INPUT_STATE(ped, p1) end
+
+
+---@param ped Ped
+---@param x float
+---@param y float
+---@param z float
+---@param range float
+---@return boolean
+function PED.IS_PED_IN_SPHERE_AREA_OF_ANY_ENEMY_PEDS(ped, x, y, z, range) end
 
 
 ---@param ped Ped

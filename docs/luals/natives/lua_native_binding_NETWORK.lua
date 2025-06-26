@@ -557,6 +557,13 @@ function NETWORK.NETWORK_IS_OFFLINE_INVITE_PENDING() end
 function NETWORK.NETWORK_CLEAR_OFFLINE_INVITE_PENDING() end
 
 
+---@return string
+function NETWORK.NETWORK_INVITE_GET_JOIN_FAIL_REASON_() end
+
+
+function NETWORK.NETWORK_INVITE_CLEAR_JOIN_FAIL_REASON_() end
+
+
 ---@param p0 int
 function NETWORK.NETWORK_SESSION_HOST_SINGLE_PLAYER(p0) end
 
@@ -2890,6 +2897,10 @@ function NETWORK.IS_ENTITY_IN_GHOST_COLLISION(entity) end
 function NETWORK.SET_FREEMODE_REPORT_DATA_(gamerHandle, reportData) end
 
 
+---@return boolean
+function NETWORK.IS_OBJECT_REASSIGNMENT_IN_PROGRESS() end
+
+
 ---@param toggle BOOL
 function NETWORK.USE_PLAYER_COLOUR_INSTEAD_OF_TEAM_COLOUR(toggle) end
 
@@ -3820,6 +3831,11 @@ function NETWORK.UGC_GET_ROOT_CONTENT_ID(p0) end
 function NETWORK.UGC_GET_CONTENT_NAME(p0) end
 
 
+---@param index int
+---@return string
+function NETWORK.UGC_GET_CONTENT_DESCRIPTION(index) end
+
+
 ---@param p0 Any
 ---@return int
 function NETWORK.UGC_GET_CONTENT_DESCRIPTION_HASH(p0) end
@@ -4174,11 +4190,6 @@ function NETWORK.NETWORK_HAS_ROS_PRIVILEGE_MP_VOICE_COMMUNICATION_() end
 function NETWORK.NETWORK_HAS_ROS_PRIVILEGE_REPORTING_() end
 
 
----@param p0 Any
----@return int
-function NETWORK.NETWORK_START_COMMUNICATION_PERMISSIONS_CHECK(p0) end
-
-
 ---@param netHandle number
 ---@return int
 function NETWORK.NETWORK_START_USER_CONTENT_PERMISSIONS_CHECK(netHandle) end
@@ -4298,5 +4309,21 @@ function NETWORK.NETWORK_GET_PLAYER_ACCOUNT_ID(player) end
 ---@param p0 Any
 ---@param p1 Any
 function NETWORK.NETWORK_UGC_NAV(p0, p1) end
+
+
+---@return int
+function NETWORK.NETWORK_GET_GAME_RESTART_REASON_() end
+
+
+function NETWORK.NETWORK_CONFIRM_GAME_RESTART_() end
+
+
+---@return string
+function NETWORK.NETWORK_GET_GAME_RESTART_REASON_MESSAGE_LABEL_() end
+
+
+---@param errorCode int
+---@return string
+function NETWORK.NETWORK_GET_BATTLEYE_ERROR_MESSAGE_LABEL_(errorCode) end
 
 

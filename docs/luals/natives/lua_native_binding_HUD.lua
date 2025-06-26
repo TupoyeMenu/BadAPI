@@ -1205,6 +1205,10 @@ function HUD.SHOW_START_MISSION_INSTRUCTIONAL_BUTTON(toggle) end
 function HUD.SHOW_CONTACT_INSTRUCTIONAL_BUTTON(toggle) end
 
 
+---@param toggle BOOL
+function HUD.SHOW_PURCHASE_INSTRUCTIONAL_BUTTON_(toggle) end
+
+
 function HUD.RELOAD_MAP_MENU() end
 
 

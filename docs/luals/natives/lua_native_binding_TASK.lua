@@ -301,6 +301,15 @@ function TASK.TASK_PLANT_BOMB(ped, x, y, z, heading) end
 ---@param y float
 ---@param z float
 ---@param moveBlendRatio float
+---@param radius float
+function TASK.TASK_SHARK_CIRCLE_COORD(ped, x, y, z, moveBlendRatio, radius) end
+
+
+---@param ped Ped
+---@param x float
+---@param y float
+---@param z float
+---@param moveBlendRatio float
 ---@param time int
 ---@param targetRadius float
 ---@param flags int
@@ -711,6 +720,10 @@ function TASK.TASK_SHUFFLE_TO_NEXT_VEHICLE_SEAT(ped, vehicle, useAlternateShuffl
 
 ---@param ped Ped
 function TASK.CLEAR_PED_TASKS(ped) end
+
+
+---@param ped Ped
+function TASK.CLEAR_PED_SCRIPT_TASK_IF_RUNNING_THREAT_RESPONSE_NON_TEMP_TASK(ped) end
 
 
 ---@param ped Ped
@@ -1337,7 +1350,8 @@ function TASK.SET_DRIVE_TASK_CRUISE_SPEED(driver, cruiseSpeed) end
 
 ---@param ped Ped
 ---@param speed float
-function TASK.SET_DRIVE_TASK_MAX_CRUISE_SPEED(ped, speed) end
+---@param updateBaseTask BOOL
+function TASK.SET_DRIVE_TASK_MAX_CRUISE_SPEED(ped, speed, updateBaseTask) end
 
 
 ---@param ped Ped

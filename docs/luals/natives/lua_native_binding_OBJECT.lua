@@ -263,6 +263,11 @@ function OBJECT.DOOR_SYSTEM_GET_OPEN_RATIO(doorHash) end
 
 
 ---@param doorHash Hash
+---@return boolean
+function OBJECT.DOOR_SYSTEM_GET_IS_SPRING_REMOVED(doorHash) end
+
+
+---@param doorHash Hash
 ---@param removed BOOL
 ---@param requestDoor BOOL
 ---@param forceUpdate BOOL
@@ -782,6 +787,11 @@ function OBJECT.PREVENT_COLLECTION_OF_PORTABLE_PICKUP(object, p1, p2) end
 ---@param pickup Pickup
 ---@param toggle BOOL
 function OBJECT.SET_PICKUP_OBJECT_GLOW_WHEN_UNCOLLECTABLE(pickup, toggle) end
+
+
+---@param pickup Pickup
+---@param toggle BOOL
+function OBJECT.SET_PICKUP_GLOW_DISABLED_(pickup, toggle) end
 
 
 ---@param pickup Pickup
