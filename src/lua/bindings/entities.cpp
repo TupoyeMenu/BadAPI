@@ -43,7 +43,7 @@ namespace lua::entities
 	// Table: entities
 	// Name: take_control_of
 	// Must be called from a script (script.run_in_fiber for example)
-	// Param: entity: Entity: Script handle of the entity we are trying to take control of.
+	// Param: entity: EntityHandle: Script handle of the entity we are trying to take control of.
 	// Param: try_count: integer: Optional. Number of time we'll try taking control of the entity. Default to 300.
 	// Returns: boolean: Returns true if we successfully got control of the entity.
 	static bool take_control_of_try_count(Entity entity, int try_count)
