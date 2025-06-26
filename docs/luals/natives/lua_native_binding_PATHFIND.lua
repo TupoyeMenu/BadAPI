@@ -404,7 +404,7 @@ function PATHFIND.GET_POSITION_BY_SIDE_OF_ROAD(x, y, z, p3, outPosition) end
 ---@param x float
 ---@param y float
 ---@param z float
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function PATHFIND.IS_POINT_ON_ROAD(x, y, z, vehicle) end
 

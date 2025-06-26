@@ -36,7 +36,7 @@ function MOBILE.SET_MOBILE_PHONE_ROTATION(rotX, rotY, rotZ, p3) end
 
 
 ---@param rotation Vector3
----@param p1 Vehicle
+---@param p1 VehicleHandle
 function MOBILE.GET_MOBILE_PHONE_ROTATION(rotation, p1) end
 
 

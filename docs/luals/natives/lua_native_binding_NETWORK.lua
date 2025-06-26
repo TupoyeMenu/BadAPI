@@ -1653,7 +1653,7 @@ function NETWORK.NETWORK_HAS_CONTROL_OF_DOOR(doorHash) end
 function NETWORK.NETWORK_IS_DOOR_NETWORKED(doorHash) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return int
 function NETWORK.VEH_TO_NET(vehicle) end
 
@@ -1669,7 +1669,7 @@ function NETWORK.OBJ_TO_NET(object) end
 
 
 ---@param netHandle int
----@return Vehicle
+---@return VehicleHandle
 function NETWORK.NET_TO_VEH(netHandle) end
 
 
@@ -2835,17 +2835,17 @@ function NETWORK.SET_NETWORK_VEHICLE_RESPOT_TIMER(netId, time, p2, p3) end
 function NETWORK.IS_NETWORK_VEHICLE_RUNNING_RESPOT_TIMER(networkID) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function NETWORK.SET_NETWORK_VEHICLE_AS_GHOST(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param multiplier float
 function NETWORK.SET_NETWORK_VEHICLE_MAX_POSITION_DELTA_MULTIPLIER(vehicle, multiplier) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function NETWORK.SET_NETWORK_ENABLE_HIGH_SPEED_EDGE_FALL_DETECTION(vehicle, toggle) end
 
@@ -3391,7 +3391,7 @@ function NETWORK.NETWORK_TRIGGER_DAMAGE_EVENT_FOR_ZERO_WEAPON_HASH(entity, toggl
 function NETWORK.NETWORK_SET_NO_LONGER_NEEDED(entity, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param isAudible boolean
 ---@param isInvisible boolean
 ---@param netId int
@@ -3399,7 +3399,7 @@ function NETWORK.NETWORK_SET_NO_LONGER_NEEDED(entity, toggle) end
 function NETWORK.NETWORK_EXPLODE_VEHICLE(vehicle, isAudible, isInvisible, netId) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param isAudible boolean
 ---@param isInvisible boolean
 ---@param netId int

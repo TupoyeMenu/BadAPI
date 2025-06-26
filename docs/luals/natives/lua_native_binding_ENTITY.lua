@@ -313,7 +313,7 @@ function ENTITY.GET_PED_INDEX_FROM_ENTITY_INDEX(entity) end
 
 
 ---@param entity EntityHandle
----@return Vehicle
+---@return VehicleHandle
 function ENTITY.GET_VEHICLE_INDEX_FROM_ENTITY_INDEX(entity) end
 
 
@@ -812,7 +812,7 @@ function ENTITY.SET_ENTITY_AS_NO_LONGER_NEEDED(entity) end
 function ENTITY.SET_PED_AS_NO_LONGER_NEEDED(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function ENTITY.SET_VEHICLE_AS_NO_LONGER_NEEDED(vehicle) end
 
 

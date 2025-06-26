@@ -431,7 +431,7 @@ function PLAYER.IS_PLAYER_BEING_ARRESTED(player, atArresting) end
 function PLAYER.RESET_PLAYER_ARREST_STATE(player) end
 
 
----@return Vehicle
+---@return VehicleHandle
 function PLAYER.GET_PLAYERS_LAST_VEHICLE() end
 
 
@@ -510,7 +510,7 @@ function PLAYER.GET_CAUSE_OF_MOST_RECENT_FORCE_CLEANUP() end
 
 
 ---@param player PlayerHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function PLAYER.SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE(player, vehicle) end
 
 

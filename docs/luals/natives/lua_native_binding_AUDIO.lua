@@ -563,21 +563,21 @@ function AUDIO.SET_RADIO_RETUNE_DOWN() end
 function AUDIO.SET_RADIO_TO_STATION_NAME(stationName) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param radioStation string
 function AUDIO.SET_VEH_RADIO_STATION(vehicle, radioStation) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.SET_VEH_HAS_NORMAL_RADIO(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function AUDIO.IS_VEHICLE_RADIO_ON(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.SET_VEH_FORCED_RADIO_THIS_FRAME(vehicle) end
 
 
@@ -663,12 +663,12 @@ function AUDIO.SET_RADIO_TRACK_WITH_START_OFFSET(radioStationName, mixName, p2) 
 function AUDIO.SET_NEXT_RADIO_TRACK(radioName, radioTrack, p2, p3) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_VEHICLE_RADIO_LOUD(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function AUDIO.CAN_VEHICLE_RECEIVE_CB_RADIO(vehicle) end
 
@@ -685,7 +685,7 @@ function AUDIO.DOES_PLAYER_VEH_HAVE_RADIO() end
 function AUDIO.IS_PLAYER_VEH_RADIO_ENABLE() end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_VEHICLE_RADIO_ENABLED(vehicle, toggle) end
 
@@ -777,7 +777,7 @@ function AUDIO.GET_CURRENT_TRACK_PLAY_TIME(radioStationName) end
 function AUDIO.GET_CURRENT_TRACK_SOUND_NAME(radioStationName) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_VEHICLE_MISSILE_WARNING_ENABLED(vehicle, toggle) end
 
@@ -842,17 +842,17 @@ function AUDIO.PLAY_POLICE_REPORT(name, p1) end
 function AUDIO.CANCEL_ALL_POLICE_REPORTS() end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.BLIP_SIREN(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param override boolean
 ---@param hornHash int
 function AUDIO.OVERRIDE_VEH_HORN(vehicle, override, hornHash) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function AUDIO.IS_HORN_ACTIVE(vehicle) end
 
@@ -901,7 +901,7 @@ function AUDIO.LOAD_STREAM_WITH_START_OFFSET(streamName, startOffset, soundSet) 
 function AUDIO.PLAY_STREAM_FROM_PED(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.PLAY_STREAM_FROM_VEHICLE(vehicle) end
 
 
@@ -956,45 +956,45 @@ function AUDIO.BLOCK_SPEECH_CONTEXT_GROUP(p0, p1) end
 function AUDIO.UNBLOCK_SPEECH_CONTEXT_GROUP(p0) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_SIREN_WITH_NO_DRIVER(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_SIREN_BYPASS_MP_DRIVER_CHECK(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.TRIGGER_SIREN_AUDIO(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.SET_HORN_PERMANENTLY_ON(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_HORN_ENABLED(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 Any
 function AUDIO.SET_AUDIO_VEHICLE_PRIORITY(vehicle, p1) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param time float
 function AUDIO.SET_HORN_PERMANENTLY_ON_TIME(vehicle, time) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.USE_SIREN_AS_HORN(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param audioName string
 function AUDIO.FORCE_USE_AUDIO_GAME_OBJECT(vehicle, audioName) end
 
@@ -1003,13 +1003,13 @@ function AUDIO.FORCE_USE_AUDIO_GAME_OBJECT(vehicle, audioName) end
 function AUDIO.PRELOAD_VEHICLE_AUDIO_BANK(vehicleModel) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 string
 ---@param p2 string
 function AUDIO.SET_VEHICLE_STARTUP_REV_SOUND(vehicle, p1, p2) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function AUDIO.RESET_VEHICLE_STARTUP_REV_SOUND(vehicle) end
 
 
@@ -1018,42 +1018,42 @@ function AUDIO.RESET_VEHICLE_STARTUP_REV_SOUND(vehicle) end
 function AUDIO.SET_VEHICLE_FORCE_REVERSE_WARNING(p0, p1) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function AUDIO.IS_VEHICLE_AUDIBLY_DAMAGED(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param damageFactor float
 function AUDIO.SET_VEHICLE_AUDIO_ENGINE_DAMAGE_FACTOR(vehicle, damageFactor) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param intensity float
 function AUDIO.SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR(vehicle, intensity) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param force boolean
 function AUDIO.FORCE_VEHICLE_ENGINE_SYNTH_(vehicle, force) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.ENABLE_VEHICLE_FANBELT_DAMAGE(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.ENABLE_VEHICLE_EXHAUST_POPS(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_VEHICLE_BOOST_ACTIVE(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.SET_PLAYER_VEHICLE_ALARM_AUDIO_ACTIVE(vehicle, toggle) end
 
@@ -1063,22 +1063,22 @@ function AUDIO.SET_PLAYER_VEHICLE_ALARM_AUDIO_ACTIVE(vehicle, toggle) end
 function AUDIO.SET_SCRIPT_UPDATE_DOOR_AUDIO(doorHash, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param doorId int
 function AUDIO.PLAY_VEHICLE_DOOR_OPEN_SOUND(vehicle, doorId) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param doorId int
 function AUDIO.PLAY_VEHICLE_DOOR_CLOSE_SOUND(vehicle, doorId) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param toggle boolean
 function AUDIO.ENABLE_STALL_WARNING_SOUNDS(vehicle, toggle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param enable boolean
 function AUDIO.ENABLE_DRAG_RACE_STATIONARY_WARNING_SOUNDS_(vehicle, enable) end
 
@@ -1232,12 +1232,12 @@ function AUDIO.STOP_ALL_ALARMS(stop) end
 function AUDIO.IS_ALARM_PLAYING(alarmName) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return Hash
 function AUDIO.GET_VEHICLE_DEFAULT_HORN(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return Hash
 function AUDIO.GET_VEHICLE_DEFAULT_HORN_IGNORE_MODS(vehicle) end
 
@@ -1279,7 +1279,7 @@ function AUDIO.FREEZE_MICROPHONE() end
 function AUDIO.DISTANT_COP_CAR_SIRENS(value) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 boolean
 function AUDIO.SET_SIREN_CAN_BE_CONTROLLED_BY_AUDIO(vehicle, p1) end
 
@@ -1368,12 +1368,12 @@ function AUDIO.HAS_LOADED_MP_DATA_SET() end
 function AUDIO.HAS_LOADED_SP_DATA_SET() end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return int
 function AUDIO.GET_VEHICLE_HORN_SOUND_INDEX(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param value int
 function AUDIO.SET_VEHICLE_HORN_SOUND_INDEX(vehicle, value) end
 

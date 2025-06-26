@@ -19,7 +19,7 @@ class Arg:
         self.type_ = self.type_.replace("Ped", "PedHandle")
         self.type_ = self.type_.replace("Pickup", "PickupHandle")
         self.type_ = self.type_.replace("Player", "PlayerHandle")
-        self.type_ = self.type_.replace("VehicleHandle", "VehicleHandle")
+        self.type_ = self.type_.replace("Vehicle", "VehicleHandle")
         self.type_ = self.type_.replace("Any*", "number") # not actually a number but close enough
         if self.type_ == "number":
             self.is_any_ptr = True
@@ -43,7 +43,7 @@ class NativeFunc:
         self.lua_name = lua_name
         self.cpp_name = cpp_name
         self.args = args
-        self.return_type = return_type.replace("BOOL", "boolean").replace("Any*", "uintptr_t").replace("const char*", "string").replace("Blip", "BlipHandle").replace("Cam", "CamHandle").replace("Entity", "EntityHandle").replace("Interior", "InteriorHandle").replace("Object", "ObjectHandle").replace("Ped", "PedHandle").replace("Pickup", "PickupHandle").replace("Player", "PlayerHandle").replace("VehicleHandle", "VehicleHandle")
+        self.return_type = return_type.replace("BOOL", "boolean").replace("Any*", "uintptr_t").replace("const char*", "string").replace("Blip", "BlipHandle").replace("Cam", "CamHandle").replace("Entity", "EntityHandle").replace("Interior", "InteriorHandle").replace("Object", "ObjectHandle").replace("Ped", "PedHandle").replace("Pickup", "PickupHandle").replace("Player", "PlayerHandle").replace("Vehicle", "VehicleHandle")
 
         self.out_params = []
         if self.return_type != "void":

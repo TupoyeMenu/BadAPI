@@ -53,7 +53,7 @@ function TASK.UPDATE_TASK_HANDS_UP_DURATION(ped, duration) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param timeOut int
 ---@param seat int
 ---@param speed float
@@ -61,7 +61,7 @@ function TASK.TASK_OPEN_VEHICLE_DOOR(ped, vehicle, timeOut, seat, speed) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param timeout int
 ---@param seat int
 ---@param speed float
@@ -72,13 +72,13 @@ function TASK.TASK_ENTER_VEHICLE(ped, vehicle, timeout, seat, speed, flag, overr
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param flags int
 function TASK.TASK_LEAVE_VEHICLE(ped, vehicle, flags) end
 
 
 ---@param ped PedHandle
----@param boat Vehicle
+---@param boat VehicleHandle
 function TASK.TASK_GET_OFF_BOAT(ped, boat) end
 
 
@@ -118,7 +118,7 @@ function TASK.TASK_RAPPEL_FROM_HELI(ped, minHeightAboveGround) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -132,7 +132,7 @@ function TASK.TASK_VEHICLE_DRIVE_TO_COORD(ped, vehicle, x, y, z, speed, p6, vehi
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -143,7 +143,7 @@ function TASK.TASK_VEHICLE_DRIVE_TO_COORD_LONGRANGE(ped, vehicle, x, y, z, speed
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param speed float
 ---@param drivingStyle int
 function TASK.TASK_VEHICLE_DRIVE_WANDER(ped, vehicle, speed, drivingStyle) end
@@ -267,7 +267,7 @@ function TASK.TASK_WANDER_SPECIFIC(ped, conditionalAnimGroupStr, conditionalAnim
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -393,7 +393,7 @@ function TASK.IS_CONTROLLED_VEHICLE_UNABLE_TO_GET_TO_ROAD(ped) end
 ---@param y float
 ---@param z float
 ---@param moveBlendRatio float
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param useLongRangeVehiclePathing boolean
 ---@param drivingFlags int
 ---@param maxRangeToShootTargets float
@@ -405,7 +405,7 @@ function TASK.TASK_GO_TO_COORD_ANY_MEANS(ped, x, y, z, moveBlendRatio, vehicle, 
 ---@param y float
 ---@param z float
 ---@param moveBlendRatio float
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param useLongRangeVehiclePathing boolean
 ---@param drivingFlags int
 ---@param maxRangeToShootTargets float
@@ -421,7 +421,7 @@ function TASK.TASK_GO_TO_COORD_ANY_MEANS_EXTRA_PARAMS(ped, x, y, z, moveBlendRat
 ---@param y float
 ---@param z float
 ---@param moveBlendRatio float
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param useLongRangeVehiclePathing boolean
 ---@param drivingFlags int
 ---@param maxRangeToShootTargets float
@@ -563,7 +563,7 @@ function TASK.GET_PHONE_GESTURE_ANIM_CURRENT_TIME(ped) end
 function TASK.GET_PHONE_GESTURE_ANIM_TOTAL_TIME(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param animationSet string
 ---@param animationName string
 function TASK.TASK_VEHICLE_PLAY_ANIM(vehicle, animationSet, animationName) end
@@ -635,7 +635,7 @@ function TASK.GET_IS_TASK_ACTIVE(ped, taskIndex) end
 function TASK.GET_SCRIPT_TASK_STATUS(ped, taskHash) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return int
 function TASK.GET_ACTIVE_VEHICLE_MISSION_TYPE(vehicle) end
 
@@ -711,7 +711,7 @@ function TASK.TASK_SHOOT_AT_COORD(ped, x, y, z, duration, firingPattern) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param useAlternateShuffle boolean
 function TASK.TASK_SHUFFLE_TO_NEXT_VEHICLE_SEAT(ped, vehicle, useAlternateShuffle) end
 
@@ -728,7 +728,7 @@ function TASK.CLEAR_PED_SCRIPT_TASK_IF_RUNNING_THREAT_RESPONSE_NON_TEMP_TASK(ped
 function TASK.CLEAR_PED_SECONDARY_TASK(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function TASK.TASK_EVERYONE_LEAVE_VEHICLE(vehicle) end
 
 
@@ -762,15 +762,15 @@ function TASK.TASK_TURN_PED_TO_FACE_COORD(ped, x, y, z, duration) end
 
 
 ---@param driver PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param action int
 ---@param time int
 function TASK.TASK_VEHICLE_TEMP_ACTION(driver, vehicle, action, time) end
 
 
 ---@param driver PedHandle
----@param vehicle Vehicle
----@param vehicleTarget Vehicle
+---@param vehicle VehicleHandle
+---@param vehicleTarget VehicleHandle
 ---@param missionType int
 ---@param cruiseSpeed float
 ---@param drivingStyle int
@@ -781,7 +781,7 @@ function TASK.TASK_VEHICLE_MISSION(driver, vehicle, vehicleTarget, missionType, 
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param pedTarget PedHandle
 ---@param missionType int
 ---@param maxSpeed float
@@ -793,7 +793,7 @@ function TASK.TASK_VEHICLE_MISSION_PED_TARGET(ped, vehicle, pedTarget, missionTy
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -807,8 +807,8 @@ function TASK.TASK_VEHICLE_MISSION_COORS_TARGET(ped, vehicle, x, y, z, mission, 
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
----@param targetVehicle Vehicle
+---@param vehicle VehicleHandle
+---@param targetVehicle VehicleHandle
 ---@param mode int
 ---@param speed float
 ---@param drivingStyle int
@@ -819,7 +819,7 @@ function TASK.TASK_VEHICLE_ESCORT(ped, vehicle, targetVehicle, mode, speed, driv
 
 
 ---@param driver PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param targetEntity EntityHandle
 ---@param speed float
 ---@param drivingStyle int
@@ -833,7 +833,7 @@ function TASK.TASK_VEHICLE_CHASE(driver, targetEnt) end
 
 
 ---@param pilot PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param entityToFollow EntityHandle
 ---@param targetSpeed float
 ---@param drivingFlags int
@@ -871,7 +871,7 @@ function TASK.TASK_PLANE_CHASE(pilot, entityToFollow, x, y, z) end
 
 
 ---@param pilot PedHandle
----@param plane Vehicle
+---@param plane VehicleHandle
 ---@param runwayStartX float
 ---@param runwayStartY float
 ---@param runwayStartZ float
@@ -885,16 +885,16 @@ function TASK.TASK_PLANE_LAND(pilot, plane, runwayStartX, runwayStartY, runwaySt
 function TASK.CLEAR_DEFAULT_PRIMARY_TASK(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function TASK.CLEAR_PRIMARY_VEHICLE_TASK(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function TASK.CLEAR_VEHICLE_CRASH_TASK(vehicle) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -907,7 +907,7 @@ function TASK.TASK_PLANE_GOTO_PRECISE_VTOL(ped, vehicle, x, y, z, flightHeight, 
 
 
 ---@param ped PedHandle
----@param submarine Vehicle
+---@param submarine VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -916,8 +916,8 @@ function TASK.TASK_SUBMARINE_GOTO_AND_STOP(ped, submarine, x, y, z, autopilot) e
 
 
 ---@param pilot PedHandle
----@param aircraft Vehicle
----@param targetVehicle Vehicle
+---@param aircraft VehicleHandle
+---@param targetVehicle VehicleHandle
 ---@param targetPed PedHandle
 ---@param destinationX float
 ---@param destinationY float
@@ -934,8 +934,8 @@ function TASK.TASK_HELI_MISSION(pilot, aircraft, targetVehicle, targetPed, desti
 
 
 ---@param pilot PedHandle
----@param heli1 Vehicle
----@param heli2 Vehicle
+---@param heli1 VehicleHandle
+---@param heli2 VehicleHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
@@ -943,8 +943,8 @@ function TASK.TASK_HELI_ESCORT_HELI(pilot, heli1, heli2, offsetX, offsetY, offse
 
 
 ---@param pilot PedHandle
----@param aircraft Vehicle
----@param targetVehicle Vehicle
+---@param aircraft VehicleHandle
+---@param targetVehicle VehicleHandle
 ---@param targetPed PedHandle
 ---@param destinationX float
 ---@param destinationY float
@@ -960,7 +960,7 @@ function TASK.TASK_PLANE_MISSION(pilot, aircraft, targetVehicle, targetPed, dest
 
 
 ---@param pilot PedHandle
----@param aircraft Vehicle
+---@param aircraft VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -970,8 +970,8 @@ function TASK.TASK_PLANE_TAXI(pilot, aircraft, x, y, z, cruiseSpeed, targetReach
 
 
 ---@param pedDriver PedHandle
----@param vehicle Vehicle
----@param targetVehicle Vehicle
+---@param vehicle VehicleHandle
+---@param targetVehicle VehicleHandle
 ---@param targetPed PedHandle
 ---@param x float
 ---@param y float
@@ -986,7 +986,7 @@ function TASK.TASK_BOAT_MISSION(pedDriver, vehicle, targetVehicle, targetPed, x,
 
 ---@param driverPed PedHandle
 ---@param targetPed PedHandle
----@param targetVehicle Vehicle
+---@param targetVehicle VehicleHandle
 ---@param targetX float
 ---@param targetY float
 ---@param targetZ float
@@ -999,7 +999,7 @@ function TASK.TASK_DRIVE_BY(driverPed, targetPed, targetVehicle, targetX, target
 
 ---@param shootingPed PedHandle
 ---@param targetPed PedHandle
----@param targetVehicle Vehicle
+---@param targetVehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -1022,7 +1022,7 @@ function TASK.CONTROL_MOUNTED_WEAPON(ped) end
 
 ---@param shootingPed PedHandle
 ---@param targetPed PedHandle
----@param targetVehicle Vehicle
+---@param targetVehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -1059,7 +1059,7 @@ function TASK.TASK_CHAT_TO_PED(ped, target, flags, goToLocationX, goToLocationY,
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 function TASK.TASK_WARP_PED_INTO_VEHICLE(ped, vehicle, seat) end
 
@@ -1691,7 +1691,7 @@ function TASK.TASK_VEHICLE_AIM_AT_COORD(ped, x, y, z) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -1962,7 +1962,7 @@ function TASK.ASSISTED_MOVEMENT_OVERRIDE_LOAD_DISTANCE_THIS_FRAME(dist) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param WPRecording string
 ---@param p3 int
 ---@param p4 int
@@ -1974,34 +1974,34 @@ function TASK.ASSISTED_MOVEMENT_OVERRIDE_LOAD_DISTANCE_THIS_FRAME(dist) end
 function TASK.TASK_VEHICLE_FOLLOW_WAYPOINT_RECORDING(ped, vehicle, WPRecording, p3, p4, p5, p6, p7, p8, p9) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function TASK.IS_WAYPOINT_PLAYBACK_GOING_ON_FOR_VEHICLE(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return int
 function TASK.GET_VEHICLE_WAYPOINT_PROGRESS(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return int
 function TASK.GET_VEHICLE_WAYPOINT_TARGET_POINT(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function TASK.VEHICLE_WAYPOINT_PLAYBACK_PAUSE(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function TASK.VEHICLE_WAYPOINT_PLAYBACK_RESUME(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function TASK.VEHICLE_WAYPOINT_PLAYBACK_USE_DEFAULT_SPEED(vehicle) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param speed float
 function TASK.VEHICLE_WAYPOINT_PLAYBACK_OVERRIDE_SPEED(vehicle, speed) end
 

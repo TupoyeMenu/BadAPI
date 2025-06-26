@@ -244,25 +244,25 @@ function WEAPON.SET_PED_DROPS_INVENTORY_WEAPON(ped, weaponHash, xOffset, yOffset
 function WEAPON.GET_MAX_AMMO_IN_CLIP(ped, weaponHash, p2) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 ---@return int
 function WEAPON.GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES_(vehicle, seat) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 ---@return boolean
 function WEAPON.HAS_WEAPON_RELOADING_IN_VEHICLE_(vehicle, seat) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 ---@return float
 function WEAPON.GET_VEHICLE_WEAPON_RELOAD_TIME_(vehicle, seat) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 ---@param ammo int
 ---@return boolean
@@ -278,7 +278,7 @@ function WEAPON.GET_AMMO_IN_VEHICLE_WEAPON_CLIP_(vehicle, seat, ammo) end
 function WEAPON.GET_AMMO_IN_CLIP(ped, weaponHash, ammo) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 ---@param ammo int
 ---@return boolean
@@ -393,7 +393,7 @@ function WEAPON.GET_MAX_RANGE_OF_CURRENT_PED_WEAPON(ped) end
 
 
 ---@param driver PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param weaponHash Hash
 ---@param p3 Any
 ---@return boolean
@@ -436,7 +436,7 @@ function WEAPON.REFILL_AMMO_INSTANTLY(ped) end
 function WEAPON.MAKE_PED_RELOAD(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seat int
 ---@param ped PedHandle
 ---@return boolean

@@ -62,7 +62,7 @@ function PED.CLONE_PED_TO_TARGET_ALT(ped, targetPed, p2) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param atGetIn boolean
 ---@return boolean
 function PED.IS_PED_IN_VEHICLE(ped, vehicle, atGetIn) end
@@ -131,7 +131,7 @@ function PED.IS_PED_RELOADING(ped) end
 function PED.IS_PED_A_PLAYER(ped) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param pedType int
 ---@param modelHash Hash
 ---@param seat int
@@ -237,7 +237,7 @@ function PED.SET_PED_ARMOUR(ped, amount) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seatIndex int
 function PED.SET_PED_INTO_VEHICLE(ped, vehicle, seatIndex) end
 
@@ -259,7 +259,7 @@ function PED.CAN_CREATE_RANDOM_PED(p0) end
 function PED.CREATE_RANDOM_PED(posX, posY, posZ) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param returnHandle boolean
 ---@return PedHandle
 function PED.CREATE_RANDOM_PED_AS_DRIVER(vehicle, returnHandle) end
@@ -298,7 +298,7 @@ function PED.IS_PED_HUMAN(ped) end
 
 ---@param ped PedHandle
 ---@param includeEntering boolean
----@return Vehicle
+---@return VehicleHandle
 function PED.GET_VEHICLE_PED_IS_IN(ped, includeEntering) end
 
 
@@ -355,7 +355,7 @@ function PED.IS_PED_ON_VEHICLE(ped) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function PED.IS_PED_ON_SPECIFIC_VEHICLE(ped, vehicle) end
 
@@ -397,7 +397,7 @@ function PED.SET_PED_UPPER_BODY_DAMAGE_ONLY(ped, toggle) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@return boolean
 function PED.IS_PED_SITTING_IN_VEHICLE(ped, vehicle) end
 
@@ -887,7 +887,7 @@ function PED.GET_SEAT_PED_IS_TRYING_TO_ENTER(ped) end
 
 
 ---@param ped PedHandle
----@return Vehicle
+---@return VehicleHandle
 function PED.GET_VEHICLE_PED_IS_TRYING_TO_ENTER(ped) end
 
 
@@ -1083,12 +1083,12 @@ function PED.RESET_GROUP_FORMATION_DEFAULT_SPACING(groupHandle) end
 
 
 ---@param ped PedHandle
----@return Vehicle
+---@return VehicleHandle
 function PED.GET_VEHICLE_PED_IS_USING(ped) end
 
 
 ---@param ped PedHandle
----@return Vehicle
+---@return VehicleHandle
 function PED.GET_VEHICLE_PED_IS_ENTERING(ped) end
 
 
@@ -1167,7 +1167,7 @@ function PED.SET_CORPSE_RAGDOLL_FRICTION(ped, p1) end
 
 
 ---@param ped PedHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param seatIndex int
 ---@param flags int
 ---@param p4 Any
@@ -2035,7 +2035,7 @@ function PED.SET_PED_DEFENSIVE_SPHERE_ATTACHED_TO_PED(ped, target, xOffset, yOff
 
 
 ---@param ped PedHandle
----@param target Vehicle
+---@param target VehicleHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float

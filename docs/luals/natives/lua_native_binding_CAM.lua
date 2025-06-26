@@ -321,7 +321,7 @@ function CAM.HARD_ATTACH_CAM_TO_ENTITY(cam, entity, xRot, yRot, zRot, xOffset, y
 
 
 ---@param cam CamHandle
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param boneIndex int
 ---@param relativeRotation boolean
 ---@param rotX float
@@ -590,7 +590,7 @@ function CAM.IS_SCRIPT_GLOBAL_SHAKING() end
 function CAM.STOP_SCRIPT_GLOBAL_SHAKING(p0) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 int
 ---@param p2 float
 function CAM.TRIGGER_VEHICLE_PART_BROKEN_CAMERA_SHAKE(vehicle, p1, p2) end
@@ -882,7 +882,7 @@ function CAM.GET_THIRD_PERSON_CAM_MIN_ORBIT_DISTANCE_SPRING_() end
 function CAM.GET_THIRD_PERSON_CAM_MAX_ORBIT_DISTANCE_SPRING_() end
 
 
----@param p0 Vehicle
+---@param p0 VehicleHandle
 ---@param p1 int
 function CAM.SET_IN_VEHICLE_CAM_STATE_THIS_UPDATE(p0, p1) end
 
@@ -1088,7 +1088,7 @@ function CAM.SET_GAMEPLAY_COORD_HINT(x, y, z, duration, blendOutDuration, blendI
 function CAM.SET_GAMEPLAY_PED_HINT(ped, x1, y1, z1, p4, duration, blendOutDuration, blendInDuration) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float

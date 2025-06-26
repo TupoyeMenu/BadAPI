@@ -469,7 +469,7 @@ function STATS.PLAYSTATS_RANDOM_MISSION_DONE(name, p1, p2, p3) end
 function STATS.PLAYSTATS_ROS_BET(amount, act, player, cm) end
 
 
----@param p0 Vehicle
+---@param p0 VehicleHandle
 ---@param p1 Any
 ---@param p2 int
 ---@param p3 int

@@ -1585,7 +1585,7 @@ function GRAPHICS.SET_PARTICLE_FX_LOOPED_CAMERA_BIAS_(ptfxHandle, p1) end
 function GRAPHICS.SET_PARTICLE_FX_CAM_INSIDE_VEHICLE(p0) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 boolean
 function GRAPHICS.SET_PARTICLE_FX_CAM_INSIDE_NONPLAYER_VEHICLE(vehicle, p1) end
 
@@ -1677,7 +1677,7 @@ function GRAPHICS.SET_PARTICLE_FX_OVERRIDE(oldAsset, newAsset) end
 function GRAPHICS.RESET_PARTICLE_FX_OVERRIDE(name) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param effectName string
 ---@param frontBack boolean
 ---@param leftRight boolean
@@ -1702,7 +1702,7 @@ function GRAPHICS.SET_WEATHER_PTFX_OVERRIDE_CURR_LEVEL(p0) end
 function GRAPHICS.WASH_DECALS_IN_RANGE(x, y, z, range, p4) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 float
 function GRAPHICS.WASH_DECALS_FROM_VEHICLE(vehicle, p1) end
 
@@ -1733,7 +1733,7 @@ function GRAPHICS.REMOVE_DECALS_FROM_OBJECT(obj) end
 function GRAPHICS.REMOVE_DECALS_FROM_OBJECT_FACING(obj, x, y, z) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 function GRAPHICS.REMOVE_DECALS_FROM_VEHICLE(vehicle) end
 
 
@@ -1841,7 +1841,7 @@ function GRAPHICS.UNPATCH_DECAL_DIFFUSE_MAP(decalType) end
 function GRAPHICS.MOVE_VEHICLE_DECALS(p0, p1) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param ped PedHandle
 ---@param boneIndex int
 ---@param x1 float
@@ -1866,18 +1866,18 @@ function GRAPHICS.ADD_VEHICLE_CREW_EMBLEM(vehicle, ped, boneIndex, x1, x2, x3, y
 function GRAPHICS.ABORT_VEHICLE_CREW_EMBLEM_REQUEST(p0) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 int
 function GRAPHICS.REMOVE_VEHICLE_CREW_EMBLEM(vehicle, p1) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 int
 ---@return int
 function GRAPHICS.GET_VEHICLE_CREW_EMBLEM_REQUEST_STATE(vehicle, p1) end
 
 
----@param vehicle Vehicle
+---@param vehicle VehicleHandle
 ---@param p1 int
 ---@return boolean
 function GRAPHICS.DOES_VEHICLE_HAVE_CREW_EMBLEM(vehicle, p1) end
