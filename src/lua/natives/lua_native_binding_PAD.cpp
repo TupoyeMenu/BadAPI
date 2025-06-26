@@ -33,6 +33,12 @@ namespace lua::native
 		return retval;
 	}
 
+	static bool LUA_NATIVE_PAD_IS_CONTROL_HELD_DOWN_(int control, int action, int duration)
+	{
+		auto retval = (bool)PAD::_IS_CONTROL_HELD_DOWN(control, action, duration);
+		return retval;
+	}
+
 	static int LUA_NATIVE_PAD_GET_CONTROL_VALUE(int control, int action)
 	{
 		auto retval = PAD::GET_CONTROL_VALUE(control, action);
@@ -283,6 +289,7 @@ namespace lua::native
 		PAD.set_function("IS_CONTROL_RELEASED", LUA_NATIVE_PAD_IS_CONTROL_RELEASED);
 		PAD.set_function("IS_CONTROL_JUST_PRESSED", LUA_NATIVE_PAD_IS_CONTROL_JUST_PRESSED);
 		PAD.set_function("IS_CONTROL_JUST_RELEASED", LUA_NATIVE_PAD_IS_CONTROL_JUST_RELEASED);
+		PAD.set_function("IS_CONTROL_HELD_DOWN_", LUA_NATIVE_PAD_IS_CONTROL_HELD_DOWN_);
 		PAD.set_function("GET_CONTROL_VALUE", LUA_NATIVE_PAD_GET_CONTROL_VALUE);
 		PAD.set_function("GET_CONTROL_NORMAL", LUA_NATIVE_PAD_GET_CONTROL_NORMAL);
 		PAD.set_function("SET_USE_ADJUSTED_MOUSE_COORDS", LUA_NATIVE_PAD_SET_USE_ADJUSTED_MOUSE_COORDS);

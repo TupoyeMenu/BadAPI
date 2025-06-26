@@ -224,6 +224,33 @@ namespace lua::native
 		return retval;
 	}
 
+	static int LUA_NATIVE_WEAPON_GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES_(Vehicle vehicle, int seat)
+	{
+		auto retval = WEAPON::_GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES(vehicle, seat);
+		return retval;
+	}
+
+	static bool LUA_NATIVE_WEAPON_HAS_WEAPON_RELOADING_IN_VEHICLE_(Vehicle vehicle, int seat)
+	{
+		auto retval = (bool)WEAPON::_HAS_WEAPON_RELOADING_IN_VEHICLE(vehicle, seat);
+		return retval;
+	}
+
+	static float LUA_NATIVE_WEAPON_GET_VEHICLE_WEAPON_RELOAD_TIME_(Vehicle vehicle, int seat)
+	{
+		auto retval = WEAPON::_GET_VEHICLE_WEAPON_RELOAD_TIME(vehicle, seat);
+		return retval;
+	}
+
+	static std::tuple<bool, int> LUA_NATIVE_WEAPON_GET_AMMO_IN_VEHICLE_WEAPON_CLIP_(Vehicle vehicle, int seat, int ammo)
+	{
+		std::tuple<bool, int> return_values;
+		std::get<0>(return_values) = (bool)WEAPON::_GET_AMMO_IN_VEHICLE_WEAPON_CLIP(vehicle, seat, &ammo);
+		std::get<1>(return_values) = ammo;
+
+		return return_values;
+	}
+
 	static std::tuple<bool, int> LUA_NATIVE_WEAPON_GET_AMMO_IN_CLIP(Ped ped, Hash weaponHash, int ammo)
 	{
 		std::tuple<bool, int> return_values;
@@ -231,6 +258,12 @@ namespace lua::native
 		std::get<1>(return_values) = ammo;
 
 		return return_values;
+	}
+
+	static bool LUA_NATIVE_WEAPON_SET_AMMO_IN_VEHICLE_WEAPON_CLIP_(Vehicle vehicle, int seat, int ammo)
+	{
+		auto retval = (bool)WEAPON::_SET_AMMO_IN_VEHICLE_WEAPON_CLIP(vehicle, seat, ammo);
+		return retval;
 	}
 
 	static bool LUA_NATIVE_WEAPON_SET_AMMO_IN_CLIP(Ped ped, Hash weaponHash, int ammo)
@@ -380,6 +413,12 @@ namespace lua::native
 	static bool LUA_NATIVE_WEAPON_MAKE_PED_RELOAD(Ped ped)
 	{
 		auto retval = (bool)WEAPON::MAKE_PED_RELOAD(ped);
+		return retval;
+	}
+
+	static bool LUA_NATIVE_WEAPON_TRIGGER_VEHICLE_WEAPON_RELOAD_(Vehicle vehicle, int seat, Ped ped)
+	{
+		auto retval = (bool)WEAPON::_TRIGGER_VEHICLE_WEAPON_RELOAD(vehicle, seat, ped);
 		return retval;
 	}
 
@@ -715,7 +754,12 @@ namespace lua::native
 		WEAPON.set_function("SET_PED_DROPS_WEAPON", LUA_NATIVE_WEAPON_SET_PED_DROPS_WEAPON);
 		WEAPON.set_function("SET_PED_DROPS_INVENTORY_WEAPON", LUA_NATIVE_WEAPON_SET_PED_DROPS_INVENTORY_WEAPON);
 		WEAPON.set_function("GET_MAX_AMMO_IN_CLIP", LUA_NATIVE_WEAPON_GET_MAX_AMMO_IN_CLIP);
+		WEAPON.set_function("GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES_", LUA_NATIVE_WEAPON_GET_TIME_BEFORE_VEHICLE_WEAPON_RELOAD_FINISHES_);
+		WEAPON.set_function("HAS_WEAPON_RELOADING_IN_VEHICLE_", LUA_NATIVE_WEAPON_HAS_WEAPON_RELOADING_IN_VEHICLE_);
+		WEAPON.set_function("GET_VEHICLE_WEAPON_RELOAD_TIME_", LUA_NATIVE_WEAPON_GET_VEHICLE_WEAPON_RELOAD_TIME_);
+		WEAPON.set_function("GET_AMMO_IN_VEHICLE_WEAPON_CLIP_", LUA_NATIVE_WEAPON_GET_AMMO_IN_VEHICLE_WEAPON_CLIP_);
 		WEAPON.set_function("GET_AMMO_IN_CLIP", LUA_NATIVE_WEAPON_GET_AMMO_IN_CLIP);
+		WEAPON.set_function("SET_AMMO_IN_VEHICLE_WEAPON_CLIP_", LUA_NATIVE_WEAPON_SET_AMMO_IN_VEHICLE_WEAPON_CLIP_);
 		WEAPON.set_function("SET_AMMO_IN_CLIP", LUA_NATIVE_WEAPON_SET_AMMO_IN_CLIP);
 		WEAPON.set_function("GET_MAX_AMMO", LUA_NATIVE_WEAPON_GET_MAX_AMMO);
 		WEAPON.set_function("GET_MAX_AMMO_BY_TYPE", LUA_NATIVE_WEAPON_GET_MAX_AMMO_BY_TYPE);
@@ -741,6 +785,7 @@ namespace lua::native
 		WEAPON.set_function("IS_PED_WEAPON_COMPONENT_ACTIVE", LUA_NATIVE_WEAPON_IS_PED_WEAPON_COMPONENT_ACTIVE);
 		WEAPON.set_function("REFILL_AMMO_INSTANTLY", LUA_NATIVE_WEAPON_REFILL_AMMO_INSTANTLY);
 		WEAPON.set_function("MAKE_PED_RELOAD", LUA_NATIVE_WEAPON_MAKE_PED_RELOAD);
+		WEAPON.set_function("TRIGGER_VEHICLE_WEAPON_RELOAD_", LUA_NATIVE_WEAPON_TRIGGER_VEHICLE_WEAPON_RELOAD_);
 		WEAPON.set_function("REQUEST_WEAPON_ASSET", LUA_NATIVE_WEAPON_REQUEST_WEAPON_ASSET);
 		WEAPON.set_function("HAS_WEAPON_ASSET_LOADED", LUA_NATIVE_WEAPON_HAS_WEAPON_ASSET_LOADED);
 		WEAPON.set_function("REMOVE_WEAPON_ASSET", LUA_NATIVE_WEAPON_REMOVE_WEAPON_ASSET);
