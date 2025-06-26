@@ -33,7 +33,7 @@ function entities.get_all_objects_as_handles() end
 ---```lua
 ---boolean = entities.take_control_of(entity, try_count)
 ---```
----@param entity Entity Script handle of the entity we are trying to take control of.
+---@param entity EntityHandle Script handle of the entity we are trying to take control of.
 ---@param try_count integer Optional. Number of time we'll try taking control of the entity. Default to 300.
 ---@return boolean Returns true if we successfully got control of the entity.
 function entities.take_control_of(entity, try_count) end
