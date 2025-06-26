@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -29,11 +28,11 @@ PHYSICS = {}
 ---@param maxLength float
 ---@param minLength float
 ---@param windingSpeed float
----@param p11 BOOL
----@param p12 BOOL
----@param rigid BOOL
+---@param p11 boolean
+---@param p12 boolean
+---@param rigid boolean
 ---@param p14 float
----@param breakWhenShot BOOL
+---@param breakWhenShot boolean
 ---@param unkPtr number
 ---@return int
 function PHYSICS.ADD_ROPE(x, y, z, rotX, rotY, rotZ, length, ropeType, maxLength, minLength, windingSpeed, p11, p12, rigid, p14, breakWhenShot, unkPtr) end
@@ -54,12 +53,12 @@ function PHYSICS.DOES_ROPE_EXIST(ropeId) end
 
 
 ---@param ropeId int
----@param p1 BOOL
+---@param p1 boolean
 function PHYSICS.ROPE_DRAW_ENABLED(ropeId, p1) end
 
 
 ---@param ropeId int
----@param toggle BOOL
+---@param toggle boolean
 function PHYSICS.ROPE_DRAW_SHADOW_ENABLED(ropeId, toggle) end
 
 
@@ -87,8 +86,8 @@ function PHYSICS.GET_ROPE_VERTEX_COUNT(ropeId) end
 
 
 ---@param ropeId int
----@param ent1 Entity
----@param ent2 Entity
+---@param ent1 EntityHandle
+---@param ent2 EntityHandle
 ---@param ent1_x float
 ---@param ent1_y float
 ---@param ent1_z float
@@ -96,24 +95,24 @@ function PHYSICS.GET_ROPE_VERTEX_COUNT(ropeId) end
 ---@param ent2_y float
 ---@param ent2_z float
 ---@param length float
----@param p10 BOOL
----@param p11 BOOL
+---@param p10 boolean
+---@param p11 boolean
 ---@param p12 number
 ---@param p13 number
 function PHYSICS.ATTACH_ENTITIES_TO_ROPE(ropeId, ent1, ent2, ent1_x, ent1_y, ent1_z, ent2_x, ent2_y, ent2_z, length, p10, p11, p12, p13) end
 
 
 ---@param ropeId int
----@param entity Entity
+---@param entity EntityHandle
 ---@param x float
 ---@param y float
 ---@param z float
----@param p5 BOOL
+---@param p5 boolean
 function PHYSICS.ATTACH_ROPE_TO_ENTITY(ropeId, entity, x, y, z, p5) end
 
 
 ---@param ropeId int
----@param entity Entity
+---@param entity EntityHandle
 function PHYSICS.DETACH_ROPE_FROM_ENTITY(ropeId, entity) end
 
 
@@ -127,7 +126,7 @@ function PHYSICS.ROPE_SET_UPDATE_ORDER(ropeId, p1) end
 
 
 ---@param ropeId int
----@param p1 BOOL
+---@param p1 boolean
 function PHYSICS.ROPE_SET_SMOOTH_REELIN(ropeId, p1) end
 
 
@@ -201,8 +200,8 @@ function PHYSICS.ROPE_ATTACH_VIRTUAL_BOUND_GEOM(ropeId, p1, p2, p3, p4, p5, p6, 
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function PHYSICS.ROPE_CHANGE_SCRIPT_OWNER(p0, p1, p2) end
 
 
@@ -236,39 +235,39 @@ function PHYSICS.ROPE_RESET_LENGTH(ropeId, length) end
 function PHYSICS.APPLY_IMPULSE_TO_CLOTH(posX, posY, posZ, vecX, vecY, vecZ, impulse) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param vertex int
 ---@param value float
 function PHYSICS.SET_DAMPING(entity, vertex, value) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param type int
 ---@return Vector3
 function PHYSICS.GET_DAMPING(entity, type) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function PHYSICS.ACTIVATE_PHYSICS(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param x float
 ---@param y float
 ---@param z float
 function PHYSICS.SET_CGOFFSET(entity, x, y, z) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@return Vector3
 function PHYSICS.GET_CGOFFSET(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function PHYSICS.SET_CG_AT_BOUNDCENTER(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param p1 float
 ---@param p2 float
 ---@param p3 float
@@ -278,39 +277,39 @@ function PHYSICS.SET_CG_AT_BOUNDCENTER(entity) end
 ---@param p7 float
 ---@param p8 float
 ---@param p9 Any
----@param p10 BOOL
+---@param p10 boolean
 function PHYSICS.BREAK_ENTITY_GLASS(entity, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) end
 
 
----@param object Object
+---@param object ObjectHandle
 ---@return boolean
 function PHYSICS.GET_IS_ENTITY_A_FRAG(object) end
 
 
----@param object Object
----@param toggle BOOL
+---@param object ObjectHandle
+---@param toggle boolean
 function PHYSICS.SET_DISABLE_BREAKING(object, toggle) end
 
 
----@param object Object
+---@param object ObjectHandle
 function PHYSICS.RESET_DISABLE_BREAKING(object) end
 
 
----@param object Object
----@param toggle BOOL
+---@param object ObjectHandle
+---@param toggle boolean
 function PHYSICS.SET_DISABLE_FRAG_DAMAGE(object, toggle) end
 
 
----@param entity Entity
----@param toggle BOOL
+---@param entity EntityHandle
+---@param toggle boolean
 function PHYSICS.SET_USE_KINEMATIC_PHYSICS(entity, toggle) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function PHYSICS.SET_IN_STUNT_MODE(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function PHYSICS.SET_IN_ARENA_MODE(toggle) end
 
 

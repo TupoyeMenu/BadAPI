@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -34,7 +33,7 @@ function NETSHOPPING.NET_GAMESERVER_CATALOG_ITEM_KEY_IS_VALID(hash) end
 
 ---@param itemHash Hash
 ---@param categoryHash Hash
----@param p2 BOOL
+---@param p2 boolean
 ---@return int
 function NETSHOPPING.NET_GAMESERVER_GET_PRICE(itemHash, categoryHash, p2) end
 
@@ -111,8 +110,8 @@ function NETSHOPPING.NET_GAMESERVER_SESSION_APPLY_RECEIVED_DATA(charSlot) end
 function NETSHOPPING.NET_GAMESERVER_IS_SESSION_REFRESH_PENDING() end
 
 
----@param inventory BOOL
----@param playerbalance BOOL
+---@param inventory boolean
+---@param playerbalance boolean
 ---@return boolean
 function NETSHOPPING.NET_GAMESERVER_START_SESSION_RESTART(inventory, playerbalance) end
 
@@ -122,10 +121,10 @@ function NETSHOPPING.NET_GAMESERVER_TRANSACTION_IN_PROGRESS() end
 
 
 ---@param p0 int
----@param p1 BOOL
+---@param p1 boolean
 ---@return boolean
 ---@return int p0
----@return BOOL p1
+---@return boolean p1
 function NETSHOPPING.NET_GAMESERVER_GET_SESSION_STATE_AND_STATUS(p0, p1) end
 
 
@@ -184,7 +183,7 @@ function NETSHOPPING.NET_GAMESERVER_END_SERVICE(transactionId) end
 
 
 ---@param slot int
----@param transfer BOOL
+---@param transfer boolean
 ---@param reason Hash
 ---@return boolean
 function NETSHOPPING.NET_GAMESERVER_DELETE_CHARACTER(slot, transfer, reason) end

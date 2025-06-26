@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -18,7 +17,7 @@
 ---@alias Vector3 vec3
 
 GRAPHICS = {}
----@param enabled BOOL
+---@param enabled boolean
 function GRAPHICS.SET_DEBUG_LINES_AND_SPHERES_DRAWING_ACTIVE(enabled) end
 
 
@@ -178,11 +177,11 @@ function GRAPHICS.DRAW_TEXTURED_POLY(x1, y1, z1, x2, y2, z2, x3, y3, z3, red, gr
 function GRAPHICS.DRAW_BOX(x1, y1, z1, x2, y2, z2, red, green, blue, alpha) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_BACKFACECULLING(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_DEPTHWRITING(toggle) end
 
 
@@ -232,7 +231,7 @@ function GRAPHICS.GET_STATUS_OF_TAKE_HIGH_QUALITY_PHOTO() end
 function GRAPHICS.FREE_MEMORY_FOR_HIGH_QUALITY_PHOTO() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_TAKEN_PHOTO_IS_MUGSHOT(toggle) end
 
 
@@ -267,8 +266,8 @@ function GRAPHICS.GET_STATUS_OF_CREATE_LOW_QUALITY_COPY_OF_PHOTO(p0) end
 function GRAPHICS.FREE_MEMORY_FOR_LOW_QUALITY_PHOTO() end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function GRAPHICS.DRAW_LOW_QUALITY_PHOTO_TO_PHONE(p0, p1) end
 
 
@@ -374,7 +373,7 @@ function GRAPHICS.DRAW_SHADOWED_SPOT_LIGHT(posX, posY, posZ, dirX, dirY, dirZ, c
 function GRAPHICS.FADE_UP_PED_LIGHT(p0) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function GRAPHICS.UPDATE_LIGHTS_ON_ENTITY(entity) end
 
 
@@ -403,13 +402,13 @@ function GRAPHICS.GET_LIGHT_OVERRIDE_MAX_INTENSITY_SCALE() end
 ---@param green int
 ---@param blue int
 ---@param alpha int
----@param bobUpAndDown BOOL
----@param faceCamera BOOL
+---@param bobUpAndDown boolean
+---@param faceCamera boolean
 ---@param p19 int
----@param rotate BOOL
+---@param rotate boolean
 ---@param textureDict string
 ---@param textureName string
----@param drawOnEnts BOOL
+---@param drawOnEnts boolean
 function GRAPHICS.DRAW_MARKER(type, posX, posY, posZ, dirX, dirY, dirZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ, red, green, blue, alpha, bobUpAndDown, faceCamera, p19, rotate, textureDict, textureName, drawOnEnts) end
 
 
@@ -430,15 +429,15 @@ function GRAPHICS.DRAW_MARKER(type, posX, posY, posZ, dirX, dirY, dirZ, rotX, ro
 ---@param green int
 ---@param blue int
 ---@param alpha int
----@param bobUpAndDown BOOL
----@param faceCamera BOOL
+---@param bobUpAndDown boolean
+---@param faceCamera boolean
 ---@param p19 Any
----@param rotate BOOL
+---@param rotate boolean
 ---@param textureDict string
 ---@param textureName string
----@param drawOnEnts BOOL
----@param p24 BOOL
----@param p25 BOOL
+---@param drawOnEnts boolean
+---@param p24 boolean
+---@param p25 boolean
 function GRAPHICS.DRAW_MARKER_EX(type, posX, posY, posZ, dirX, dirY, dirZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ, red, green, blue, alpha, bobUpAndDown, faceCamera, p19, rotate, textureDict, textureName, drawOnEnts, p24, p25) end
 
 
@@ -536,16 +535,16 @@ function GRAPHICS.SET_CHECKPOINT_DIRECTION(checkpoint, posX, posY, posZ) end
 function GRAPHICS.DELETE_CHECKPOINT(checkpoint) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.DONT_RENDER_IN_GAME_UI(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.FORCE_RENDER_IN_GAME_UI(toggle) end
 
 
 ---@param textureDict string
----@param p1 BOOL
+---@param p1 boolean
 function GRAPHICS.REQUEST_STREAMED_TEXTURE_DICT(textureDict, p1) end
 
 
@@ -566,11 +565,11 @@ function GRAPHICS.SET_STREAMED_TEXTURE_DICT_AS_NO_LONGER_NEEDED(textureDict) end
 ---@param g int
 ---@param b int
 ---@param a int
----@param p8 BOOL
+---@param p8 boolean
 function GRAPHICS.DRAW_RECT(x, y, width, height, r, g, b, a, p8) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_SCRIPT_GFX_DRAW_BEHIND_PAUSEMENU(toggle) end
 
 
@@ -617,7 +616,7 @@ function GRAPHICS.GET_SAFE_ZONE_SIZE() end
 ---@param green int
 ---@param blue int
 ---@param alpha int
----@param p11 BOOL
+---@param p11 boolean
 ---@param p12 Any
 function GRAPHICS.DRAW_SPRITE(textureDict, textureName, screenX, screenY, width, height, heading, red, green, blue, alpha, p11, p12) end
 
@@ -672,18 +671,18 @@ function GRAPHICS.DRAW_SPRITE_NAMED_RENDERTARGET(textureDict, textureName, scree
 function GRAPHICS.DRAW_SPRITE_ARX_WITH_UV(textureDict, textureName, x, y, width, height, u1, v1, u2, v2, heading, red, green, blue, alpha, p15) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param icon string
 ---@return int
 function GRAPHICS.ADD_ENTITY_ICON(entity, icon) end
 
 
----@param entity Entity
----@param toggle BOOL
+---@param entity EntityHandle
+---@param toggle boolean
 function GRAPHICS.SET_ENTITY_ICON_VISIBILITY(entity, toggle) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param red int
 ---@param green int
 ---@param blue int
@@ -694,7 +693,7 @@ function GRAPHICS.SET_ENTITY_ICON_COLOR(entity, red, green, blue, alpha) end
 ---@param x float
 ---@param y float
 ---@param z float
----@param p3 BOOL
+---@param p3 boolean
 function GRAPHICS.SET_DRAW_ORIGIN(x, y, z, p3) end
 
 
@@ -746,21 +745,21 @@ function GRAPHICS.GET_BINK_MOVIE_TIME(binkMovie) end
 function GRAPHICS.SET_BINK_MOVIE_VOLUME(binkMovie, value) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function GRAPHICS.ATTACH_TV_AUDIO_TO_ENTITY(entity) end
 
 
 ---@param binkMovie int
----@param p1 BOOL
+---@param p1 boolean
 function GRAPHICS.SET_BINK_MOVIE_AUDIO_FRONTEND(binkMovie, p1) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_TV_AUDIO_FRONTEND(toggle) end
 
 
 ---@param binkMovie int
----@param bShouldSkip BOOL
+---@param bShouldSkip boolean
 function GRAPHICS.SET_BINK_SHOULD_SKIP(binkMovie, bShouldSkip) end
 
 
@@ -792,7 +791,7 @@ function GRAPHICS.GET_SCREEN_RESOLUTION(x, y) end
 function GRAPHICS.GET_ACTUAL_SCREEN_RESOLUTION(x, y) end
 
 
----@param b BOOL
+---@param b boolean
 ---@return float
 function GRAPHICS.GET_ASPECT_RATIO(b) end
 
@@ -812,7 +811,7 @@ function GRAPHICS.GET_IS_HIDEF() end
 function GRAPHICS.ADJUST_NEXT_POS_SIZE_AS_NORMALIZED_16_9() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_NIGHTVISION(toggle) end
 
 
@@ -824,11 +823,11 @@ function GRAPHICS.GET_REQUESTINGNIGHTVISION() end
 function GRAPHICS.GET_USINGNIGHTVISION() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_EXPOSURETWEAK(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.FORCE_EXPOSURE_READBACK(toggle) end
 
 
@@ -836,7 +835,7 @@ function GRAPHICS.FORCE_EXPOSURE_READBACK(toggle) end
 function GRAPHICS.OVERRIDE_NIGHTVISION_LIGHT_RANGE(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_NOISEOVERIDE(toggle) end
 
 
@@ -861,7 +860,7 @@ function GRAPHICS.GET_SCREEN_COORD_FROM_WORLD_COORD(worldX, worldY, worldZ, scre
 function GRAPHICS.GET_TEXTURE_RESOLUTION(textureDict, textureName) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param txd string
 ---@param txn string
 ---@return boolean
@@ -883,11 +882,11 @@ function GRAPHICS.SET_FLASH(p0, p1, fadeIn, duration, fadeOut) end
 function GRAPHICS.DISABLE_OCCLUSION_THIS_FRAME() end
 
 
----@param state BOOL
+---@param state boolean
 function GRAPHICS.SET_ARTIFICIAL_LIGHTS_STATE(state) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_ARTIFICIAL_VEHICLE_LIGHTS_STATE(toggle) end
 
 
@@ -984,12 +983,12 @@ function GRAPHICS.CASCADE_SHADOWS_INIT_SESSION() end
 
 
 ---@param p0 Any
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 float
 ---@param p3 float
 ---@param p4 float
 ---@param p5 float
----@param p6 BOOL
+---@param p6 boolean
 ---@param p7 float
 function GRAPHICS.CASCADE_SHADOWS_SET_CASCADE_BOUNDS(p0, p1, p2, p3, p4, p5, p6, p7) end
 
@@ -1010,11 +1009,11 @@ function GRAPHICS.CASCADE_SHADOWS_SET_SPLIT_Z_EXP_WEIGHT(p0) end
 function GRAPHICS.CASCADE_SHADOWS_SET_BOUND_POSITION(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.CASCADE_SHADOWS_ENABLE_ENTITY_TRACKER(toggle) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.CASCADE_SHADOWS_SET_SCREEN_SIZE_CHECK_ENABLED(p0) end
 
 
@@ -1025,11 +1024,11 @@ function GRAPHICS.CASCADE_SHADOWS_SET_SHADOW_SAMPLE_TYPE(type) end
 function GRAPHICS.CASCADE_SHADOWS_CLEAR_SHADOW_SAMPLE_TYPE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.CASCADE_SHADOWS_SET_AIRCRAFT_MODE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.CASCADE_SHADOWS_SET_DYNAMIC_DEPTH_MODE(p0) end
 
 
@@ -1037,7 +1036,7 @@ function GRAPHICS.CASCADE_SHADOWS_SET_DYNAMIC_DEPTH_MODE(p0) end
 function GRAPHICS.CASCADE_SHADOWS_SET_DYNAMIC_DEPTH_VALUE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.CASCADE_SHADOWS_ENABLE_FREEZER(p0) end
 
 
@@ -1045,7 +1044,7 @@ function GRAPHICS.CASCADE_SHADOWS_ENABLE_FREEZER(p0) end
 function GRAPHICS.WATER_REFLECTION_SET_SCRIPT_OBJECT_VISIBILITY(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.GOLF_TRAIL_SET_ENABLED(toggle) end
 
 
@@ -1057,7 +1056,7 @@ function GRAPHICS.GOLF_TRAIL_SET_ENABLED(toggle) end
 ---@param p5 float
 ---@param p6 float
 ---@param p7 float
----@param p8 BOOL
+---@param p8 boolean
 function GRAPHICS.GOLF_TRAIL_SET_PATH(p0, p1, p2, p3, p4, p5, p6, p7, p8) end
 
 
@@ -1087,7 +1086,7 @@ function GRAPHICS.GOLF_TRAIL_SET_COLOUR(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, 
 function GRAPHICS.GOLF_TRAIL_SET_TESSELLATION(p0, p1) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.GOLF_TRAIL_SET_FIXED_CONTROL_POINT_ENABLE(p0) end
 
 
@@ -1111,7 +1110,7 @@ function GRAPHICS.GOLF_TRAIL_SET_FIXED_CONTROL_POINT(type, xPos, yPos, zPos, p4,
 function GRAPHICS.GOLF_TRAIL_SET_SHADER_PARAMS(p0, p1, p2, p3, p4) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.GOLF_TRAIL_SET_FACING(p0) end
 
 
@@ -1124,7 +1123,7 @@ function GRAPHICS.GOLF_TRAIL_GET_MAX_HEIGHT() end
 function GRAPHICS.GOLF_TRAIL_GET_VISUAL_CONTROL_POINT(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_SEETHROUGH(toggle) end
 
 
@@ -1186,11 +1185,11 @@ function GRAPHICS.SET_MOTIONBLUR_MAX_VEL_SCALER(p0) end
 function GRAPHICS.GET_MOTIONBLUR_MAX_VEL_SCALER() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_FORCE_MOTIONBLUR(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.TOGGLE_PLAYER_DAMAGE_OVERLAY(toggle) end
 
 
@@ -1219,7 +1218,7 @@ function GRAPHICS.GET_SCREENBLUR_FADE_CURRENT_TIME() end
 function GRAPHICS.IS_SCREENBLUR_FADE_RUNNING() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.TOGGLE_PAUSED_RENDERPHASES(toggle) end
 
 
@@ -1233,8 +1232,8 @@ function GRAPHICS.RESET_PAUSED_RENDERPHASES() end
 function GRAPHICS.GRAB_PAUSEMENU_OWNERSHIP() end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 ---@param nearplaneOut float
 ---@param nearplaneIn float
 ---@param farplaneOut float
@@ -1242,11 +1241,11 @@ function GRAPHICS.GRAB_PAUSEMENU_OWNERSHIP() end
 function GRAPHICS.SET_HIDOF_OVERRIDE(p0, p1, nearplaneOut, nearplaneIn, farplaneOut, farplaneIn) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.SET_LOCK_ADAPTIVE_DOF_DISTANCE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return boolean
 function GRAPHICS.PHONEPHOTOEDITOR_TOGGLE(p0) end
 
@@ -1256,7 +1255,7 @@ function GRAPHICS.PHONEPHOTOEDITOR_IS_ACTIVE() end
 
 
 ---@param textureDict string
----@param p1 BOOL
+---@param p1 boolean
 ---@return boolean
 function GRAPHICS.PHONEPHOTOEDITOR_SET_FRAME_TXD(textureDict, p1) end
 
@@ -1269,9 +1268,9 @@ function GRAPHICS.PHONEPHOTOEDITOR_SET_FRAME_TXD(textureDict, p1) end
 ---@param yRot float
 ---@param zRot float
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
 ---@return boolean
 function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_AT_COORD(effectName, xPos, yPos, zPos, xRot, yRot, zRot, scale, xAxis, yAxis, zAxis) end
 
@@ -1284,16 +1283,16 @@ function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_AT_COORD(effectName, xPos, yPos, 
 ---@param yRot float
 ---@param zRot float
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
----@param p11 BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
+---@param p11 boolean
 ---@return boolean
 function GRAPHICS.START_NETWORKED_PARTICLE_FX_NON_LOOPED_AT_COORD(effectName, xPos, yPos, zPos, xRot, yRot, zRot, scale, xAxis, yAxis, zAxis, p11) end
 
 
 ---@param effectName string
----@param ped Ped
+---@param ped PedHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
@@ -1302,15 +1301,15 @@ function GRAPHICS.START_NETWORKED_PARTICLE_FX_NON_LOOPED_AT_COORD(effectName, xP
 ---@param rotZ float
 ---@param boneIndex int
 ---@param scale float
----@param axisX BOOL
----@param axisY BOOL
----@param axisZ BOOL
+---@param axisX boolean
+---@param axisY boolean
+---@param axisZ boolean
 ---@return boolean
 function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(effectName, ped, offsetX, offsetY, offsetZ, rotX, rotY, rotZ, boneIndex, scale, axisX, axisY, axisZ) end
 
 
 ---@param effectName string
----@param ped Ped
+---@param ped PedHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
@@ -1319,15 +1318,15 @@ function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(effectName, ped, offs
 ---@param rotZ float
 ---@param boneIndex int
 ---@param scale float
----@param axisX BOOL
----@param axisY BOOL
----@param axisZ BOOL
+---@param axisX boolean
+---@param axisY boolean
+---@param axisZ boolean
 ---@return boolean
 function GRAPHICS.START_NETWORKED_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(effectName, ped, offsetX, offsetY, offsetZ, rotX, rotY, rotZ, boneIndex, scale, axisX, axisY, axisZ) end
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
@@ -1335,15 +1334,15 @@ function GRAPHICS.START_NETWORKED_PARTICLE_FX_NON_LOOPED_ON_PED_BONE(effectName,
 ---@param rotY float
 ---@param rotZ float
 ---@param scale float
----@param axisX BOOL
----@param axisY BOOL
----@param axisZ BOOL
+---@param axisX boolean
+---@param axisY boolean
+---@param axisZ boolean
 ---@return boolean
 function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_ON_ENTITY(effectName, entity, offsetX, offsetY, offsetZ, rotX, rotY, rotZ, scale, axisX, axisY, axisZ) end
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
@@ -1351,15 +1350,15 @@ function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_ON_ENTITY(effectName, entity, off
 ---@param rotY float
 ---@param rotZ float
 ---@param scale float
----@param axisX BOOL
----@param axisY BOOL
----@param axisZ BOOL
+---@param axisX boolean
+---@param axisY boolean
+---@param axisZ boolean
 ---@return boolean
 function GRAPHICS.START_NETWORKED_PARTICLE_FX_NON_LOOPED_ON_ENTITY(effectName, entity, offsetX, offsetY, offsetZ, rotX, rotY, rotZ, scale, axisX, axisY, axisZ) end
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
@@ -1368,9 +1367,9 @@ function GRAPHICS.START_NETWORKED_PARTICLE_FX_NON_LOOPED_ON_ENTITY(effectName, e
 ---@param rotZ float
 ---@param boneIndex int
 ---@param scale float
----@param axisX BOOL
----@param axisY BOOL
----@param axisZ BOOL
+---@param axisX boolean
+---@param axisY boolean
+---@param axisZ boolean
 ---@return boolean
 function GRAPHICS.START_PARTICLE_FX_NON_LOOPED_ON_ENTITY_BONE(effectName, entity, offsetX, offsetY, offsetZ, rotX, rotY, rotZ, boneIndex, scale, axisX, axisY, axisZ) end
 
@@ -1395,7 +1394,7 @@ function GRAPHICS.SET_PARTICLE_FX_NON_LOOPED_SCALE(scale) end
 function GRAPHICS.SET_PARTICLE_FX_NON_LOOPED_EMITTER_SIZE(p0, p1, scale) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_PARTICLE_FX_FORCE_VEHICLE_INTERIOR(toggle) end
 
 
@@ -1407,16 +1406,16 @@ function GRAPHICS.SET_PARTICLE_FX_FORCE_VEHICLE_INTERIOR(toggle) end
 ---@param yRot float
 ---@param zRot float
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
----@param p11 BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
+---@param p11 boolean
 ---@return int
 function GRAPHICS.START_PARTICLE_FX_LOOPED_AT_COORD(effectName, x, y, z, xRot, yRot, zRot, scale, xAxis, yAxis, zAxis, p11) end
 
 
 ---@param effectName string
----@param ped Ped
+---@param ped PedHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
@@ -1425,15 +1424,15 @@ function GRAPHICS.START_PARTICLE_FX_LOOPED_AT_COORD(effectName, x, y, z, xRot, y
 ---@param zRot float
 ---@param boneIndex int
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
 ---@return int
 function GRAPHICS.START_PARTICLE_FX_LOOPED_ON_PED_BONE(effectName, ped, xOffset, yOffset, zOffset, xRot, yRot, zRot, boneIndex, scale, xAxis, yAxis, zAxis) end
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
@@ -1441,15 +1440,15 @@ function GRAPHICS.START_PARTICLE_FX_LOOPED_ON_PED_BONE(effectName, ped, xOffset,
 ---@param yRot float
 ---@param zRot float
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
 ---@return int
 function GRAPHICS.START_PARTICLE_FX_LOOPED_ON_ENTITY(effectName, entity, xOffset, yOffset, zOffset, xRot, yRot, zRot, scale, xAxis, yAxis, zAxis) end
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
@@ -1458,15 +1457,15 @@ function GRAPHICS.START_PARTICLE_FX_LOOPED_ON_ENTITY(effectName, entity, xOffset
 ---@param zRot float
 ---@param boneIndex int
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
 ---@return int
 function GRAPHICS.START_PARTICLE_FX_LOOPED_ON_ENTITY_BONE(effectName, entity, xOffset, yOffset, zOffset, xRot, yRot, zRot, boneIndex, scale, xAxis, yAxis, zAxis) end
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
@@ -1474,9 +1473,9 @@ function GRAPHICS.START_PARTICLE_FX_LOOPED_ON_ENTITY_BONE(effectName, entity, xO
 ---@param yRot float
 ---@param zRot float
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
 ---@param r float
 ---@param g float
 ---@param b float
@@ -1486,7 +1485,7 @@ function GRAPHICS.START_NETWORKED_PARTICLE_FX_LOOPED_ON_ENTITY(effectName, entit
 
 
 ---@param effectName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
@@ -1495,9 +1494,9 @@ function GRAPHICS.START_NETWORKED_PARTICLE_FX_LOOPED_ON_ENTITY(effectName, entit
 ---@param zRot float
 ---@param boneIndex int
 ---@param scale float
----@param xAxis BOOL
----@param yAxis BOOL
----@param zAxis BOOL
+---@param xAxis boolean
+---@param yAxis boolean
+---@param zAxis boolean
 ---@param r float
 ---@param g float
 ---@param b float
@@ -1507,16 +1506,16 @@ function GRAPHICS.START_NETWORKED_PARTICLE_FX_LOOPED_ON_ENTITY_BONE(effectName, 
 
 
 ---@param ptfxHandle int
----@param p1 BOOL
+---@param p1 boolean
 function GRAPHICS.STOP_PARTICLE_FX_LOOPED(ptfxHandle, p1) end
 
 
 ---@param ptfxHandle int
----@param p1 BOOL
+---@param p1 boolean
 function GRAPHICS.REMOVE_PARTICLE_FX(ptfxHandle, p1) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function GRAPHICS.REMOVE_PARTICLE_FX_FROM_ENTITY(entity) end
 
 
@@ -1550,7 +1549,7 @@ function GRAPHICS.SET_PARTICLE_FX_LOOPED_OFFSETS(ptfxHandle, x, y, z, rotX, rotY
 ---@param ptfxHandle int
 ---@param propertyName string
 ---@param amount float
----@param noNetwork BOOL
+---@param noNetwork boolean
 function GRAPHICS.SET_PARTICLE_FX_LOOPED_EVOLUTION(ptfxHandle, propertyName, amount, noNetwork) end
 
 
@@ -1558,7 +1557,7 @@ function GRAPHICS.SET_PARTICLE_FX_LOOPED_EVOLUTION(ptfxHandle, propertyName, amo
 ---@param r float
 ---@param g float
 ---@param b float
----@param p4 BOOL
+---@param p4 boolean
 function GRAPHICS.SET_PARTICLE_FX_LOOPED_COLOUR(ptfxHandle, r, g, b, p4) end
 
 
@@ -1582,12 +1581,12 @@ function GRAPHICS.SET_PARTICLE_FX_LOOPED_FAR_CLIP_DIST(ptfxHandle, range) end
 function GRAPHICS.SET_PARTICLE_FX_LOOPED_CAMERA_BIAS_(ptfxHandle, p1) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.SET_PARTICLE_FX_CAM_INSIDE_VEHICLE(p0) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function GRAPHICS.SET_PARTICLE_FX_CAM_INSIDE_NONPLAYER_VEHICLE(vehicle, p1) end
 
 
@@ -1602,11 +1601,11 @@ function GRAPHICS.CLEAR_PARTICLE_FX_SHOOTOUT_BOAT() end
 function GRAPHICS.SET_PARTICLE_FX_BLOOD_SCALE(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.DISABLE_IN_WATER_PTFX(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.DISABLE_DOWNWASH_PTFX(toggle) end
 
 
@@ -1614,11 +1613,11 @@ function GRAPHICS.DISABLE_DOWNWASH_PTFX(toggle) end
 function GRAPHICS.SET_PARTICLE_FX_SLIPSTREAM_LODRANGE_SCALE(scale) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.ENABLE_CLOWN_BLOOD_VFX(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.ENABLE_ALIEN_BLOOD_VFX(toggle) end
 
 
@@ -1630,7 +1629,7 @@ function GRAPHICS.SET_PARTICLE_FX_BULLET_IMPACT_SCALE(scale) end
 function GRAPHICS.SET_PARTICLE_FX_BULLET_IMPACT_LODRANGE_SCALE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.SET_PARTICLE_FX_BULLET_TRACE_NO_ANGLE_REJECT(p0) end
 
 
@@ -1661,7 +1660,7 @@ function GRAPHICS.SET_PTFX_FORCE_VEHICLE_INTERIOR_FLAG(p0) end
 function GRAPHICS.REGISTER_POSTFX_BULLET_IMPACT(weaponWorldPosX, weaponWorldPosY, weaponWorldPosZ, intensity) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.FORCE_POSTFX_BULLET_IMPACTS_AFTER_HUD(p0) end
 
 
@@ -1680,14 +1679,14 @@ function GRAPHICS.RESET_PARTICLE_FX_OVERRIDE(name) end
 
 ---@param vehicle Vehicle
 ---@param effectName string
----@param frontBack BOOL
----@param leftRight BOOL
----@param localOnly BOOL
+---@param frontBack boolean
+---@param leftRight boolean
+---@param localOnly boolean
 ---@return int
 function GRAPHICS.START_VEHICLE_PARTICLE_FX_LOOPED_(vehicle, effectName, frontBack, leftRight, localOnly) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.SET_WEATHER_PTFX_USE_OVERRIDE_SETTINGS(p0) end
 
 
@@ -1723,11 +1722,11 @@ function GRAPHICS.FADE_DECALS_IN_RANGE(x, y, z, p3, p4) end
 function GRAPHICS.REMOVE_DECALS_IN_RANGE(x, y, z, range) end
 
 
----@param obj Object
+---@param obj ObjectHandle
 function GRAPHICS.REMOVE_DECALS_FROM_OBJECT(obj) end
 
 
----@param obj Object
+---@param obj ObjectHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -1755,9 +1754,9 @@ function GRAPHICS.REMOVE_DECALS_FROM_VEHICLE(vehicle) end
 ---@param bCoef float
 ---@param opacity float
 ---@param timeout float
----@param p17 BOOL
----@param p18 BOOL
----@param p19 BOOL
+---@param p17 boolean
+---@param p18 boolean
+---@param p19 boolean
 ---@return int
 function GRAPHICS.ADD_DECAL(decalType, posX, posY, posZ, p4, p5, p6, p7, p8, p9, width, height, rCoef, gCoef, bCoef, opacity, timeout, p17, p18, p19) end
 
@@ -1843,7 +1842,7 @@ function GRAPHICS.MOVE_VEHICLE_DECALS(p0, p1) end
 
 
 ---@param vehicle Vehicle
----@param ped Ped
+---@param ped PedHandle
 ---@param boneIndex int
 ---@param x1 float
 ---@param x2 float
@@ -1884,11 +1883,11 @@ function GRAPHICS.GET_VEHICLE_CREW_EMBLEM_REQUEST_STATE(vehicle, p1) end
 function GRAPHICS.DOES_VEHICLE_HAVE_CREW_EMBLEM(vehicle, p1) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.DISABLE_COMPOSITE_SHOTGUN_DECALS(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.DISABLE_SCUFF_DECALS(toggle) end
 
 
@@ -1910,26 +1909,26 @@ function GRAPHICS.OVERRIDE_INTERIOR_SMOKE_END() end
 function GRAPHICS.REGISTER_NOIR_LENS_EFFECT() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.DISABLE_VEHICLE_DISTANTLIGHTS(toggle) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function GRAPHICS.RENDER_SHADOWED_LIGHTS_WITH_NO_SHADOWS(p0) end
 
 
 function GRAPHICS.REQUEST_EARLY_LIGHT_CHECK() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.USE_SNOW_FOOT_VFX_WHEN_UNSHELTERED(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.FORCE_ALLOW_SNOW_FOOT_VFX_ON_ICE_(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.USE_SNOW_WHEEL_VFX_WHEN_UNSHELTERED(toggle) end
 
 
@@ -1937,7 +1936,7 @@ function GRAPHICS.USE_SNOW_WHEEL_VFX_WHEN_UNSHELTERED(toggle) end
 function GRAPHICS.DISABLE_REGION_VFX(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.FORCE_GROUND_SNOW_PASS_(toggle) end
 
 
@@ -2084,17 +2083,17 @@ function GRAPHICS.SET_SCALEFORM_MOVIE_NAMED_AS_NO_LONGER_NEEDED_(scaleformHandle
 
 
 ---@param scaleform int
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_SCALEFORM_MOVIE_TO_USE_SYSTEM_TIME(scaleform, toggle) end
 
 
 ---@param scaleformHandle int
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_SCALEFORM_MOVIE_TO_USE_LARGE_RT(scaleformHandle, toggle) end
 
 
 ---@param scaleformHandle int
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.SET_SCALEFORM_MOVIE_TO_USE_SUPER_LARGE_RT(scaleformHandle, toggle) end
 
 
@@ -2260,7 +2259,7 @@ function GRAPHICS.SCALEFORM_MOVIE_METHOD_ADD_PARAM_INT(value) end
 function GRAPHICS.SCALEFORM_MOVIE_METHOD_ADD_PARAM_FLOAT(value) end
 
 
----@param value BOOL
+---@param value boolean
 function GRAPHICS.SCALEFORM_MOVIE_METHOD_ADD_PARAM_BOOL(value) end
 
 
@@ -2343,7 +2342,7 @@ function GRAPHICS.DRAW_TV_CHANNEL(xPos, yPos, xScale, yScale, rotation, red, gre
 
 ---@param tvChannel int
 ---@param playlistName string
----@param restart BOOL
+---@param restart boolean
 function GRAPHICS.SET_TV_CHANNEL_PLAYLIST(tvChannel, playlistName, restart) end
 
 
@@ -2354,7 +2353,7 @@ function GRAPHICS.SET_TV_CHANNEL_PLAYLIST_AT_HOUR(tvChannel, playlistName, hour)
 
 
 ---@param tvChannel int
----@param p1 BOOL
+---@param p1 boolean
 ---@return Any
 function GRAPHICS.SET_TV_CHANNEL_PLAYLIST_DIRTY_(tvChannel, p1) end
 
@@ -2374,7 +2373,7 @@ function GRAPHICS.IS_PLAYLIST_ON_CHANNEL(tvChannel, p1) end
 function GRAPHICS.IS_TVSHOW_CURRENTLY_PLAYING(videoCliphash) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.ENABLE_MOVIE_KEYFRAME_WAIT(toggle) end
 
 
@@ -2386,7 +2385,7 @@ function GRAPHICS.SET_TV_PLAYER_WATCHING_THIS_FRAME(p0) end
 function GRAPHICS.GET_CURRENT_TV_CLIP_NAMEHASH() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.ENABLE_MOVIE_SUBTITLES(toggle) end
 
 
@@ -2400,7 +2399,7 @@ function GRAPHICS.UI3DSCENE_PUSH_PRESET(presetName) end
 
 
 ---@param presetName string
----@param ped Ped
+---@param ped PedHandle
 ---@param slot int
 ---@param posX float
 ---@param posY float
@@ -2412,11 +2411,11 @@ function GRAPHICS.UI3DSCENE_ASSIGN_PED_TO_SLOT(presetName, ped, slot, posX, posY
 function GRAPHICS.UI3DSCENE_CLEAR_PATCHED_DATA() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.UI3DSCENE_MAKE_PUSHED_PRESET_PERSISTENT(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function GRAPHICS.TERRAINGRID_ACTIVATE(toggle) end
 
 
@@ -2453,7 +2452,7 @@ function GRAPHICS.TERRAINGRID_SET_COLOURS(lowR, lowG, lowB, lowAlpha, r, g, b, a
 
 ---@param effectName string
 ---@param duration int
----@param looped BOOL
+---@param looped boolean
 function GRAPHICS.ANIMPOSTFX_PLAY(effectName, duration, looped) end
 
 

@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -24,7 +23,7 @@ CLOCK = {}
 function CLOCK.SET_CLOCK_TIME(hour, minute, second) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function CLOCK.PAUSE_CLOCK(toggle) end
 
 

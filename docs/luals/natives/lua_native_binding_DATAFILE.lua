@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -57,7 +56,7 @@ function DATAFILE.DATAFILE_DELETE_REQUESTED_FILE(requestId) end
 ---@param description string
 ---@param tagsCsv string
 ---@param contentTypeName string
----@param publish BOOL
+---@param publish boolean
 ---@param p7 Any
 ---@return boolean
 function DATAFILE.UGC_CREATE_CONTENT(data, dataCount, contentName, description, tagsCsv, contentTypeName, publish, p7) end
@@ -67,7 +66,7 @@ function DATAFILE.UGC_CREATE_CONTENT(data, dataCount, contentName, description, 
 ---@param description string
 ---@param tagsCsv string
 ---@param contentTypeName string
----@param publish BOOL
+---@param publish boolean
 ---@param p5 Any
 ---@return boolean
 function DATAFILE.UGC_CREATE_MISSION(contentName, description, tagsCsv, contentTypeName, publish, p5) end
@@ -110,7 +109,7 @@ function DATAFILE.DATAFILE_SELECT_UGC_DATA(p0, p1) end
 
 
 ---@param p0 int
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function DATAFILE.DATAFILE_SELECT_UGC_STATS(p0, p1, p2) end
@@ -160,9 +159,9 @@ function DATAFILE.DATAFILE_GET_FILE_DICT(p0) end
 function DATAFILE.DATAFILE_START_SAVE_TO_CLOUD(filename, p1) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return boolean
----@return BOOL p0
+---@return boolean p0
 function DATAFILE.DATAFILE_UPDATE_SAVE_TO_CLOUD(p0) end
 
 
@@ -187,7 +186,7 @@ function DATAFILE.DATAFILE_GET_FILE_DICT_FOR_ADDITIONAL_DATA_FILE(p0) end
 
 ---@param objectData number
 ---@param key string
----@param value BOOL
+---@param value boolean
 function DATAFILE.DATADICT_SET_BOOL(objectData, key, value) end
 
 
@@ -278,7 +277,7 @@ function DATAFILE.DATADICT_GET_TYPE(objectData, key) end
 
 
 ---@param arrayData number
----@param value BOOL
+---@param value boolean
 function DATAFILE.DATAARRAY_ADD_BOOL(arrayData, value) end
 
 

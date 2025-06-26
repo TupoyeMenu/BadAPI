@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -130,7 +129,7 @@ function SCRIPT.TRIGGER_SCRIPT_EVENT(eventGroup, eventData, eventDataSize, playe
 function SCRIPT.SHUTDOWN_LOADING_SCREEN() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function SCRIPT.SET_NO_LOADING_SCREEN(toggle) end
 
 

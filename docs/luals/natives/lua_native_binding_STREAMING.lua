@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -36,7 +35,7 @@ function STREAMING.IS_NETWORK_LOADING_SCENE() end
 
 
 ---@param interiorID int
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_INTERIOR_ACTIVE(interiorID, toggle) end
 
 
@@ -53,7 +52,7 @@ function STREAMING.REQUEST_MENU_PED_MODEL(model) end
 function STREAMING.HAS_MODEL_LOADED(model) end
 
 
----@param interior Interior
+---@param interior InteriorHandle
 ---@param roomName string
 function STREAMING.REQUEST_MODELS_IN_ROOM(interior, roomName) end
 
@@ -160,7 +159,7 @@ function STREAMING.REMOVE_IPL(iplName) end
 function STREAMING.IS_IPL_ACTIVE(iplName) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_STREAMING(toggle) end
 
 
@@ -172,19 +171,19 @@ function STREAMING.LOAD_GLOBAL_WATER_FILE(waterType) end
 function STREAMING.GET_GLOBAL_WATER_FILE() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_GAME_PAUSES_FOR_STREAMING(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_REDUCE_PED_MODEL_BUDGET(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_REDUCE_VEHICLE_MODEL_BUDGET(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_DITCH_POLICE_MODELS(toggle) end
 
 
@@ -235,21 +234,21 @@ function STREAMING.CLEAR_FOCUS() end
 function STREAMING.SET_FOCUS_POS_AND_VEL(x, y, z, offsetX, offsetY, offsetZ) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function STREAMING.SET_FOCUS_ENTITY(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
 function STREAMING.IS_ENTITY_FOCUS(entity) end
 
 
----@param p0 Entity
+---@param p0 EntityHandle
 function STREAMING.SET_RESTORE_FOCUS_ENTITY(p0) end
 
 
 ---@param name string
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_MAPDATACULLBOX_ENABLED(name, toggle) end
 
 
@@ -345,8 +344,8 @@ function STREAMING.IS_NEW_LOAD_SCENE_LOADED() end
 function STREAMING.IS_SAFE_TO_START_PLAYER_SWITCH() end
 
 
----@param from Ped
----@param to Ped
+---@param from PedHandle
+---@param to PedHandle
 ---@param flags int
 ---@param switchType int
 function STREAMING.START_PLAYER_SWITCH(from, to, flags, switchType) end
@@ -427,13 +426,13 @@ function STREAMING.ENABLE_SWITCH_PAUSE_BEFORE_DESCENT() end
 function STREAMING.DISABLE_SWITCH_OUTRO_FX() end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param flags int
 ---@param switchType int
 function STREAMING.SWITCH_TO_MULTI_FIRSTPART(ped, flags, switchType) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function STREAMING.SWITCH_TO_MULTI_SECONDPART(ped) end
 
 
@@ -474,7 +473,7 @@ function STREAMING.REMAP_LODSCALE_RANGE_THIS_FRAME(p0, p1, p2, p3) end
 function STREAMING.SUPPRESS_HD_MAP_STREAMING_THIS_FRAME() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_RENDER_HD_ONLY(toggle) end
 
 
@@ -534,7 +533,7 @@ function STREAMING.SET_SRL_POST_CUTSCENE_CAMERA(p0, p1, p2, p3, p4, p5) end
 function STREAMING.SET_SRL_READAHEAD_TIMES(p0, p1, p2, p3) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function STREAMING.SET_SRL_LONG_JUMP_MODE(p0) end
 
 
@@ -572,7 +571,7 @@ function STREAMING.GET_USED_CREATOR_BUDGET() end
 
 
 ---@param name string
----@param toggle BOOL
+---@param toggle boolean
 function STREAMING.SET_ISLAND_ENABLED(name, toggle) end
 
 

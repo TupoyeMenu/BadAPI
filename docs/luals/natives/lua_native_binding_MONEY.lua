@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -24,8 +23,8 @@ function MONEY.NETWORK_INITIALIZE_CASH(wallet, bank) end
 
 
 ---@param characterSlot int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_DELETE_CHARACTER(characterSlot, p1, p2) end
 
 
@@ -58,22 +57,22 @@ function MONEY.NETWORK_CAN_SHARE_JOB_CASH() end
 ---@param index int
 ---@param context string
 ---@param reason string
----@param p3 BOOL
+---@param p3 boolean
 function MONEY.NETWORK_REFUND_CASH(index, context, reason, p3) end
 
 
 ---@param amount int
 ---@param p1 string
 ---@param p2 string
----@param p3 BOOL
----@param p4 BOOL
----@param p5 BOOL
+---@param p3 boolean
+---@param p4 boolean
+---@param p5 boolean
 function MONEY.NETWORK_DEDUCT_CASH(amount, p1, p2, p3, p4, p5) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@return boolean
 function MONEY.NETWORK_MONEY_CAN_BET(amount, p1, p2) end
 
@@ -176,7 +175,7 @@ function MONEY.NETWORK_EARN_FROM_BEND_JOB(amount, heistHash) end
 
 ---@param p0 Any
 ---@param p1 number
----@param p2 BOOL
+---@param p2 boolean
 function MONEY.NETWORK_EARN_FROM_CHALLENGE_WIN(p0, p1, p2) end
 
 
@@ -375,9 +374,9 @@ function MONEY.NETWORK_EARN_FMBB_WAGE_BONUS(p0) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 ---@param p4 Any
 ---@param p5 Any
 ---@return boolean
@@ -385,9 +384,9 @@ function MONEY.NETWORK_CAN_SPEND_MONEY(p0, p1, p2, p3, p4, p5) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 ---@param p4 number
 ---@param p5 Any
 ---@param p6 Any
@@ -399,41 +398,41 @@ function MONEY.NETWORK_CAN_SPEND_MONEY2(p0, p1, p2, p3, p4, p5, p6) end
 ---@param item Hash
 ---@param p2 Any
 ---@param p3 Any
----@param p4 BOOL
+---@param p4 boolean
 ---@param item_name string
 ---@param p6 Any
 ---@param p7 Any
 ---@param p8 Any
----@param p9 BOOL
+---@param p9 boolean
 function MONEY.NETWORK_BUY_ITEM(amount, item, p2, p3, p4, item_name, p6, p7, p8, p9) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 ---@param p4 Any
 function MONEY.NETWORK_SPENT_TAXI(amount, p1, p2, p3, p4) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_PAY_EMPLOYEE_WAGE(p0, p1, p2) end
 
 
 ---@param amount int
 ---@param matchId string
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_PAY_MATCH_ENTRY_FEE(amount, matchId, p2, p3) end
 
 
 ---@param amount int
 ---@param p1 int
 ---@param matchId string
----@param p3 BOOL
----@param p4 BOOL
+---@param p3 boolean
+---@param p4 boolean
 function MONEY.NETWORK_SPENT_BETTING(amount, p1, matchId, p3, p4) end
 
 
@@ -444,134 +443,134 @@ function MONEY.NETWORK_SPENT_WAGER(p0, p1, amount) end
 
 
 ---@param p0 Any
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
----@param p3 BOOL
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_IN_STRIPCLUB(p0, p1, p2, p3) end
 
 
 ---@param cost int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_BUY_HEALTHCARE(cost, p1, p2) end
 
 
 ---@param cost int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_BUY_AIRSTRIKE(cost, p1, p2, p3) end
 
 
 ---@param p0 int
 ---@param p1 int
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 ---@param npcProvider int
 function MONEY.NETWORK_BUY_BACKUP_GANG(p0, p1, p2, p3, npcProvider) end
 
 
 ---@param cost int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_BUY_HELI_STRIKE(cost, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_AMMO_DROP(p0, p1, p2, p3) end
 
 
 ---@param amount int
----@param victim Player
----@param p2 BOOL
----@param p3 BOOL
+---@param victim PlayerHandle
+---@param p2 boolean
+---@param p3 boolean
 ---@param p4 Any
 function MONEY.NETWORK_BUY_BOUNTY(amount, victim, p2, p3, p4) end
 
 
 ---@param cost int
 ---@param propertyName Hash
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_BUY_PROPERTY(cost, propertyName, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_BUY_SMOKES(p0, p1, p2) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_HELI_PICKUP(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_BOAT_PICKUP(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_BULL_SHARK(p0, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_CASH_DROP(amount, p1, p2) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_HIRE_MUGGER(p0, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_ROBBED_BY_MUGGER(amount, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_HIRE_MERCENARY(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
 ---@param p1 number
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 ---@param p4 Any
 function MONEY.NETWORK_SPENT_BUY_WANTEDLEVEL(p0, p1, p2, p3, p4) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_BUY_OFFTHERADAR(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_BUY_REVEAL_PLAYERS(p0, p1, p2, p3) end
 
@@ -579,79 +578,79 @@ function MONEY.NETWORK_SPENT_BUY_REVEAL_PLAYERS(p0, p1, p2, p3) end
 ---@param p0 Any
 ---@param p1 Any
 ---@param p2 Any
----@param p3 BOOL
----@param p4 BOOL
+---@param p3 boolean
+---@param p4 boolean
 function MONEY.NETWORK_SPENT_CARWASH(p0, p1, p2, p3, p4) end
 
 
 ---@param p0 Any
 ---@param p1 Any
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_CINEMA(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_TELESCOPE(p0, p1, p2) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_HOLDUPS(p0, p1, p2) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_BUY_PASSIVE_MODE(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_BANK_INTEREST(p0, p1, p2) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_PROSTITUTES(p0, p1, p2) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_ARREST_BAIL(p0, p1, p2) end
 
 
 ---@param amount int
 ---@param vehicleModel Hash
 ---@param gamerHandle number
----@param notBankrupt BOOL
----@param hasTheMoney BOOL
+---@param notBankrupt boolean
+---@param hasTheMoney boolean
 function MONEY.NETWORK_SPENT_PAY_VEHICLE_INSURANCE_PREMIUM(amount, vehicleModel, gamerHandle, notBankrupt, hasTheMoney) end
 
 
 ---@param p0 Any
 ---@param p1 number
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_CALL_PLAYER(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_BOUNTY(p0, p1, p2) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_FROM_ROCKSTAR(p0, p1, p2) end
 
 
@@ -677,14 +676,14 @@ function MONEY.NETWORK_SPENT_MOVE_SUBMARINE(p0, p1, p2) end
 
 ---@param p0 int
 ---@param p1 int
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_PLAYER_HEALTHCARE(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_NO_COPS(p0, p1, p2, p3) end
 
@@ -699,23 +698,23 @@ function MONEY.NETWORK_SPENT_CARGO_SOURCING(p0, p1, p2, p3, p4, p5) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_REQUEST_JOB(p0, p1, p2, p3) end
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPENT_REQUEST_HEIST(p0, p1, p2, p3) end
 
 
 ---@param amount int
 ---@param p1 Any
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 ---@param p4 Any
 function MONEY.NETWORK_BUY_FAIRGROUND_RIDE(amount, p1, p2, p3, p4) end
 
@@ -726,14 +725,14 @@ function MONEY.NETWORK_ECONOMY_HAS_FIXED_CRAZY_NUMBERS() end
 
 ---@param amount int
 ---@param matchId string
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_JOB_SKIP(amount, matchId, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@return boolean
 function MONEY.NETWORK_SPENT_BOSS_GOON(amount, p1, p2) end
 
@@ -751,8 +750,8 @@ function MONEY.NETWORK_SPEND_BOSS(p0, p1, p2) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_MOVE_YACHT(amount, p1, p2) end
 
 
@@ -766,8 +765,8 @@ function MONEY.NETWORK_SPENT_RENAME_ORGANIZATION(p0, p1, p2, p3) end
 ---@param p0 int
 ---@param p1 int
 ---@param p2 Hash
----@param p3 BOOL
----@param p4 BOOL
+---@param p3 boolean
+---@param p4 boolean
 function MONEY.NETWORK_BUY_CONTRABAND_MISSION(p0, p1, p2, p3, p4) end
 
 
@@ -844,8 +843,8 @@ function MONEY.NETWORK_SPENT_UPGRADE_WAREHOUSE_PROPERTY(p0, p1, p2, p3) end
 
 ---@param amount int
 ---@param data number
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_PURCHASE_IMPEXP_WAREHOUSE_PROPERTY(amount, data, p2, p3) end
 
 
@@ -988,14 +987,14 @@ function MONEY.NETWORK_SPENT_UPGRADE_HANGAR(p0, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_HANGAR_UTILITY_CHARGES(amount, p1, p2) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_HANGAR_STAFF_CHARGES(amount, p1, p2) end
 
 
@@ -1033,8 +1032,8 @@ function MONEY.NETWORK_EARN_FROM_SELL_BUNKER(amount, bunkerHash) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_BALLISTIC_EQUIPMENT(amount, p1, p2) end
 
 
@@ -1156,14 +1155,14 @@ function MONEY.NETWORK_SERVICE_EARN_GANGOPS_RIVAL_DELIVERY(earnedMoney) end
 
 ---@param type int
 ---@param amount int
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPEND_GANGOPS_START_STRAND(type, amount, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPEND_GANGOPS_TRIP_SKIP(amount, p1, p2) end
 
 
@@ -1253,43 +1252,43 @@ function MONEY.NETWORK_SPEND_NIGHTCLUB_AND_WAREHOUSE(p0, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPENT_RDR_HATCHET_BONUS(amount, p1, p2) end
 
 
----@param player Player
+---@param player PlayerHandle
 ---@param amount int
 ---@param p1 Any
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_NIGHTCLUB_ENTRY_FEE(player, amount, p1, p2, p3) end
 
 
 ---@param amount int
 ---@param p1 Any
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPEND_NIGHTCLUB_BAR_DRINK(amount, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPEND_BOUNTY_HUNTER_MISSION(amount, p1, p2) end
 
 
 ---@param amount int
 ---@param p1 Any
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_REHIRE_DJ(amount, p1, p2, p3) end
 
 
 ---@param amount int
 ---@param p1 Any
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPENT_ARENA_JOIN_SPECTATOR(amount, p1, p2, p3) end
 
 
@@ -1304,35 +1303,35 @@ function MONEY.NETWORK_EARN_ARENA_CAREER_PROGRESSION(amount, p1) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPEND_MAKE_IT_RAIN(amount, p1, p2) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 string
 function MONEY.NETWORK_SPEND_BUY_ARENA(amount, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 string
 function MONEY.NETWORK_SPEND_UPGRADE_ARENA(amount, p1, p2, p3) end
 
 
 ---@param amount int
 ---@param type int
----@param p2 BOOL
----@param p3 BOOL
+---@param p2 boolean
+---@param p3 boolean
 function MONEY.NETWORK_SPEND_ARENA_SPECTATOR_BOX(amount, type, p2, p3) end
 
 
 ---@param amount int
 ---@param p1 Any
----@param p2 BOOL
+---@param p2 boolean
 function MONEY.NETWORK_SPEND_SPIN_THE_WHEEL_PAYMENT(amount, p1, p2) end
 
 
@@ -1341,8 +1340,8 @@ function MONEY.NETWORK_EARN_SPIN_THE_WHEEL_CASH(amount) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MONEY.NETWORK_SPEND_ARENA_PREMIUM(amount, p1, p2) end
 
 
@@ -1370,22 +1369,22 @@ function MONEY.NETWORK_EARN_DAILY_OBJECTIVE_EVENT(amount) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 int
 function MONEY.NETWORK_SPEND_CASINO_MEMBERSHIP(amount, p1, p2, p3) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param data number
 function MONEY.NETWORK_SPEND_BUY_CASINO(amount, p1, p2, data) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param data number
 function MONEY.NETWORK_SPEND_UPGRADE_CASINO(amount, p1, p2, data) end
 
@@ -1565,7 +1564,7 @@ function MONEY.NETWORK_SPEND_SUBMARINE(p0, p1, p2, p3, p4, p5) end
 
 ---@param amount1 int
 ---@param p1 Any
----@param p2 BOOL
+---@param p2 boolean
 ---@param p3 Any
 ---@param p4 int
 ---@param p5 int
@@ -1625,8 +1624,8 @@ function MONEY.NETWORK_SPEND_CAR_CLUB_MEMBERSHIP(amount1, p1, p2, amount2, p4) e
 
 
 ---@param p0 Any
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPEND_CAR_CLUB_BAR(p0, p1, p2, p3) end
 
@@ -1713,11 +1712,11 @@ function MONEY.NETWORK_SPEND_INTERACTION_MENU_ABILITY(p0, p1, p2, p3) end
 ---@param p0 Any
 ---@param p1 Any
 ---@param p2 Any
----@param p3 BOOL
+---@param p3 boolean
 function MONEY.NETWORK_SPEND_SET_COMMON_FIELDS(p0, p1, p2, p3) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function MONEY.NETWORK_SPEND_SET_DISCOUNT(p0) end
 
 
@@ -1765,8 +1764,8 @@ function MONEY.NETWORK_SPEND_COMP_SUV(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 Any
 function MONEY.NETWORK_SPEND_SUV_FST_TRVL(p0, p1, p2, p3) end
 
@@ -1862,8 +1861,8 @@ function MONEY.NETWORK_EARN_UPGRADE_AGENCY(p0, p1) end
 
 
 ---@param amount int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param data number
 function MONEY.NETWORK_SPEND_APARTMENT_UTILITIES(amount, p1, p2, data) end
 
@@ -1913,8 +1912,8 @@ function MONEY.NETWORK_SPEND_UPGRADE_MFGARAGE_(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 int
 function MONEY.NETWORK_SPEND_BUY_SUPPLIES_(p0, p1, p2, p3) end
 
@@ -1934,22 +1933,22 @@ function MONEY.NETWORK_SPEND_UPGRADE_ACID_LAB_EQUIPMENT_(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 int
 function MONEY.NETWORK_SPEND_UPGRADE_ACID_LAB_ARMOR_(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 int
 function MONEY.NETWORK_SPEND_UPGRADE_ACID_LAB_SCOOP_(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param p3 int
 function MONEY.NETWORK_SPEND_UPGRADE_ACID_LAB_MINES_(p0, p1, p2, p3) end
 
@@ -2081,8 +2080,8 @@ function MONEY.NETWORK_EARN_PROGRESS_HUB_(p0, p1) end
 
 
 ---@param hangarCargoSourcingPrice int
----@param fromBank BOOL
----@param fromBankAndWallet BOOL
+---@param fromBank boolean
+---@param fromBankAndWallet boolean
 ---@param cost int
 ---@param warehouseId int
 ---@param warehouseSlot int
@@ -2090,29 +2089,29 @@ function MONEY.NETWORK_SPENT_AIR_FREIGHT_(hangarCargoSourcingPrice, fromBank, fr
 
 
 ---@param amount int
----@param fromBank BOOL
----@param fromBankAndWallet BOOL
+---@param fromBank boolean
+---@param fromBankAndWallet boolean
 ---@param cost int
 function MONEY.NETWORK_SPENT_SKIP_CARGO_SOURCE_SETUP_(amount, fromBank, fromBankAndWallet, cost) end
 
 
 ---@param amount int
----@param fromBank BOOL
----@param fromBankAndWallet BOOL
+---@param fromBank boolean
+---@param fromBankAndWallet boolean
 ---@param p3 Hash
 function MONEY.NETWORK_SPENT_STEALTH_MODULE_(amount, fromBank, fromBankAndWallet, p3) end
 
 
 ---@param amount int
----@param fromBank BOOL
----@param fromBankAndWallet BOOL
+---@param fromBank boolean
+---@param fromBankAndWallet boolean
 ---@param p3 Hash
 function MONEY.NETWORK_SPENT_MISSILE_JAMMER_(amount, fromBank, fromBankAndWallet, p3) end
 
 
 ---@param price int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 ---@param stat Hash
 ---@param spent Hash
 ---@param p5 string

@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -51,7 +50,7 @@ function MOBILE.SET_MOBILE_PHONE_POSITION(posX, posY, posZ) end
 function MOBILE.GET_MOBILE_PHONE_POSITION(position) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MOBILE.SCRIPT_IS_MOVING_MOBILE_PHONE_OFFSCREEN(toggle) end
 
 
@@ -59,7 +58,7 @@ function MOBILE.SCRIPT_IS_MOVING_MOBILE_PHONE_OFFSCREEN(toggle) end
 function MOBILE.CAN_PHONE_BE_SEEN_ON_SCREEN() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MOBILE.SET_MOBILE_PHONE_DOF_STATE(toggle) end
 
 
@@ -67,20 +66,20 @@ function MOBILE.SET_MOBILE_PHONE_DOF_STATE(toggle) end
 function MOBILE.CELL_SET_INPUT(direction) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MOBILE.CELL_HORIZONTAL_MODE_TOGGLE(toggle) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function MOBILE.CELL_CAM_ACTIVATE(p0, p1) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MOBILE.CELL_CAM_ACTIVATE_SELFIE_MODE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MOBILE.CELL_CAM_ACTIVATE_SHALLOW_DOF_MODE(toggle) end
 
 
@@ -116,7 +115,7 @@ function MOBILE.CELL_CAM_SET_SELFIE_MODE_HEAD_ROLL_OFFSET(roll) end
 function MOBILE.CELL_CAM_SET_SELFIE_MODE_HEAD_PITCH_OFFSET(pitch) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
 function MOBILE.CELL_CAM_IS_CHAR_VISIBLE_NO_FACE_CHECK(entity) end
 

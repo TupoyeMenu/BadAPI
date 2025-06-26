@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -67,7 +66,7 @@ function PAD.GET_CONTROL_VALUE(control, action) end
 function PAD.GET_CONTROL_NORMAL(control, action) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function PAD.SET_USE_ADJUSTED_MOUSE_COORDS(toggle) end
 
 
@@ -153,14 +152,14 @@ function PAD.HAVE_CONTROLS_CHANGED(control) end
 
 ---@param control int
 ---@param action int
----@param allowXOSwap BOOL
+---@param allowXOSwap boolean
 ---@return string
 function PAD.GET_CONTROL_INSTRUCTIONAL_BUTTONS_STRING(control, action, allowXOSwap) end
 
 
 ---@param control int
 ---@param controlGroup int
----@param allowXOSwap BOOL
+---@param allowXOSwap boolean
 ---@return string
 function PAD.GET_CONTROL_GROUP_INSTRUCTIONAL_BUTTONS_STRING(control, controlGroup, allowXOSwap) end
 
@@ -231,7 +230,7 @@ function PAD.GET_IS_USING_ALTERNATE_DRIVEBY() end
 function PAD.GET_ALLOW_MOVEMENT_WHILE_ZOOMED() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function PAD.SET_PLAYERPAD_SHAKES_WHEN_CONTROLLER_DISABLED(toggle) end
 
 
@@ -242,13 +241,13 @@ function PAD.SET_INPUT_EXCLUSIVE(control, action) end
 
 ---@param control int
 ---@param action int
----@param disableRelatedActions BOOL
+---@param disableRelatedActions boolean
 function PAD.DISABLE_CONTROL_ACTION(control, action, disableRelatedActions) end
 
 
 ---@param control int
 ---@param action int
----@param enableRelatedActions BOOL
+---@param enableRelatedActions boolean
 function PAD.ENABLE_CONTROL_ACTION(control, action, enableRelatedActions) end
 
 

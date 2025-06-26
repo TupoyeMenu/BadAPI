@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -26,7 +25,7 @@ function LOBBY.LOBBY_AUTO_MULTIPLAYER_MENU() end
 function LOBBY.LOBBY_AUTO_MULTIPLAYER_FREEMODE() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function LOBBY.LOBBY_SET_AUTO_MULTIPLAYER(toggle) end
 
 
@@ -34,7 +33,7 @@ function LOBBY.LOBBY_SET_AUTO_MULTIPLAYER(toggle) end
 function LOBBY.LOBBY_AUTO_MULTIPLAYER_EVENT() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function LOBBY.LOBBY_SET_AUTO_MULTIPLAYER_EVENT(toggle) end
 
 
@@ -42,11 +41,11 @@ function LOBBY.LOBBY_SET_AUTO_MULTIPLAYER_EVENT(toggle) end
 function LOBBY.LOBBY_AUTO_MULTIPLAYER_RANDOM_JOB() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function LOBBY.LOBBY_SET_AUTO_MP_RANDOM_JOB(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function LOBBY.SHUTDOWN_SESSION_CLEARS_AUTO_MULTIPLAYER(toggle) end
 
 

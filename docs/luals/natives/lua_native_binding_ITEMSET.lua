@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -18,7 +17,7 @@
 ---@alias Vector3 vec3
 
 ITEMSET = {}
----@param p0 BOOL
+---@param p0 boolean
 ---@return ScrHandle
 function ITEMSET.CREATE_ITEMSET(p0) end
 

@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -89,7 +88,7 @@ function CUTSCENE.START_CUTSCENE(flags) end
 function CUTSCENE.START_CUTSCENE_AT_COORDS(x, y, z, flags) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CUTSCENE.STOP_CUTSCENE(p0) end
 
 
@@ -156,7 +155,7 @@ function CUTSCENE.GET_CUTSCENE_SECTION_PLAYING() end
 
 ---@param cutsceneEntName string
 ---@param modelHash Hash
----@return Entity
+---@return EntityHandle
 function CUTSCENE.GET_ENTITY_INDEX_OF_CUTSCENE_ENTITY(cutsceneEntName, modelHash) end
 
 
@@ -174,7 +173,7 @@ function CUTSCENE.IS_CUTSCENE_AUTHORIZED(cutsceneName) end
 function CUTSCENE.DOES_CUTSCENE_HANDLE_EXIST(cutsceneHandle) end
 
 
----@param cutscenePed Ped
+---@param cutscenePed PedHandle
 ---@param cutsceneEntName string
 ---@param p2 int
 ---@param modelHash Hash
@@ -184,7 +183,7 @@ function CUTSCENE.REGISTER_ENTITY_FOR_CUTSCENE(cutscenePed, cutsceneEntName, p2,
 
 ---@param cutsceneEntName string
 ---@param modelHash Hash
----@return Entity
+---@return EntityHandle
 function CUTSCENE.GET_ENTITY_INDEX_OF_REGISTERED_ENTITY(cutsceneEntName, modelHash) end
 
 
@@ -213,30 +212,30 @@ function CUTSCENE.CAN_SET_ENTER_STATE_FOR_REGISTERED_ENTITY(cutsceneEntName, mod
 function CUTSCENE.CAN_SET_EXIT_STATE_FOR_REGISTERED_ENTITY(cutsceneEntName, modelHash) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return boolean
 function CUTSCENE.CAN_SET_EXIT_STATE_FOR_CAMERA(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function CUTSCENE.SET_PAD_CAN_SHAKE_DURING_CUTSCENE(toggle) end
 
 
----@param p0 BOOL
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p0 boolean
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 function CUTSCENE.SET_CUTSCENE_FADE_VALUES(p0, p1, p2, p3) end
 
 
----@param p0 BOOL
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p0 boolean
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 function CUTSCENE.SET_CUTSCENE_MULTIHEAD_FADE(p0, p1, p2, p3) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CUTSCENE.SET_CUTSCENE_MULTIHEAD_FADE_MANUAL(p0) end
 
 
@@ -244,11 +243,11 @@ function CUTSCENE.SET_CUTSCENE_MULTIHEAD_FADE_MANUAL(p0) end
 function CUTSCENE.IS_MULTIHEAD_FADE_UP() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CUTSCENE.NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CUTSCENE.SET_CAR_GENERATORS_CAN_UPDATE_DURING_CUTSCENE(p0) end
 
 
@@ -256,7 +255,7 @@ function CUTSCENE.SET_CAR_GENERATORS_CAN_UPDATE_DURING_CUTSCENE(p0) end
 function CUTSCENE.CAN_USE_MOBILE_PHONE_DURING_CUTSCENE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CUTSCENE.SET_CUTSCENE_CAN_BE_SKIPPED(p0) end
 
 
@@ -272,7 +271,7 @@ function CUTSCENE.SET_CUTSCENE_PED_COMPONENT_VARIATION(cutsceneEntName, componen
 
 
 ---@param cutsceneEntName string
----@param ped Ped
+---@param ped PedHandle
 ---@param modelHash Hash
 function CUTSCENE.SET_CUTSCENE_PED_COMPONENT_VARIATION_FROM_PED(cutsceneEntName, ped, modelHash) end
 

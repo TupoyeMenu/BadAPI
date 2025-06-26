@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -34,7 +33,7 @@ function BRAIN.ADD_SCRIPT_TO_RANDOM_PED(name, model, p2, p3) end
 function BRAIN.REGISTER_OBJECT_SCRIPT_BRAIN(scriptName, modelHash, p2, activationRange, p4, p5) end
 
 
----@param object Object
+---@param object ObjectHandle
 ---@return boolean
 function BRAIN.IS_OBJECT_WITHIN_BRAIN_ACTIVATION_RANGE(object) end
 

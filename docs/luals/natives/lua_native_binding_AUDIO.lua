@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -19,17 +18,17 @@
 
 AUDIO = {}
 ---@param ringtoneName string
----@param ped Ped
----@param p2 BOOL
+---@param ped PedHandle
+---@param p2 boolean
 function AUDIO.PLAY_PED_RINGTONE(ringtoneName, ped, p2) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function AUDIO.IS_PED_RINGTONE_PLAYING(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.STOP_PED_RINGTONE(ped) end
 
 
@@ -53,19 +52,19 @@ function AUDIO.CREATE_NEW_SCRIPTED_CONVERSATION() end
 ---@param p2 string
 ---@param p3 int
 ---@param p4 int
----@param p5 BOOL
----@param p6 BOOL
----@param p7 BOOL
----@param p8 BOOL
+---@param p5 boolean
+---@param p6 boolean
+---@param p7 boolean
+---@param p8 boolean
 ---@param p9 int
----@param p10 BOOL
----@param p11 BOOL
----@param p12 BOOL
+---@param p10 boolean
+---@param p11 boolean
+---@param p12 boolean
 function AUDIO.ADD_LINE_TO_CONVERSATION(index, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12) end
 
 
 ---@param index int
----@param ped Ped
+---@param ped PedHandle
 ---@param p2 string
 function AUDIO.ADD_PED_TO_CONVERSATION(index, ped, p2) end
 
@@ -78,11 +77,11 @@ function AUDIO.SET_POSITION_FOR_NULL_CONV_PED(p0, p1, p2, p3) end
 
 
 ---@param p0 int
----@param entity Entity
+---@param entity EntityHandle
 function AUDIO.SET_ENTITY_FOR_NULL_CONV_PED(p0, entity) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 ---@param x1 float
 ---@param y1 float
 ---@param z1 float
@@ -95,35 +94,35 @@ function AUDIO.SET_ENTITY_FOR_NULL_CONV_PED(p0, entity) end
 function AUDIO.SET_MICROPHONE_POSITION(toggle, x1, y1, z1, x2, y2, z2, x3, y3, z3) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function AUDIO.SET_CONVERSATION_AUDIO_CONTROLLED_BY_ANIM(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function AUDIO.SET_CONVERSATION_AUDIO_PLACEHOLDER(p0) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function AUDIO.START_SCRIPT_PHONE_CONVERSATION(p0, p1) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function AUDIO.PRELOAD_SCRIPT_PHONE_CONVERSATION(p0, p1) end
 
 
----@param p0 BOOL
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p0 boolean
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 function AUDIO.START_SCRIPT_CONVERSATION(p0, p1, p2, p3) end
 
 
----@param p0 BOOL
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p0 boolean
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 function AUDIO.PRELOAD_SCRIPT_CONVERSATION(p0, p1, p2, p3) end
 
 
@@ -146,14 +145,14 @@ function AUDIO.IS_SCRIPTED_CONVERSATION_LOADED() end
 function AUDIO.GET_CURRENT_SCRIPTED_CONVERSATION_LINE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function AUDIO.PAUSE_SCRIPTED_CONVERSATION(p0) end
 
 
 function AUDIO.RESTART_SCRIPTED_CONVERSATION() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return int
 function AUDIO.STOP_SCRIPTED_CONVERSATION(p0) end
 
@@ -161,13 +160,13 @@ function AUDIO.STOP_SCRIPTED_CONVERSATION(p0) end
 function AUDIO.SKIP_TO_NEXT_SCRIPTED_CONVERSATION_LINE() end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param voiceline string
 ---@param speaker string
 function AUDIO.INTERRUPT_CONVERSATION(ped, voiceline, speaker) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param p1 string
 ---@param speaker string
 function AUDIO.INTERRUPT_CONVERSATION_AND_PAUSE(ped, p1, speaker) end
@@ -178,7 +177,7 @@ function AUDIO.INTERRUPT_CONVERSATION_AND_PAUSE(ped, p1, speaker) end
 function AUDIO.GET_VARIATION_CHOSEN_FOR_SCRIPTED_LINE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function AUDIO.SET_NO_DUCKING_FOR_CONVERSATION(p0) end
 
 
@@ -190,42 +189,42 @@ function AUDIO.UNREGISTER_SCRIPT_WITH_AUDIO() end
 
 
 ---@param audioBank string
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function AUDIO.REQUEST_MISSION_AUDIO_BANK(audioBank, p1, p2) end
 
 
 ---@param audioBank string
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function AUDIO.REQUEST_AMBIENT_AUDIO_BANK(audioBank, p1, p2) end
 
 
 ---@param audioBank string
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function AUDIO.REQUEST_SCRIPT_AUDIO_BANK(audioBank, p1, p2) end
 
 
 ---@param audioBank string
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function AUDIO.HINT_MISSION_AUDIO_BANK(audioBank, p1, p2) end
 
 
 ---@param audioBank string
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function AUDIO.HINT_AMBIENT_AUDIO_BANK(audioBank, p1, p2) end
 
 
 ---@param audioBank string
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 ---@return boolean
 function AUDIO.HINT_SCRIPT_AUDIO_BANK(audioBank, p1, p2) end
@@ -265,16 +264,16 @@ function AUDIO.RELEASE_SOUND_ID(soundId) end
 ---@param soundId int
 ---@param audioName string
 ---@param audioRef string
----@param p3 BOOL
+---@param p3 boolean
 ---@param p4 Any
----@param p5 BOOL
+---@param p5 boolean
 function AUDIO.PLAY_SOUND(soundId, audioName, audioRef, p3, p4, p5) end
 
 
 ---@param soundId int
 ---@param audioName string
 ---@param audioRef string
----@param p3 BOOL
+---@param p3 boolean
 function AUDIO.PLAY_SOUND_FRONTEND(soundId, audioName, audioRef, p3) end
 
 
@@ -285,16 +284,16 @@ function AUDIO.PLAY_DEFERRED_SOUND_FRONTEND(soundName, soundsetName) end
 
 ---@param soundId int
 ---@param audioName string
----@param entity Entity
+---@param entity EntityHandle
 ---@param audioRef string
----@param isNetwork BOOL
+---@param isNetwork boolean
 ---@param p5 Any
 function AUDIO.PLAY_SOUND_FROM_ENTITY(soundId, audioName, entity, audioRef, isNetwork, p5) end
 
 
 ---@param soundId int
 ---@param model Hash
----@param entity Entity
+---@param entity EntityHandle
 ---@param soundSetHash Hash
 ---@param p4 Any
 ---@param p5 Any
@@ -307,9 +306,9 @@ function AUDIO.PLAY_SOUND_FROM_ENTITY_HASH(soundId, model, entity, soundSetHash,
 ---@param y float
 ---@param z float
 ---@param audioRef string
----@param isNetwork BOOL
+---@param isNetwork boolean
 ---@param range int
----@param p8 BOOL
+---@param p8 boolean
 function AUDIO.PLAY_SOUND_FROM_COORD(soundId, audioName, x, y, z, audioRef, isNetwork, range, p8) end
 
 
@@ -346,7 +345,7 @@ function AUDIO.SET_VARIABLE_ON_STREAM(variable, p1) end
 
 
 ---@param p0 string
----@param p1 BOOL
+---@param p1 boolean
 function AUDIO.OVERRIDE_UNDERWATER_STREAM(p0, p1) end
 
 
@@ -360,25 +359,25 @@ function AUDIO.SET_VARIABLE_ON_UNDER_WATER_STREAM(variableName, value) end
 function AUDIO.HAS_SOUND_FINISHED(soundId) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param speechName string
 ---@param speechParam string
 ---@param p3 Any
 function AUDIO.PLAY_PED_AMBIENT_SPEECH_NATIVE(ped, speechName, speechParam, p3) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param speechName string
 ---@param speechParam string
 ---@param p3 Any
 function AUDIO.PLAY_PED_AMBIENT_SPEECH_AND_CLONE_NATIVE(ped, speechName, speechParam, p3) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param speechName string
 ---@param voiceName string
 ---@param speechParam string
----@param p4 BOOL
+---@param p4 boolean
 function AUDIO.PLAY_PED_AMBIENT_SPEECH_WITH_VOICE_NATIVE(ped, speechName, voiceName, speechParam, p4) end
 
 
@@ -398,12 +397,12 @@ function AUDIO.OVERRIDE_TREVOR_RAGE(voiceEffect) end
 function AUDIO.RESET_TREVOR_RAGE() end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function AUDIO.SET_PLAYER_ANGRY(ped, toggle) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param painID int
 ---@param p1 int
 ---@param p3 Any
@@ -421,65 +420,65 @@ function AUDIO.ACTIVATE_AUDIO_SLOWMO_MODE(mode) end
 function AUDIO.DEACTIVATE_AUDIO_SLOWMO_MODE(mode) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param name string
 function AUDIO.SET_AMBIENT_VOICE_NAME(ped, name) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param hash Hash
 function AUDIO.SET_AMBIENT_VOICE_NAME_HASH(ped, hash) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return Hash
 function AUDIO.GET_AMBIENT_VOICE_NAME_HASH(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.SET_PED_VOICE_FULL(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param p1 int
 ---@param voiceGroup Hash
 function AUDIO.SET_PED_RACE_AND_VOICE_GROUP(ped, p1, voiceGroup) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param voiceGroupHash Hash
 function AUDIO.SET_PED_VOICE_GROUP(ped, voiceGroupHash) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param voiceGroupHash Hash
 function AUDIO.SET_PED_VOICE_GROUP_FROM_RACE_TO_PVG(ped, voiceGroupHash) end
 
 
----@param ped Ped
----@param p1 BOOL
+---@param ped PedHandle
+---@param p1 boolean
 function AUDIO.SET_PED_GENDER(ped, p1) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.STOP_CURRENT_PLAYING_SPEECH(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.STOP_CURRENT_PLAYING_AMBIENT_SPEECH(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function AUDIO.IS_AMBIENT_SPEECH_PLAYING(ped) end
 
 
----@param p0 Ped
+---@param p0 PedHandle
 ---@return boolean
 function AUDIO.IS_SCRIPTED_SPEECH_PLAYING(p0) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function AUDIO.IS_ANY_SPEECH_PLAYING(ped) end
 
@@ -488,35 +487,35 @@ function AUDIO.IS_ANY_SPEECH_PLAYING(ped) end
 function AUDIO.IS_ANY_POSITIONAL_SPEECH_PLAYING() end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param speechName string
----@param p2 BOOL
+---@param p2 boolean
 ---@return boolean
 function AUDIO.DOES_CONTEXT_EXIST_FOR_THIS_PED(ped, speechName, p2) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function AUDIO.IS_PED_IN_CURRENT_CONVERSATION(ped) end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function AUDIO.SET_PED_IS_DRUNK(ped, toggle) end
 
 
----@param pedHandle Ped
+---@param pedHandle PedHandle
 ---@param p1 int
 ---@param speechName string
 function AUDIO.PLAY_ANIMAL_VOCALIZATION(pedHandle, p1, speechName) end
 
 
----@param pedHandle Ped
+---@param pedHandle PedHandle
 ---@return boolean
 function AUDIO.IS_ANIMAL_VOCALIZATION_PLAYING(pedHandle) end
 
 
----@param animal Ped
+---@param animal PedHandle
 ---@param mood int
 function AUDIO.SET_ANIMAL_MOOD(animal, mood) end
 
@@ -525,7 +524,7 @@ function AUDIO.SET_ANIMAL_MOOD(animal, mood) end
 function AUDIO.IS_MOBILE_PHONE_RADIO_ACTIVE() end
 
 
----@param state BOOL
+---@param state boolean
 function AUDIO.SET_MOBILE_PHONE_RADIO_STATE(state) end
 
 
@@ -589,12 +588,12 @@ function AUDIO.SET_EMITTER_RADIO_STATION(emitterName, radioStation, p2) end
 
 
 ---@param emitterName string
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_STATIC_EMITTER_ENABLED(emitterName, toggle) end
 
 
 ---@param emitterName string
----@param entity Entity
+---@param entity EntityHandle
 function AUDIO.LINK_STATIC_EMITTER_TO_ENTITY(emitterName, entity) end
 
 
@@ -602,7 +601,7 @@ function AUDIO.LINK_STATIC_EMITTER_TO_ENTITY(emitterName, entity) end
 function AUDIO.SET_RADIO_TO_STATION_INDEX(radioStation) end
 
 
----@param active BOOL
+---@param active boolean
 function AUDIO.SET_FRONTEND_RADIO_ACTIVE(active) end
 
 
@@ -619,7 +618,7 @@ function AUDIO.IS_MISSION_NEWS_STORY_UNLOCKED(newsStory) end
 function AUDIO.GET_AUDIBLE_MUSIC_TRACK_TEXT_ID() end
 
 
----@param play BOOL
+---@param play boolean
 function AUDIO.PLAY_END_CREDITS_MUSIC(play) end
 
 
@@ -634,7 +633,7 @@ function AUDIO.FREEZE_RADIO_STATION(radioStation) end
 function AUDIO.UNFREEZE_RADIO_STATION(radioStation) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_RADIO_AUTO_UNFREEZE(toggle) end
 
 
@@ -642,7 +641,7 @@ function AUDIO.SET_RADIO_AUTO_UNFREEZE(toggle) end
 function AUDIO.SET_INITIAL_PLAYER_STATION(radioStation) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_USER_RADIO_CONTROL_ENABLED(toggle) end
 
 
@@ -665,7 +664,7 @@ function AUDIO.SET_NEXT_RADIO_TRACK(radioName, radioTrack, p2, p3) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_VEHICLE_RADIO_LOUD(vehicle, toggle) end
 
 
@@ -674,7 +673,7 @@ function AUDIO.SET_VEHICLE_RADIO_LOUD(vehicle, toggle) end
 function AUDIO.CAN_VEHICLE_RECEIVE_CB_RADIO(vehicle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_MOBILE_RADIO_ENABLED_DURING_GAMEPLAY(toggle) end
 
 
@@ -687,7 +686,7 @@ function AUDIO.IS_PLAYER_VEH_RADIO_ENABLE() end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_VEHICLE_RADIO_ENABLED(vehicle, toggle) end
 
 
@@ -697,7 +696,7 @@ function AUDIO.SET_POSITIONED_PLAYER_VEHICLE_RADIO_EMITTER_ENABLED(p0) end
 
 ---@param radioStation string
 ---@param trackListName string
----@param p2 BOOL
+---@param p2 boolean
 function AUDIO.SET_CUSTOM_RADIO_TRACK_LIST(radioStation, trackListName, p2) end
 
 
@@ -715,7 +714,7 @@ function AUDIO.FIND_RADIO_STATION_INDEX(stationNameHash) end
 
 
 ---@param radioStation string
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_RADIO_STATION_MUSIC_ONLY(radioStation, toggle) end
 
 
@@ -733,17 +732,17 @@ function AUDIO.UNLOCK_RADIO_STATION_TRACK_LIST(radioStation, trackListName) end
 function AUDIO.LOCK_RADIO_STATION_TRACK_LIST(radioStation, trackListName) end
 
 
----@param enableMixes BOOL
+---@param enableMixes boolean
 function AUDIO.UPDATE_UNLOCKABLE_DJ_RADIO_TRACKS(enableMixes) end
 
 
 ---@param radioStationName string
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.LOCK_RADIO_STATION(radioStationName, toggle) end
 
 
 ---@param radioStation string
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_RADIO_STATION_AS_FAVOURITE(radioStation, toggle) end
 
 
@@ -779,41 +778,41 @@ function AUDIO.GET_CURRENT_TRACK_SOUND_NAME(radioStationName) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_VEHICLE_MISSILE_WARNING_ENABLED(vehicle, toggle) end
 
 
 ---@param zoneName string
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function AUDIO.SET_AMBIENT_ZONE_STATE(zoneName, p1, p2) end
 
 
 ---@param zoneName string
----@param p1 BOOL
+---@param p1 boolean
 function AUDIO.CLEAR_AMBIENT_ZONE_STATE(zoneName, p1) end
 
 
 ---@param ambientZone string
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function AUDIO.SET_AMBIENT_ZONE_LIST_STATE(ambientZone, p1, p2) end
 
 
 ---@param ambientZone string
----@param p1 BOOL
+---@param p1 boolean
 function AUDIO.CLEAR_AMBIENT_ZONE_LIST_STATE(ambientZone, p1) end
 
 
 ---@param ambientZone string
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function AUDIO.SET_AMBIENT_ZONE_STATE_PERSISTENT(ambientZone, p1, p2) end
 
 
 ---@param ambientZone string
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function AUDIO.SET_AMBIENT_ZONE_LIST_STATE_PERSISTENT(ambientZone, p1, p2) end
 
 
@@ -848,7 +847,7 @@ function AUDIO.BLIP_SIREN(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param override BOOL
+---@param override boolean
 ---@param hornHash int
 function AUDIO.OVERRIDE_VEH_HORN(vehicle, override, hornHash) end
 
@@ -858,22 +857,22 @@ function AUDIO.OVERRIDE_VEH_HORN(vehicle, override, hornHash) end
 function AUDIO.IS_HORN_ACTIVE(vehicle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_AGGRESSIVE_HORNS(toggle) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function AUDIO.SET_RADIO_POSITION_AUDIO_MUTE(p0) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function AUDIO.SET_VEHICLE_CONVERSATIONS_PERSIST(p0, p1) end
 
 
----@param p0 BOOL
----@param p1 BOOL
----@param p2 BOOL
+---@param p0 boolean
+---@param p1 boolean
+---@param p2 boolean
 function AUDIO.SET_VEHICLE_CONVERSATIONS_PERSIST_NEW(p0, p1, p2) end
 
 
@@ -898,7 +897,7 @@ function AUDIO.LOAD_STREAM(streamName, soundSet) end
 function AUDIO.LOAD_STREAM_WITH_START_OFFSET(streamName, startOffset, soundSet) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.PLAY_STREAM_FROM_PED(ped) end
 
 
@@ -906,7 +905,7 @@ function AUDIO.PLAY_STREAM_FROM_PED(ped) end
 function AUDIO.PLAY_STREAM_FROM_VEHICLE(vehicle) end
 
 
----@param object Object
+---@param object ObjectHandle
 function AUDIO.PLAY_STREAM_FROM_OBJECT(object) end
 
 
@@ -922,28 +921,28 @@ function AUDIO.PLAY_STREAM_FROM_POSITION(x, y, z) end
 function AUDIO.STOP_STREAM() end
 
 
----@param ped Ped
----@param shaking BOOL
+---@param ped PedHandle
+---@param shaking boolean
 function AUDIO.STOP_PED_SPEAKING(ped, shaking) end
 
 
----@param ped Ped
----@param p1 BOOL
----@param p2 BOOL
+---@param ped PedHandle
+---@param p1 boolean
+---@param p2 boolean
 function AUDIO.BLOCK_ALL_SPEECH_FROM_PED(ped, p1, p2) end
 
 
----@param ped Ped
----@param p1 BOOL
+---@param ped PedHandle
+---@param p1 boolean
 function AUDIO.STOP_PED_SPEAKING_SYNCED(ped, p1) end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function AUDIO.DISABLE_PED_PAIN_AUDIO(ped, toggle) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function AUDIO.IS_AMBIENT_SPEECH_DISABLED(ped) end
 
@@ -958,12 +957,12 @@ function AUDIO.UNBLOCK_SPEECH_CONTEXT_GROUP(p0) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_SIREN_WITH_NO_DRIVER(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_SIREN_BYPASS_MP_DRIVER_CHECK(vehicle, toggle) end
 
 
@@ -976,7 +975,7 @@ function AUDIO.SET_HORN_PERMANENTLY_ON(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_HORN_ENABLED(vehicle, toggle) end
 
 
@@ -991,7 +990,7 @@ function AUDIO.SET_HORN_PERMANENTLY_ON_TIME(vehicle, time) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.USE_SIREN_AS_HORN(vehicle, toggle) end
 
 
@@ -1035,32 +1034,32 @@ function AUDIO.SET_VEHICLE_AUDIO_BODY_DAMAGE_FACTOR(vehicle, intensity) end
 
 
 ---@param vehicle Vehicle
----@param force BOOL
+---@param force boolean
 function AUDIO.FORCE_VEHICLE_ENGINE_SYNTH_(vehicle, force) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.ENABLE_VEHICLE_FANBELT_DAMAGE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.ENABLE_VEHICLE_EXHAUST_POPS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_VEHICLE_BOOST_ACTIVE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_PLAYER_VEHICLE_ALARM_AUDIO_ACTIVE(vehicle, toggle) end
 
 
 ---@param doorHash Hash
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_SCRIPT_UPDATE_DOOR_AUDIO(doorHash, toggle) end
 
 
@@ -1075,12 +1074,12 @@ function AUDIO.PLAY_VEHICLE_DOOR_CLOSE_SOUND(vehicle, doorId) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.ENABLE_STALL_WARNING_SOUNDS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param enable BOOL
+---@param enable boolean
 function AUDIO.ENABLE_DRAG_RACE_STATIONARY_WARNING_SOUNDS_(vehicle, enable) end
 
 
@@ -1088,7 +1087,7 @@ function AUDIO.ENABLE_DRAG_RACE_STATIONARY_WARNING_SOUNDS_(vehicle, enable) end
 function AUDIO.IS_GAME_IN_CONTROL_OF_MUSIC() end
 
 
----@param active BOOL
+---@param active boolean
 function AUDIO.SET_GPS_ACTIVE(active) end
 
 
@@ -1104,7 +1103,7 @@ function AUDIO.IS_MISSION_COMPLETE_PLAYING() end
 function AUDIO.IS_MISSION_COMPLETE_READY_FOR_UI() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.BLOCK_DEATH_JINGLE(toggle) end
 
 
@@ -1135,13 +1134,13 @@ function AUDIO.SET_AUDIO_SCENE_VARIABLE(scene, variable, value) end
 function AUDIO.SET_AUDIO_SCRIPT_CLEANUP_TIME(time) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param groupName string
 ---@param p2 float
 function AUDIO.ADD_ENTITY_TO_AUDIO_MIX_GROUP(entity, groupName, p2) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param p1 float
 function AUDIO.REMOVE_ENTITY_FROM_AUDIO_MIX_GROUP(entity, p1) end
 
@@ -1191,7 +1190,7 @@ function AUDIO.RECORD_BROKEN_GLASS(x, y, z, radius) end
 function AUDIO.CLEAR_ALL_BROKEN_GLASS() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param p1 Any
 function AUDIO.SCRIPT_OVERRIDES_WIND_ELEVATION(p0, p1) end
 
@@ -1215,16 +1214,16 @@ function AUDIO.PREPARE_ALARM(alarmName) end
 
 
 ---@param alarmName string
----@param p2 BOOL
+---@param p2 boolean
 function AUDIO.START_ALARM(alarmName, p2) end
 
 
 ---@param alarmName string
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.STOP_ALARM(alarmName, toggle) end
 
 
----@param stop BOOL
+---@param stop boolean
 function AUDIO.STOP_ALL_ALARMS(stop) end
 
 
@@ -1243,45 +1242,45 @@ function AUDIO.GET_VEHICLE_DEFAULT_HORN(vehicle) end
 function AUDIO.GET_VEHICLE_DEFAULT_HORN_IGNORE_MODS(vehicle) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.RESET_PED_AUDIO_FLAGS(ped) end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function AUDIO.SET_PED_FOOTSTEPS_EVENTS_ENABLED(ped, toggle) end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function AUDIO.SET_PED_CLOTH_EVENTS_ENABLED(ped, toggle) end
 
 
 ---@param hash Hash
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.OVERRIDE_PLAYER_GROUND_MATERIAL(hash, toggle) end
 
 
----@param ped Ped
----@param p1 BOOL
+---@param ped PedHandle
+---@param p1 boolean
 ---@param hash Hash
 function AUDIO.USE_FOOTSTEP_SCRIPT_SWEETENERS(ped, p1, hash) end
 
 
 ---@param hash Hash
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.OVERRIDE_MICROPHONE_SETTINGS(hash, toggle) end
 
 
 function AUDIO.FREEZE_MICROPHONE() end
 
 
----@param value BOOL
+---@param value boolean
 function AUDIO.DISTANT_COP_CAR_SIRENS(value) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function AUDIO.SET_SIREN_CAN_BE_CONTROLLED_BY_AUDIO(vehicle, p1) end
 
 
@@ -1289,7 +1288,7 @@ function AUDIO.ENABLE_STUNT_JUMP_AUDIO() end
 
 
 ---@param flagName string
----@param toggle BOOL
+---@param toggle boolean
 function AUDIO.SET_AUDIO_FLAG(flagName, toggle) end
 
 
@@ -1323,7 +1322,7 @@ function AUDIO.INIT_SYNCH_SCENE_AUDIO_WITH_POSITION(audioEvent, x, y, z) end
 
 
 ---@param audioEvent string
----@param entity Entity
+---@param entity EntityHandle
 function AUDIO.INIT_SYNCH_SCENE_AUDIO_WITH_ENTITY(audioEvent, entity) end
 
 
@@ -1347,14 +1346,14 @@ function AUDIO.STOP_SMOKE_GRENADE_EXPLOSION_SOUNDS() end
 function AUDIO.GET_MUSIC_VOL_SLIDER() end
 
 
----@param ped Ped
+---@param ped PedHandle
 function AUDIO.REQUEST_TENNIS_BANKS(ped) end
 
 
 function AUDIO.UNREQUEST_TENNIS_BANKS() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function AUDIO.SET_SKIP_MINIGUN_SPIN_UP_AUDIO(p0) end
 
 

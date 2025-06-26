@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -134,7 +133,7 @@ function SOCIALCLUB.SC_EMAIL_SEND_EMAIL(p0) end
 function SOCIALCLUB.SC_EMAIL_SET_CURRENT_EMAIL_TAG(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function SOCIALCLUB.SC_CACHE_NEW_ROCKSTAR_MSGS(toggle) end
 
 

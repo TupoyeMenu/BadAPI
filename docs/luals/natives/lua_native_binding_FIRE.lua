@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -22,7 +21,7 @@ FIRE = {}
 ---@param Y float
 ---@param Z float
 ---@param maxChildren int
----@param isGasFire BOOL
+---@param isGasFire boolean
 ---@return FireId
 function FIRE.START_SCRIPT_FIRE(X, Y, Z, maxChildren, isGasFire) end
 
@@ -31,16 +30,16 @@ function FIRE.START_SCRIPT_FIRE(X, Y, Z, maxChildren, isGasFire) end
 function FIRE.REMOVE_SCRIPT_FIRE(fireHandle) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@return FireId
 function FIRE.START_ENTITY_FIRE(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function FIRE.STOP_ENTITY_FIRE(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
 function FIRE.IS_ENTITY_ON_FIRE(entity) end
 
@@ -78,21 +77,21 @@ function FIRE.GET_CLOSEST_FIRE_POS(outPosition, x, y, z) end
 ---@param z float
 ---@param explosionType int
 ---@param damageScale float
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param isAudible boolean
+---@param isInvisible boolean
 ---@param cameraShake float
----@param noDamage BOOL
+---@param noDamage boolean
 function FIRE.ADD_EXPLOSION(x, y, z, explosionType, damageScale, isAudible, isInvisible, cameraShake, noDamage) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param x float
 ---@param y float
 ---@param z float
 ---@param explosionType int
 ---@param damageScale float
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param isAudible boolean
+---@param isInvisible boolean
 ---@param cameraShake float
 function FIRE.ADD_OWNED_EXPLOSION(ped, x, y, z, explosionType, damageScale, isAudible, isInvisible, cameraShake) end
 
@@ -103,8 +102,8 @@ function FIRE.ADD_OWNED_EXPLOSION(ped, x, y, z, explosionType, damageScale, isAu
 ---@param explosionType int
 ---@param explosionFx Hash
 ---@param damageScale float
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param isAudible boolean
+---@param isInvisible boolean
 ---@param cameraShake float
 function FIRE.ADD_EXPLOSION_WITH_USER_VFX(x, y, z, explosionType, explosionFx, damageScale, isAudible, isInvisible, cameraShake) end
 
@@ -145,7 +144,7 @@ function FIRE.IS_EXPLOSION_IN_SPHERE(explosionType, x, y, z, radius) end
 ---@param y float
 ---@param z float
 ---@param radius float
----@return Entity
+---@return EntityHandle
 function FIRE.GET_OWNER_OF_EXPLOSION_IN_SPHERE(explosionType, x, y, z, radius) end
 
 
@@ -169,7 +168,7 @@ function FIRE.IS_EXPLOSION_IN_ANGLED_AREA(explosionType, x1, y1, z1, x2, y2, z2,
 ---@param y2 float
 ---@param z2 float
 ---@param radius float
----@return Entity
+---@return EntityHandle
 function FIRE.GET_OWNER_OF_EXPLOSION_IN_ANGLED_AREA(explosionType, x1, y1, z1, x2, y2, z2, radius) end
 
 

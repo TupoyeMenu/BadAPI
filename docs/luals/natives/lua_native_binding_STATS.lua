@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -29,9 +28,9 @@ function STATS.STAT_LOAD(statSlot) end
 
 
 ---@param p0 int
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 int
----@param p3 BOOL
+---@param p3 boolean
 ---@return boolean
 function STATS.STAT_SAVE(p0, p1, p2, p3) end
 
@@ -73,7 +72,7 @@ function STATS.STAT_CLOUD_SLOT_LOAD_FAILED(p0) end
 function STATS.STAT_CLOUD_SLOT_LOAD_FAILED_CODE(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function STATS.STAT_SET_BLOCK_SAVES(toggle) end
 
 
@@ -110,28 +109,28 @@ function STATS.GET_STAT_HASH_FOR_CHARACTER_STAT_(dataType, statIndex, charSlot) 
 
 ---@param statName Hash
 ---@param value int
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_INT(statName, value, save) end
 
 
 ---@param statName Hash
 ---@param value float
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_FLOAT(statName, value, save) end
 
 
 ---@param statName Hash
----@param value BOOL
----@param save BOOL
+---@param value boolean
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_BOOL(statName, value, save) end
 
 
 ---@param statName Hash
 ---@param value string
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_GXT_LABEL(statName, value, save) end
 
@@ -139,14 +138,14 @@ function STATS.STAT_SET_GXT_LABEL(statName, value, save) end
 ---@param statName Hash
 ---@param value number
 ---@param numFields int
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_DATE(statName, value, numFields, save) end
 
 
 ---@param statName Hash
 ---@param value string
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_STRING(statName, value, save) end
 
@@ -155,7 +154,7 @@ function STATS.STAT_SET_STRING(statName, value, save) end
 ---@param x float
 ---@param y float
 ---@param z float
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_POS(statName, x, y, z, save) end
 
@@ -164,20 +163,20 @@ function STATS.STAT_SET_POS(statName, x, y, z, save) end
 ---@param p1 int
 ---@param p2 int
 ---@param p3 int
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_MASKED_INT(statName, p1, p2, p3, save) end
 
 
 ---@param statName Hash
 ---@param value string
----@param save BOOL
+---@param save boolean
 ---@return boolean
 function STATS.STAT_SET_USER_ID(statName, value, save) end
 
 
 ---@param statName Hash
----@param p1 BOOL
+---@param p1 boolean
 ---@return boolean
 function STATS.STAT_SET_CURRENT_POSIX_TIME(statName, p1) end
 
@@ -199,10 +198,10 @@ function STATS.STAT_GET_FLOAT(statHash, outValue, p2) end
 
 
 ---@param statHash Hash
----@param outValue BOOL
+---@param outValue boolean
 ---@param p2 Any
 ---@return boolean
----@return BOOL outValue
+---@return boolean outValue
 function STATS.STAT_GET_BOOL(statHash, outValue, p2) end
 
 
@@ -322,24 +321,24 @@ function STATS.PACKED_STAT_GET_INT_STAT_INDEX(p0) end
 
 
 ---@param index int
----@param spStat BOOL
----@param charStat BOOL
+---@param spStat boolean
+---@param charStat boolean
 ---@param character int
 ---@return Hash
 function STATS.GET_PACKED_INT_STAT_KEY(index, spStat, charStat, character) end
 
 
 ---@param index int
----@param spStat BOOL
----@param charStat BOOL
+---@param spStat boolean
+---@param charStat boolean
 ---@param character int
 ---@return Hash
 function STATS.GET_PACKED_TU_INT_STAT_KEY(index, spStat, charStat, character) end
 
 
 ---@param index int
----@param spStat BOOL
----@param charStat BOOL
+---@param spStat boolean
+---@param charStat boolean
 ---@param character int
 ---@param section string
 ---@return Hash
@@ -359,7 +358,7 @@ function STATS.GET_PACKED_STAT_INT_CODE(index, characterSlot) end
 
 
 ---@param index int
----@param value BOOL
+---@param value boolean
 ---@param characterSlot int
 function STATS.SET_PACKED_STAT_BOOL_CODE(index, value, characterSlot) end
 
@@ -379,7 +378,7 @@ function STATS.PLAYSTATS_BACKGROUND_SCRIPT_ACTION(action, value) end
 ---@param posY float
 ---@param posZ float
 ---@param action string
----@param p4 BOOL
+---@param p4 boolean
 ---@param p5 int
 function STATS.PLAYSTATS_FLOW_LOW_(posX, posY, posZ, action, p4, p5) end
 
@@ -388,7 +387,7 @@ function STATS.PLAYSTATS_FLOW_LOW_(posX, posY, posZ, action, p4, p5) end
 ---@param posY float
 ---@param posZ float
 ---@param action string
----@param p4 BOOL
+---@param p4 boolean
 ---@param p5 int
 function STATS.PLAYSTATS_FLOW_MEDIUM_(posX, posY, posZ, action, p4, p5) end
 
@@ -397,7 +396,7 @@ function STATS.PLAYSTATS_FLOW_MEDIUM_(posX, posY, posZ, action, p4, p5) end
 ---@param posY float
 ---@param posZ float
 ---@param action string
----@param p4 BOOL
+---@param p4 boolean
 ---@param p5 int
 function STATS.PLAYSTATS_FLOW_HIGH_(posX, posY, posZ, action, p4, p5) end
 
@@ -436,16 +435,16 @@ function STATS.PLAYSTATS_LEAVE_JOB_CHAIN(p0, p1, p2, p3, p4) end
 ---@param p0 string
 ---@param p1 Any
 ---@param p2 Any
----@param p3 BOOL
+---@param p3 boolean
 function STATS.PLAYSTATS_MISSION_STARTED(p0, p1, p2, p3) end
 
 
 ---@param p0 string
 ---@param p1 Any
 ---@param p2 Any
----@param p3 BOOL
----@param p4 BOOL
----@param p5 BOOL
+---@param p3 boolean
+---@param p4 boolean
+---@param p5 boolean
 function STATS.PLAYSTATS_MISSION_OVER(p0, p1, p2, p3, p4, p5) end
 
 
@@ -465,7 +464,7 @@ function STATS.PLAYSTATS_RANDOM_MISSION_DONE(name, p1, p2, p3) end
 
 ---@param amount int
 ---@param act int
----@param player Player
+---@param player PlayerHandle
 ---@param cm float
 function STATS.PLAYSTATS_ROS_BET(amount, act, player, cm) end
 
@@ -548,24 +547,24 @@ function STATS.PLAYSTATS_WEBSITE_VISITED(scaleformHash, p1) end
 
 
 ---@param p0 int
----@param p1 BOOL
+---@param p1 boolean
 function STATS.PLAYSTATS_FRIEND_ACTIVITY(p0, p1) end
 
 
 ---@param totalTimeMs int
 ---@param p1 int
----@param p2 BOOL
+---@param p2 boolean
 function STATS.PLAYSTATS_ODDJOB_DONE(totalTimeMs, p1, p2) end
 
 
----@param p0 Ped
+---@param p0 PedHandle
 ---@param p1 int
 ---@param p2 int
 ---@param p3 int
 function STATS.PLAYSTATS_PROP_CHANGE(p0, p1, p2, p3) end
 
 
----@param p0 Ped
+---@param p0 PedHandle
 ---@param p1 Any
 ---@param p2 Any
 ---@param p3 Any
@@ -704,7 +703,7 @@ function STATS.PLAYSTATS_FM_EVENT_HUNTBEAST(p0) end
 function STATS.PLAYSTATS_PIMENU_HIDE_OPTIONS(data) end
 
 
----@param isBoss BOOL
+---@param isBoss boolean
 ---@param bossType int
 ---@param bossId1 int
 ---@param bossId2 int
@@ -766,7 +765,7 @@ function STATS.LEADERBOARDS_READ_SUCCESSFUL(p0, p1, p2) end
 ---@param p0 number
 ---@param p1 number
 ---@param p2 Any
----@param p3 BOOL
+---@param p3 boolean
 ---@param p4 Any
 ---@param p5 Any
 ---@return boolean
@@ -1490,7 +1489,7 @@ function STATS.PLAYSTATS_ARENA_WARS_SPECTATOR(p0, p1, p2, p3, p4) end
 function STATS.PLAYSTATS_ARENA_WARS_ENDED(data) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param p1 int
 ---@param p2 int
 ---@param p3 int

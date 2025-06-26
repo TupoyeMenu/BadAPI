@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -56,7 +55,7 @@ function EXTRAMETADATA.SETUP_SHOP_PED_APPAREL_QUERY(p0, p1, p2, p3) end
 ---@param character int
 ---@param p1 int
 ---@param p2 int
----@param p3 BOOL
+---@param p3 boolean
 ---@param p4 int
 ---@param componentId int
 ---@return int
@@ -93,7 +92,7 @@ function EXTRAMETADATA.GET_SHOP_PED_QUERY_PROP_INDEX(componentHash) end
 function EXTRAMETADATA.GET_SHOP_PED_PROP(componentHash, outProp) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param componentId int
 ---@param drawableVariant int
 ---@param textureVariant int
@@ -101,7 +100,7 @@ function EXTRAMETADATA.GET_SHOP_PED_PROP(componentHash, outProp) end
 function EXTRAMETADATA.GET_HASH_NAME_FOR_COMPONENT(entity, componentId, drawableVariant, textureVariant) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param componentId int
 ---@param propIndex int
 ---@param propTextureIndex int
@@ -180,14 +179,14 @@ function EXTRAMETADATA.GET_FORCED_PROP(componentHash, forcedPropIndex, nameHash,
 function EXTRAMETADATA.DOES_SHOP_PED_APPAREL_HAVE_RESTRICTION_TAG(componentHash, restrictionTagHash, componentId) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param componentId int
 ---@param restrictionTagHash Hash
 ---@return boolean
 function EXTRAMETADATA.DOES_CURRENT_PED_COMPONENT_HAVE_RESTRICTION_TAG(ped, componentId, restrictionTagHash) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param componentId int
 ---@param restrictionTagHash Hash
 ---@return boolean
@@ -195,7 +194,7 @@ function EXTRAMETADATA.DOES_CURRENT_PED_PROP_HAVE_RESTRICTION_TAG(ped, component
 
 
 ---@param character int
----@param p1 BOOL
+---@param p1 boolean
 ---@return int
 function EXTRAMETADATA.SETUP_SHOP_PED_OUTFIT_QUERY(character, p1) end
 

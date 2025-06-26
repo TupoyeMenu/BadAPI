@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -43,7 +42,7 @@ function ZONE.GET_NAME_OF_ZONE(x, y, z) end
 
 
 ---@param zoneId int
----@param toggle BOOL
+---@param toggle boolean
 function ZONE.SET_ZONE_ENABLED(zoneId, toggle) end
 
 

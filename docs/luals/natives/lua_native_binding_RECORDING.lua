@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -80,7 +79,7 @@ function RECORDING.IS_REPLAY_INITIALIZED() end
 function RECORDING.IS_REPLAY_AVAILABLE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return boolean
 function RECORDING.IS_REPLAY_RECORD_SPACE_AVAILABLE(p0) end
 

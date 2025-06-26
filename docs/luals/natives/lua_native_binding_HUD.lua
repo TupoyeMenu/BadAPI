@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -40,7 +39,7 @@ function HUD.BUSYSPINNER_IS_ON() end
 function HUD.BUSYSPINNER_IS_DISPLAYING() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.DISABLE_PAUSEMENU_SPINNER(p0) end
 
 
@@ -51,7 +50,7 @@ function HUD.SET_MOUSE_CURSOR_THIS_FRAME() end
 function HUD.SET_MOUSE_CURSOR_STYLE(spriteId) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MOUSE_CURSOR_VISIBLE(toggle) end
 
 
@@ -67,7 +66,7 @@ function HUD.IS_MOUSE_ROLLED_OVER_INSTRUCTIONAL_BUTTONS() end
 function HUD.GET_MOUSE_EVENT(scaleformHandle, p1, p2, p3) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.THEFEED_ONLY_SHOW_TOOLTIPS(toggle) end
 
 
@@ -138,7 +137,7 @@ function HUD.THEFEED_SET_RGBA_PARAMETER_FOR_NEXT_MESSAGE(red, green, blue, alpha
 function HUD.THEFEED_SET_FLASH_DURATION_PARAMETER_FOR_NEXT_MESSAGE(count) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.THEFEED_SET_VIBRATE_PARAMETER_FOR_NEXT_MESSAGE(toggle) end
 
 
@@ -151,7 +150,7 @@ function HUD.THEFEED_FREEZE_NEXT_POST() end
 function HUD.THEFEED_CLEAR_FROZEN_POST() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.THEFEED_SET_SNAP_FEED_ITEM_POSITIONS(p0) end
 
 
@@ -168,9 +167,9 @@ function HUD.BEGIN_TEXT_COMMAND_THEFEED_POST(text) end
 
 ---@param statTitle string
 ---@param iconEnum int
----@param stepVal BOOL
+---@param stepVal boolean
 ---@param barValue int
----@param isImportant BOOL
+---@param isImportant boolean
 ---@param pictureTextureDict string
 ---@param pictureTextureName string
 ---@return int
@@ -179,7 +178,7 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_STATS(statTitle, iconEnum, stepVal, b
 
 ---@param txdName string
 ---@param textureName string
----@param flash BOOL
+---@param flash boolean
 ---@param iconType int
 ---@param sender string
 ---@param subject string
@@ -189,7 +188,7 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT(txdName, textureName, fla
 
 ---@param txdName string
 ---@param textureName string
----@param flash BOOL
+---@param flash boolean
 ---@param iconType int
 ---@param sender string
 ---@param subject string
@@ -199,7 +198,7 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_SUBTITLE_LABEL(txdName, t
 
 ---@param txdName string
 ---@param textureName string
----@param flash BOOL
+---@param flash boolean
 ---@param iconType int
 ---@param sender string
 ---@param subject string
@@ -210,7 +209,7 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_TU(txdName, textureName, 
 
 ---@param txdName string
 ---@param textureName string
----@param flash BOOL
+---@param flash boolean
 ---@param iconType int
 ---@param sender string
 ---@param subject string
@@ -222,7 +221,7 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG(txdName, te
 
 ---@param txdName string
 ---@param textureName string
----@param flash BOOL
+---@param flash boolean
 ---@param iconType1 int
 ---@param sender string
 ---@param subject string
@@ -234,20 +233,20 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG(txdName, te
 function HUD.END_TEXT_COMMAND_THEFEED_POST_MESSAGETEXT_WITH_CREW_TAG_AND_ADDITIONAL_ICON(txdName, textureName, flash, iconType1, sender, subject, duration, clanTag, iconType2, p9) end
 
 
----@param blink BOOL
----@param p1 BOOL
+---@param blink boolean
+---@param p1 boolean
 ---@return int
 function HUD.END_TEXT_COMMAND_THEFEED_POST_TICKER(blink, p1) end
 
 
----@param blink BOOL
----@param p1 BOOL
+---@param blink boolean
+---@param p1 boolean
 ---@return int
 function HUD.END_TEXT_COMMAND_THEFEED_POST_TICKER_FORCED(blink, p1) end
 
 
----@param blink BOOL
----@param p1 BOOL
+---@param blink boolean
+---@param p1 boolean
 ---@return int
 function HUD.END_TEXT_COMMAND_THEFEED_POST_TICKER_WITH_TOKENS(blink, p1) end
 
@@ -261,12 +260,12 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_TICKER_WITH_TOKENS(blink, p1) end
 function HUD.END_TEXT_COMMAND_THEFEED_POST_AWARD(textureDict, textureName, rpBonus, colorOverlay, titleLabel) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 ---@param p2 int
 ---@param p3 int
----@param isLeader BOOL
----@param unk0 BOOL
+---@param isLeader boolean
+---@param unk0 boolean
 ---@param clanDesc int
 ---@param R int
 ---@param G int
@@ -276,12 +275,12 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_AWARD(textureDict, textureName, rpBon
 function HUD.END_TEXT_COMMAND_THEFEED_POST_CREWTAG(p0, p1, p2, p3, isLeader, unk0, clanDesc, R, G, B) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 ---@param p2 int
 ---@param p3 int
----@param isLeader BOOL
----@param unk0 BOOL
+---@param isLeader boolean
+---@param unk0 boolean
 ---@param clanDesc int
 ---@param playerName string
 ---@param R int
@@ -317,8 +316,8 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_UNLOCK_TU(gxtLabel1, p1, gxtLabel2, p
 function HUD.END_TEXT_COMMAND_THEFEED_POST_UNLOCK_TU_WITH_COLOR(p0, p1, p2, p3, p4, p5) end
 
 
----@param blink BOOL
----@param p1 BOOL
+---@param blink boolean
+---@param p1 boolean
 ---@return int
 function HUD.END_TEXT_COMMAND_THEFEED_POST_MPTICKER(blink, p1) end
 
@@ -326,8 +325,8 @@ function HUD.END_TEXT_COMMAND_THEFEED_POST_MPTICKER(blink, p1) end
 ---@param p0 string
 ---@param p1 string
 ---@param p2 string
----@param p3 BOOL
----@param p4 BOOL
+---@param p3 boolean
+---@param p4 boolean
 ---@return int
 function HUD.END_TEXT_COMMAND_THEFEED_POST_CREW_RANKUP_WITH_LITERAL_FLAG(p0, p1, p2, p3, p4) end
 
@@ -363,7 +362,7 @@ function HUD.BEGIN_TEXT_COMMAND_PRINT(GxtEntry) end
 
 
 ---@param duration int
----@param drawImmediately BOOL
+---@param drawImmediately boolean
 function HUD.END_TEXT_COMMAND_PRINT(duration, drawImmediately) end
 
 
@@ -389,7 +388,7 @@ function HUD.END_TEXT_COMMAND_DISPLAY_TEXT(x, y, p2) end
 function HUD.BEGIN_TEXT_COMMAND_GET_SCREEN_WIDTH_OF_DISPLAY_TEXT(text) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return float
 function HUD.END_TEXT_COMMAND_GET_SCREEN_WIDTH_OF_DISPLAY_TEXT(p0) end
 
@@ -409,8 +408,8 @@ function HUD.BEGIN_TEXT_COMMAND_DISPLAY_HELP(inputType) end
 
 
 ---@param p0 int
----@param loop BOOL
----@param beep BOOL
+---@param loop boolean
+---@param beep boolean
 ---@param shape int
 function HUD.END_TEXT_COMMAND_DISPLAY_HELP(p0, loop, beep, shape) end
 
@@ -428,7 +427,7 @@ function HUD.END_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(p0) end
 function HUD.BEGIN_TEXT_COMMAND_SET_BLIP_NAME(textLabel) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 function HUD.END_TEXT_COMMAND_SET_BLIP_NAME(blip) end
 
 
@@ -436,7 +435,7 @@ function HUD.END_TEXT_COMMAND_SET_BLIP_NAME(blip) end
 function HUD.BEGIN_TEXT_COMMAND_ADD_DIRECTLY_TO_PREVIOUS_BRIEFS(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.END_TEXT_COMMAND_ADD_DIRECTLY_TO_PREVIOUS_BRIEFS(p0) end
 
 
@@ -472,7 +471,7 @@ function HUD.ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL(labelName) end
 function HUD.ADD_TEXT_COMPONENT_SUBSTRING_TEXT_LABEL_HASH_KEY(gxtEntryHash) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 function HUD.ADD_TEXT_COMPONENT_SUBSTRING_BLIP_NAME(blip) end
 
 
@@ -486,7 +485,7 @@ function HUD.ADD_TEXT_COMPONENT_SUBSTRING_TIME(timestamp, flags) end
 
 
 ---@param value int
----@param commaSeparated BOOL
+---@param commaSeparated boolean
 function HUD.ADD_TEXT_COMPONENT_FORMATTED_INTEGER(value, commaSeparated) end
 
 
@@ -571,7 +570,7 @@ function HUD.HAS_ADDITIONAL_TEXT_LOADED(slot) end
 
 
 ---@param p0 int
----@param p1 BOOL
+---@param p1 boolean
 function HUD.CLEAR_ADDITIONAL_TEXT(p0, p1) end
 
 
@@ -633,7 +632,7 @@ function HUD.IS_RADAR_PREFERENCE_SWITCHED_ON() end
 function HUD.IS_SUBTITLE_PREFERENCE_SWITCHED_ON() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.DISPLAY_HUD(toggle) end
 
 
@@ -643,11 +642,11 @@ function HUD.DISPLAY_HUD_WHEN_NOT_IN_STATE_OF_PLAY_THIS_FRAME() end
 function HUD.DISPLAY_HUD_WHEN_PAUSED_THIS_FRAME() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.DISPLAY_RADAR(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_FAKE_SPECTATOR_MODE(toggle) end
 
 
@@ -671,7 +670,7 @@ function HUD.IS_MINIMAP_RENDERING() end
 function HUD.USE_VEHICLE_TARGETING_RETICULE(p0) end
 
 
----@param enable BOOL
+---@param enable boolean
 function HUD.USE_VEHICLE_TARGETING_RETICULE_ON_VEHICLES_(enable) end
 
 
@@ -682,32 +681,32 @@ function HUD.ADD_VALID_VEHICLE_HIT_HASH(p0) end
 function HUD.CLEAR_VALID_VEHICLE_HIT_HASHES() end
 
 
----@param blip Blip
----@param enabled BOOL
+---@param blip BlipHandle
+---@param enabled boolean
 function HUD.SET_BLIP_ROUTE(blip, enabled) end
 
 
 function HUD.CLEAR_ALL_BLIP_ROUTES() end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param colour int
 function HUD.SET_BLIP_ROUTE_COLOUR(blip, colour) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_FORCE_SHOW_GPS(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_USE_SET_DESTINATION_IN_PAUSE_MAP(toggle) end
 
 
----@param disabled BOOL
+---@param disabled boolean
 function HUD.SET_BLOCK_WANTED_FLASH(disabled) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.ADD_NEXT_MESSAGE_TO_PREVIOUS_BRIEFS(p0) end
 
 
@@ -723,7 +722,7 @@ function HUD.SET_RADAR_ZOOM_PRECISE(zoom) end
 function HUD.SET_RADAR_ZOOM(zoomLevel) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param zoom float
 function HUD.SET_RADAR_ZOOM_TO_BLIP(blip, zoom) end
 
@@ -774,11 +773,11 @@ function HUD.REPLACE_HUD_COLOUR(hudColorIndex, hudColorIndex2) end
 function HUD.REPLACE_HUD_COLOUR_WITH_RGBA(hudColorIndex, r, g, b, a) end
 
 
----@param visible BOOL
+---@param visible boolean
 function HUD.SET_ABILITY_BAR_VISIBILITY(visible) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_ALLOW_ABILITY_BAR(toggle) end
 
 
@@ -791,11 +790,11 @@ function HUD.FLASH_ABILITY_BAR(millisecondsToFlash) end
 function HUD.SET_ABILITY_BAR_VALUE(p0, p1) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.FLASH_WANTED_DISPLAY(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.FORCE_OFF_WANTED_STAR_FLASH(toggle) end
 
 
@@ -821,11 +820,11 @@ function HUD.SET_TEXT_SCALE(scale, size) end
 function HUD.SET_TEXT_COLOUR(red, green, blue, alpha) end
 
 
----@param align BOOL
+---@param align boolean
 function HUD.SET_TEXT_CENTRE(align) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_TEXT_RIGHT_JUSTIFY(toggle) end
 
 
@@ -846,7 +845,7 @@ function HUD.SET_TEXT_WRAP(start, end) end
 function HUD.SET_TEXT_LEADING(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.SET_TEXT_PROPORTIONAL(p0) end
 
 
@@ -885,7 +884,7 @@ function HUD.GET_DEFAULT_SCRIPT_RENDERTARGET_RENDER_ID() end
 
 
 ---@param name string
----@param p1 BOOL
+---@param p1 boolean
 ---@return boolean
 function HUD.REGISTER_NAMED_RENDERTARGET(name, p1) end
 
@@ -914,7 +913,7 @@ function HUD.GET_NAMED_RENDERTARGET_RENDER_ID(name) end
 function HUD.IS_NAMED_RENDERTARGET_LINKED(modelHash) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.CLEAR_HELP(toggle) end
 
 
@@ -955,47 +954,47 @@ function HUD.GET_NUMBER_OF_ACTIVE_BLIPS() end
 
 
 ---@param blipSprite int
----@return Blip
+---@return BlipHandle
 function HUD.GET_NEXT_BLIP_INFO_ID(blipSprite) end
 
 
 ---@param blipSprite int
----@return Blip
+---@return BlipHandle
 function HUD.GET_FIRST_BLIP_INFO_ID(blipSprite) end
 
 
 ---@param blipSprite int
----@return Blip
+---@return BlipHandle
 function HUD.GET_CLOSEST_BLIP_INFO_ID(blipSprite) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return Vector3
 function HUD.GET_BLIP_INFO_ID_COORD(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_INFO_ID_DISPLAY(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_INFO_ID_TYPE(blip) end
 
 
----@param blip Blip
----@return Entity
+---@param blip BlipHandle
+---@return EntityHandle
 function HUD.GET_BLIP_INFO_ID_ENTITY_INDEX(blip) end
 
 
----@param blip Blip
----@return Pickup
+---@param blip BlipHandle
+---@return PickupHandle
 function HUD.GET_BLIP_INFO_ID_PICKUP_INDEX(blip) end
 
 
----@param entity Entity
----@return Blip
+---@param entity EntityHandle
+---@return BlipHandle
 function HUD.GET_BLIP_FROM_ENTITY(entity) end
 
 
@@ -1003,7 +1002,7 @@ function HUD.GET_BLIP_FROM_ENTITY(entity) end
 ---@param posY float
 ---@param posZ float
 ---@param radius float
----@return Blip
+---@return BlipHandle
 function HUD.ADD_BLIP_FOR_RADIUS(posX, posY, posZ, radius) end
 
 
@@ -1012,24 +1011,24 @@ function HUD.ADD_BLIP_FOR_RADIUS(posX, posY, posZ, radius) end
 ---@param z float
 ---@param width float
 ---@param height float
----@return Blip
+---@return BlipHandle
 function HUD.ADD_BLIP_FOR_AREA(x, y, z, width, height) end
 
 
----@param entity Entity
----@return Blip
+---@param entity EntityHandle
+---@return BlipHandle
 function HUD.ADD_BLIP_FOR_ENTITY(entity) end
 
 
----@param pickup Pickup
----@return Blip
+---@param pickup PickupHandle
+---@return BlipHandle
 function HUD.ADD_BLIP_FOR_PICKUP(pickup) end
 
 
 ---@param x float
 ---@param y float
 ---@param z float
----@return Blip
+---@return BlipHandle
 function HUD.ADD_BLIP_FOR_COORD(x, y, z) end
 
 
@@ -1041,28 +1040,28 @@ function HUD.ADD_BLIP_FOR_COORD(x, y, z) end
 function HUD.TRIGGER_SONAR_BLIP(posX, posY, posZ, radius, p4) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.ALLOW_SONAR_BLIPS(toggle) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param posX float
 ---@param posY float
 ---@param posZ float
 function HUD.SET_BLIP_COORDS(blip, posX, posY, posZ) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return Vector3
 function HUD.GET_BLIP_COORDS(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param spriteId int
 function HUD.SET_BLIP_SPRITE(blip, spriteId) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_SPRITE(blip) end
 
@@ -1075,120 +1074,120 @@ function HUD.SET_COP_BLIP_SPRITE(p0, p1) end
 function HUD.SET_COP_BLIP_SPRITE_AS_STANDARD() end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param gxtEntry string
 function HUD.SET_BLIP_NAME_FROM_TEXT_FILE(blip, gxtEntry) end
 
 
----@param blip Blip
----@param player Player
+---@param blip BlipHandle
+---@param player PlayerHandle
 function HUD.SET_BLIP_NAME_TO_PLAYER_NAME(blip, player) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param alpha int
 function HUD.SET_BLIP_ALPHA(blip, alpha) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_ALPHA(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param opacity int
 ---@param duration int
 function HUD.SET_BLIP_FADE(blip, opacity, duration) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_FADE_DIRECTION(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param rotation int
 function HUD.SET_BLIP_ROTATION(blip, rotation) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param heading float
 function HUD.SET_BLIP_ROTATION_WITH_FLOAT(blip, heading) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_ROTATION(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param duration int
 function HUD.SET_BLIP_FLASH_TIMER(blip, duration) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param p1 Any
 function HUD.SET_BLIP_FLASH_INTERVAL(blip, p1) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param color int
 function HUD.SET_BLIP_COLOUR(blip, color) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param r int
 ---@param g int
 ---@param b int
 function HUD.SET_BLIP_SECONDARY_COLOUR(blip, r, g, b) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_COLOUR(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return int
 function HUD.GET_BLIP_HUD_COLOUR(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return boolean
 function HUD.IS_BLIP_SHORT_RANGE(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return boolean
 function HUD.IS_BLIP_ON_MINIMAP(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return boolean
 function HUD.DOES_BLIP_HAVE_GPS_ROUTE(blip) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_HIDDEN_ON_LEGEND(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_HIGH_DETAIL(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_AS_MISSION_CREATOR_BLIP(blip, toggle) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return boolean
 function HUD.IS_MISSION_CREATOR_BLIP(blip) end
 
 
----@return Blip
+---@return BlipHandle
 function HUD.GET_NEW_SELECTED_MISSION_CREATOR_BLIP() end
 
 
@@ -1196,15 +1195,15 @@ function HUD.GET_NEW_SELECTED_MISSION_CREATOR_BLIP() end
 function HUD.IS_HOVERING_OVER_MISSION_CREATOR_BLIP() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SHOW_START_MISSION_INSTRUCTIONAL_BUTTON(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SHOW_CONTACT_INSTRUCTIONAL_BUTTON(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SHOW_PURCHASE_INSTRUCTIONAL_BUTTON_(toggle) end
 
 
@@ -1216,116 +1215,116 @@ function HUD.RELOAD_MAP_MENU() end
 function HUD.SET_BLIP_MARKER_LONG_DISTANCE(p0, p1) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_FLASHES(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_FLASHES_ALTERNATE(blip, toggle) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return boolean
 function HUD.IS_BLIP_FLASHING(blip) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_AS_SHORT_RANGE(blip, toggle) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param scale float
 function HUD.SET_BLIP_SCALE(blip, scale) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param xScale float
 ---@param yScale float
 function HUD.SET_BLIP_SCALE_2D(blip, xScale, yScale) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param priority int
 function HUD.SET_BLIP_PRIORITY(blip, priority) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param displayId int
 function HUD.SET_BLIP_DISPLAY(blip, displayId) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param index int
 function HUD.SET_BLIP_CATEGORY(blip, index) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 function HUD.REMOVE_BLIP(blip) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_AS_FRIENDLY(blip, toggle) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 function HUD.PULSE_BLIP(blip) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param number int
 function HUD.SHOW_NUMBER_ON_BLIP(blip, number) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 function HUD.HIDE_NUMBER_ON_BLIP(blip) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_HEIGHT_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_TICK_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_GOLD_TICK_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_FOR_SALE_ICON_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_HEADING_INDICATOR_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_OUTLINE_INDICATOR_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_FRIEND_INDICATOR_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SHOW_CREW_INDICATOR_ON_BLIP(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_EXTENDED_HEIGHT_THRESHOLD(blip, toggle) end
 
 
@@ -1334,22 +1333,22 @@ function HUD.SET_BLIP_EXTENDED_HEIGHT_THRESHOLD(blip, toggle) end
 function HUD.SET_BLIP_SHORT_HEIGHT_THRESHOLD(p0, p1) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param p1 Any
 function HUD.SET_BLIP_USE_HEIGHT_INDICATOR_ON_EDGE(blip, p1) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_AS_MINIMAL_ON_EDGE(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_RADIUS_BLIP_EDGE(blip, toggle) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@return boolean
 function HUD.DOES_BLIP_EXIST(blip) end
 
@@ -1372,22 +1371,22 @@ function HUD.IS_WAYPOINT_ACTIVE() end
 function HUD.SET_NEW_WAYPOINT(x, y) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 function HUD.SET_BLIP_BRIGHT(blip, toggle) end
 
 
----@param blip Blip
----@param toggle BOOL
+---@param blip BlipHandle
+---@param toggle boolean
 ---@param hudColorIndex int
 function HUD.SET_BLIP_SHOW_CONE(blip, toggle, hudColorIndex) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function HUD.REMOVE_COP_BLIP_FROM_PED(ped) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param p1 float
 ---@param p2 float
 ---@param p3 float
@@ -1399,38 +1398,38 @@ function HUD.REMOVE_COP_BLIP_FROM_PED(ped) end
 function HUD.SETUP_FAKE_CONE_DATA(blip, p1, p2, p3, p4, p5, p6, p7, p8) end
 
 
----@param blip Blip
+---@param blip BlipHandle
 function HUD.REMOVE_FAKE_CONE_DATA(blip) end
 
 
 function HUD.CLEAR_FAKE_CONE_ARRAY() end
 
 
----@param blip Blip
+---@param blip BlipHandle
 ---@param blipChangeParam46 int
----@param blipChangeParam47 BOOL
+---@param blipChangeParam47 boolean
 function HUD.SET_BLIP_GPS_ROUTE_DISPLAY_DISTANCE_(blip, blipChangeParam46, blipChangeParam47) end
 
 
 ---@param componentId int
----@param toggle BOOL
+---@param toggle boolean
 ---@param overrideColor int
 ---@return boolean
 function HUD.SET_MINIMAP_COMPONENT(componentId, toggle, overrideColor) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MINIMAP_SONAR_SWEEP(toggle) end
 
 
 function HUD.SHOW_ACCOUNT_PICKER() end
 
 
----@return Blip
+---@return BlipHandle
 function HUD.GET_MAIN_PLAYER_BLIP_ID() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.SET_PM_WARNINGSCREEN_ACTIVE(p0) end
 
 
@@ -1445,11 +1444,11 @@ function HUD.HIDE_LOADING_ON_FADE_THIS_FRAME() end
 function HUD.SET_RADAR_AS_INTERIOR_THIS_FRAME(interior, x, y, z, zoom) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_INSIDE_VERY_SMALL_INTERIOR(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_INSIDE_VERY_LARGE_INTERIOR(toggle) end
 
 
@@ -1477,7 +1476,7 @@ function HUD.HIDE_MINIMAP_EXTERIOR_MAP_THIS_FRAME() end
 function HUD.HIDE_MINIMAP_INTERIOR_MAP_THIS_FRAME() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_USE_ISLAND_MAP(toggle) end
 
 
@@ -1497,15 +1496,15 @@ function HUD.DONT_ZOOM_MINIMAP_WHEN_SNIPING_THIS_FRAME() end
 function HUD.SET_WIDESCREEN_FORMAT(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.DISPLAY_AREA_NAME(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.DISPLAY_CASH(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.USE_FAKE_MP_CASH(toggle) end
 
 
@@ -1514,7 +1513,7 @@ function HUD.USE_FAKE_MP_CASH(toggle) end
 function HUD.CHANGE_FAKE_MP_CASH(cash, bank) end
 
 
----@param display BOOL
+---@param display boolean
 function HUD.DISPLAY_AMMO_THIS_FRAME(display) end
 
 
@@ -1524,7 +1523,7 @@ function HUD.DISPLAY_SNIPER_SCOPE_THIS_FRAME() end
 function HUD.HIDE_HUD_AND_RADAR_THIS_FRAME() end
 
 
----@param allow BOOL
+---@param allow boolean
 function HUD.ALLOW_DISPLAY_OF_MULTIPLAYER_CASH_TEXT(allow) end
 
 
@@ -1541,7 +1540,7 @@ function HUD.REMOVE_MULTIPLAYER_BANK_CASH() end
 
 
 ---@param p0 int
----@param p1 BOOL
+---@param p1 boolean
 function HUD.SET_MULTIPLAYER_HUD_CASH(p0, p1) end
 
 
@@ -1556,11 +1555,11 @@ function HUD.IS_IME_IN_PROGRESS() end
 
 
 ---@param message string
----@param p1 BOOL
+---@param p1 boolean
 function HUD.DISPLAY_HELP_TEXT_THIS_FRAME(message, p1) end
 
 
----@param show BOOL
+---@param show boolean
 function HUD.HUD_FORCE_WEAPON_WHEEL(show) end
 
 
@@ -1583,7 +1582,7 @@ function HUD.HUD_SET_WEAPON_WHEEL_TOP_SLOT(weaponHash) end
 function HUD.HUD_GET_WEAPON_WHEEL_TOP_SLOT(weaponTypeIndex) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.HUD_SHOWING_CHARACTER_SWITCH_SELECTION(toggle) end
 
 
@@ -1595,7 +1594,7 @@ function HUD.SET_GPS_FLAGS(p0, p1) end
 function HUD.CLEAR_GPS_FLAGS() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_RACE_TRACK_RENDER(toggle) end
 
 
@@ -1603,8 +1602,8 @@ function HUD.CLEAR_GPS_RACE_TRACK() end
 
 
 ---@param hudColor int
----@param displayOnFoot BOOL
----@param followPlayer BOOL
+---@param displayOnFoot boolean
+---@param followPlayer boolean
 function HUD.START_GPS_CUSTOM_ROUTE(hudColor, displayOnFoot, followPlayer) end
 
 
@@ -1614,7 +1613,7 @@ function HUD.START_GPS_CUSTOM_ROUTE(hudColor, displayOnFoot, followPlayer) end
 function HUD.ADD_POINT_TO_GPS_CUSTOM_ROUTE(x, y, z) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 ---@param radarThickness int
 ---@param mapThickness int
 function HUD.SET_GPS_CUSTOM_ROUTE_RENDER(toggle, radarThickness, mapThickness) end
@@ -1624,8 +1623,8 @@ function HUD.CLEAR_GPS_CUSTOM_ROUTE() end
 
 
 ---@param hudColor int
----@param routeFromPlayer BOOL
----@param displayOnFoot BOOL
+---@param routeFromPlayer boolean
+---@param displayOnFoot boolean
 function HUD.START_GPS_MULTI_ROUTE(hudColor, routeFromPlayer, displayOnFoot) end
 
 
@@ -1635,7 +1634,7 @@ function HUD.START_GPS_MULTI_ROUTE(hudColor, routeFromPlayer, displayOnFoot) end
 function HUD.ADD_POINT_TO_GPS_MULTI_ROUTE(x, y, z) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_GPS_MULTI_ROUTE_RENDER(toggle) end
 
 
@@ -1645,7 +1644,7 @@ function HUD.CLEAR_GPS_MULTI_ROUTE() end
 function HUD.CLEAR_GPS_PLAYER_WAYPOINT() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_GPS_FLASHES(toggle) end
 
 
@@ -1660,26 +1659,26 @@ function HUD.FLASH_MINIMAP_DISPLAY() end
 function HUD.FLASH_MINIMAP_DISPLAY_WITH_COLOR(hudColorIndex) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.TOGGLE_STEALTH_RADAR(toggle) end
 
 
----@param toggle BOOL
----@param ped Ped
+---@param toggle boolean
+---@param ped PedHandle
 function HUD.SET_MINIMAP_IN_SPECTATOR_MODE(toggle, ped) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param name string
 function HUD.SET_MISSION_NAME(p0, name) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param name string
 function HUD.SET_MISSION_NAME_FOR_UGC_MISSION(p0, name) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param p1 string
 ---@param p2 string
 ---@param p3 string
@@ -1691,19 +1690,19 @@ function HUD.SET_MISSION_NAME_FOR_UGC_MISSION(p0, name) end
 function HUD.SET_DESCRIPTION_FOR_UGC_MISSION_EIGHT_STRINGS(p0, p1, p2, p3, p4, p5, p6, p7, p8) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MINIMAP_BLOCK_WAYPOINT(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MINIMAP_IN_PROLOGUE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MINIMAP_BACKGROUND_HIDDEN(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MINIMAP_HIDE_FOW(toggle) end
 
 
@@ -1718,7 +1717,7 @@ function HUD.GET_MINIMAP_FOW_DISCOVERY_RATIO() end
 function HUD.GET_MINIMAP_FOW_COORDINATE_IS_REVEALED(x, y, z) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.SET_MINIMAP_FOW_DO_NOT_UPDATE(p0) end
 
 
@@ -1751,14 +1750,14 @@ function HUD.UNLOCK_MINIMAP_POSITION() end
 
 
 ---@param altitude float
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
 function HUD.SET_FAKE_MINIMAP_MAX_ALTIMETER_HEIGHT(altitude, p1, p2) end
 
 
 ---@param health int
 ---@param capacity int
----@param wasAdded BOOL
+---@param wasAdded boolean
 function HUD.SET_HEALTH_HUD_DISPLAY_VALUES(health, capacity, wasAdded) end
 
 
@@ -1770,8 +1769,8 @@ function HUD.SET_MAX_HEALTH_HUD_DISPLAY(maximumValue) end
 function HUD.SET_MAX_ARMOUR_HUD_DISPLAY(maximumValue) end
 
 
----@param toggleBigMap BOOL
----@param showFullMap BOOL
+---@param toggleBigMap boolean
+---@param showFullMap boolean
 function HUD.SET_BIGMAP_ACTIVE(toggleBigMap, showFullMap) end
 
 
@@ -1870,7 +1869,7 @@ function HUD.SET_FLOATING_HELP_TEXT_WORLD_POSITION(hudIndex, x, y, z) end
 
 
 ---@param hudIndex int
----@param entity Entity
+---@param entity EntityHandle
 ---@param offsetX float
 ---@param offsetY float
 function HUD.SET_FLOATING_HELP_TEXT_TO_ENTITY(hudIndex, entity, offsetX, offsetY) end
@@ -1886,14 +1885,14 @@ function HUD.SET_FLOATING_HELP_TEXT_STYLE(hudIndex, p1, p2, p3, p4, p5) end
 
 
 ---@param hudIndex int
----@param p1 BOOL
+---@param p1 boolean
 function HUD.CLEAR_FLOATING_HELP(hudIndex, p1) end
 
 
----@param player Player
+---@param player PlayerHandle
 ---@param username string
----@param pointedClanTag BOOL
----@param isRockstarClan BOOL
+---@param pointedClanTag boolean
+---@param isRockstarClan boolean
 ---@param clanTag string
 ---@param clanFlag int
 ---@param r int
@@ -1906,10 +1905,10 @@ function HUD.CREATE_MP_GAMER_TAG_WITH_CREW_COLOR(player, username, pointedClanTa
 function HUD.IS_MP_GAMER_TAG_MOVIE_ACTIVE() end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param username string
----@param pointedClanTag BOOL
----@param isRockstarClan BOOL
+---@param pointedClanTag boolean
+---@param isRockstarClan boolean
 ---@param clanTag string
 ---@param clanFlag int
 ---@return int
@@ -1932,23 +1931,23 @@ function HUD.IS_MP_GAMER_TAG_FREE(gamerTagId) end
 
 ---@param gamerTagId int
 ---@param component int
----@param toggle BOOL
+---@param toggle boolean
 ---@param p3 Any
 function HUD.SET_MP_GAMER_TAG_VISIBILITY(gamerTagId, component, toggle, p3) end
 
 
 ---@param gamerTagId int
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_ALL_MP_GAMER_TAGS_VISIBILITY(gamerTagId, toggle) end
 
 
 ---@param gamerTagId int
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MP_GAMER_TAGS_SHOULD_USE_VEHICLE_HEALTH(gamerTagId, toggle) end
 
 
 ---@param gamerTagId int
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_MP_GAMER_TAGS_SHOULD_USE_POINTS_HEALTH(gamerTagId, toggle) end
 
 
@@ -2024,11 +2023,11 @@ function HUD.IS_WARNING_MESSAGE_READY_FOR_CONTROL() end
 ---@param titleMsg string
 ---@param flags int
 ---@param promptMsg string
----@param p3 BOOL
+---@param p3 boolean
 ---@param p4 int
 ---@param p5 string
 ---@param p6 string
----@param showBackground BOOL
+---@param showBackground boolean
 ---@param errorCode int
 function HUD.SET_WARNING_MESSAGE(titleMsg, flags, promptMsg, p3, p4, p5, p6, showBackground, errorCode) end
 
@@ -2037,11 +2036,11 @@ function HUD.SET_WARNING_MESSAGE(titleMsg, flags, promptMsg, p3, p4, p5, p6, sho
 ---@param entryLine1 string
 ---@param instructionalKey int
 ---@param entryLine2 string
----@param p4 BOOL
+---@param p4 boolean
 ---@param p5 Any
 ---@param showBackground number
 ---@param p7 number
----@param p8 BOOL
+---@param p8 boolean
 ---@param p9 Any
 function HUD.SET_WARNING_MESSAGE_WITH_HEADER(entryHeader, entryLine1, instructionalKey, entryLine2, p4, p5, showBackground, p7, p8, p9) end
 
@@ -2050,12 +2049,12 @@ function HUD.SET_WARNING_MESSAGE_WITH_HEADER(entryHeader, entryLine1, instructio
 ---@param entryLine1 string
 ---@param instructionalKey int
 ---@param entryLine2 string
----@param p4 BOOL
+---@param p4 boolean
 ---@param p5 Any
 ---@param additionalIntInfo Any
 ---@param additionalTextInfoLine1 string
 ---@param additionalTextInfoLine2 string
----@param showBackground BOOL
+---@param showBackground boolean
 ---@param errorCode int
 function HUD.SET_WARNING_MESSAGE_WITH_HEADER_AND_SUBSTRING_FLAGS(entryHeader, entryLine1, instructionalKey, entryLine2, p4, p5, additionalIntInfo, additionalTextInfoLine1, additionalTextInfoLine2, showBackground, errorCode) end
 
@@ -2064,11 +2063,11 @@ function HUD.SET_WARNING_MESSAGE_WITH_HEADER_AND_SUBSTRING_FLAGS(entryHeader, en
 ---@param entryLine1 string
 ---@param flags int
 ---@param entryLine2 string
----@param p4 BOOL
+---@param p4 boolean
 ---@param p5 Any
 ---@param p6 number
 ---@param p7 number
----@param showBg BOOL
+---@param showBg boolean
 ---@param p9 Any
 ---@param p10 Any
 function HUD.SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED(entryHeader, entryLine1, flags, entryLine2, p4, p5, p6, p7, showBg, p9, p10) end
@@ -2079,12 +2078,12 @@ function HUD.SET_WARNING_MESSAGE_WITH_HEADER_EXTENDED(entryHeader, entryLine1, f
 ---@param p2 int
 ---@param p3 int
 ---@param labelMessage2 string
----@param p5 BOOL
+---@param p5 boolean
 ---@param p6 int
 ---@param p7 int
 ---@param p8 string
 ---@param p9 string
----@param background BOOL
+---@param background boolean
 ---@param errorCode int
 function HUD.SET_WARNING_MESSAGE_WITH_HEADER_AND_SUBSTRING_FLAGS_EXTENDED(labelTitle, labelMessage, p2, p3, labelMessage2, p5, p6, p7, p8, p9, background, errorCode) end
 
@@ -2118,7 +2117,7 @@ function HUD.IS_WARNING_MESSAGE_ACTIVE() end
 function HUD.CLEAR_DYNAMIC_PAUSE_MENU_ERROR_MESSAGE() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.CUSTOM_MINIMAP_SET_ACTIVE(toggle) end
 
 
@@ -2140,11 +2139,11 @@ function HUD.CUSTOM_MINIMAP_CLEAR_BLIPS() end
 function HUD.FORCE_SONAR_BLIPS_THIS_FRAME() end
 
 
----@return Blip
+---@return BlipHandle
 function HUD.GET_NORTH_BLID_INDEX() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.DISPLAY_PLAYER_NAME_TAGS_ON_BLIPS(toggle) end
 
 
@@ -2155,7 +2154,7 @@ function HUD.DRAW_HUD_OVER_FADE_THIS_FRAME() end
 
 
 ---@param menuhash Hash
----@param togglePause BOOL
+---@param togglePause boolean
 ---@param component int
 function HUD.ACTIVATE_FRONTEND_MENU(menuhash, togglePause, component) end
 
@@ -2169,7 +2168,7 @@ function HUD.RESTART_FRONTEND_MENU(menuHash, p1) end
 function HUD.GET_CURRENT_FRONTEND_MENU_VERSION() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_PAUSE_MENU_ACTIVE(toggle) end
 
 
@@ -2182,7 +2181,7 @@ function HUD.SUPPRESS_FRONTEND_RENDERING_THIS_FRAME() end
 function HUD.ALLOW_PAUSE_WHEN_NOT_IN_STATE_OF_PLAY_THIS_FRAME() end
 
 
----@param active BOOL
+---@param active boolean
 function HUD.SET_FRONTEND_ACTIVE(active) end
 
 
@@ -2261,13 +2260,13 @@ function HUD.PAUSE_MENU_GET_MOUSE_CLICK_EVENT(p0, p1, p2) end
 function HUD.PAUSE_MENU_REDRAW_INSTRUCTIONAL_BUTTONS(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param position int
 ---@param spinnerIndex int
 function HUD.PAUSE_MENU_SET_BUSY_SPINNER(p0, position, spinnerIndex) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.PAUSE_MENU_SET_WARN_ON_TAB_CHANGE(p0) end
 
 
@@ -2347,7 +2346,7 @@ function HUD.GET_CHARACTER_MENU_PED_INT_STAT(p0, p1, p2) end
 ---@param statHash Hash
 ---@param outValue int
 ---@param mask int
----@param p3 BOOL
+---@param p3 boolean
 ---@return boolean
 ---@return int outValue
 function HUD.GET_MENU_PED_MASKED_INT_STAT(statHash, outValue, mask, p3) end
@@ -2357,7 +2356,7 @@ function HUD.GET_MENU_PED_MASKED_INT_STAT(statHash, outValue, mask, p3) end
 ---@param outValue number
 ---@param p2 int
 ---@param mask int
----@param p4 BOOL
+---@param p4 boolean
 ---@return boolean
 function HUD.GET_CHARACTER_MENU_PED_MASKED_INT_STAT(statHash, outValue, p2, mask, p4) end
 
@@ -2371,32 +2370,32 @@ function HUD.GET_MENU_PED_FLOAT_STAT(statHash, outValue) end
 
 ---@param statHash float
 ---@param outValue float
----@param p2 BOOL
+---@param p2 boolean
 ---@return boolean
 ---@return float outValue
 function HUD.GET_CHARACTER_MENU_PED_FLOAT_STAT(statHash, outValue, p2) end
 
 
 ---@param statHash Hash
----@param outValue BOOL
+---@param outValue boolean
 ---@return boolean
----@return BOOL outValue
+---@return boolean outValue
 function HUD.GET_MENU_PED_BOOL_STAT(statHash, outValue) end
 
 
 function HUD.CLEAR_PED_IN_PAUSE_MENU() end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param p1 int
 function HUD.GIVE_PED_TO_PAUSE_MENU(ped, p1) end
 
 
----@param state BOOL
+---@param state boolean
 function HUD.SET_PAUSE_MENU_PED_LIGHTING(state) end
 
 
----@param state BOOL
+---@param state boolean
 function HUD.SET_PAUSE_MENU_PED_SLEEP_STATE(state) end
 
 
@@ -2426,7 +2425,7 @@ function HUD.SET_SOCIAL_CLUB_TOUR(name) end
 function HUD.IS_SOCIAL_CLUB_ACTIVE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function HUD.SET_TEXT_INPUT_BOX_ENABLED(p0) end
 
 
@@ -2457,62 +2456,62 @@ function HUD.MP_TEXT_CHAT_IS_TEAM_JOB(p0) end
 function HUD.OVERRIDE_MP_TEXT_CHAT_COLOR(p0, hudColor) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.MP_TEXT_CHAT_DISABLE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.FLAG_PLAYER_CONTEXT_IN_TOURNAMENT(toggle) end
 
 
----@param ped Ped
----@param hasCone BOOL
+---@param ped PedHandle
+---@param hasCone boolean
 function HUD.SET_PED_HAS_AI_BLIP(ped, hasCone) end
 
 
----@param ped Ped
----@param hasCone BOOL
+---@param ped PedHandle
+---@param hasCone boolean
 ---@param color int
 function HUD.SET_PED_HAS_AI_BLIP_WITH_COLOUR(ped, hasCone, color) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function HUD.DOES_PED_HAVE_AI_BLIP(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param gangId int
 function HUD.SET_PED_AI_BLIP_GANG_ID(ped, gangId) end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function HUD.SET_PED_AI_BLIP_HAS_CONE(ped, toggle) end
 
 
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function HUD.SET_PED_AI_BLIP_FORCED_ON(ped, toggle) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param range float
 function HUD.SET_PED_AI_BLIP_NOTICE_RANGE(ped, range) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param spriteId int
 function HUD.SET_PED_AI_BLIP_SPRITE(ped, spriteId) end
 
 
----@param ped Ped
----@return Blip
+---@param ped PedHandle
+---@return BlipHandle
 function HUD.GET_AI_PED_PED_BLIP_INDEX(ped) end
 
 
----@param ped Ped
----@return Blip
+---@param ped PedHandle
+---@return BlipHandle
 function HUD.GET_AI_PED_VEHICLE_BLIP_INDEX(ped) end
 
 
@@ -2523,11 +2522,11 @@ function HUD.HAS_DIRECTOR_MODE_BEEN_LAUNCHED_BY_CODE() end
 function HUD.SET_DIRECTOR_MODE_LAUNCHED_BY_SCRIPT() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_PLAYER_IS_IN_DIRECTOR_MODE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function HUD.SET_DIRECTOR_MODE_AVAILABLE(toggle) end
 
 

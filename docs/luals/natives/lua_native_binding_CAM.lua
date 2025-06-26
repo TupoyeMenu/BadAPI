@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -18,16 +17,16 @@
 ---@alias Vector3 vec3
 
 CAM = {}
----@param render BOOL
----@param ease BOOL
+---@param render boolean
+---@param ease boolean
 ---@param easeTime int
----@param p3 BOOL
----@param p4 BOOL
+---@param p3 boolean
+---@param p4 boolean
 ---@param p5 Any
 function CAM.RENDER_SCRIPT_CAMS(render, ease, easeTime, p3, p4, p5) end
 
 
----@param render BOOL
+---@param render boolean
 ---@param p1 float
 ---@param p2 int
 ---@param p3 Any
@@ -35,8 +34,8 @@ function CAM.STOP_RENDERING_SCRIPT_CAMS_USING_CATCH_UP(render, p1, p2, p3) end
 
 
 ---@param camName string
----@param p1 BOOL
----@return Cam
+---@param p1 boolean
+---@return CamHandle
 function CAM.CREATE_CAM(camName, p1) end
 
 
@@ -48,15 +47,15 @@ function CAM.CREATE_CAM(camName, p1) end
 ---@param rotY float
 ---@param rotZ float
 ---@param fov float
----@param p8 BOOL
+---@param p8 boolean
 ---@param p9 int
----@return Cam
+---@return CamHandle
 function CAM.CREATE_CAM_WITH_PARAMS(camName, posX, posY, posZ, rotX, rotY, rotZ, fov, p8, p9) end
 
 
 ---@param camHash Hash
----@param p1 BOOL
----@return Cam
+---@param p1 boolean
+---@return CamHandle
 function CAM.CREATE_CAMERA(camHash, p1) end
 
 
@@ -68,87 +67,87 @@ function CAM.CREATE_CAMERA(camHash, p1) end
 ---@param rotY float
 ---@param rotZ float
 ---@param fov float
----@param p8 BOOL
+---@param p8 boolean
 ---@param p9 Any
----@return Cam
+---@return CamHandle
 function CAM.CREATE_CAMERA_WITH_PARAMS(camHash, posX, posY, posZ, rotX, rotY, rotZ, fov, p8, p9) end
 
 
----@param cam Cam
----@param bScriptHostCam BOOL
+---@param cam CamHandle
+---@param bScriptHostCam boolean
 function CAM.DESTROY_CAM(cam, bScriptHostCam) end
 
 
----@param bScriptHostCam BOOL
+---@param bScriptHostCam boolean
 function CAM.DESTROY_ALL_CAMS(bScriptHostCam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.DOES_CAM_EXIST(cam) end
 
 
----@param cam Cam
----@param active BOOL
+---@param cam CamHandle
+---@param active boolean
 function CAM.SET_CAM_ACTIVE(cam, active) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.IS_CAM_ACTIVE(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.IS_CAM_RENDERING(cam) end
 
 
----@return Cam
+---@return CamHandle
 function CAM.GET_RENDERING_CAM() end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return Vector3
 function CAM.GET_CAM_COORD(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param rotationOrder int
 ---@return Vector3
 function CAM.GET_CAM_ROT(cam, rotationOrder) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_FOV(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_NEAR_CLIP(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_FAR_CLIP(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_NEAR_DOF(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_FAR_DOF(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_DOF_STRENGTH(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param posX float
 ---@param posY float
 ---@param posZ float
@@ -163,14 +162,14 @@ function CAM.GET_CAM_DOF_STRENGTH(cam) end
 function CAM.SET_CAM_PARAMS(cam, posX, posY, posZ, rotX, rotY, rotZ, fieldOfView, p8, p9, p10, p11) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param posX float
 ---@param posY float
 ---@param posZ float
 function CAM.SET_CAM_COORD(cam, posX, posY, posZ) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param rotX float
 ---@param rotY float
 ---@param rotZ float
@@ -178,47 +177,47 @@ function CAM.SET_CAM_COORD(cam, posX, posY, posZ) end
 function CAM.SET_CAM_ROT(cam, rotX, rotY, rotZ, rotationOrder) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param fieldOfView float
 function CAM.SET_CAM_FOV(cam, fieldOfView) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param nearClip float
 function CAM.SET_CAM_NEAR_CLIP(cam, nearClip) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param farClip float
 function CAM.SET_CAM_FAR_CLIP(cam, farClip) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 float
 function CAM.FORCE_CAM_FAR_CLIP(cam, p1) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param strength float
 function CAM.SET_CAM_MOTION_BLUR_STRENGTH(cam, strength) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param nearDOF float
 function CAM.SET_CAM_NEAR_DOF(cam, nearDOF) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param farDOF float
 function CAM.SET_CAM_FAR_DOF(cam, farDOF) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param dofStrength float
 function CAM.SET_CAM_DOF_STRENGTH(cam, dofStrength) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 float
 ---@param p2 float
 ---@param p3 float
@@ -226,8 +225,8 @@ function CAM.SET_CAM_DOF_STRENGTH(cam, dofStrength) end
 function CAM.SET_CAM_DOF_PLANES(cam, p1, p2, p3, p4) end
 
 
----@param cam Cam
----@param toggle BOOL
+---@param cam CamHandle
+---@param toggle boolean
 function CAM.SET_CAM_USE_SHALLOW_DOF_MODE(cam, toggle) end
 
 
@@ -237,7 +236,7 @@ function CAM.SET_USE_HI_DOF() end
 function CAM.SET_USE_HI_DOF_ON_SYNCED_SCENE_THIS_UPDATE() end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param p1 float
 function CAM.SET_CAM_DOF_OVERRIDDEN_FOCUS_DISTANCE(camera, p1) end
 
@@ -247,57 +246,57 @@ function CAM.SET_CAM_DOF_OVERRIDDEN_FOCUS_DISTANCE(camera, p1) end
 function CAM.SET_CAM_DOF_OVERRIDDEN_FOCUS_DISTANCE_BLEND_LEVEL(p0, p1) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param p1 float
 function CAM.SET_CAM_DOF_FNUMBER_OF_LENS(camera, p1) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param multiplier float
 function CAM.SET_CAM_DOF_FOCAL_LENGTH_MULTIPLIER(camera, multiplier) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param p1 float
 function CAM.SET_CAM_DOF_FOCUS_DISTANCE_BIAS(camera, p1) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param p1 float
 function CAM.SET_CAM_DOF_MAX_NEAR_IN_FOCUS_DISTANCE(camera, p1) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param p1 float
 function CAM.SET_CAM_DOF_MAX_NEAR_IN_FOCUS_DISTANCE_BLEND_LEVEL(camera, p1) end
 
 
----@param camera Cam
----@param state BOOL
+---@param camera CamHandle
+---@param state boolean
 function CAM.SET_CAM_DOF_SHOULD_KEEP_LOOK_AT_TARGET_IN_FOCUS(camera, state) end
 
 
----@param cam Cam
----@param entity Entity
+---@param cam CamHandle
+---@param entity EntityHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
----@param isRelative BOOL
+---@param isRelative boolean
 function CAM.ATTACH_CAM_TO_ENTITY(cam, entity, xOffset, yOffset, zOffset, isRelative) end
 
 
----@param cam Cam
----@param ped Ped
+---@param cam CamHandle
+---@param ped PedHandle
 ---@param boneIndex int
 ---@param x float
 ---@param y float
 ---@param z float
----@param heading BOOL
+---@param heading boolean
 function CAM.ATTACH_CAM_TO_PED_BONE(cam, ped, boneIndex, x, y, z, heading) end
 
 
----@param cam Cam
----@param ped Ped
+---@param cam CamHandle
+---@param ped PedHandle
 ---@param boneIndex int
 ---@param p3 float
 ---@param p4 float
@@ -305,105 +304,105 @@ function CAM.ATTACH_CAM_TO_PED_BONE(cam, ped, boneIndex, x, y, z, heading) end
 ---@param p6 float
 ---@param p7 float
 ---@param p8 float
----@param p9 BOOL
+---@param p9 boolean
 function CAM.HARD_ATTACH_CAM_TO_PED_BONE(cam, ped, boneIndex, p3, p4, p5, p6, p7, p8, p9) end
 
 
----@param cam Cam
----@param entity Entity
+---@param cam CamHandle
+---@param entity EntityHandle
 ---@param xRot float
 ---@param yRot float
 ---@param zRot float
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
----@param isRelative BOOL
+---@param isRelative boolean
 function CAM.HARD_ATTACH_CAM_TO_ENTITY(cam, entity, xRot, yRot, zRot, xOffset, yOffset, zOffset, isRelative) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param vehicle Vehicle
 ---@param boneIndex int
----@param relativeRotation BOOL
+---@param relativeRotation boolean
 ---@param rotX float
 ---@param rotY float
 ---@param rotZ float
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
----@param fixedDirection BOOL
+---@param fixedDirection boolean
 function CAM.ATTACH_CAM_TO_VEHICLE_BONE(cam, vehicle, boneIndex, relativeRotation, rotX, rotY, rotZ, offsetX, offsetY, offsetZ, fixedDirection) end
 
 
----@param cam Cam
+---@param cam CamHandle
 function CAM.DETACH_CAM(cam) end
 
 
----@param cam Cam
----@param p1 BOOL
+---@param cam CamHandle
+---@param p1 boolean
 function CAM.SET_CAM_INHERIT_ROLL_VEHICLE(cam, p1) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param x float
 ---@param y float
 ---@param z float
 function CAM.POINT_CAM_AT_COORD(cam, x, y, z) end
 
 
----@param cam Cam
----@param entity Entity
+---@param cam CamHandle
+---@param entity EntityHandle
 ---@param p2 float
 ---@param p3 float
 ---@param p4 float
----@param p5 BOOL
+---@param p5 boolean
 function CAM.POINT_CAM_AT_ENTITY(cam, entity, p2, p3, p4, p5) end
 
 
----@param cam Cam
----@param ped Ped
+---@param cam CamHandle
+---@param ped PedHandle
 ---@param boneIndex int
 ---@param x float
 ---@param y float
 ---@param z float
----@param p6 BOOL
+---@param p6 boolean
 function CAM.POINT_CAM_AT_PED_BONE(cam, ped, boneIndex, x, y, z, p6) end
 
 
----@param cam Cam
+---@param cam CamHandle
 function CAM.STOP_CAM_POINTING(cam) end
 
 
----@param cam Cam
----@param toggle BOOL
+---@param cam CamHandle
+---@param toggle boolean
 function CAM.SET_CAM_AFFECTS_AIMING(cam, toggle) end
 
 
----@param cam Cam
----@param toggle BOOL
+---@param cam CamHandle
+---@param toggle boolean
 function CAM.SET_CAM_CONTROLS_MINI_MAP_HEADING(cam, toggle) end
 
 
----@param cam Cam
----@param toggle BOOL
+---@param cam CamHandle
+---@param toggle boolean
 function CAM.SET_CAM_IS_INSIDE_VEHICLE(cam, toggle) end
 
 
 ---@param p0 Any
----@param p1 BOOL
+---@param p1 boolean
 function CAM.ALLOW_MOTION_BLUR_DECAY(p0, p1) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param name string
 function CAM.SET_CAM_DEBUG_NAME(camera, name) end
 
 
----@return Cam
+---@return CamHandle
 function CAM.GET_DEBUG_CAM() end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param x float
 ---@param y float
 ---@param z float
@@ -416,95 +415,95 @@ function CAM.GET_DEBUG_CAM() end
 function CAM.ADD_CAM_SPLINE_NODE(camera, x, y, z, xRot, yRot, zRot, length, smoothingStyle, rotationOrder) end
 
 
----@param cam Cam
----@param cam2 Cam
+---@param cam CamHandle
+---@param cam2 CamHandle
 ---@param length int
 ---@param p3 int
 function CAM.ADD_CAM_SPLINE_NODE_USING_CAMERA_FRAME(cam, cam2, length, p3) end
 
 
----@param cam Cam
----@param cam2 Cam
+---@param cam CamHandle
+---@param cam2 CamHandle
 ---@param length int
 ---@param p3 int
 function CAM.ADD_CAM_SPLINE_NODE_USING_CAMERA(cam, cam2, length, p3) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param length int
 ---@param p2 int
 function CAM.ADD_CAM_SPLINE_NODE_USING_GAMEPLAY_FRAME(cam, length, p2) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 float
 function CAM.SET_CAM_SPLINE_PHASE(cam, p1) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_SPLINE_PHASE(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_SPLINE_NODE_PHASE(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param timeDuration int
 function CAM.SET_CAM_SPLINE_DURATION(cam, timeDuration) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param smoothingStyle int
 function CAM.SET_CAM_SPLINE_SMOOTHING_STYLE(cam, smoothingStyle) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return int
 function CAM.GET_CAM_SPLINE_NODE_INDEX(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param easingFunction int
 ---@param p2 int
 ---@param p3 float
 function CAM.SET_CAM_SPLINE_NODE_EASE(cam, easingFunction, p2, p3) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 int
 ---@param scale float
 function CAM.SET_CAM_SPLINE_NODE_VELOCITY_SCALE(cam, p1, scale) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 int
 ---@param p2 float
 ---@param p3 float
 function CAM.OVERRIDE_CAM_SPLINE_VELOCITY(cam, p1, p2, p3) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 int
 ---@param p2 float
 ---@param p3 float
 function CAM.OVERRIDE_CAM_SPLINE_MOTION_BLUR(cam, p1, p2, p3) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 int
 ---@param flags int
 function CAM.SET_CAM_SPLINE_NODE_EXTRA_FLAGS(cam, p1, flags) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.IS_CAM_SPLINE_PAUSED(cam) end
 
 
----@param camera Cam
+---@param camera CamHandle
 ---@param camPosX float
 ---@param camPosY float
 ---@param camPosZ float
@@ -520,8 +519,8 @@ function CAM.IS_CAM_SPLINE_PAUSED(cam) end
 function CAM.INTERPOLATE_CAM_WITH_PARAMS_(camera, camPosX, camPosY, camPosZ, camRotX, camRotY, camRotZ, fov, duration, posCurveType, rotCurveType, rotOrder, fovCurveType) end
 
 
----@param camTo Cam
----@param camFrom Cam
+---@param camTo CamHandle
+---@param camFrom CamHandle
 ---@param duration int
 ---@param easeLocation int
 ---@param easeRotation int
@@ -529,26 +528,26 @@ function CAM.INTERPOLATE_CAM_WITH_PARAMS_(camera, camPosX, camPosY, camPosZ, cam
 function CAM.ACTIVATE_CAM_WITH_INTERP_AND_FOV_CURVE_(camTo, camFrom, duration, easeLocation, easeRotation, easeFov) end
 
 
----@param camTo Cam
----@param camFrom Cam
+---@param camTo CamHandle
+---@param camFrom CamHandle
 ---@param duration int
 ---@param easeLocation int
 ---@param easeRotation int
 function CAM.SET_CAM_ACTIVE_WITH_INTERP(camTo, camFrom, duration, easeLocation, easeRotation) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.IS_CAM_INTERPOLATING(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param type string
 ---@param amplitude float
 function CAM.SHAKE_CAM(cam, type, amplitude) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 string
 ---@param p2 string
 ---@param p3 string
@@ -556,18 +555,18 @@ function CAM.SHAKE_CAM(cam, type, amplitude) end
 function CAM.ANIMATED_SHAKE_CAM(cam, p1, p2, p3, amplitude) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.IS_CAM_SHAKING(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param amplitude float
 function CAM.SET_CAM_SHAKE_AMPLITUDE(cam, amplitude) end
 
 
----@param cam Cam
----@param p1 BOOL
+---@param cam CamHandle
+---@param p1 boolean
 function CAM.STOP_CAM_SHAKING(cam, p1) end
 
 
@@ -587,7 +586,7 @@ function CAM.ANIMATED_SHAKE_SCRIPT_GLOBAL(p0, p1, p2, p3) end
 function CAM.IS_SCRIPT_GLOBAL_SHAKING() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.STOP_SCRIPT_GLOBAL_SHAKING(p0) end
 
 
@@ -597,7 +596,7 @@ function CAM.STOP_SCRIPT_GLOBAL_SHAKING(p0) end
 function CAM.TRIGGER_VEHICLE_PART_BROKEN_CAMERA_SHAKE(vehicle, p1, p2) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param animName string
 ---@param animDictionary string
 ---@param x float
@@ -606,25 +605,25 @@ function CAM.TRIGGER_VEHICLE_PART_BROKEN_CAMERA_SHAKE(vehicle, p1, p2) end
 ---@param xRot float
 ---@param yRot float
 ---@param zRot float
----@param p9 BOOL
+---@param p9 boolean
 ---@param p10 int
 ---@return boolean
 function CAM.PLAY_CAM_ANIM(cam, animName, animDictionary, x, y, z, xRot, yRot, zRot, p9, p10) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param animName string
 ---@param animDictionary string
 ---@return boolean
 function CAM.IS_CAM_PLAYING_ANIM(cam, animName, animDictionary) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param phase float
 function CAM.SET_CAM_ANIM_CURRENT_PHASE(cam, phase) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return float
 function CAM.GET_CAM_ANIM_CURRENT_PHASE(cam) end
 
@@ -637,37 +636,37 @@ function CAM.GET_CAM_ANIM_CURRENT_PHASE(cam) end
 function CAM.PLAY_SYNCHRONIZED_CAM_ANIM(p0, p1, animName, animDictionary) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 float
 ---@param p2 float
 ---@param p3 float
 function CAM.SET_FLY_CAM_HORIZONTAL_RESPONSE(cam, p1, p2, p3) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param p1 float
 ---@param p2 float
 ---@param p3 float
 function CAM.SET_FLY_CAM_VERTICAL_RESPONSE(cam, p1, p2, p3) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param height float
 function CAM.SET_FLY_CAM_MAX_HEIGHT(cam, height) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@param x float
 ---@param y float
 ---@param z float
 function CAM.SET_FLY_CAM_COORD_AND_CONSTRAIN(cam, x, y, z) end
 
 
----@param cam Cam
+---@param cam CamHandle
 function CAM.SET_FLY_CAM_VERTICAL_CONTROLS_THIS_UPDATE(cam) end
 
 
----@param cam Cam
+---@param cam CamHandle
 ---@return boolean
 function CAM.WAS_FLY_CAM_CONSTRAINED_ON_PREVIOUS_UDPATE(cam) end
 
@@ -696,7 +695,7 @@ function CAM.DO_SCREEN_FADE_IN(duration) end
 function CAM.DO_SCREEN_FADE_OUT(duration) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param p1 int
 function CAM.SET_WIDESCREEN_BORDERS(p0, p1) end
 
@@ -765,7 +764,7 @@ function CAM.SET_FIRST_PERSON_SHOOTER_CAMERA_HEADING(yaw) end
 function CAM.SET_FIRST_PERSON_SHOOTER_CAMERA_PITCH(pitch) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.SET_SCRIPTED_CAMERA_IS_FIRST_PERSON_THIS_FRAME(p0) end
 
 
@@ -782,11 +781,11 @@ function CAM.IS_GAMEPLAY_CAM_SHAKING() end
 function CAM.SET_GAMEPLAY_CAM_SHAKE_AMPLITUDE(amplitude) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.STOP_GAMEPLAY_CAM_SHAKING(p0) end
 
 
----@param ped Ped
+---@param ped PedHandle
 function CAM.SET_GAMEPLAY_CAM_FOLLOW_PED_THIS_UPDATE(ped) end
 
 
@@ -802,7 +801,7 @@ function CAM.IS_INTERPOLATING_FROM_SCRIPT_CAMS() end
 function CAM.IS_INTERPOLATING_TO_SCRIPT_CAMS() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.SET_GAMEPLAY_CAM_ALTITUDE_FOV_SCALING_STATE(p0) end
 
 
@@ -813,18 +812,18 @@ function CAM.DISABLE_GAMEPLAY_CAM_ALTITUDE_FOV_SCALING_THIS_UPDATE() end
 function CAM.IS_GAMEPLAY_CAM_LOOKING_BEHIND() end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function CAM.SET_GAMEPLAY_CAM_IGNORE_ENTITY_COLLISION_THIS_UPDATE(entity) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function CAM.DISABLE_CAM_COLLISION_FOR_OBJECT(entity) end
 
 
 function CAM.BYPASS_CAMERA_COLLISION_BUOYANCY_TEST_THIS_UPDATE() end
 
 
----@param entity Entity
+---@param entity EntityHandle
 function CAM.SET_GAMEPLAY_CAM_ENTITY_TO_LIMIT_FOCUS_OVER_BOUNDING_SPHERE_THIS_UPDATE(entity) end
 
 
@@ -852,8 +851,8 @@ function CAM.IS_FOLLOW_PED_CAM_ACTIVE() end
 function CAM.SET_FOLLOW_PED_CAM_THIS_UPDATE(camName, p1) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function CAM.USE_SCRIPT_CAM_FOR_AMBIENT_POPULATION_ORIGIN_THIS_FRAME(p0, p1) end
 
 
@@ -913,12 +912,12 @@ function CAM.SET_FOLLOW_PED_CAM_VIEW_MODE(viewMode) end
 function CAM.IS_FOLLOW_VEHICLE_CAM_ACTIVE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.SET_FOLLOW_VEHICLE_CAM_HIGH_ANGLE_MODE_THIS_UPDATE(p0) end
 
 
----@param p0 BOOL
----@param p1 BOOL
+---@param p0 boolean
+---@param p1 boolean
 function CAM.SET_FOLLOW_VEHICLE_CAM_HIGH_ANGLE_MODE_EVERY_UPDATE(p0, p1) end
 
 
@@ -1017,7 +1016,7 @@ function CAM.SET_FIRST_PERSON_AIM_CAM_NEAR_CLIP_THIS_UPDATE(p0) end
 function CAM.SET_THIRD_PERSON_AIM_CAM_NEAR_CLIP_THIS_UPDATE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.SET_ALLOW_CUSTOM_VEHICLE_DRIVE_BY_CAM_THIS_UPDATE(p0) end
 
 
@@ -1033,7 +1032,7 @@ function CAM.GET_FINAL_RENDERED_CAM_COORD() end
 function CAM.GET_FINAL_RENDERED_CAM_ROT(rotationOrder) end
 
 
----@param player Player
+---@param player PlayerHandle
 ---@param rotationOrder int
 ---@return Vector3
 function CAM.GET_FINAL_RENDERED_REMOTE_PLAYER_CAM_ROT(player, rotationOrder) end
@@ -1043,7 +1042,7 @@ function CAM.GET_FINAL_RENDERED_REMOTE_PLAYER_CAM_ROT(player, rotationOrder) end
 function CAM.GET_FINAL_RENDERED_CAM_FOV() end
 
 
----@param player Player
+---@param player PlayerHandle
 ---@return float
 function CAM.GET_FINAL_RENDERED_REMOTE_PLAYER_CAM_FOV(player) end
 
@@ -1078,11 +1077,11 @@ function CAM.GET_FINAL_RENDERED_CAM_MOTION_BLUR_STRENGTH() end
 function CAM.SET_GAMEPLAY_COORD_HINT(x, y, z, duration, blendOutDuration, blendInDuration, p6) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param x1 float
 ---@param y1 float
 ---@param z1 float
----@param p4 BOOL
+---@param p4 boolean
 ---@param duration int
 ---@param blendOutDuration int
 ---@param blendInDuration int
@@ -1093,29 +1092,29 @@ function CAM.SET_GAMEPLAY_PED_HINT(ped, x1, y1, z1, p4, duration, blendOutDurati
 ---@param offsetX float
 ---@param offsetY float
 ---@param offsetZ float
----@param p4 BOOL
+---@param p4 boolean
 ---@param time int
 ---@param easeInTime int
 ---@param easeOutTime int
 function CAM.SET_GAMEPLAY_VEHICLE_HINT(vehicle, offsetX, offsetY, offsetZ, p4, time, easeInTime, easeOutTime) end
 
 
----@param object Object
+---@param object ObjectHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
----@param p4 BOOL
+---@param p4 boolean
 ---@param time int
 ---@param easeInTime int
 ---@param easeOutTime int
 function CAM.SET_GAMEPLAY_OBJECT_HINT(object, xOffset, yOffset, zOffset, p4, time, easeInTime, easeOutTime) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@param xOffset float
 ---@param yOffset float
 ---@param zOffset float
----@param p4 BOOL
+---@param p4 boolean
 ---@param time int
 ---@param easeInTime int
 ---@param easeOutTime int
@@ -1127,15 +1126,15 @@ function CAM.SET_GAMEPLAY_ENTITY_HINT(entity, xOffset, yOffset, zOffset, p4, tim
 function CAM.IS_GAMEPLAY_HINT_ACTIVE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.STOP_GAMEPLAY_HINT(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.STOP_GAMEPLAY_HINT_BEING_CANCELLED_THIS_UPDATE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.STOP_CODE_GAMEPLAY_HINT(p0) end
 
 
@@ -1163,11 +1162,11 @@ function CAM.SET_GAMEPLAY_HINT_CAMERA_RELATIVE_SIDE_OFFSET(xOffset) end
 function CAM.SET_GAMEPLAY_HINT_CAMERA_RELATIVE_VERTICAL_OFFSET(yOffset) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function CAM.SET_GAMEPLAY_HINT_CAMERA_BLEND_TO_FOLLOW_PED_MEDIUM_VIEW_MODE(toggle) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.SET_CINEMATIC_BUTTON_ACTIVE(p0) end
 
 
@@ -1188,7 +1187,7 @@ function CAM.IS_CINEMATIC_CAM_SHAKING() end
 function CAM.SET_CINEMATIC_CAM_SHAKE_AMPLITUDE(p0) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function CAM.STOP_CINEMATIC_CAM_SHAKING(p0) end
 
 
@@ -1214,8 +1213,8 @@ function CAM.IS_CINEMATIC_FIRST_PERSON_VEHICLE_INTERIOR_CAM_RENDERING() end
 
 ---@param p0 Hash
 ---@param time int
----@param p2 BOOL
----@param entity Entity
+---@param p2 boolean
+---@param entity EntityHandle
 function CAM.CREATE_CINEMATIC_SHOT(p0, time, p2, entity) end
 
 
@@ -1228,14 +1227,14 @@ function CAM.IS_CINEMATIC_SHOT_ACTIVE(p0) end
 function CAM.STOP_CINEMATIC_SHOT(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function CAM.FORCE_CINEMATIC_RENDERING_THIS_UPDATE(toggle) end
 
 
 function CAM.SET_CINEMATIC_NEWS_CHANNEL_ACTIVE_THIS_UPDATE() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function CAM.SET_CINEMATIC_MODE_ACTIVE(toggle) end
 
 
@@ -1278,7 +1277,7 @@ function CAM.SET_CUTSCENE_CAM_FAR_CLIP_THIS_UPDATE(p0) end
 ---@param p6 float
 ---@param p7 int
 ---@param p8 int
----@return Ped
+---@return PedHandle
 function CAM.GET_FOCUS_PED_ON_SCREEN(p0, p1, p2, p3, p4, p5, p6, p7, p8) end
 
 

@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -51,10 +50,10 @@ function DLC.GET_IS_LOADING_SCREEN_ACTIVE() end
 function DLC.GET_IS_INITIAL_LOADING_SCREEN_ACTIVE() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param unused int
 ---@return boolean
----@return BOOL p0
+---@return boolean p0
 function DLC.HAS_CLOUD_REQUESTS_FINISHED(p0, unused) end
 
 

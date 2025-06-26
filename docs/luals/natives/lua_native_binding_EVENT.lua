@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -18,7 +17,7 @@
 ---@alias Vector3 vec3
 
 EVENT = {}
----@param ped Ped
+---@param ped PedHandle
 ---@param name Hash
 function EVENT.SET_DECISION_MAKER(ped, name) end
 
@@ -48,7 +47,7 @@ function EVENT.ADD_SHOCKING_EVENT_AT_POSITION(eventType, x, y, z, duration) end
 
 
 ---@param eventType int
----@param entity Entity
+---@param entity EntityHandle
 ---@param duration float
 ---@return int
 function EVENT.ADD_SHOCKING_EVENT_FOR_ENTITY(eventType, entity, duration) end
@@ -68,7 +67,7 @@ function EVENT.IS_SHOCKING_EVENT_IN_SPHERE(eventType, x, y, z, radius) end
 function EVENT.REMOVE_SHOCKING_EVENT(event) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function EVENT.REMOVE_ALL_SHOCKING_EVENTS(p0) end
 
 

@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -35,7 +34,7 @@ function MISC.SET_RANDOM_SEED(seed) end
 function MISC.SET_TIME_SCALE(timeScale) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_MISSION_FLAG(toggle) end
 
 
@@ -43,7 +42,7 @@ function MISC.SET_MISSION_FLAG(toggle) end
 function MISC.GET_MISSION_FLAG() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_RANDOM_EVENT_FLAG(toggle) end
 
 
@@ -96,11 +95,11 @@ function MISC.ACTIVITY_FEED_ONLINE_PLAYED_WITH_POST(p0) end
 function MISC.HAS_RESUMED_FROM_SUSPEND() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_SCRIPT_HIGH_PRIO(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_THIS_IS_A_TRIGGER_SCRIPT(toggle) end
 
 
@@ -111,7 +110,7 @@ function MISC.INFORM_CODE_OF_CONTENT_ID_OF_CURRENT_UGC_MISSION(p0) end
 ---@param p0 number
 ---@param p1 number
 ---@param p2 Any
----@param p3 BOOL
+---@param p3 boolean
 ---@return boolean
 function MISC.GET_BASE_ELEMENT_LOCATION_FROM_METADATA_BLOCK(p0, p1, p2, p3) end
 
@@ -181,7 +180,7 @@ function MISC.SET_OVERRIDE_WEATHER(weatherType) end
 
 
 ---@param weatherType string
----@param p1 BOOL
+---@param p1 boolean
 function MISC.SET_OVERRIDE_WEATHEREX(weatherType, p1) end
 
 
@@ -350,8 +349,8 @@ function MISC.GET_RANDOM_MWC_INT_IN_RANGE(startRange, endRange) end
 ---@param y float
 ---@param z float
 ---@param groundZ float
----@param ignoreWater BOOL
----@param p5 BOOL
+---@param ignoreWater boolean
+---@param p5 boolean
 ---@return boolean
 ---@return float groundZ
 function MISC.GET_GROUND_Z_FOR_3D_COORD(x, y, z, groundZ, ignoreWater, p5) end
@@ -372,8 +371,8 @@ function MISC.GET_GROUND_Z_AND_NORMAL_FOR_3D_COORD(x, y, z, groundZ, normal) end
 ---@param y float
 ---@param z float
 ---@param groundZ float
----@param p4 BOOL
----@param p5 BOOL
+---@param p4 boolean
+---@param p5 boolean
 ---@return boolean
 ---@return float groundZ
 function MISC.GET_GROUND_Z_EXCLUDING_OBJECTS_FOR_3D_COORD(x, y, z, groundZ, p4, p5) end
@@ -411,7 +410,7 @@ function MISC.ATAN2(p0, p1) end
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param useZ BOOL
+---@param useZ boolean
 ---@return float
 function MISC.GET_DISTANCE_BETWEEN_COORDS(x1, y1, z1, x2, y2, z2, useZ) end
 
@@ -439,7 +438,7 @@ function MISC.GET_HEADING_FROM_VECTOR_2D(dx, dy) end
 ---@param x3 float
 ---@param y3 float
 ---@param z3 float
----@param clamp BOOL
+---@param clamp boolean
 ---@return float
 function MISC.GET_RATIO_OF_CLOSEST_POINT_ON_LINE(x1, y1, z1, x2, y2, z2, x3, y3, z3, clamp) end
 
@@ -453,7 +452,7 @@ function MISC.GET_RATIO_OF_CLOSEST_POINT_ON_LINE(x1, y1, z1, x2, y2, z2, x3, y3,
 ---@param x3 float
 ---@param y3 float
 ---@param z3 float
----@param clamp BOOL
+---@param clamp boolean
 ---@return Vector3
 function MISC.GET_CLOSEST_POINT_ON_LINE(x1, y1, z1, x2, y2, z2, x3, y3, z3, clamp) end
 
@@ -535,13 +534,13 @@ function MISC.SLERP_NEAR_QUATERNION(t, x, y, z, w, x1, y1, z1, w1, outX, outY, o
 ---@param p3 float
 ---@param p4 float
 ---@param p5 float
----@param p6 BOOL
----@param p7 BOOL
----@param p8 BOOL
----@param p9 BOOL
----@param p10 BOOL
+---@param p6 boolean
+---@param p7 boolean
+---@param p8 boolean
+---@param p9 boolean
+---@param p10 boolean
 ---@param p11 Any
----@param p12 BOOL
+---@param p12 boolean
 ---@return boolean
 function MISC.IS_AREA_OCCUPIED(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12) end
 
@@ -567,13 +566,13 @@ function MISC.IS_AREA_OCCUPIED_SLOW(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,
 ---@param y float
 ---@param z float
 ---@param range float
----@param p4 BOOL
----@param checkVehicles BOOL
----@param checkPeds BOOL
----@param p7 BOOL
----@param p8 BOOL
----@param ignoreEntity Entity
----@param p10 BOOL
+---@param p4 boolean
+---@param checkVehicles boolean
+---@param checkPeds boolean
+---@param p7 boolean
+---@param p8 boolean
+---@param ignoreEntity EntityHandle
+---@param p10 boolean
 ---@return boolean
 function MISC.IS_POSITION_OCCUPIED(x, y, z, range, p4, checkVehicles, checkPeds, p7, p8, ignoreEntity, p10) end
 
@@ -593,10 +592,10 @@ function MISC.IS_POINT_OBSCURED_BY_A_MISSION_ENTITY(p0, p1, p2, p3, p4, p5, p6) 
 ---@param Y float
 ---@param Z float
 ---@param radius float
----@param p4 BOOL
----@param ignoreCopCars BOOL
----@param ignoreObjects BOOL
----@param p7 BOOL
+---@param p4 boolean
+---@param ignoreCopCars boolean
+---@param ignoreObjects boolean
+---@param p7 boolean
 function MISC.CLEAR_AREA(X, Y, Z, radius, p4, ignoreCopCars, ignoreObjects, p7) end
 
 
@@ -604,10 +603,10 @@ function MISC.CLEAR_AREA(X, Y, Z, radius, p4, ignoreCopCars, ignoreObjects, p7) 
 ---@param y float
 ---@param z float
 ---@param radius float
----@param p4 BOOL
----@param p5 BOOL
----@param p6 BOOL
----@param p7 BOOL
+---@param p4 boolean
+---@param p5 boolean
+---@param p6 boolean
+---@param p7 boolean
 function MISC.CLEAR_AREA_LEAVE_VEHICLE_HEALTH(x, y, z, radius, p4, p5, p6, p7) end
 
 
@@ -615,12 +614,12 @@ function MISC.CLEAR_AREA_LEAVE_VEHICLE_HEALTH(x, y, z, radius, p4, p5, p6, p7) e
 ---@param y float
 ---@param z float
 ---@param radius float
----@param p4 BOOL
----@param p5 BOOL
----@param p6 BOOL
----@param p7 BOOL
----@param p8 BOOL
----@param p9 BOOL
+---@param p4 boolean
+---@param p5 boolean
+---@param p6 boolean
+---@param p7 boolean
+---@param p8 boolean
+---@param p9 boolean
 ---@param p10 Any
 function MISC.CLEAR_AREA_OF_VEHICLES(x, y, z, radius, p4, p5, p6, p7, p8, p9, p10) end
 
@@ -632,11 +631,11 @@ function MISC.CLEAR_AREA_OF_VEHICLES(x, y, z, radius, p4, p5, p6, p7, p8, p9, p1
 ---@param y2 float
 ---@param z2 float
 ---@param width float
----@param p7 BOOL
----@param p8 BOOL
----@param p9 BOOL
----@param p10 BOOL
----@param p11 BOOL
+---@param p7 boolean
+---@param p8 boolean
+---@param p9 boolean
+---@param p10 boolean
+---@param p11 boolean
 ---@param p12 Any
 ---@param p13 Any
 function MISC.CLEAR_ANGLED_AREA_OF_VEHICLES(x1, y1, z1, x2, y2, z2, width, p7, p8, p9, p10, p11, p12, p13) end
@@ -677,7 +676,7 @@ function MISC.CLEAR_AREA_OF_PROJECTILES(x, y, z, radius, flags) end
 function MISC.CLEAR_SCENARIO_SPAWN_HISTORY() end
 
 
----@param ignoreVehicle BOOL
+---@param ignoreVehicle boolean
 function MISC.SET_SAVE_MENU_ACTIVE(ignoreVehicle) end
 
 
@@ -685,11 +684,11 @@ function MISC.SET_SAVE_MENU_ACTIVE(ignoreVehicle) end
 function MISC.GET_STATUS_OF_MANUAL_SAVE() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_CREDITS_ACTIVE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_CREDITS_FADE_OUT_WITH_SCREEN(toggle) end
 
 
@@ -718,7 +717,7 @@ function MISC.ADD_HOSPITAL_RESTART(x, y, z, p3, p4) end
 
 
 ---@param hospitalIndex int
----@param toggle BOOL
+---@param toggle boolean
 function MISC.DISABLE_HOSPITAL_RESTART(hospitalIndex, toggle) end
 
 
@@ -732,7 +731,7 @@ function MISC.ADD_POLICE_RESTART(p0, p1, p2, p3, p4) end
 
 
 ---@param policeIndex int
----@param toggle BOOL
+---@param toggle boolean
 function MISC.DISABLE_POLICE_RESTART(policeIndex, toggle) end
 
 
@@ -746,27 +745,27 @@ function MISC.SET_RESTART_COORD_OVERRIDE(x, y, z, heading) end
 function MISC.CLEAR_RESTART_COORD_OVERRIDE() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.PAUSE_DEATH_ARREST_RESTART(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.IGNORE_NEXT_RESTART(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_FADE_OUT_AFTER_DEATH(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_FADE_OUT_AFTER_ARREST(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_FADE_IN_AFTER_DEATH_ARREST(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_FADE_IN_AFTER_LOAD(toggle) end
 
 
@@ -782,17 +781,17 @@ function MISC.REGISTER_SAVE_HOUSE(x, y, z, p3, p4, p5, p6) end
 
 
 ---@param savehouseHandle int
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function MISC.SET_SAVE_HOUSE(savehouseHandle, p1, p2) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param p1 float
 ---@param p2 float
 ---@param p3 float
 ---@param p4 float
----@param p5 BOOL
+---@param p5 boolean
 ---@param p6 float
 ---@param p7 float
 ---@return boolean
@@ -801,13 +800,13 @@ function MISC.OVERRIDE_SAVE_HOUSE(p0, p1, p2, p3, p4, p5, p6, p7) end
 
 ---@param p0 Vector3
 ---@param p1 float
----@param fadeInAfterLoad BOOL
----@param p3 BOOL
+---@param fadeInAfterLoad boolean
+---@param p3 boolean
 ---@return boolean
 ---@return Vector3 p0
 ---@return float p1
----@return BOOL fadeInAfterLoad
----@return BOOL p3
+---@return boolean fadeInAfterLoad
+---@return boolean p3
 function MISC.GET_SAVE_HOUSE_DETAILS_AFTER_SUCCESSFUL_LOAD(p0, p1, fadeInAfterLoad, p3) end
 
 
@@ -892,11 +891,11 @@ function MISC.IS_MEMORY_CARD_IN_USE() end
 ---@param y2 float
 ---@param z2 float
 ---@param damage int
----@param p7 BOOL
+---@param p7 boolean
 ---@param weaponHash Hash
----@param ownerPed Ped
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param ownerPed PedHandle
+---@param isAudible boolean
+---@param isInvisible boolean
 ---@param speed float
 function MISC.SHOOT_SINGLE_BULLET_BETWEEN_COORDS(x1, y1, z1, x2, y2, z2, damage, p7, weaponHash, ownerPed, isAudible, isInvisible, speed) end
 
@@ -908,13 +907,13 @@ function MISC.SHOOT_SINGLE_BULLET_BETWEEN_COORDS(x1, y1, z1, x2, y2, z2, damage,
 ---@param y2 float
 ---@param z2 float
 ---@param damage int
----@param p7 BOOL
+---@param p7 boolean
 ---@param weaponHash Hash
----@param ownerPed Ped
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param ownerPed PedHandle
+---@param isAudible boolean
+---@param isInvisible boolean
 ---@param speed float
----@param entity Entity
+---@param entity EntityHandle
 ---@param p14 Any
 function MISC.SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY(x1, y1, z1, x2, y2, z2, damage, p7, weaponHash, ownerPed, isAudible, isInvisible, speed, entity, p14) end
 
@@ -926,17 +925,17 @@ function MISC.SHOOT_SINGLE_BULLET_BETWEEN_COORDS_IGNORE_ENTITY(x1, y1, z1, x2, y
 ---@param y2 float
 ---@param z2 float
 ---@param damage int
----@param p7 BOOL
+---@param p7 boolean
 ---@param weaponHash Hash
----@param ownerPed Ped
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param ownerPed PedHandle
+---@param isAudible boolean
+---@param isInvisible boolean
 ---@param speed float
----@param entity Entity
----@param p14 BOOL
----@param p15 BOOL
----@param targetEntity Entity
----@param p17 BOOL
+---@param entity EntityHandle
+---@param p14 boolean
+---@param p15 boolean
+---@param targetEntity EntityHandle
+---@param p17 boolean
 ---@param p18 Any
 ---@param p19 Any
 ---@param p20 Any
@@ -959,15 +958,15 @@ function MISC.SET_FAKE_WANTED_LEVEL(fakeWantedLevel) end
 function MISC.GET_FAKE_WANTED_LEVEL() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.USING_MISSION_CREATOR(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.ALLOW_MISSION_CREATOR_WARP(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_MINIGAME_IN_PROGRESS(toggle) end
 
 
@@ -1000,7 +999,7 @@ function MISC.ARE_STRINGS_EQUAL(string1, string2) end
 
 ---@param str1 string
 ---@param str2 string
----@param matchCase BOOL
+---@param matchCase boolean
 ---@param maxLength int
 ---@return int
 function MISC.COMPARE_STRINGS(str1, str2, matchCase, maxLength) end
@@ -1032,7 +1031,7 @@ function MISC.IS_SNIPER_BULLET_IN_AREA(x1, y1, z1, x2, y2, z2) end
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_PROJECTILE_IN_AREA(x1, y1, z1, x2, y2, z2, ownedByPlayer) end
 
@@ -1044,7 +1043,7 @@ function MISC.IS_PROJECTILE_IN_AREA(x1, y1, z1, x2, y2, z2, ownedByPlayer) end
 ---@param y2 float
 ---@param z2 float
 ---@param type int
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_PROJECTILE_TYPE_IN_AREA(x1, y1, z1, x2, y2, z2, type, ownedByPlayer) end
 
@@ -1057,7 +1056,7 @@ function MISC.IS_PROJECTILE_TYPE_IN_AREA(x1, y1, z1, x2, y2, z2, type, ownedByPl
 ---@param z2 float
 ---@param width float
 ---@param p7 Any
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_PROJECTILE_TYPE_IN_ANGLED_AREA(x1, y1, z1, x2, y2, z2, width, p7, ownedByPlayer) end
 
@@ -1067,7 +1066,7 @@ function MISC.IS_PROJECTILE_TYPE_IN_ANGLED_AREA(x1, y1, z1, x2, y2, z2, width, p
 ---@param z float
 ---@param projectileHash Hash
 ---@param radius float
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_PROJECTILE_TYPE_WITHIN_DISTANCE(x, y, z, projectileHash, radius, ownedByPlayer) end
 
@@ -1080,7 +1079,7 @@ function MISC.IS_PROJECTILE_TYPE_WITHIN_DISTANCE(x, y, z, projectileHash, radius
 ---@param z2 float
 ---@param projectileHash Hash
 ---@param projectilePos Vector3
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 ---@return Vector3 projectilePos
 function MISC.GET_COORDS_OF_PROJECTILE_TYPE_IN_AREA(x1, y1, z1, x2, y2, z2, projectileHash, projectilePos, ownedByPlayer) end
@@ -1095,31 +1094,31 @@ function MISC.GET_COORDS_OF_PROJECTILE_TYPE_IN_AREA(x1, y1, z1, x2, y2, z2, proj
 ---@param distanceOfOppositeFace float
 ---@param weaponType Hash
 ---@param positionOut Vector3
----@param bIsPlayer BOOL
+---@param bIsPlayer boolean
 ---@return boolean
 ---@return Vector3 positionOut
 function MISC.GET_COORDS_OF_PROJECTILE_TYPE_IN_ANGLED_AREA(vecAngledAreaPoint1X, vecAngledAreaPoint1Y, vecAngledAreaPoint1Z, vecAngledAreaPoint2X, vecAngledAreaPoint2Y, vecAngledAreaPoint2Z, distanceOfOppositeFace, weaponType, positionOut, bIsPlayer) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param weaponHash Hash
 ---@param distance float
 ---@param outCoords Vector3
----@param p4 BOOL
+---@param p4 boolean
 ---@return boolean
 ---@return Vector3 outCoords
 function MISC.GET_COORDS_OF_PROJECTILE_TYPE_WITHIN_DISTANCE(ped, weaponHash, distance, outCoords, p4) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param weaponHash Hash
 ---@param distance float
 ---@param outCoords Vector3
----@param outProjectile Object
----@param p5 BOOL
+---@param outProjectile ObjectHandle
+---@param p5 boolean
 ---@return boolean
 ---@return Vector3 outCoords
----@return Object outProjectile
+---@return ObjectHandle outProjectile
 function MISC.GET_PROJECTILE_OF_PROJECTILE_TYPE_WITHIN_DISTANCE(ped, weaponHash, distance, outCoords, outProjectile, p5) end
 
 
@@ -1130,7 +1129,7 @@ function MISC.GET_PROJECTILE_OF_PROJECTILE_TYPE_WITHIN_DISTANCE(ped, weaponHash,
 ---@param y2 float
 ---@param z2 float
 ---@param width float
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_BULLET_IN_ANGLED_AREA(x1, y1, z1, x2, y2, z2, width, ownedByPlayer) end
 
@@ -1139,7 +1138,7 @@ function MISC.IS_BULLET_IN_ANGLED_AREA(x1, y1, z1, x2, y2, z2, width, ownedByPla
 ---@param y float
 ---@param z float
 ---@param radius float
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_BULLET_IN_AREA(x, y, z, radius, ownedByPlayer) end
 
@@ -1150,7 +1149,7 @@ function MISC.IS_BULLET_IN_AREA(x, y, z, radius, ownedByPlayer) end
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param ownedByPlayer BOOL
+---@param ownedByPlayer boolean
 ---@return boolean
 function MISC.IS_BULLET_IN_BOX(x1, y1, z1, x2, y2, z2, ownedByPlayer) end
 
@@ -1159,8 +1158,8 @@ function MISC.IS_BULLET_IN_BOX(x1, y1, z1, x2, y2, z2, ownedByPlayer) end
 ---@param y float
 ---@param z float
 ---@param p3 float
----@param p4 BOOL
----@param p5 BOOL
+---@param p4 boolean
+---@param p5 boolean
 ---@return boolean
 function MISC.HAS_BULLET_IMPACTED_IN_AREA(x, y, z, p3, p4, p5) end
 
@@ -1171,8 +1170,8 @@ function MISC.HAS_BULLET_IMPACTED_IN_AREA(x, y, z, p3, p4, p5) end
 ---@param p3 float
 ---@param p4 float
 ---@param p5 float
----@param p6 BOOL
----@param p7 BOOL
+---@param p6 boolean
+---@param p7 boolean
 ---@return boolean
 function MISC.HAS_BULLET_IMPACTED_IN_BOX(p0, p1, p2, p3, p4, p5, p6, p7) end
 
@@ -1302,7 +1301,7 @@ function MISC.ADD_STUNT_JUMP(x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, cam
 function MISC.ADD_STUNT_JUMP_ANGLED(x1, y1, z1, x2, y2, z2, radius1, x3, y3, z3, x4, y4, z4, radius2, camX, camY, camZ, p17, p18, p19) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.TOGGLE_SHOW_OPTIONAL_STUNT_JUMP_CAMERA(toggle) end
 
 
@@ -1318,7 +1317,7 @@ function MISC.ENABLE_STUNT_JUMP_SET(p0) end
 function MISC.DISABLE_STUNT_JUMP_SET(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_STUNT_JUMPS_CAN_TRIGGER(toggle) end
 
 
@@ -1341,15 +1340,15 @@ function MISC.GET_TOTAL_SUCCESSFUL_STUNT_JUMPS() end
 function MISC.CANCEL_STUNT_JUMP() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_GAME_PAUSED(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_THIS_SCRIPT_CAN_BE_PAUSED(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_THIS_SCRIPT_CAN_REMOVE_BLIPS_CREATED_BY_ANY_SCRIPT(toggle) end
 
 
@@ -1364,7 +1363,7 @@ function MISC.HAS_CHEAT_WITH_HASH_BEEN_ACTIVATED(hash, amount) end
 function MISC.HAS_PC_CHEAT_WITH_HASH_BEEN_ACTIVATED(hash) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function MISC.OVERRIDE_FREEZE_FLAGS(p0) end
 
 
@@ -1393,14 +1392,14 @@ function MISC.SET_GRAVITY_LEVEL(level) end
 
 ---@param p0 number
 ---@param p1 Any
----@param p2 BOOL
+---@param p2 boolean
 function MISC.START_SAVE_DATA(p0, p1, p2) end
 
 
 function MISC.STOP_SAVE_DATA() end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@return int
 function MISC.GET_SIZE_OF_SAVE_DATA(p0) end
 
@@ -1480,12 +1479,12 @@ function MISC.COPY_SCRIPT_STRUCT(dst, src, size) end
 
 
 ---@param dispatchService int
----@param toggle BOOL
+---@param toggle boolean
 function MISC.ENABLE_DISPATCH_SERVICE(dispatchService, toggle) end
 
 
 ---@param dispatchService int
----@param toggle BOOL
+---@param toggle boolean
 function MISC.BLOCK_DISPATCH_SERVICE_RESOURCE_CREATION(dispatchService, toggle) end
 
 
@@ -1509,7 +1508,7 @@ function MISC.CREATE_INCIDENT(dispatchService, x, y, z, numUnits, radius, outInc
 
 
 ---@param dispatchService int
----@param ped Ped
+---@param ped PedHandle
 ---@param numUnits int
 ---@param radius float
 ---@param outIncidentID int
@@ -1561,8 +1560,8 @@ function MISC.FIND_SPAWN_POINT_IN_DIRECTION(posX, posY, posZ, fwdVecX, fwdVecY, 
 ---@param z2 float
 ---@param p6 float
 ---@param p7 float
----@param p8 BOOL
----@param p9 BOOL
+---@param p8 boolean
+---@param p9 boolean
 ---@return int
 function MISC.ADD_POP_MULTIPLIER_AREA(x1, y1, z1, x2, y2, z2, p6, p7, p8, p9) end
 
@@ -1573,7 +1572,7 @@ function MISC.DOES_POP_MULTIPLIER_AREA_EXIST(id) end
 
 
 ---@param id int
----@param p1 BOOL
+---@param p1 boolean
 function MISC.REMOVE_POP_MULTIPLIER_AREA(id, p1) end
 
 
@@ -1588,8 +1587,8 @@ function MISC.IS_POP_MULTIPLIER_AREA_NETWORKED(id) end
 ---@param radius float
 ---@param pedMultiplier float
 ---@param vehicleMultiplier float
----@param p6 BOOL
----@param p7 BOOL
+---@param p6 boolean
+---@param p7 boolean
 ---@return int
 function MISC.ADD_POP_MULTIPLIER_SPHERE(x, y, z, radius, pedMultiplier, vehicleMultiplier, p6, p7) end
 
@@ -1600,55 +1599,55 @@ function MISC.DOES_POP_MULTIPLIER_SPHERE_EXIST(id) end
 
 
 ---@param id int
----@param p1 BOOL
+---@param p1 boolean
 function MISC.REMOVE_POP_MULTIPLIER_SPHERE(id, p1) end
 
 
----@param ped Ped
----@param toggle BOOL
----@param p2 BOOL
+---@param ped PedHandle
+---@param toggle boolean
+---@param p2 boolean
 function MISC.ENABLE_TENNIS_MODE(ped, toggle, p2) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function MISC.IS_TENNIS_MODE(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param animDict string
 ---@param animName string
 ---@param p3 float
 ---@param p4 float
----@param p5 BOOL
+---@param p5 boolean
 function MISC.PLAY_TENNIS_SWING_ANIM(ped, animDict, animName, p3, p4, p5) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function MISC.GET_TENNIS_SWING_ANIM_COMPLETE(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function MISC.GET_TENNIS_SWING_ANIM_CAN_BE_INTERRUPTED(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return boolean
 function MISC.GET_TENNIS_SWING_ANIM_SWUNG(ped) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param p1 int
 ---@param p2 float
 ---@param p3 float
 ---@param p4 float
----@param p5 BOOL
+---@param p5 boolean
 function MISC.PLAY_TENNIS_DIVE_ANIM(ped, p1, p2, p3, p4, p5) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param p1 string
 ---@param p2 float
 function MISC.SET_TENNIS_MOVE_NETWORK_SIGNAL_FLOAT(ped, p1, p2) end
@@ -1727,7 +1726,7 @@ function MISC.ADD_TACTICAL_NAV_MESH_POINT(x, y, z) end
 function MISC.CLEAR_TACTICAL_NAV_MESH_POINTS() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_RIOT_MODE_ENABLED(toggle) end
 
 
@@ -1773,7 +1772,7 @@ function MISC.NEXT_ONSCREEN_KEYBOARD_RESULT_WILL_DISPLAY_USING_THESE_FONTS(p0) e
 
 
 ---@param hash Hash
----@param enable BOOL
+---@param enable boolean
 function MISC.ACTION_MANAGER_ENABLE_ACTION(hash, enable) end
 
 
@@ -1782,31 +1781,31 @@ function MISC.GET_REAL_WORLD_TIME() end
 
 
 ---@param eventType int
----@param suppress BOOL
+---@param suppress boolean
 function MISC.SUPRESS_RANDOM_EVENT_THIS_FRAME(eventType, suppress) end
 
 
----@param player Player
+---@param player PlayerHandle
 function MISC.SET_EXPLOSIVE_AMMO_THIS_FRAME(player) end
 
 
----@param player Player
+---@param player PlayerHandle
 function MISC.SET_FIRE_AMMO_THIS_FRAME(player) end
 
 
----@param player Player
+---@param player PlayerHandle
 function MISC.SET_EXPLOSIVE_MELEE_THIS_FRAME(player) end
 
 
----@param player Player
+---@param player PlayerHandle
 function MISC.SET_SUPER_JUMP_THIS_FRAME(player) end
 
 
----@param player Player
+---@param player PlayerHandle
 function MISC.SET_BEAST_JUMP_THIS_FRAME(player) end
 
 
----@param player Player
+---@param player PlayerHandle
 function MISC.SET_FORCED_JUMP_THIS_FRAME(player) end
 
 
@@ -1837,14 +1836,14 @@ function MISC.SCRIPT_RACE_INIT(p0, p1, p2, p3) end
 function MISC.SCRIPT_RACE_SHUTDOWN() end
 
 
----@param player Player
+---@param player PlayerHandle
 ---@param p1 Any
 ---@param p2 Any
 ---@param p3 Any
 function MISC.SCRIPT_RACE_PLAYER_HIT_CHECKPOINT(player, p1, p2, p3) end
 
 
----@param player Player
+---@param player PlayerHandle
 ---@param p1 int
 ---@param p2 int
 ---@return boolean
@@ -1906,7 +1905,7 @@ function MISC.PLM_IS_IN_CONSTRAINED_MODE() end
 function MISC.PLM_GET_CONSTRAINED_DURATION_MS() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_PLAYER_IS_IN_ANIMAL_FORM(toggle) end
 
 
@@ -1914,7 +1913,7 @@ function MISC.SET_PLAYER_IS_IN_ANIMAL_FORM(toggle) end
 function MISC.GET_IS_PLAYER_IN_ANIMAL_FORM() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function MISC.SET_PLAYER_IS_REPEATING_A_MISSION(toggle) end
 
 

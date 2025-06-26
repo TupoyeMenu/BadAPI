@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -24,8 +23,8 @@ PATHFIND = {}
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param nodeEnabled BOOL
----@param unknown2 BOOL
+---@param nodeEnabled boolean
+---@param unknown2 boolean
 function PATHFIND.SET_ROADS_IN_AREA(x1, y1, z1, x2, y2, z2, nodeEnabled, unknown2) end
 
 
@@ -36,9 +35,9 @@ function PATHFIND.SET_ROADS_IN_AREA(x1, y1, z1, x2, y2, z2, nodeEnabled, unknown
 ---@param y2 float
 ---@param z2 float
 ---@param width float
----@param unknown1 BOOL
----@param unknown2 BOOL
----@param unknown3 BOOL
+---@param unknown1 boolean
+---@param unknown2 boolean
+---@param unknown3 boolean
 function PATHFIND.SET_ROADS_IN_ANGLED_AREA(x1, y1, z1, x2, y2, z2, width, unknown1, unknown2, unknown3) end
 
 
@@ -48,7 +47,7 @@ function PATHFIND.SET_ROADS_IN_ANGLED_AREA(x1, y1, z1, x2, y2, z2, width, unknow
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param p6 BOOL
+---@param p6 boolean
 ---@param p7 Any
 function PATHFIND.SET_PED_PATHS_IN_AREA(x1, y1, z1, x2, y2, z2, p6, p7) end
 
@@ -56,7 +55,7 @@ function PATHFIND.SET_PED_PATHS_IN_AREA(x1, y1, z1, x2, y2, z2, p6, p7) end
 ---@param x float
 ---@param y float
 ---@param z float
----@param onGround BOOL
+---@param onGround boolean
 ---@param outPosition Vector3
 ---@param flags int
 ---@return boolean
@@ -216,7 +215,7 @@ function PATHFIND.GET_VEHICLE_NODE_IS_SWITCHED_OFF(nodeID) end
 ---@param p7 number
 ---@param p8 number
 ---@param p9 float
----@param p10 BOOL
+---@param p10 boolean
 ---@return boolean
 ---@return Vector3 p5
 ---@return Vector3 p6
@@ -224,12 +223,12 @@ function PATHFIND.GET_VEHICLE_NODE_IS_SWITCHED_OFF(nodeID) end
 function PATHFIND.GET_CLOSEST_ROAD(x, y, z, p3, p4, p5, p6, p7, p8, p9, p10) end
 
 
----@param set BOOL
+---@param set boolean
 ---@return boolean
 function PATHFIND.LOAD_ALL_PATH_NODES(set) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function PATHFIND.SET_ALLOW_STREAM_PROLOGUE_NODES(toggle) end
 
 
@@ -302,9 +301,9 @@ function PATHFIND.SET_PED_PATHS_BACK_TO_ORIGINAL(x1, y1, z1, x2, y2, z2, p6) end
 ---@param y float
 ---@param z float
 ---@param radius float
----@param p4 BOOL
----@param p5 BOOL
----@param p6 BOOL
+---@param p4 boolean
+---@param p5 boolean
+---@param p6 boolean
 ---@param outPosition Vector3
 ---@param nodeId int
 ---@return boolean
@@ -337,7 +336,7 @@ function PATHFIND.GET_STREET_NAME_AT_COORD(x, y, z, streetName, crossingRoad) en
 ---@param x float
 ---@param y float
 ---@param z float
----@param p3 BOOL
+---@param p3 boolean
 ---@param direction int
 ---@param p5 float
 ---@param distToNxJunction float
@@ -348,11 +347,11 @@ function PATHFIND.GET_STREET_NAME_AT_COORD(x, y, z, streetName, crossingRoad) en
 function PATHFIND.GENERATE_DIRECTIONS_TO_COORD(x, y, z, p3, direction, p5, distToNxJunction) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function PATHFIND.SET_IGNORE_NO_GPS_FLAG(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function PATHFIND.SET_IGNORE_NO_GPS_FLAG_UNTIL_FIRST_NORMAL_NODE(toggle) end
 
 
@@ -370,7 +369,7 @@ function PATHFIND.GET_GPS_BLIP_ROUTE_LENGTH() end
 
 
 ---@param result Vector3
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 float
 ---@param p3 int
 ---@return boolean
@@ -447,7 +446,7 @@ function PATHFIND.IS_NAVMESH_REQUIRED_REGION_IN_USE() end
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param toggle BOOL
+---@param toggle boolean
 function PATHFIND.DISABLE_NAVMESH_IN_AREA(x1, y1, z1, x2, y2, z2, toggle) end
 
 
@@ -482,7 +481,7 @@ function PATHFIND.GET_NUM_NAVMESHES_EXISTING_IN_AREA(x1, y1, z1, x2, y2, z2) end
 ---@param p4 float
 ---@param p5 float
 ---@param p6 float
----@param p7 BOOL
+---@param p7 boolean
 ---@param p8 Any
 ---@return int
 function PATHFIND.ADD_NAVMESH_BLOCKING_OBJECT(p0, p1, p2, p3, p4, p5, p6, p7, p8) end

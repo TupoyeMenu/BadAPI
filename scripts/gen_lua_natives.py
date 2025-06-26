@@ -11,7 +11,16 @@ class Arg:
     def __init__(self, name, type_):
         self.name = name
         self.type_ = type_.replace("BOOL", "boolean")
-        self.type_ = type_.replace("Any*", "number") # not actually a number but close enough
+        self.type_ = self.type_.replace("Blip", "BlipHandle")
+        self.type_ = self.type_.replace("Cam", "CamHandle")
+        self.type_ = self.type_.replace("Entity", "EntityHandle")
+        self.type_ = self.type_.replace("Interior", "InteriorHandle")
+        self.type_ = self.type_.replace("Object", "ObjectHandle")
+        self.type_ = self.type_.replace("Ped", "PedHandle")
+        self.type_ = self.type_.replace("Pickup", "PickupHandle")
+        self.type_ = self.type_.replace("Player", "PlayerHandle")
+        self.type_ = self.type_.replace("VehicleHandle", "VehicleHandle")
+        self.type_ = self.type_.replace("Any*", "number") # not actually a number but close enough
         if self.type_ == "number":
             self.is_any_ptr = True
         else:
@@ -34,7 +43,7 @@ class NativeFunc:
         self.lua_name = lua_name
         self.cpp_name = cpp_name
         self.args = args
-        self.return_type = return_type.replace("BOOL", "boolean").replace("Any*", "uintptr_t").replace("const char*", "string")
+        self.return_type = return_type.replace("BOOL", "boolean").replace("Any*", "uintptr_t").replace("const char*", "string").replace("Blip", "BlipHandle").replace("Cam", "CamHandle").replace("Entity", "EntityHandle").replace("Interior", "InteriorHandle").replace("Object", "ObjectHandle").replace("Ped", "PedHandle").replace("Pickup", "PickupHandle").replace("Player", "PlayerHandle").replace("VehicleHandle", "VehicleHandle")
 
         self.out_params = []
         if self.return_type != "void":
@@ -187,7 +196,6 @@ def generate_native_binding_cpp_and_hpp_files(functions_per_namespaces):
 
         file_buffer = ""
         file_buffer += "---@meta\n"
-        file_buffer += "---@alias BOOL boolean\n"
         file_buffer += "---@alias float number\n"
         file_buffer += "---@alias int integer\n"
         file_buffer += "---@alias Hash integer\n"

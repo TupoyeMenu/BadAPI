@@ -1,5 +1,4 @@
 ---@meta
----@alias BOOL boolean
 ---@alias float number
 ---@alias int integer
 ---@alias Hash integer
@@ -23,9 +22,9 @@ VEHICLE = {}
 ---@param y float
 ---@param z float
 ---@param heading float
----@param isNetwork BOOL
----@param bScriptHostVeh BOOL
----@param p7 BOOL
+---@param isNetwork boolean
+---@param bScriptHostVeh boolean
+---@param p7 boolean
 ---@return Vehicle
 function VEHICLE.CREATE_VEHICLE(modelHash, x, y, z, heading, isNetwork, bScriptHostVeh, p7) end
 
@@ -35,19 +34,19 @@ function VEHICLE.DELETE_VEHICLE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
----@param p2 BOOL
+---@param toggle boolean
+---@param p2 boolean
 function VEHICLE.SET_VEHICLE_ALLOW_HOMING_MISSLE_LOCKON(vehicle, toggle, p2) end
 
 
 ---@param vehicle Vehicle
----@param canBeLockedOn BOOL
----@param p2 BOOL
+---@param canBeLockedOn boolean
+---@param p2 boolean
 function VEHICLE.SET_VEHICLE_ALLOW_HOMING_MISSLE_LOCKON_SYNCED(vehicle, canBeLockedOn, p2) end
 
 
 ---@param veh Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_ALLOW_NO_PASSENGERS_LOCKON(veh, toggle) end
 
 
@@ -88,11 +87,11 @@ function VEHICLE.DOES_SCRIPT_VEHICLE_GENERATOR_EXIST(vehicleGenerator) end
 ---@param p8 int
 ---@param p9 int
 ---@param p10 int
----@param p11 BOOL
----@param p12 BOOL
----@param p13 BOOL
----@param p14 BOOL
----@param p15 BOOL
+---@param p11 boolean
+---@param p12 boolean
+---@param p13 boolean
+---@param p14 boolean
+---@param p15 boolean
 ---@param p16 int
 ---@return int
 function VEHICLE.CREATE_SCRIPT_VEHICLE_GENERATOR(x, y, z, heading, p4, p5, modelHash, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) end
@@ -103,7 +102,7 @@ function VEHICLE.DELETE_SCRIPT_VEHICLE_GENERATOR(vehicleGenerator) end
 
 
 ---@param vehicleGenerator int
----@param enabled BOOL
+---@param enabled boolean
 function VEHICLE.SET_SCRIPT_VEHICLE_GENERATOR(vehicleGenerator, enabled) end
 
 
@@ -113,15 +112,15 @@ function VEHICLE.SET_SCRIPT_VEHICLE_GENERATOR(vehicleGenerator, enabled) end
 ---@param x2 float
 ---@param y2 float
 ---@param z2 float
----@param toggle BOOL
----@param p7 BOOL
+---@param toggle boolean
+---@param p7 boolean
 function VEHICLE.SET_ALL_VEHICLE_GENERATORS_ACTIVE_IN_AREA(x1, y1, z1, x2, y2, z2, toggle, p7) end
 
 
 function VEHICLE.SET_ALL_VEHICLE_GENERATORS_ACTIVE() end
 
 
----@param active BOOL
+---@param active boolean
 function VEHICLE.SET_ALL_LOW_PRIORITY_VEHICLE_GENERATORS_ACTIVE(active) end
 
 
@@ -142,9 +141,9 @@ function VEHICLE.SET_VEHICLE_ON_GROUND_PROPERLY(vehicle, p1) end
 
 
 ---@param p0 Vehicle
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 ---@return boolean
 function VEHICLE.SET_VEHICLE_USE_CUTSCENE_WHEEL_COMPRESSION(p0, p1, p2, p3) end
 
@@ -168,8 +167,8 @@ function VEHICLE.IS_VEHICLE_STOPPED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param includeDriver BOOL
----@param includeDeadOccupants BOOL
+---@param includeDriver boolean
+---@param includeDeadOccupants boolean
 ---@return int
 function VEHICLE.GET_VEHICLE_NUMBER_OF_PASSENGERS(vehicle, includeDriver, includeDeadOccupants) end
 
@@ -213,7 +212,7 @@ function VEHICLE.SET_RANDOM_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME(multiplier) en
 function VEHICLE.SET_PARKED_VEHICLE_DENSITY_MULTIPLIER_THIS_FRAME(multiplier) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_RANDOM_TRAINS_THIS_FRAME(toggle) end
 
 
@@ -221,7 +220,7 @@ function VEHICLE.SET_DISABLE_RANDOM_TRAINS_THIS_FRAME(toggle) end
 function VEHICLE.SET_AMBIENT_VEHICLE_RANGE_MULTIPLIER_THIS_FRAME(value) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_FAR_DRAW_VEHICLES(toggle) end
 
 
@@ -241,40 +240,40 @@ function VEHICLE.SET_VEHICLE_INDIVIDUAL_DOORS_LOCKED(vehicle, doorId, doorLockSt
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_HAS_MUTED_SIRENS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param player Player
----@param toggle BOOL
+---@param player PlayerHandle
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DOORS_LOCKED_FOR_PLAYER(vehicle, player, toggle) end
 
 
 ---@param vehicle Vehicle
----@param player Player
+---@param player PlayerHandle
 ---@return boolean
 function VEHICLE.GET_VEHICLE_DOORS_LOCKED_FOR_PLAYER(vehicle, player) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DOORS_LOCKED_FOR_ALL_PLAYERS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DOORS_LOCKED_FOR_NON_SCRIPT_PLAYERS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
 ---@param team int
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DOORS_LOCKED_FOR_TEAM(vehicle, team, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DOORS_LOCKED_FOR_ALL_TEAMS(vehicle, toggle) end
 
 
@@ -293,20 +292,20 @@ function VEHICLE.GET_VEHICLE_THROTTLE_(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param isAudible BOOL
----@param isInvisible BOOL
+---@param isAudible boolean
+---@param isInvisible boolean
 function VEHICLE.EXPLODE_VEHICLE(vehicle, isAudible, isInvisible) end
 
 
 ---@param vehicle Vehicle
----@param killDriver BOOL
----@param explodeOnImpact BOOL
+---@param killDriver boolean
+---@param explodeOnImpact boolean
 function VEHICLE.SET_VEHICLE_OUT_OF_CONTROL(vehicle, killDriver, explodeOnImpact) end
 
 
 ---@param vehicle Vehicle
----@param ped Ped
----@param toggle BOOL
+---@param ped PedHandle
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_TIMED_EXPLOSION(vehicle, ped, toggle) end
 
 
@@ -330,7 +329,7 @@ function VEHICLE.HAVE_VEHICLE_REAR_DOORS_BEEN_BLOWN_OPEN_BY_STICKYBOMB(vehicle) 
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_TAXI_LIGHTS(vehicle, state) end
 
 
@@ -352,12 +351,12 @@ function VEHICLE.SET_VEHICLE_COLOURS(vehicle, colorPrimary, colorSecondary) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_FULLBEAM(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_IS_RACING(vehicle, toggle) end
 
 
@@ -424,22 +423,22 @@ function VEHICLE.GET_VEHICLE_ENVEFF_SCALE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_CAN_RESPRAY_VEHICLE(vehicle, state) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_GOON_BOSS_VEHICLE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_OPEN_REAR_DOORS_ON_EXPLOSION(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.FORCE_SUBMARINE_SURFACE_MODE(vehicle, toggle) end
 
 
@@ -449,7 +448,7 @@ function VEHICLE.FORCE_SUBMARINE_NEURTAL_BUOYANCY(p0, p1) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 ---@param depth1 float
 ---@param depth2 float
 ---@param depth3 float
@@ -472,12 +471,12 @@ function VEHICLE.SET_BOAT_IGNORE_LAND_PROBES(p0, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_BOUNDS_AFFECT_WATER_PROBES_(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_BOAT_ANCHOR(vehicle, toggle) end
 
 
@@ -492,12 +491,12 @@ function VEHICLE.CAN_ANCHOR_BOAT_HERE_IGNORE_PLAYERS(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_BOAT_REMAINS_ANCHORED_WHILE_PLAYER_IS_DRIVER(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_FORCE_LOW_LOD_ANCHOR_MODE(vehicle, p1) end
 
 
@@ -512,7 +511,7 @@ function VEHICLE.IS_BOAT_ANCHORED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_BOAT_SINKS_WHEN_WRECKED(vehicle, toggle) end
 
 
@@ -521,7 +520,7 @@ function VEHICLE.SET_BOAT_WRECKED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_SIREN(vehicle, toggle) end
 
 
@@ -536,7 +535,7 @@ function VEHICLE.IS_VEHICLE_SIREN_AUDIO_ON(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_STRONG(vehicle, toggle) end
 
 
@@ -554,36 +553,36 @@ function VEHICLE.GET_VEHICLE_COLOURS(vehicle, colorPrimary, colorSecondary) end
 
 ---@param vehicle Vehicle
 ---@param seatIndex int
----@param isTaskRunning BOOL
+---@param isTaskRunning boolean
 ---@return boolean
 function VEHICLE.IS_VEHICLE_SEAT_FREE(vehicle, seatIndex, isTaskRunning) end
 
 
 ---@param vehicle Vehicle
 ---@param seatIndex int
----@param p2 BOOL
----@return Ped
+---@param p2 boolean
+---@return PedHandle
 function VEHICLE.GET_PED_IN_VEHICLE_SEAT(vehicle, seatIndex, p2) end
 
 
 ---@param vehicle Vehicle
 ---@param seatIndex int
----@return Ped
+---@return PedHandle
 function VEHICLE.GET_LAST_PED_IN_VEHICLE_SEAT(vehicle, seatIndex) end
 
 
 ---@param vehicle Vehicle
----@param lightsOn BOOL
----@param highbeamsOn BOOL
+---@param lightsOn boolean
+---@param highbeamsOn boolean
 ---@return boolean
----@return BOOL lightsOn
----@return BOOL highbeamsOn
+---@return boolean lightsOn
+---@return boolean highbeamsOn
 function VEHICLE.GET_VEHICLE_LIGHTS_STATE(vehicle, lightsOn, highbeamsOn) end
 
 
 ---@param vehicle Vehicle
 ---@param wheelID int
----@param completely BOOL
+---@param completely boolean
 ---@return boolean
 function VEHICLE.IS_VEHICLE_TYRE_BURST(vehicle, wheelID, completely) end
 
@@ -601,7 +600,7 @@ function VEHICLE.SET_VEHICLE_FORWARD_SPEED_XY(vehicle, speed) end
 ---@param vehicle Vehicle
 ---@param distance float
 ---@param duration int
----@param p3 BOOL
+---@param p3 boolean
 function VEHICLE.BRING_VEHICLE_TO_HALT(vehicle, distance, duration, p3) end
 
 
@@ -611,7 +610,7 @@ function VEHICLE.SET_VEHICLE_STEER_FOR_BUILDINGS(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAUSES_SWERVING(vehicle, toggle) end
 
 
@@ -639,7 +638,7 @@ function VEHICLE.SET_FORKLIFT_FORK_HEIGHT(vehicle, height) end
 
 
 ---@param vehicle Vehicle
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
 function VEHICLE.IS_ENTITY_ATTACHED_TO_HANDLER_FRAME(vehicle, entity) end
 
@@ -649,19 +648,19 @@ function VEHICLE.IS_ENTITY_ATTACHED_TO_HANDLER_FRAME(vehicle, entity) end
 function VEHICLE.IS_ANY_ENTITY_ATTACHED_TO_HANDLER_FRAME(vehicle) end
 
 
----@param entity Entity
+---@param entity EntityHandle
 ---@return Vehicle
 function VEHICLE.FIND_HANDLER_VEHICLE_CONTAINER_IS_ATTACHED_TO(entity) end
 
 
 ---@param vehicle Vehicle
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
 function VEHICLE.IS_HANDLER_FRAME_LINED_UP_WITH_CONTAINER(vehicle, entity) end
 
 
 ---@param vehicle Vehicle
----@param entity Entity
+---@param entity EntityHandle
 function VEHICLE.ATTACH_CONTAINER_TO_HANDLER_FRAME_WHEN_LINED_UP(vehicle, entity) end
 
 
@@ -670,17 +669,17 @@ function VEHICLE.DETACH_CONTAINER_FROM_HANDLER_FRAME(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_DISABLE_HEIGHT_MAP_AVOIDANCE(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_PLANE_AVOIDS_OTHERS_(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_BOAT_DISABLE_AVOIDANCE(vehicle, p1) end
 
 
@@ -704,18 +703,18 @@ function VEHICLE.SET_CAR_BOOT_OPEN(vehicle) end
 
 ---@param vehicle Vehicle
 ---@param index int
----@param onRim BOOL
+---@param onRim boolean
 ---@param p3 float
 function VEHICLE.SET_VEHICLE_TYRE_BURST(vehicle, index, onRim, p3) end
 
 
 ---@param vehicle Vehicle
----@param closeInstantly BOOL
+---@param closeInstantly boolean
 function VEHICLE.SET_VEHICLE_DOORS_SHUT(vehicle, closeInstantly) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_TYRES_CAN_BURST(vehicle, toggle) end
 
 
@@ -725,20 +724,20 @@ function VEHICLE.GET_VEHICLE_TYRES_CAN_BURST(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param enabled BOOL
+---@param enabled boolean
 function VEHICLE.SET_VEHICLE_WHEELS_CAN_BREAK(vehicle, enabled) end
 
 
 ---@param vehicle Vehicle
 ---@param doorId int
----@param loose BOOL
----@param openInstantly BOOL
+---@param loose boolean
+---@param openInstantly boolean
 function VEHICLE.SET_VEHICLE_DOOR_OPEN(vehicle, doorId, loose, openInstantly) end
 
 
 ---@param vehicle Vehicle
 ---@param doorId int
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DOOR_AUTO_LOCK(vehicle, doorId, toggle) end
 
 
@@ -792,7 +791,7 @@ function VEHICLE.SET_VEHICLE_LIGHTS(vehicle, state) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_USE_PLAYER_LIGHT_SETTINGS(vehicle, toggle) end
 
 
@@ -802,7 +801,7 @@ function VEHICLE.SET_VEHICLE_HEADLIGHT_SHADOWS(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_VEHICLE_ALARM(vehicle, state) end
 
 
@@ -816,12 +815,12 @@ function VEHICLE.IS_VEHICLE_ALARM_ACTIVATED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_INTERIORLIGHT(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_FORCE_INTERIORLIGHT(vehicle, toggle) end
 
 
@@ -852,7 +851,7 @@ function VEHICLE.ATTACH_VEHICLE_ON_TO_TRAILER(vehicle, trailer, offsetX, offsetY
 
 
 ---@param vehicle Vehicle
----@param entity Entity
+---@param entity EntityHandle
 ---@param p2 float
 function VEHICLE.STABILISE_ENTITY_ATTACHED_TO_HELI(vehicle, entity, p2) end
 
@@ -908,7 +907,7 @@ function VEHICLE.SET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(vehicle, plateIndex) end
 function VEHICLE.GET_VEHICLE_NUMBER_PLATE_TEXT_INDEX(vehicle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_RANDOM_TRAINS(toggle) end
 
 
@@ -916,7 +915,7 @@ function VEHICLE.SET_RANDOM_TRAINS(toggle) end
 ---@param x float
 ---@param y float
 ---@param z float
----@param direction BOOL
+---@param direction boolean
 ---@param p5 Any
 ---@param p6 Any
 ---@return Vehicle
@@ -924,7 +923,7 @@ function VEHICLE.CREATE_MISSION_TRAIN(variation, x, y, z, direction, p5, p6) end
 
 
 ---@param trackId int
----@param state BOOL
+---@param state boolean
 function VEHICLE.SWITCH_TRAIN_TRACK(trackId, state) end
 
 
@@ -950,15 +949,15 @@ function VEHICLE.SET_TRAIN_SPEED(train, speed) end
 function VEHICLE.SET_TRAIN_CRUISE_SPEED(train, speed) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_RANDOM_BOATS(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_RANDOM_BOATS_MP(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_GARBAGE_TRUCKS(toggle) end
 
 
@@ -1039,7 +1038,7 @@ function VEHICLE.GET_TIME_POSITION_IN_RECORDING(vehicle) end
 ---@param vehicle Vehicle
 ---@param recording int
 ---@param script string
----@param p3 BOOL
+---@param p3 boolean
 function VEHICLE.START_PLAYBACK_RECORDED_VEHICLE(vehicle, recording, script, p3) end
 
 
@@ -1053,7 +1052,7 @@ function VEHICLE.START_PLAYBACK_RECORDED_VEHICLE_WITH_FLAGS(vehicle, recording, 
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.FORCE_PLAYBACK_RECORDED_VEHICLE_UPDATE(vehicle, p1) end
 
 
@@ -1114,7 +1113,7 @@ function VEHICLE.SET_PLAYBACK_TO_USE_AI(vehicle, drivingStyle) end
 ---@param vehicle Vehicle
 ---@param time int
 ---@param drivingStyle int
----@param p3 BOOL
+---@param p3 boolean
 function VEHICLE.SET_PLAYBACK_TO_USE_AI_TRY_TO_REVERT_BACK_LATER(vehicle, time, drivingStyle, p3) end
 
 
@@ -1141,27 +1140,27 @@ function VEHICLE.SET_GLOBAL_POSITION_OFFSET_FOR_RECORDED_VEHICLE_PLAYBACK(vehicl
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_SHOULD_LERP_FROM_AI_TO_FULL_RECORDING(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.EXPLODE_VEHICLE_IN_CUTSCENE(vehicle, p1) end
 
 
 ---@param p0 Any
 ---@param p1 float
 ---@param p2 Any
----@param p3 BOOL
----@param p4 BOOL
----@param p5 BOOL
+---@param p3 boolean
+---@param p4 boolean
+---@param p5 boolean
 ---@param p6 Any
 function VEHICLE.ADD_VEHICLE_STUCK_CHECK_WITH_WARP(p0, p1, p2, p3, p4, p5, p6) end
 
 
 ---@param model Hash
----@param suppressed BOOL
+---@param suppressed boolean
 function VEHICLE.SET_VEHICLE_MODEL_IS_SUPPRESSED(model, suppressed) end
 
 
@@ -1223,7 +1222,7 @@ function VEHICLE.DELETE_MISSION_TRAIN(train) end
 
 
 ---@param train Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_MISSION_TRAIN_AS_NO_LONGER_NEEDED(train, p1) end
 
 
@@ -1305,27 +1304,27 @@ function VEHICLE.FORCE_SUB_THROTTLE_FOR_TIME(vehicle, p1, p2) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_VEHICLE_CAN_BE_TARGETTED(vehicle, state) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_DONT_ALLOW_PLAYER_TO_ENTER_VEHICLE_IF_LOCKED_FOR_PLAYER(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_VEHICLE_CAN_BE_VISIBLY_DAMAGED(vehicle, state) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_HAS_UNBREAKABLE_LIGHTS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_RESPECTS_LOCKS_WHEN_HAS_DRIVER(vehicle, p1) end
 
 
@@ -1356,19 +1355,19 @@ function VEHICLE.IS_VEHICLE_DOOR_FULLY_OPEN(vehicle, doorId) end
 
 
 ---@param vehicle Vehicle
----@param value BOOL
----@param instantly BOOL
----@param disableAutoStart BOOL
+---@param value boolean
+---@param instantly boolean
+---@param disableAutoStart boolean
 function VEHICLE.SET_VEHICLE_ENGINE_ON(vehicle, value, instantly, disableAutoStart) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_UNDRIVEABLE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_PROVIDES_COVER(vehicle, toggle) end
 
 
@@ -1381,9 +1380,9 @@ function VEHICLE.SET_VEHICLE_DOOR_CONTROL(vehicle, doorId, speed, angle) end
 
 ---@param vehicle Vehicle
 ---@param doorId int
----@param p2 BOOL
----@param p3 BOOL
----@param p4 BOOL
+---@param p2 boolean
+---@param p3 boolean
+---@param p4 boolean
 function VEHICLE.SET_VEHICLE_DOOR_LATCHED(vehicle, doorId, p2, p3, p4) end
 
 
@@ -1395,24 +1394,24 @@ function VEHICLE.GET_VEHICLE_DOOR_ANGLE_RATIO(vehicle, doorId) end
 
 ---@param vehicle Vehicle
 ---@param doord int
----@return Ped
+---@return PedHandle
 function VEHICLE.GET_PED_USING_VEHICLE_DOOR(vehicle, doord) end
 
 
 ---@param vehicle Vehicle
 ---@param doorId int
----@param closeInstantly BOOL
+---@param closeInstantly boolean
 function VEHICLE.SET_VEHICLE_DOOR_SHUT(vehicle, doorId, closeInstantly) end
 
 
 ---@param vehicle Vehicle
 ---@param doorId int
----@param deleteDoor BOOL
+---@param deleteDoor boolean
 function VEHICLE.SET_VEHICLE_DOOR_BROKEN(vehicle, doorId, deleteDoor) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_BREAK(vehicle, toggle) end
 
 
@@ -1465,31 +1464,31 @@ function VEHICLE.GET_VEHICLE_XENON_LIGHT_COLOR_INDEX(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_IS_CONSIDERED_BY_PLAYER(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_WILL_FORCE_OTHER_VEHICLES_TO_STOP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_ACT_AS_IF_HAS_SIREN_ON(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_USE_MORE_RESTRICTIVE_SPAWN_CHECKS(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_MAY_BE_USED_BY_GOTO_POINT_ANY_MEANS(vehicle, p1) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 ---@param modelHash Hash
 ---@param successIndicator int
 ---@return Hash modelHash
@@ -1516,18 +1515,18 @@ function VEHICLE.IS_VEHICLE_DOOR_DAMAGED(veh, doorID) end
 
 ---@param vehicle Vehicle
 ---@param doorId int
----@param isBreakable BOOL
+---@param isBreakable boolean
 function VEHICLE.SET_DOOR_ALLOWED_TO_BE_BROKEN_OFF(vehicle, doorId, isBreakable) end
 
 
 ---@param vehicle Vehicle
----@param frontBumper BOOL
+---@param frontBumper boolean
 ---@return boolean
 function VEHICLE.IS_VEHICLE_BUMPER_BOUNCING(vehicle, frontBumper) end
 
 
 ---@param vehicle Vehicle
----@param frontBumper BOOL
+---@param frontBumper boolean
 ---@return boolean
 function VEHICLE.IS_VEHICLE_BUMPER_BROKEN_OFF(vehicle, frontBumper) end
 
@@ -1564,7 +1563,7 @@ function VEHICLE.GET_IN_VEHICLE_CLIPSET_HASH_FOR_SEAT(vehicle, p1) end
 
 
 ---@param train Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_RENDER_TRAIN_AS_DERAILED(train, toggle) end
 
 
@@ -1614,47 +1613,47 @@ function VEHICLE.SET_VEHICLE_DEFORMATION_FIXED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_ENGINE_MISSFIRE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_LEAK_OIL(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_LEAK_PETROL(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_VEHICLE_PETROL_TANK_FIRES(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_VEHICLE_PETROL_TANK_DAMAGE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_VEHICLE_ENGINE_FIRES(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_LIMIT_SPEED_WHEN_PLAYER_INACTIVE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_STOP_INSTANTLY_WHEN_PLAYER_INACTIVE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_PRETEND_OCCUPANTS(vehicle, toggle) end
 
 
@@ -1681,7 +1680,7 @@ function VEHICLE.IS_VEHICLE_EXTRA_TURNED_ON(vehicle, extraId) end
 
 ---@param vehicle Vehicle
 ---@param extraId int
----@param disable BOOL
+---@param disable boolean
 function VEHICLE.SET_VEHICLE_EXTRA(vehicle, extraId, disable) end
 
 
@@ -1698,17 +1697,17 @@ function VEHICLE.IS_EXTRA_BROKEN_OFF(vehicle, extraId) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_CONVERTIBLE_ROOF(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param instantlyLower BOOL
+---@param instantlyLower boolean
 function VEHICLE.LOWER_CONVERTIBLE_ROOF(vehicle, instantlyLower) end
 
 
 ---@param vehicle Vehicle
----@param instantlyRaise BOOL
+---@param instantlyRaise boolean
 function VEHICLE.RAISE_CONVERTIBLE_ROOF(vehicle, instantlyRaise) end
 
 
@@ -1718,19 +1717,19 @@ function VEHICLE.GET_CONVERTIBLE_ROOF_STATE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 ---@return boolean
 function VEHICLE.IS_VEHICLE_A_CONVERTIBLE(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param noAnimation BOOL
+---@param noAnimation boolean
 ---@return boolean
 function VEHICLE.TRANSFORM_TO_SUBMARINE(vehicle, noAnimation) end
 
 
 ---@param vehicle Vehicle
----@param noAnimation BOOL
+---@param noAnimation boolean
 function VEHICLE.TRANSFORM_TO_CAR(vehicle, noAnimation) end
 
 
@@ -1750,12 +1749,12 @@ function VEHICLE.IS_VEHICLE_STOPPED_AT_TRAFFIC_LIGHTS(vehicle) end
 ---@param zOffset float
 ---@param damage float
 ---@param radius float
----@param focusOnModel BOOL
+---@param focusOnModel boolean
 function VEHICLE.SET_VEHICLE_DAMAGE(vehicle, xOffset, yOffset, zOffset, damage, radius, focusOnModel) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_OCCUPANTS_TAKE_EXPLOSIVE_DAMAGE(vehicle, toggle) end
 
 
@@ -1797,45 +1796,45 @@ function VEHICLE.RESET_VEHICLE_STUCK_TIMER(vehicle, nullAttributes) end
 
 
 ---@param vehicle Vehicle
----@param isOnFireCheck BOOL
+---@param isOnFireCheck boolean
 ---@return boolean
 function VEHICLE.IS_VEHICLE_DRIVEABLE(vehicle, isOnFireCheck) end
 
 
 ---@param vehicle Vehicle
----@param owned BOOL
+---@param owned boolean
 function VEHICLE.SET_VEHICLE_HAS_BEEN_OWNED_BY_PLAYER(vehicle, owned) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_NEEDS_TO_BE_HOTWIRED(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_BLIP_THROTTLE_RANDOMLY(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_POLICE_FOCUS_WILL_TRACK_VEHICLE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
 ---@param duration int
 ---@param mode Hash
----@param forever BOOL
+---@param forever boolean
 function VEHICLE.START_VEHICLE_HORN(vehicle, duration, mode, forever) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_IN_CAR_MOD_SHOP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_HAS_STRONG_AXLES(vehicle, toggle) end
 
 
@@ -1904,14 +1903,14 @@ function VEHICLE.ARE_ANY_VEHICLE_SEATS_FREE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.RESET_VEHICLE_WHEELS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
----@param p2 BOOL
----@param p3 BOOL
+---@param p1 boolean
+---@param p2 boolean
+---@param p3 boolean
 ---@return boolean
 function VEHICLE.IS_HELI_PART_BROKEN(vehicle, p1, p2, p3) end
 
@@ -1942,7 +1941,7 @@ function VEHICLE.SET_HELI_TAIL_ROTOR_HEALTH(vehicle, health) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 ---@return boolean
 function VEHICLE.SET_HELI_TAIL_BOOM_CAN_BREAK_OFF(vehicle, toggle) end
 
@@ -1953,22 +1952,22 @@ function VEHICLE.SET_VEHICLE_NAME_DEBUG(vehicle, name) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_EXPLODES_ON_HIGH_EXPLOSION_DAMAGE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_EXPLODES_ON_EXPLOSION_DAMAGE_AT_ZERO_BODY_HEALTH(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_ALLOW_VEHICLE_EXPLODES_ON_CONTACT(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DISABLE_TOWING(vehicle, toggle) end
 
 
@@ -2064,7 +2063,7 @@ function VEHICLE.SET_ATTACHED_VEHICLE_TO_TOW_TRUCK_ARM_(towTruck, vehicle) end
 
 ---@param towTruck Vehicle
 ---@param vehicle Vehicle
----@param rear BOOL
+---@param rear boolean
 ---@param hookOffsetX float
 ---@param hookOffsetY float
 ---@param hookOffsetZ float
@@ -2088,40 +2087,40 @@ function VEHICLE.IS_VEHICLE_ATTACHED_TO_TOW_TRUCK(towTruck, vehicle) end
 
 
 ---@param towTruck Vehicle
----@return Entity
+---@return EntityHandle
 function VEHICLE.GET_ENTITY_ATTACHED_TO_TOW_TRUCK(towTruck) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 ---@param p2 Any
----@return Entity
+---@return EntityHandle
 function VEHICLE.SET_VEHICLE_AUTOMATICALLY_ATTACHES(vehicle, p1, p2) end
 
 
 ---@param vehicle Vehicle
 ---@param position float
----@param p2 BOOL
+---@param p2 boolean
 function VEHICLE.SET_VEHICLE_BULLDOZER_ARM_POSITION(vehicle, position, p2) end
 
 
 ---@param vehicle Vehicle
 ---@param position float
----@param p2 BOOL
+---@param p2 boolean
 function VEHICLE.SET_VEHICLE_TANK_TURRET_POSITION(vehicle, position, p2) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 ---@param x float
 ---@param y float
 ---@param z float
----@param p5 BOOL
+---@param p5 boolean
 function VEHICLE.SET_VEHICLE_TURRET_TARGET(vehicle, p1, x, y, z, p5) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_TANK_STATIONARY(vehicle, p1) end
 
 
@@ -2150,7 +2149,7 @@ function VEHICLE.GET_VEHICLE_FLIGHT_NOZZLE_POSITION(plane) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_VERTICAL_FLIGHT_MODE_TRANSITION(vehicle, toggle) end
 
 
@@ -2170,7 +2169,7 @@ function VEHICLE.GENERATE_VEHICLE_CREATION_POS_FROM_PATHS(outVec, p1, outVec1, p
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_BURNOUT(vehicle, toggle) end
 
 
@@ -2180,7 +2179,7 @@ function VEHICLE.IS_VEHICLE_IN_BURNOUT(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_REDUCE_GRIP(vehicle, toggle) end
 
 
@@ -2191,27 +2190,27 @@ function VEHICLE.SET_VEHICLE_REDUCE_GRIP_LEVEL(vehicle, val) end
 
 ---@param vehicle Vehicle
 ---@param turnSignal int
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_INDICATOR_LIGHTS(vehicle, turnSignal, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_BRAKE_LIGHTS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_TAIL_LIGHTS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_HANDBRAKE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_BRAKE(vehicle, toggle) end
 
 
@@ -2222,7 +2221,7 @@ function VEHICLE.INSTANTLY_FILL_VEHICLE_POPULATION() end
 function VEHICLE.HAS_INSTANT_FILL_VEHICLE_POPULATION_FINISHED() end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.NETWORK_ENABLE_EMPTY_CROWDING_VEHICLES_REMOVAL(toggle) end
 
 
@@ -2243,17 +2242,17 @@ function VEHICLE.GET_VEHICLE_TRAILER_PARENT_VEHICLE_(trailer) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_USES_LARGE_REAR_RAMP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_RUDDER_BROKEN(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_CONVERTIBLE_ROOF_LATCH_STATE(vehicle, state) end
 
 
@@ -2347,7 +2346,7 @@ function VEHICLE.GET_VEHICLE_CLASS_MAX_BRAKING(vehicleClass) end
 ---@param z float
 ---@param radius float
 ---@param speed float
----@param p5 BOOL
+---@param p5 boolean
 ---@return int
 function VEHICLE.ADD_ROAD_NODE_SPEED_ZONE(x, y, z, radius, speed, p5) end
 
@@ -2376,8 +2375,8 @@ function VEHICLE.IS_VEHICLE_SEARCHLIGHT_ON(vehicle) end
 
 
 ---@param heli Vehicle
----@param toggle BOOL
----@param canBeUsedByAI BOOL
+---@param toggle boolean
+---@param canBeUsedByAI boolean
 function VEHICLE.SET_VEHICLE_SEARCHLIGHT(heli, toggle, canBeUsedByAI) end
 
 
@@ -2386,11 +2385,11 @@ function VEHICLE.SET_VEHICLE_SEARCHLIGHT(heli, toggle, canBeUsedByAI) end
 function VEHICLE.DOES_VEHICLE_HAVE_SEARCHLIGHT(vehicle) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param vehicle Vehicle
 ---@param seatIndex int
----@param side BOOL
----@param onEnter BOOL
+---@param side boolean
+---@param onEnter boolean
 ---@return boolean
 function VEHICLE.IS_ENTRY_POINT_FOR_SEAT_CLEAR(ped, vehicle, seatIndex, side, onEnter) end
 
@@ -2438,7 +2437,7 @@ function VEHICLE.SET_VEHICLE_WHEEL_TYPE(vehicle, WheelType) end
 
 
 ---@param paintType int
----@param p1 BOOL
+---@param p1 boolean
 ---@return int
 function VEHICLE.GET_NUM_MOD_COLORS(paintType, p1) end
 
@@ -2475,7 +2474,7 @@ function VEHICLE.GET_VEHICLE_MOD_COLOR_2(vehicle, paintType, color) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 ---@return string
 function VEHICLE.GET_VEHICLE_MOD_COLOR_1_NAME(vehicle, p1) end
 
@@ -2500,7 +2499,7 @@ function VEHICLE.IS_VEHICLE_MOD_GEN9_EXCLUSIVE(vehicle, modType, modIndex) end
 ---@param vehicle Vehicle
 ---@param modType int
 ---@param modIndex int
----@param customTires BOOL
+---@param customTires boolean
 function VEHICLE.SET_VEHICLE_MOD(vehicle, modType, modIndex, customTires) end
 
 
@@ -2529,7 +2528,7 @@ function VEHICLE.REMOVE_VEHICLE_MOD(vehicle, modType) end
 
 ---@param vehicle Vehicle
 ---@param modType int
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.TOGGLE_VEHICLE_MOD(vehicle, modType, toggle) end
 
 
@@ -2644,7 +2643,7 @@ function VEHICLE.OVERRIDE_PLANE_DAMAGE_THREHSOLD(vehicle, health) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_TRANSMISSION_REDUCED_GEAR_RATIO_(vehicle, toggle) end
 
 
@@ -2679,17 +2678,17 @@ function VEHICLE.SET_VEHICLE_MAX_SPEED(vehicle, speed) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_STAYS_FROZEN_WHEN_CLEANED_UP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_ACT_AS_IF_HIGH_SPEED_FOR_FRAG_SMASHING(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 ---@param p2 float
 function VEHICLE.SET_PEDS_CAN_FALL_OFF_THIS_VEHICLE_FROM_LARGE_FALL_DAMAGE(vehicle, toggle, p2) end
 
@@ -2720,12 +2719,12 @@ function VEHICLE.SET_VEHICLE_CHEAT_POWER_INCREASE(vehicle, value) end
 
 
 ---@param p0 Any
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_INFLUENCES_WANTED_LEVEL(p0, p1) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_VEHICLE_IS_WANTED(vehicle, state) end
 
 
@@ -2735,12 +2734,12 @@ function VEHICLE.SWING_BOAT_BOOM_TO_RATIO(vehicle, ratio) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SWING_BOAT_BOOM_FREELY(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.ALLOW_BOAT_BOOM_TO_ANIMATE(vehicle, toggle) end
 
 
@@ -2750,8 +2749,8 @@ function VEHICLE.GET_BOAT_BOOM_POSITION_RATIO(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function VEHICLE.DISABLE_PLANE_AILERON(vehicle, p1, p2) end
 
 
@@ -2761,7 +2760,7 @@ function VEHICLE.GET_IS_VEHICLE_ENGINE_RUNNING(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_USE_ALTERNATE_HANDLING(vehicle, toggle) end
 
 
@@ -2772,7 +2771,7 @@ function VEHICLE.SET_BIKE_ON_STAND(vehicle, x, y) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_NOT_STEALABLE_AMBIENTLY(vehicle, p1) end
 
 
@@ -2792,7 +2791,7 @@ function VEHICLE.CLEAR_LAST_DRIVEN_VEHICLE() end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_HAS_BEEN_DRIVEN_FLAG(vehicle, toggle) end
 
 
@@ -2807,7 +2806,7 @@ function VEHICLE.SET_VEHICLE_LOD_MULTIPLIER(vehicle, multiplier) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_SAVE_IN_GARAGE(vehicle, toggle) end
 
 
@@ -2822,12 +2821,12 @@ function VEHICLE.GET_VEHICLE_NUM_OF_BROKEN_LOOSEN_PARTS(vehicle) end
 
 
 ---@param p0 Any
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_FORCE_VEHICLE_ENGINE_DAMAGE_BY_BULLET(p0, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_GENERATES_ENGINE_SHOCKING_EVENTS(vehicle, toggle) end
 
 
@@ -2843,8 +2842,8 @@ function VEHICLE.DISABLE_VEHICLE_EXPLOSION_BREAK_OFF_PARTS() end
 function VEHICLE.SET_LIGHTS_CUTOFF_DISTANCE_TWEAK(distance) end
 
 
----@param driver Ped
----@param entity Entity
+---@param driver PedHandle
+---@param entity EntityHandle
 ---@param xTarget float
 ---@param yTarget float
 ---@param zTarget float
@@ -2852,14 +2851,14 @@ function VEHICLE.SET_VEHICLE_SHOOT_AT_TARGET(driver, entity, xTarget, yTarget, z
 
 
 ---@param vehicle Vehicle
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
----@return Entity entity
+---@return EntityHandle entity
 function VEHICLE.GET_VEHICLE_LOCK_ON_TARGET(vehicle, entity) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_FORCE_HD_VEHICLE(vehicle, toggle) end
 
 
@@ -2883,15 +2882,15 @@ function VEHICLE.IS_VEHICLE_VISIBLE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_GRAVITY(vehicle, toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_ENABLE_VEHICLE_SLIPSTREAMING(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_SLIPSTREAMING_SHOULD_TIME_OUT(toggle) end
 
 
@@ -2906,12 +2905,12 @@ function VEHICLE.IS_VEHICLE_PRODUCING_SLIP_STREAM(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_INACTIVE_DURING_PLAYBACK(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_ACTIVE_DURING_PLAYBACK(vehicle, toggle) end
 
 
@@ -2921,7 +2920,7 @@ function VEHICLE.IS_VEHICLE_SPRAYABLE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_ENGINE_CAN_DEGRADE(vehicle, toggle) end
 
 
@@ -2952,7 +2951,7 @@ function VEHICLE.SET_PLANE_PROPELLER_HEALTH(plane, health) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_DEFORM_WHEELS(vehicle, toggle) end
 
 
@@ -2962,7 +2961,7 @@ function VEHICLE.IS_VEHICLE_STOLEN(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param isStolen BOOL
+---@param isStolen boolean
 function VEHICLE.SET_VEHICLE_IS_STOLEN(vehicle, isStolen) end
 
 
@@ -2991,7 +2990,7 @@ function VEHICLE.DETACH_VEHICLE_FROM_ANY_CARGOBOB(vehicle) end
 
 
 ---@param cargobob Vehicle
----@param entity Entity
+---@param entity EntityHandle
 ---@return boolean
 function VEHICLE.DETACH_ENTITY_FROM_CARGOBOB(cargobob, entity) end
 
@@ -3008,7 +3007,7 @@ function VEHICLE.GET_VEHICLE_ATTACHED_TO_CARGOBOB(cargobob) end
 
 
 ---@param p0 Any
----@return Entity
+---@return EntityHandle
 function VEHICLE.GET_ENTITY_ATTACHED_TO_CARGOBOB(p0) end
 
 
@@ -3031,7 +3030,7 @@ function VEHICLE.ATTACH_ENTITY_TO_CARGOBOB(p0, p1, p2, p3, p4, p5) end
 
 
 ---@param cargobob Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_CARGOBOB_FORCE_DONT_DETACH_VEHICLE(cargobob, toggle) end
 
 
@@ -3068,7 +3067,7 @@ function VEHICLE.REMOVE_PICK_UP_ROPE_FOR_CARGOBOB(cargobob) end
 ---@param cargobob Vehicle
 ---@param length1 float
 ---@param length2 float
----@param p3 BOOL
+---@param p3 boolean
 function VEHICLE.SET_PICKUP_ROPE_LENGTH_FOR_CARGOBOB(cargobob, length1, length2, p3) end
 
 
@@ -3094,7 +3093,7 @@ function VEHICLE.DOES_CARGOBOB_HAVE_PICKUP_MAGNET(cargobob) end
 
 
 ---@param cargobob Vehicle
----@param isActive BOOL
+---@param isActive boolean
 function VEHICLE.SET_CARGOBOB_PICKUP_MAGNET_ACTIVE(cargobob, isActive) end
 
 
@@ -3134,13 +3133,13 @@ function VEHICLE.SET_CARGOBOB_PICKUP_MAGNET_SET_TARGETED_MODE(vehicle, cargobob)
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
----@param p2 BOOL
+---@param p1 boolean
+---@param p2 boolean
 function VEHICLE.SET_CARGOBOB_PICKUP_MAGNET_SET_AMBIENT_MODE(vehicle, p1, p2) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_CARGOBOB_PICKUP_MAGNET_ENSURE_PICKUP_ENTITY_UPRIGHT(vehicle, p1) end
 
 
@@ -3150,31 +3149,31 @@ function VEHICLE.DOES_VEHICLE_HAVE_WEAPONS(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_WILL_TELL_OTHERS_TO_HURRY(vehicle, p1) end
 
 
----@param disabled BOOL
+---@param disabled boolean
 ---@param weaponHash Hash
 ---@param vehicle Vehicle
----@param owner Ped
+---@param owner PedHandle
 function VEHICLE.DISABLE_VEHICLE_WEAPON(disabled, weaponHash, vehicle, owner) end
 
 
 ---@param weaponHash Hash
 ---@param vehicle Vehicle
----@param owner Ped
+---@param owner PedHandle
 ---@return boolean
 function VEHICLE.IS_VEHICLE_WEAPON_DISABLED(weaponHash, vehicle, owner) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_USED_FOR_PILOT_SCHOOL(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_ACTIVE_FOR_PED_NAVIGATION(vehicle, toggle) end
 
 
@@ -3193,7 +3192,7 @@ function VEHICLE.SET_PLAYERS_LAST_VEHICLE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_CAN_BE_USED_BY_FLEEING_PEDS(vehicle, toggle) end
 
 
@@ -3203,12 +3202,12 @@ function VEHICLE.SET_AIRCRAFT_PILOT_SKILL_NOISE_SCALAR(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DROPS_MONEY_WHEN_BLOWN_UP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_KEEP_ENGINE_ON_WHEN_ABANDONED(vehicle, toggle) end
 
 
@@ -3243,12 +3242,12 @@ function VEHICLE.SET_VEHICLE_FRICTION_OVERRIDE(vehicle, friction) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_WHEELS_CAN_BREAK_OFF_WHEN_BLOW_UP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 ---@return boolean
 function VEHICLE.ARE_PLANE_CONTROL_PANELS_INTACT(vehicle, p1) end
 
@@ -3259,7 +3258,7 @@ function VEHICLE.SET_VEHICLE_CEILING_HEIGHT(vehicle, height) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_NO_EXPLOSION_DAMAGE_FROM_DRIVER(vehicle, toggle) end
 
 
@@ -3273,17 +3272,17 @@ function VEHICLE.DOES_VEHICLE_EXIST_WITH_DECORATOR(decorator) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_AI_CAN_USE_EXCLUSIVE_SEATS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param ped Ped
+---@param ped PedHandle
 ---@param index int
 function VEHICLE.SET_VEHICLE_EXCLUSIVE_DRIVER(vehicle, ped, index) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@param vehicle Vehicle
 ---@param outIndex int
 ---@return boolean
@@ -3302,22 +3301,22 @@ function VEHICLE.ENABLE_INDIVIDUAL_PLANE_PROPELLER_(vehicle, propeller) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_FORCE_AFTERBURNER(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DONT_PROCESS_VEHICLE_GLASS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_WANTED_CONES_RESPONSE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_USE_DESIRED_Z_CRUISE_SPEED_FOR_LANDING(vehicle, toggle) end
 
 
@@ -3330,7 +3329,7 @@ function VEHICLE.SET_ARRIVE_DISTANCE_OVERRIDE_FOR_VEHICLE_PERSUIT_ATTACK(vehicle
 function VEHICLE.SET_VEHICLE_READY_FOR_CLEANUP(p0) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISTANT_CARS_ENABLED(toggle) end
 
 
@@ -3358,7 +3357,7 @@ function VEHICLE.GET_VEHICLE_NEON_COLOUR(vehicle, r, g, b) end
 
 ---@param vehicle Vehicle
 ---@param index int
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_NEON_ENABLED(vehicle, index, toggle) end
 
 
@@ -3368,17 +3367,17 @@ function VEHICLE.SET_VEHICLE_NEON_ENABLED(vehicle, index, toggle) end
 function VEHICLE.GET_VEHICLE_NEON_ENABLED(vehicle, index) end
 
 
----@param p0 BOOL
+---@param p0 boolean
 function VEHICLE.SET_AMBIENT_VEHICLE_NEON_ENABLED(p0) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SUPPRESS_NEONS_ON_VEHICLE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_DISABLE_SUPERDUMMY(vehicle, p1) end
 
 
@@ -3419,12 +3418,12 @@ function VEHICLE.GET_NUMBER_OF_VEHICLE_DOORS(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_HYDRAULICS_CONTROL(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_CAN_ADJUST_GROUND_CLEARANCE(vehicle, p1) end
 
 
@@ -3445,12 +3444,12 @@ function VEHICLE.GET_VEHICLE_IS_MERCENARY(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_VEHICLE_BROKEN_PARTS_DONT_AFFECT_AI_HANDLING(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_KERS_ALLOWED(vehicle, toggle) end
 
 
@@ -3460,12 +3459,12 @@ function VEHICLE.GET_VEHICLE_HAS_KERS(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_PLANE_RESIST_TO_EXPLOSION(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_HELI_RESIST_TO_EXPLOSION(vehicle, toggle) end
 
 
@@ -3486,7 +3485,7 @@ function VEHICLE.GET_HYDRAULIC_SUSPENSION_RAISE_FACTOR(vehicle, wheelId) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_CAN_USE_HYDRAULICS(vehicle, toggle) end
 
 
@@ -3554,20 +3553,20 @@ function VEHICLE.SET_VEHICLE_USES_MP_PLAYER_DAMAGE_MULTIPLIER(p0, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_BIKE_EASY_TO_LAND(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_INVERT_VEHICLE_CONTROLS(vehicle, state) end
 
 
----@param disabled BOOL
+---@param disabled boolean
 function VEHICLE.SET_SPEED_BOOST_EFFECT_DISABLED(disabled) end
 
 
----@param disabled BOOL
+---@param disabled boolean
 function VEHICLE.SET_SLOW_DOWN_EFFECT_DISABLED(disabled) end
 
 
@@ -3619,7 +3618,7 @@ function VEHICLE.IS_ROCKET_BOOST_ACTIVE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param active BOOL
+---@param active boolean
 function VEHICLE.SET_ROCKET_BOOST_ACTIVE(vehicle, active) end
 
 
@@ -3647,12 +3646,12 @@ function VEHICLE.GET_CAR_HAS_JUMP(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_USE_HIGHER_CAR_JUMP(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_CLEAR_FREEZE_WAITING_ON_COLLISION_ONCE_PLAYER_ENTERS(vehicle, toggle) end
 
 
@@ -3679,7 +3678,7 @@ function VEHICLE.GET_VEHICLE_CAN_DEPLOY_PARACHUTE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param active BOOL
+---@param active boolean
 function VEHICLE.VEHICLE_START_PARACHUTING(vehicle, active) end
 
 
@@ -3689,7 +3688,7 @@ function VEHICLE.IS_VEHICLE_PARACHUTE_DEPLOYED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.VEHICLE_SET_RAMP_AND_RAMMING_CARS_TAKE_DAMAGE(vehicle, toggle) end
 
 
@@ -3708,15 +3707,15 @@ function VEHICLE.VEHICLE_SET_JET_WASH_FORCE_ENABLED(p0) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_WEAPON_CAN_TARGET_OBJECTS(vehicle, toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_USE_BOOST_BUTTON_FOR_WHEEL_RETRACT(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_USE_HORN_BUTTON_FOR_NITROUS_(toggle) end
 
 
@@ -3765,22 +3764,22 @@ function VEHICLE.SET_OVERRIDE_VEHICLE_DOOR_TORQUE(p0, p1, p2) end
 
 
 ---@param vehicle Vehicle
----@param enabled BOOL
+---@param enabled boolean
 function VEHICLE.SET_WHEELIE_ENABLED(vehicle, enabled) end
 
 
 ---@param vehicle Vehicle
----@param disable BOOL
+---@param disable boolean
 function VEHICLE.SET_DISABLE_HELI_EXPLODE_FROM_BODY_DAMAGE(vehicle, disable) end
 
 
 ---@param vehicle Vehicle
----@param disable BOOL
+---@param disable boolean
 function VEHICLE.SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_ON_COLLISION(vehicle, disable) end
 
 
 ---@param vehicle Vehicle
----@param disable BOOL
+---@param disable boolean
 function VEHICLE.SET_DISABLE_EXPLODE_FROM_BODY_DAMAGE_RECEIVED_BY_AI_VEHICLE_(vehicle, disable) end
 
 
@@ -3795,21 +3794,21 @@ function VEHICLE.SET_ROCKET_BOOST_FILL(vehicle, percentage) end
 
 
 ---@param vehicle Vehicle
----@param state BOOL
+---@param state boolean
 function VEHICLE.SET_GLIDER_ACTIVE(vehicle, state) end
 
 
 ---@param vehicle Vehicle
----@param shouldReset BOOL
+---@param shouldReset boolean
 function VEHICLE.SET_SHOULD_RESET_TURRET_IN_SCRIPTED_CAMERAS(vehicle, shouldReset) end
 
 
 ---@param vehicle Vehicle
----@param disable BOOL
+---@param disable boolean
 function VEHICLE.SET_VEHICLE_DISABLE_COLLISION_UPON_CREATION(vehicle, disable) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_GROUND_EFFECT_REDUCES_DRAG(toggle) end
 
 
@@ -3818,7 +3817,7 @@ function VEHICLE.SET_DISABLE_MAP_COLLISION(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_PED_STAND_ON_TOP(vehicle, toggle) end
 
 
@@ -3837,12 +3836,12 @@ function VEHICLE.SET_PLANE_SECTION_DAMAGE_SCALE(vehicle, p1, p2) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_PLANE_CONTROL_SECTIONS_SHOULD_BREAK_OFF_FROM_EXPLOSIONS(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_HELI_CAN_PICKUP_ENTITY_THAT_HAS_PICK_UP_DISABLED(vehicle, toggle) end
 
 
@@ -3887,7 +3886,7 @@ function VEHICLE.GET_CAN_VEHICLE_BE_PLACED_HERE(vehicle, x, y, z, rotX, rotY, ro
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_AUTOMATIC_CRASH_TASK(vehicle, toggle) end
 
 
@@ -3902,12 +3901,12 @@ function VEHICLE.SET_SPECIAL_FLIGHT_MODE_TARGET_RATIO(vehicle, targetRatio) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_SPECIAL_FLIGHT_MODE_ALLOWED(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_HOVER_MODE_FLIGHT(vehicle, toggle) end
 
 
@@ -3916,14 +3915,14 @@ function VEHICLE.SET_DISABLE_HOVER_MODE_FLIGHT(vehicle, toggle) end
 function VEHICLE.GET_OUTRIGGERS_DEPLOYED(vehicle) end
 
 
----@param ped Ped
+---@param ped PedHandle
 ---@return Vector3
 function VEHICLE.FIND_SPAWN_COORDINATES_FOR_HELI(ped) end
 
 
 ---@param vehicle Vehicle
----@param deploy BOOL
----@param p2 BOOL
+---@param deploy boolean
+---@param p2 boolean
 function VEHICLE.SET_DEPLOY_FOLDING_WINGS(vehicle, deploy, p2) end
 
 
@@ -3933,7 +3932,7 @@ function VEHICLE.ARE_FOLDING_WINGS_DEPLOYED(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param deploy BOOL
+---@param deploy boolean
 function VEHICLE.SET_DEPLOY_MISSILE_BAYS_(vehicle, deploy) end
 
 
@@ -3943,13 +3942,13 @@ function VEHICLE.ARE_MISSILE_BAYS_DEPLOYED_(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DIP_STRAIGHT_DOWN_WHEN_CRASHING_PLANE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
 ---@param index int
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_TURRET_HIDDEN(vehicle, index, toggle) end
 
 
@@ -3973,19 +3972,19 @@ function VEHICLE.SET_TRANSFORM_RATE_FOR_ANIMATION(vehicle, transformRate) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_TRANSFORM_TO_SUBMARINE_USES_ALTERNATE_INPUT(vehicle, toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_COMBAT_MODE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_DETONATION_MODE(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_VEHICLE_SHUNT_ON_STICK(toggle) end
 
 
@@ -4009,21 +4008,21 @@ function VEHICLE.GET_HAS_VEHICLE_BEEN_HIT_BY_SHUNT(vehicle) end
 function VEHICLE.GET_LAST_SHUNT_VEHICLE(vehicle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_VEHICLE_EXPLOSIONS_DAMAGE(toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 ---@param level float
 ---@param power float
 ---@param rechargeTime float
----@param disableSound BOOL
+---@param disableSound boolean
 function VEHICLE.SET_OVERRIDE_NITROUS_LEVEL(vehicle, toggle, level, power, rechargeTime, disableSound) end
 
 
 ---@param vehicle Vehicle
----@param enabled BOOL
+---@param enabled boolean
 function VEHICLE.SET_NITROUS_IS_VISIBLE_(vehicle, enabled) end
 
 
@@ -4068,20 +4067,20 @@ function VEHICLE.CLEAR_NITROUS(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_NITROUS_IS_ACTIVE(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_INCREASE_WHEEL_CRUSH_DAMAGE(vehicle, toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_WEAPON_BLADE_FORCES(toggle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_USE_DOUBLE_CLICK_FOR_CAR_JUMP(toggle) end
 
 
@@ -4091,7 +4090,7 @@ function VEHICLE.GET_DOES_VEHICLE_HAVE_TOMBSTONE(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.HIDE_TOMBSTONE(vehicle, toggle) end
 
 
@@ -4104,7 +4103,7 @@ function VEHICLE.APPLY_EMP_EFFECT(vehicle) end
 function VEHICLE.GET_IS_VEHICLE_DISABLED_BY_EMP(vehicle) end
 
 
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DISABLE_RETRACTING_WEAPON_BLADES(toggle) end
 
 
@@ -4150,12 +4149,12 @@ function VEHICLE.SET_AIRCRAFT_IGNORE_HIGHTMAP_OPTIMISATION(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param enable BOOL
+---@param enable boolean
 function VEHICLE.SET_REDUCED_SUSPENSION_FORCE(vehicle, enable) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_DRIFT_TYRES(vehicle, toggle) end
 
 
@@ -4165,17 +4164,17 @@ function VEHICLE.GET_DRIFT_TYRES_SET(vehicle) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.NETWORK_USE_HIGH_PRECISION_TRAIN_BLENDING(vehicle, toggle) end
 
 
 ---@param vehicle Vehicle
----@param p1 BOOL
+---@param p1 boolean
 function VEHICLE.SET_CHECK_FOR_ENOUGH_ROOM_FOR_PED(vehicle, p1) end
 
 
 ---@param vehicle Vehicle
----@param toggle BOOL
+---@param toggle boolean
 function VEHICLE.SET_ALLOW_COLLISION_WHEN_IN_VEHICLE_(vehicle, toggle) end
 
 
@@ -4191,10 +4190,10 @@ function VEHICLE.GET_VEHICLE_MAX_EXHAUST_BONE_COUNT_() end
 ---@param vehicle Vehicle
 ---@param index int
 ---@param boneIndex int
----@param axisX BOOL
+---@param axisX boolean
 ---@return boolean
 ---@return int boneIndex
----@return BOOL axisX
+---@return boolean axisX
 function VEHICLE.GET_VEHICLE_EXHAUST_BONE_(vehicle, index, boneIndex, axisX) end
 
 
