@@ -313,9 +313,9 @@ namespace lua::imgui
 	}
 
 // Parameters stacks (shared)
-	inline void PushFont(ImFont* pFont)
+	inline void PushFont(ImFont* pFont, float font_size_base_unscaled)
 	{
-		ImGui::PushFont(pFont);
+		ImGui::PushFont(pFont, font_size_base_unscaled);
 	}
 	inline void PopFont()
 	{
@@ -373,6 +373,10 @@ namespace lua::imgui
 	inline float GetFontSize()
 	{
 		return ImGui::GetFontSize();
+	}
+	inline ImFontBaked* GetFontBaked()
+	{
+		return ImGui::GetFontBaked();
 	}
 	inline std::tuple<float, float> GetFontTexUvWhitePixel()
 	{
@@ -2929,7 +2933,7 @@ namespace lua::imgui
 			"GlyphMinAdvanceX", &ImFontConfig::GlyphMinAdvanceX,
 			"GlyphMaxAdvanceX", &ImFontConfig::GlyphMaxAdvanceX,
 			"GlyphExtraAdvanceX", &ImFontConfig::GlyphExtraAdvanceX,
-			"FontBuilderFlags", &ImFontConfig::FontBuilderFlags,
+			"FontLoaderFlags", &ImFontConfig::FontLoaderFlags,
 			"RasterizerMultiply", &ImFontConfig::RasterizerMultiply,
 			"RasterizerDensity", &ImFontConfig::RasterizerDensity,
 			"EllipsisChar", &ImFontConfig::EllipsisChar
@@ -2956,71 +2960,25 @@ namespace lua::imgui
 			"AddFontFromMemoryTTF", &ImFontAtlas::AddFontFromMemoryTTF,
 			"AddFontFromMemoryCompressedTTF", &ImFontAtlas::AddFontFromMemoryCompressedTTF,
 			"AddFontFromMemoryCompressedBase85TTF", &ImFontAtlas::AddFontFromMemoryCompressedBase85TTF,
-			"ClearInputData", &ImFontAtlas::ClearInputData,
-			"ClearFonts", &ImFontAtlas::ClearFonts,
-			"ClearTexData", &ImFontAtlas::ClearTexData,
+			"RemoveFont", &ImFontAtlas::RemoveFont,
 			"Clear", &ImFontAtlas::Clear,
-			"Build", &ImFontAtlas::Build,
-			"GetTexDataAsAlpha8", &ImFontAtlas::GetTexDataAsAlpha8,
-			"GetTexDataAsRGBA32", &ImFontAtlas::GetTexDataAsRGBA32,
-			"IsBuilt", &ImFontAtlas::IsBuilt,
-			"SetTexID", &ImFontAtlas::SetTexID,
+			"CompactCache", &ImFontAtlas::CompactCache,
 			"GetGlyphRangesDefault", &ImFontAtlas::GetGlyphRangesDefault,
-			"GetGlyphRangesGreek", &ImFontAtlas::GetGlyphRangesGreek,
-			"GetGlyphRangesKorean", &ImFontAtlas::GetGlyphRangesKorean,
-			"GetGlyphRangesJapanese", &ImFontAtlas::GetGlyphRangesJapanese,
-			"GetGlyphRangesChineseFull", &ImFontAtlas::GetGlyphRangesChineseFull,
-			"GetGlyphRangesChineseSimplifiedCommon", &ImFontAtlas::GetGlyphRangesChineseSimplifiedCommon,
-			"GetGlyphRangesCyrillic", &ImFontAtlas::GetGlyphRangesCyrillic,
-			"GetGlyphRangesThai", &ImFontAtlas::GetGlyphRangesThai,
-			"GetGlyphRangesVietnamese", &ImFontAtlas::GetGlyphRangesVietnamese,
-			"AddCustomRectRegular", &ImFontAtlas::AddCustomRectRegular,
-			"AddCustomRectFontGlyph", &ImFontAtlas::AddCustomRectFontGlyph,
-			"GetCustomRectByIndex", &ImFontAtlas::GetCustomRectByIndex,
+			"AddCustomRect", &ImFontAtlas::AddCustomRect,
+			"RemoveCustomRect", &ImFontAtlas::RemoveCustomRect,
+			"GetCustomRect", &ImFontAtlas::GetCustomRect,
 			"Flags", &ImFontAtlas::Flags,
-			"TexID", &ImFontAtlas::TexID,
-			"TexDesiredWidth", &ImFontAtlas::TexDesiredWidth,
+			"TexDesiredFormat", &ImFontAtlas::TexDesiredFormat,
 			"TexGlyphPadding", &ImFontAtlas::TexGlyphPadding,
-			"UserData", &ImFontAtlas::UserData,
-			"Locked", &ImFontAtlas::Locked,
-			"TexReady", &ImFontAtlas::TexReady,
-			"TexPixelsUseColors", &ImFontAtlas::TexPixelsUseColors,
-			"TexPixelsAlpha8", &ImFontAtlas::TexPixelsAlpha8,
-			"TexPixelsRGBA32", &ImFontAtlas::TexPixelsRGBA32,
-			"TexWidth", &ImFontAtlas::TexWidth,
-			"TexHeight", &ImFontAtlas::TexHeight,
-			"TexUvScale", &ImFontAtlas::TexUvScale,
-			"TexUvWhitePixel", &ImFontAtlas::TexUvWhitePixel,
-			"Fonts", &ImFontAtlas::Fonts,
-			//"CustomRects", &ImFontAtlas::CustomRects, // TODO
-			//"Sources", &ImFontAtlas::Sources, // TODO
-			"TexUvLines", &ImFontAtlas::TexUvLines
+			"TexMinWidth", &ImFontAtlas::TexMinWidth,
+			"TexMinHeight", &ImFontAtlas::TexMinHeight,
+			"TexMaxWidth", &ImFontAtlas::TexMaxWidth,
+			"TexMaxHeight", &ImFontAtlas::TexMaxHeight,
+			"UserData", &ImFontAtlas::UserData
 		);
 
 		luaGlobals.new_usertype<ImFont>("ImFont",
-			"IndexAdvanceX", &ImFont::IndexAdvanceX,
-			"FallbackAdvanceX", &ImFont::FallbackAdvanceX,
-			"FontSize", &ImFont::FontSize,
-			"IndexLookup", &ImFont::IndexLookup,
-			//"Glyphs", &ImFont::Glyphs, // TODO
-			"FallbackGlyph", &ImFont::FallbackGlyph,
-			"ContainerAtlas", &ImFont::ContainerAtlas,
-			"Sources", &ImFont::Sources,
-			"SourcesCount", &ImFont::SourcesCount,
-			"EllipsisCharCount", &ImFont::EllipsisCharCount,
-			"EllipsisChar", &ImFont::EllipsisChar,
-			"FallbackChar", &ImFont::FallbackChar,
-			"EllipsisWidth", &ImFont::EllipsisWidth,
-			"EllipsisCharStep", &ImFont::EllipsisCharStep,
-			"Scale", &ImFont::Scale,
-			"Ascent", &ImFont::Ascent,
-			"Descent", &ImFont::Descent,
-			"MetricsTotalSurface", &ImFont::MetricsTotalSurface,
-			"DirtyLookupTables", &ImFont::DirtyLookupTables,
-			"Used8kPagesMap", &ImFont::Used8kPagesMap,
-			"FindGlyph", &ImFont::FindGlyph,
-			"FindGlyphNoFallback", &ImFont::FindGlyphNoFallback,
-			"GetCharAdvance", &ImFont::GetCharAdvance,
+			"IsGlyphInFont", &ImFont::IsGlyphInFont,
 			"IsLoaded", &ImFont::IsLoaded,
 			"GetDebugName", &ImFont::GetDebugName
 		);
@@ -3608,6 +3566,7 @@ namespace lua::imgui
 		ImGui.set_function("GetStyleColorVec4", GetStyleColorVec4);
 		ImGui.set_function("GetFont", GetFont);
 		ImGui.set_function("GetFontSize", GetFontSize);
+		ImGui.set_function("GetFontBaked", GetFontBaked);
 		ImGui.set_function("GetFontTexUvWhitePixel", GetFontTexUvWhitePixel);
 		ImGui.set_function("GetColorU32", sol::overload(sol::resolve<int(int, float)>(GetColorU32), sol::resolve<int(float, float, float, float)>(GetColorU32), sol::resolve<int(int)>(GetColorU32)));
 #pragma endregion Parameters stacks(shared)
