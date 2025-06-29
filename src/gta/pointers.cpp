@@ -199,7 +199,7 @@ namespace big
 		main_batch.add("Blame Explode", "0F 85 EE 00 00 00 84 C0", -1, 3521, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_blame_explode = ptr;
 		});
-		main_batch.add("Blame Explode", "0F 85 EE 00 00 00 84 C0", 3570, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+		main_batch.add("Blame Explode", "0F 85 EF 00 00 00 84 C0", 3570, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_blame_explode = ptr;
 		});
 		main_batch.add("Blame Explode", "0F 85 d3 00 00 00 84", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
