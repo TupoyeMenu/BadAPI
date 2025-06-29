@@ -64,3 +64,7 @@ add_compile_definitions(
     "CXX_FORMAT_SUPPORT"
 )
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE PROJECT_NAME="${CMAKE_PROJECT_NAME}")
+
+if (MSVC)
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /bigobj)
+endif()
