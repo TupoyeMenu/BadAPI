@@ -16,7 +16,8 @@
 #include "bindings/self.hpp"
 #include "bindings/stats.hpp"
 #include "bindings/tunables.hpp"
-#include "bindings/vector.hpp"
+#include "bindings/vector2.hpp"
+#include "bindings/vector3.hpp"
 #include "lua_manager.hpp"
 #include "util/filesystem.hpp"
 
@@ -267,7 +268,8 @@ namespace big
 		lua::tunables::bind(m_state);
 		lua::locals::bind(m_state);
 		lua::event::bind(m_state);
-		lua::vector::bind(m_state);
+		lua::vector2::bind(m_state);
+		lua::vector3::bind(m_state);
 		lua::global_table::bind(m_state);
 		lua::imgui::bind(m_state, m_state.globals());
 		lua::imguitextselect::bind(m_state);

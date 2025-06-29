@@ -183,7 +183,7 @@ namespace big
 			m_give_pickup_rewards = ptr.add(6).rip().as<decltype(m_give_pickup_rewards)>();
 		});
 
-		main_batch.add("Blame Explode", "0F 85 EE 00 00 00 84 C0", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+		main_batch.add("Blame Explode", "0F 85 EF 00 00 00 84 C0", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_blame_explode = ptr;
 		});
 		main_batch.add("Blame Explode", "0F 85 d3 00 00 00 84", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
@@ -258,8 +258,8 @@ namespace big
 			m_network_player_mgr_shutdown = ptr.sub(0x1B).as<decltype(pointers::m_network_player_mgr_shutdown)>();
 		});
 
-		main_batch.add("Network Can Access Multiplayer", "E9 ? 01 00 00 33 D2 8B CB", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_network_can_access_multiplayer = ptr.add(10).rip().as<PVOID>();
+		main_batch.add("Network Can Access Multiplayer", "E9 89 01 00 00 48 8B CF E8 13 A3 04 00", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_network_can_access_multiplayer = ptr.add(0x23).rip().as<PVOID>();
 		});
 
 		main_batch.add("Terminate Game", "E8 ? ? ? ? EB 14 41 83", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
@@ -267,8 +267,8 @@ namespace big
 			m_terminate_game = ptr.add(1).rip().as<PVOID>();
 		});
 
-		main_batch.add("Handle Join Request", "48 8B C4 48 89 58 08 4C 89 48 20 4C 89 40 18 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 18", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_handle_join_request = ptr.as<PVOID>();
+		main_batch.add("Handle Join Request", "4C 8B F1 45 33 ED 48 8D 4D", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_handle_join_request = ptr.sub(0x2D).as<PVOID>();
 		});
 
 		main_batch.add("Write Join Response Data", "E8 ? ? ? ? 41 8B DF 84 C0 74 06", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {

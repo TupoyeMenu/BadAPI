@@ -1,4 +1,4 @@
-namespace lua::vector
+namespace lua::vector3
 {
 	void bind(sol::state& state)
 	{
