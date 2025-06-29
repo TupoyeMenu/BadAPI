@@ -274,13 +274,6 @@ namespace big
 			m_network_player_mgr_shutdown = ptr.sub(0x1B).as<decltype(pointers::m_network_player_mgr_shutdown)>();
 		});
 
-		main_batch.add("Network Can Access Multiplayer", "E9 ? 01 00 00 33 D2 8B CB", -1, 3521, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_network_can_access_multiplayer = ptr.add(10).rip().as<PVOID>();
-		});
-		main_batch.add("Network Can Access Multiplayer", "E9 89 01 00 00 48 8B CF E8 13 A3 04 00", 3570, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_network_can_access_multiplayer = ptr.add(0x23).rip().as<PVOID>();
-		});
-
 		main_batch.add("Terminate Game", "E8 ? ? ? ? EB 14 41 83", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			// Multiple results but they all point to the same function.
 			m_terminate_game = ptr.add(1).rip().as<PVOID>();

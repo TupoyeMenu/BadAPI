@@ -21,8 +21,6 @@ namespace big
 		static LRESULT wndproc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 		static BOOL set_cursor_pos(int x, int y);
 
-		static int queue_dependency_legacy(void* a1, int a2, int64_t dependency);
-		static void queue_dependency_enhanced(intptr_t a1);
 		static bool prepare_metric_for_sending(rage::json_serializer* bit_buffer, int unk, int time, rage::rlMetric* metric);
 		static bool init_native_tables(rage::scrProgram* program);
 		static rage::eThreadState script_vm(uint64_t* start_stack, uint64_t** scr_globals, rage::scrProgram* program, rage::scrThreadContext* ctx);
@@ -35,7 +33,6 @@ namespace big
 		static bool receive_net_message(void* a1, rage::netConnectionManager* mgr, rage::netEvent* event);
 
 		static bool handle_join_request(Network* network, rage::snSession* session, rage::rlGamerInfo* player_info, CJoinRequestContext* ctx, BOOL is_transition_session);
-		static uint32_t network_can_access_multiplayer(uint32_t a1, uint64_t* a2);
 
 		static void terminate_game(int p1);
 

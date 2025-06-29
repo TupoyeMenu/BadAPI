@@ -29,7 +29,6 @@
 #include "util/is_enhanced.hpp"
 
 #include <memory>
-#include <rage/gameSkeleton.hpp>
 
 BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 {

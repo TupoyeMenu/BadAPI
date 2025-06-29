@@ -27,15 +27,9 @@ namespace big
 		detour_hook_helper::add<hooks::swapchain_present>("Present", swapchain_vft[hooks::swapchain_present_index]);
 		detour_hook_helper::add<hooks::swapchain_resizebuffers>("ResizeBuffers", swapchain_vft[hooks::swapchain_resizebuffers_index]);
 
-		if (g_is_enhanced)
+		if (!g_is_enhanced)
 		{
-			detour_hook_helper::add<hooks::queue_dependency_enhanced>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
-		}
-		else
-		{
-			detour_hook_helper::add<hooks::queue_dependency_legacy>("Queue Dependency", (void*)g_pointers->m_queue_dependency);
 			detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game); // Inlined in enhanced
-			detour_hook_helper::add<hooks::network_can_access_multiplayer>("NCAM", (void*)g_pointers->m_network_can_access_multiplayer);
 			detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
 		}
 		detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
