@@ -17,14 +17,7 @@ body:
       placeholder: "A clear and concise description of what you want to happen."
     validations:
       required: true
-  - type: textarea
-    attributes:
-      label: Reason
-      description: Provide Reasoning
-      placeholder: "Tell us why you'd want for us to add this to BadAPI."
-    validations:
-      required: true
-  - type: textarea
+ - type: textarea
     attributes:
       label: Additional context
       description: |
