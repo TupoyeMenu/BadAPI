@@ -9,13 +9,11 @@ namespace big
 	private:
 		std::mutex m_module_lock;
 		std::shared_ptr<lua_module> m_module;
-		std::mutex m_disabled_module_lock;
 
 		folder m_disabled_scripts_folder;
 		folder m_scripts_folder;
 		folder m_scripts_config_folder;
 
-	private:
 	public:
 		lua_manager(folder scripts_folder, folder scripts_config_folder);
 		~lua_manager();
