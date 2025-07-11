@@ -35,9 +35,6 @@ namespace big
 		static bool handle_join_request(Network* network, rage::snSession* session, rage::rlGamerInfo* player_info, CJoinRequestContext* ctx, BOOL is_transition_session);
 
 		static void terminate_game(int p1);
-
-		static void add_plane_lift(CVehicle* _this, rage::fvector3* velocity, float, float, float, bool);
-		static void apply_plane_thrust(CVehicle* _this, float, float, float, float, float, bool);
 	};
 
 	class minhook_keepalive

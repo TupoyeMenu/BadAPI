@@ -89,8 +89,4 @@ namespace big
 	{
 		return m_module;
 	}
-
-	void lua_manager::handle_error(const sol::error& error, const sol::state_view& state)
-	{
-	}
 }

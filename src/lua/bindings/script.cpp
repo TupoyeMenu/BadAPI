@@ -85,7 +85,6 @@ namespace lua::script
 
 				    if (!res.valid())
 				    {
-					    big::g_lua_manager->handle_error(res, res.lua_state());
 					    break;
 				    }
 
@@ -154,7 +153,6 @@ namespace lua::script
 
 				    if (!res.valid())
 				    {
-					    big::g_lua_manager->handle_error(res, res.lua_state());
 					    break;
 				    }
 

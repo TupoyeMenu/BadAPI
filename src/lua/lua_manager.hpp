@@ -35,8 +35,6 @@ namespace big
 		std::weak_ptr<lua_module> get_module();
 		void draw_always_draw_gui();
 
-		void handle_error(const sol::error& error, const sol::state_view& state);
-
 		template<template_str menu_event_, typename Return = void, typename... Args>
 		inline std::conditional_t<std::is_void_v<Return>, void, std::optional<Return>> trigger_event(Args&&... args)
 		{
@@ -50,7 +48,6 @@ namespace big
 
 					if (!result.valid())
 					{
-						handle_error(result, result.lua_state());
 						continue;
 					}
 
