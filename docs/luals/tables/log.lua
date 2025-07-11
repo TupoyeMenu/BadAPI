@@ -7,37 +7,37 @@ log = {}
 ---Logs an informational message.
 ---**Example Usage:**
 ---```lua
----log.info(data)
+---log.info(...)
 ---```
----@param data string
-function log.info(data) end
+---@param ... any
+function log.info(...) end
 
 
 ---Logs a warning message.
 ---**Example Usage:**
 ---```lua
----log.warning(data)
+---log.warning(...)
 ---```
----@param data string
-function log.warning(data) end
+---@param ... any
+function log.warning(...) end
 
 
 ---Logs a debug message.
 ---**Example Usage:**
 ---```lua
----log.debug(data)
+---log.debug(...)
 ---```
----@param data string
-function log.debug(data) end
+---@param ... any
+function log.debug(...) end
 
 
 ---Logs a fatal message.
 ---**Example Usage:**
 ---```lua
----log.fatal(data)
+---log.fatal(...)
 ---```
----@param data string
-function log.fatal(data) end
+---@param ... any
+function log.fatal(...) end
 
 
 ---**Example Usage:**

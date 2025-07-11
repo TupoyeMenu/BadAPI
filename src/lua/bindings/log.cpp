@@ -10,41 +10,81 @@ namespace lua::log
 	// Lua API: Function
 	// Table: log
 	// Name: info
-	// Param: data: string
+	// Param: ...: any
 	// Logs an informational message.
-	static void info(const std::string& data, sol::this_state state)
+	static void info(sol::variadic_args va, sol::this_state state)
 	{
-		LOG(INFO) << data;
+		sol::function tostring = sol::state_view(state)["tostring"];
+		auto stream = LOG(INFO);
+		int i = 0;
+		for (auto v : va)
+		{
+			if (i == 0)
+				stream << tostring(v).get<const std::string&>();
+			else
+				stream << "	" << tostring(v).get<const std::string&>();
+			i++;
+		}
 	}
 
 	// Lua API: Function
 	// Table: log
 	// Name: warning
-	// Param: data: string
+	// Param: ...: any
 	// Logs a warning message.
-	static void warning(const std::string& data, sol::this_state state)
+	static void warning(sol::variadic_args va, sol::this_state state)
 	{
-		LOG(WARNING) << data;
+		sol::function tostring = sol::state_view(state)["tostring"];
+		auto stream = LOG(WARNING);
+		int i = 0;
+		for (auto v : va)
+		{
+			if (i == 0)
+				stream << tostring(v).get<const std::string&>();
+			else
+				stream << "	" << tostring(v).get<const std::string&>();
+			i++;
+		}
 	}
 
 	// Lua API: Function
 	// Table: log
 	// Name: debug
-	// Param: data: string
+	// Param: ...: any
 	// Logs a debug message.
-	static void debug(const std::string& data, sol::this_state state)
+	static void debug(sol::variadic_args va, sol::this_state state)
 	{
-		LOG(VERBOSE) << data;
+		sol::function tostring = sol::state_view(state)["tostring"];
+		auto stream = LOG(VERBOSE);
+		int i = 0;
+		for (auto v : va)
+		{
+			if (i == 0)
+				stream << tostring(v).get<const std::string&>();
+			else
+				stream << "	" << tostring(v).get<const std::string&>();
+			i++;
+		}
 	}
 
 	// Lua API: Function
 	// Table: log
 	// Name: fatal
-	// Param: data: string
+	// Param: ...: any
 	// Logs a fatal message.
-	static void fatal(const std::string& data, sol::this_state state)
+	static void fatal(sol::variadic_args va, sol::this_state state)
 	{
-		LOG(FATAL) << data;
+		sol::function tostring = sol::state_view(state)["tostring"];
+		auto stream = LOG(FATAL);
+		int i = 0;
+		for (auto v : va)
+		{
+			if (i == 0)
+				stream << tostring(v).get<const std::string&>();
+			else
+				stream << "	" << tostring(v).get<const std::string&>();
+			i++;
+		}
 	}
 
 	// Lua API: Function
