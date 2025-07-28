@@ -96,15 +96,21 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    LOG(INFO) << "Renderer initialized.";
 			    auto gui_instance = std::make_unique<gui>();
 
-			    auto script_program_instance = std::make_unique<big_program>("BadAPIInternal");
-			    create_script_thread("BadAPIInternal");
-			    LOG(INFO) << "Script Program initialized.";
-
 			    auto fiber_pool_instance = std::make_unique<fiber_pool>(10);
 			    LOG(INFO) << "Fiber pool initialized.";
 
 			    auto hooking_instance = std::make_unique<hooking>();
 			    LOG(INFO) << "Hooking initialized.";
+
+			    while (!*g_pointers->m_natives_registered)
+				    std::this_thread::sleep_for(50ms);
+
+			    auto script_program_instance = std::make_unique<big_program>("BadAPIInternal");
+			    create_script_thread("BadAPIInternal");
+			    LOG(INFO) << "Script Program initialized.";
+
+			    g_native_invoker.cache_handlers();
+			    LOG(INFO) << "Native handlers cached.";
 
 			    auto player_service_instance         = std::make_unique<player_service>();
 			    auto tunables_service_instance       = std::make_unique<tunables_service>();
@@ -121,12 +127,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 			    auto native_hooks_instance = std::make_unique<native_hooks>();
 			    LOG(INFO) << "Dynamic native hooker initialized.";
-
-			    while (!*g_pointers->m_natives_registered)
-				    std::this_thread::sleep_for(50ms);
-
-			    g_native_invoker.cache_handlers();
-			    LOG(INFO) << "Native handlers cached.";
 
 			    auto lua_manager_instance =
 			        std::make_unique<lua_manager>(g_file_manager.get_project_folder("scripts"), g_file_manager.get_project_folder("scripts_config"));
