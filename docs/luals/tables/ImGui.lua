@@ -245,6 +245,140 @@ ImGuiInputTextFlags =
 	CallbackResize      = nil, -- Callback on buffer capacity changes request (beyond 'buf_size' parameter value), allowing the string to grow. Notify when the string wants to be resized (for string types which hold a cache of their Size). You will be provided a new BufSize in the callback and NEED to honor it. (see misc/cpp/imgui_stdlib.h for an example of using this)
 }
 
+---@enum ImGuiStyleVar
+ImGuiStyleVar =
+{
+    Alpha = nil,                    -- float
+    DisabledAlpha = nil,            -- float
+    WindowPadding = nil,            -- ImVec2
+    WindowRounding = nil,           -- float
+    WindowBorderSize = nil,         -- float
+    WindowMinSize = nil,            -- ImVec2
+    WindowTitleAlign = nil,         -- ImVec2
+    ChildRounding = nil,            -- float
+    ChildBorderSize = nil,          -- float
+    PopupRounding = nil,            -- float
+    PopupBorderSize = nil,          -- float
+    FramePadding = nil,             -- ImVec2
+    FrameRounding = nil,            -- float
+    FrameBorderSize = nil,          -- float
+    ItemSpacing = nil,              -- ImVec2
+    ItemInnerSpacing = nil,         -- ImVec2
+    IndentSpacing = nil,            -- float
+    CellPadding = nil,              -- ImVec2
+    ScrollbarSize = nil,            -- float
+    ScrollbarRounding = nil,        -- float
+    GrabMinSize = nil,              -- float
+    GrabRounding = nil,             -- float
+    ImageBorderSize = nil,          -- float
+    TabRounding = nil,              -- float
+    TabBorderSize = nil,            -- float
+    TabBarBorderSize = nil,         -- float
+    TabBarOverlineSize = nil,       -- float
+    TableAngledHeadersAngle = nil,  -- float
+    TableAngledHeadersTextAlign = nil, -- ImVec2
+    TreeLinesSize = nil,            -- float
+    TreeLinesRounding = nil,        -- float
+    ButtonTextAlign = nil,          -- ImVec2
+    SelectableTextAlign = nil,      -- ImVec2
+    SeparatorTextBorderSize = nil,  -- float
+    SeparatorTextAlign = nil,       -- ImVec2
+    SeparatorTextPadding = nil,     -- ImVec2
+    DockingSeparatorSize = nil,     -- float
+}
+
+---@enum ImGuiItemFlags
+ImGuiItemFlags =
+{
+	None = nil,
+	NoTabStop = nil, -- Disable keyboard tabbing. This is a "lighter" version of ImGuiItemFlags_NoNav.
+	NoNav = nil, -- Disable any form of focusing (keyboard/gamepad directional navigation and SetKeyboardFocusHere() calls).
+	NoNavDefaultFocus = nil, -- Disable item being a candidate for default focus (e.g. used by title bar items).
+	ButtonRepeat = nil, -- Any button-like behavior will have repeat mode enabled (based on io.KeyRepeatDelay and io.KeyRepeatRate values). Note that you can also call IsItemActive() after any button to tell if it is being held.
+	AutoClosePopups = nil, -- MenuItem()/Selectable() automatically close their parent popup window.
+	AllowDuplicateId = nil, -- Allow submitting an item with the same identifier as an item already submitted this frame without triggering a warning tooltip if io.ConfigDebugHighlightIdConflicts is set.
+};
+
+---@enum ImGuiSliderFlags
+ImGuiSliderFlags =
+{
+	None = nil,
+	Logarithmic = nil, -- Make the widget logarithmic (linear otherwise). Consider using ImGuiSliderFlags_NoRoundToFormat with this if using a format-string with small amount of digits.
+	NoRoundToFormat = nil, -- Disable rounding underlying value to match precision of the display format string (e.g. %.3f values are rounded to those 3 digits).
+	NoInput = nil, -- Disable CTRL+Click or Enter key allowing to input text directly into the widget.
+	WrapAround = nil, -- Enable wrapping around from max to min and from min to max. Only supported by DragXXX() functions for now.
+	ClampOnInput = nil, -- Clamp value to min/max bounds when input manually with CTRL+Click. By default CTRL+Click allows going out of bounds.
+	ClampZeroRange = nil, -- Clamp even if min==max==0.0f. Otherwise due to legacy reason DragXXX functions don't clamp with those values. When your clamping limits are dynamic you almost always want to use it.
+	NoSpeedTweaks = nil, -- Disable keyboard modifiers altering tweak speed. Useful if you want to alter tweak speed yourself based on your own logic.
+	AlwaysClamp = nil,
+}
+
+---@enum ImGuiComboFlags
+ImGuiComboFlags =
+{
+	None = nil,
+	PopupAlignLeft = nil, -- Align the popup toward the left by default
+	HeightSmall = nil, -- Max ~4 items visible. Tip: If you want your combo popup to be a specific size you can use SetNextWindowSizeConstraints() prior to calling BeginCombo()
+	HeightRegular = nil, -- Max ~8 items visible (default)
+	HeightLarge = nil, -- Max ~20 items visible
+	HeightLargest = nil, -- As many fitting items as possible
+	NoArrowButton = nil, -- Display on the preview box without the square arrow button
+	NoPreview = nil, -- Display only a square arrow button
+	WidthFitPreview = nil, -- Width dynamically calculated from preview contents
+	HeightMask = nil,
+}
+
+
+---@enum ImGuiHoveredFlags
+ImGuiHoveredFlags =
+{
+	None = nil, -- Return true if directly over the item/window, not obstructed by another window, not obstructed by an active popup or modal blocking inputs under them.
+	ChildWindows                  = nil, -- IsWindowHovered() only: Return true if any children of the window is hovered
+	RootWindow                    = nil, -- IsWindowHovered() only: Test from root window (top most parent of the current hierarchy)
+	AnyWindow                     = nil, -- IsWindowHovered() only: Return true if any window is hovered
+	NoPopupHierarchy              = nil, -- IsWindowHovered() only: Do not consider popup hierarchy (do not treat popup emitter as parent of popup) (when used with _ChildWindows or _RootWindow)
+	DockHierarchy                 = nil, -- IsWindowHovered() only: Consider docking hierarchy (treat dockspace host as parent of docked window) (when used with _ChildWindows or _RootWindow)
+	AllowWhenBlockedByPopup       = nil, -- Return true even if a popup window is normally blocking access to this item/window
+	AllowWhenBlockedByActiveItem  = nil, -- Return true even if an active item is blocking access to this item/window. Useful for Drag and Drop patterns.
+	AllowWhenOverlappedByItem     = nil, -- IsItemHovered() only: Return true even if the item uses AllowOverlap mode and is overlapped by another hoverable item.
+	AllowWhenOverlappedByWindow   = nil, -- IsItemHovered() only: Return true even if the position is obstructed or overlapped by another window.
+	AllowWhenDisabled             = nil, -- IsItemHovered() only: Return true even if the item is disabled
+	NoNavOverride                 = nil, -- IsItemHovered() only: Disable using keyboard/gamepad navigation state when active, always query mouse
+	AllowWhenOverlapped           = nil,
+	RectOnly                      = nil,
+	RootAndChildWindows           = nil,
+
+	-- Tooltips mode
+	-- - typically used in IsItemHovered() + SetTooltip() sequence.
+	-- - this is a shortcut to pull flags from 'style.HoverFlagsForTooltipMouse' or 'style.HoverFlagsForTooltipNav' where you can reconfigure desired behavior.
+	--   e.g. 'TooltipHoveredFlagsForMouse' defaults to 'ImGuiHoveredFlags_Stationary | ImGuiHoveredFlags_DelayShort'.
+	-- - for frequently actioned or hovered items providing a tooltip, you want may to use ImGuiHoveredFlags_ForTooltip (stationary + delay) so the tooltip doesn't show too often.
+	-- - for items which main purpose is to be hovered, or items with low affordance, or in less consistent apps, prefer no delay or shorter delay.
+	ForTooltip                    = nil,  -- Shortcut for standard flags when using IsItemHovered() + SetTooltip() sequence.
+
+	-- (Advanced) Mouse Hovering delays.
+	-- - generally you can use ImGuiHoveredFlags_ForTooltip to use application-standardized flags.
+	-- - use those if you need specific overrides.
+	Stationary                    = nil,  -- Require mouse to be stationary for style.HoverStationaryDelay (~0.15 sec) _at least one time_. After this, can move on same item/window. Using the stationary test tends to reduces the need for a long delay.
+	DelayNone                     = nil,  -- IsItemHovered() only: Return true immediately (default). As this is the default you generally ignore this.
+	DelayShort                    = nil,  -- IsItemHovered() only: Return true after style.HoverDelayShort elapsed (~0.15 sec) (shared between items) + requires mouse to be stationary for style.HoverStationaryDelay (once per item).
+	DelayNormal                   = nil,  -- IsItemHovered() only: Return true after style.HoverDelayNormal elapsed (~0.40 sec) (shared between items) + requires mouse to be stationary for style.HoverStationaryDelay (once per item).
+	NoSharedDelay                 = nil,  -- IsItemHovered() only: Disable shared delay system where moving from one item to the next keeps the previous timer for a short time (standard for tooltips with long delays)
+}
+
+---@enum ImGuiFocusedFlags
+ImGuiFocusedFlags =
+{
+	None                          = nil,
+	ChildWindows                  = nil, -- Return true if any children of the window is focused
+	RootWindow                    = nil, -- Test from root window (top most parent of the current hierarchy)
+	AnyWindow                     = nil, -- Return true if any window is focused. Important: If you are trying to tell how to dispatch your low-level inputs, do NOT use this. Use 'io.WantCaptureMouse' instead! Please read the FAQ!
+	NoPopupHierarchy              = nil, -- Do not consider popup hierarchy (do not treat popup emitter as parent of popup) (when used with _ChildWindows or _RootWindow)
+	DockHierarchy                 = nil, -- Consider docking hierarchy (treat dockspace host as parent of docked window) (when used with _ChildWindows or _RootWindow)
+	RootAndChildWindows           = nil,
+}
+
+
 --#endregion
 
 --#region ImGui Types

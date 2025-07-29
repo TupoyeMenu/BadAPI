@@ -3225,7 +3225,17 @@ namespace lua::imgui
 #pragma endregion Item Flags
 
 #pragma region Slider Flags
-		luaGlobals.new_enum("ImGuiSliderFlags", "None", ImGuiSliderFlags_None, "AlwaysClamp", ImGuiSliderFlags_AlwaysClamp, "Logarithmic", ImGuiSliderFlags_Logarithmic, "NoRoundToFormat", ImGuiSliderFlags_NoRoundToFormat, "NoInput", ImGuiSliderFlags_NoInput);
+		luaGlobals.new_enum("ImGuiSliderFlags", 
+			"None", ImGuiSliderFlags_None,
+			"Logarithmic", ImGuiSliderFlags_Logarithmic,
+			"NoRoundToFormat", ImGuiSliderFlags_NoRoundToFormat,
+			"NoInput", ImGuiSliderFlags_NoInput,
+			"WrapAround", ImGuiSliderFlags_WrapAround,
+			"ClampOnInput", ImGuiSliderFlags_ClampOnInput,
+			"ClampZeroRange", ImGuiSliderFlags_ClampZeroRange,
+			"NoSpeedTweaks", ImGuiSliderFlags_NoSpeedTweaks,
+			"AlwaysClamp", ImGuiSliderFlags_AlwaysClamp);
+
 #pragma endregion Slider Flags
 
 #pragma region ColorEdit Flags
