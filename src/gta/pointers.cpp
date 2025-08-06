@@ -331,6 +331,27 @@ namespace big
 			m_natives_registered = ptr.add(3).rip().as<bool*>();
 		});
 
+		main_batch.add("tlsContext allocator offset", "4C 8B C2 B9", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			// Multiple results but they all point to the same offset.
+			offsets::tls_context_allocator_offset = *ptr.add(4).as<uint32_t*>();
+		});
+		main_batch.add("tlsContext allocator offset", "48 8B 04 C1 48 8B 88 ? ? ? ? 48 8B 01 48 8B 40 40 48", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			offsets::tls_context_allocator_offset = *ptr.add(8).as<uint32_t*>();
+		});
+
+		main_batch.add("tlsContext thread offset", "48 8B F9 E8 ? ? ? ? FF 47", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			offsets::tls_context_thread_offset = *ptr.add(4).rip().add(16).as<uint32_t*>();
+		});
+		main_batch.add("tlsContext thread offset", "E8 ? ? ? ? 4C 8B B0 ? ? ? ? 40", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			offsets::tls_context_thread_offset = *ptr.add(1).rip().add(22).as<uint32_t*>();
+		});
+
+		main_batch.add("Allocator", "48 8D 1D ? ? ? ? A8 08", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_allocator = ptr.add(3).rip().as<rage::sysMemAllocator*>();
+		});
+		main_batch.add("Allocator", "48 8D 3D ? ? ? ? 48 89 F9 BA 07", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_allocator = ptr.add(3).rip().as<rage::sysMemAllocator*>();
+		});
 
 		main_batch.run(memory::module(""));
 

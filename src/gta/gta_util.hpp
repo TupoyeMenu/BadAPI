@@ -3,10 +3,8 @@
 // clang-format off
 #include "util/header_wrappers/include_as_enhaced.hpp"
 #include "gta/script_thread.hpp"
-#include "gta/tls_context.hpp"
 #include "util/header_wrappers/include_as_legacy.hpp"
 #include "gta/script_thread.hpp"
-#include "gta/tls_context.hpp"
 #include "util/header_wrappers/clear_include.hpp"
 // clang-format on
 
@@ -75,37 +73,37 @@ namespace big::gta_util
 		if (!thread)
 			return;
 
-		auto tls_ctx = legacy::rage::tlsContext::get();
-		auto og_thread = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread);
+		auto tls_ctx = rage::tlsContext::get();
+		auto og_thread = *tls_ctx->getScriptThreadPtr();
 
-		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = thread;
-		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
+		*tls_ctx->getScriptThreadPtr() = thread;
+		*tls_ctx->getScriptThreadActivePtr() = true;
 
 		std::invoke(std::forward<F>(callback), std::forward<Args>(args)...);
 
-		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
-		CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread != nullptr;
+		*tls_ctx->getScriptThreadPtr() = og_thread;
+		*tls_ctx->getScriptThreadActivePtr() = og_thread != nullptr;
 	}
 
 	template<typename F, typename... Args>
 	void execute_as_script(rage::joaat_t script_hash, F&& callback, Args&&... args)
 	{
-		auto tls_ctx = legacy::rage::tlsContext::get();
+		auto tls_ctx = rage::tlsContext::get();
 		for (auto thread : *g_pointers->m_script_threads)
 		{
 			if (!thread || CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_thread_id) == 0
 			    || CROSS_CLASS_ACCESS(legacy::rage::scrThread, enhanced::rage::scrThread, thread, ->m_context.m_script_hash) != script_hash)
 				continue;
 
-			auto og_thread = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread);
+			auto og_thread = *tls_ctx->getScriptThreadPtr();
 
-			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = thread;
-			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
+			*tls_ctx->getScriptThreadPtr() = thread;
+			*tls_ctx->getScriptThreadActivePtr() = true;
 
 			std::invoke(std::forward<F>(callback), std::forward<Args>(args)...);
 
-			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
-			CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread != nullptr;
+			*tls_ctx->getScriptThreadPtr() = og_thread;
+			*tls_ctx->getScriptThreadActivePtr() = og_thread != nullptr;
 
 			return;
 		}

@@ -107,6 +107,8 @@ namespace big
 
 		bool* m_natives_registered;
 		PVOID m_gta_thread_vtable;
+
+		rage::sysMemAllocator* m_allocator;
 	};
 
 	inline pointers* g_pointers{};

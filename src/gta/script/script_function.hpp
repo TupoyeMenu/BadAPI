@@ -45,9 +45,9 @@ namespace big
 
 			auto tls_ctx                       = rage::tlsContext::get();
 			auto stack                         = (uint64_t*)thread->m_stack;
-			auto og_thread                     = tls_ctx->m_script_thread;
-			tls_ctx->m_script_thread           = thread;
-			tls_ctx->m_is_script_thread_active = true;
+			auto og_thread                     = *tls_ctx->getScriptThreadPtr();
+			*tls_ctx->getScriptThreadPtr()           = thread;
+			*tls_ctx->getScriptThreadActivePtr() = true;
 			rage::scrThreadContext ctx         = thread->m_context;
 			auto top_stack                     = ctx.m_stack_pointer; // This will be the top item in the stack after the args and return address are cleaned off
 
@@ -59,8 +59,8 @@ namespace big
 
 			g_pointers->m_script_vm(stack, g_pointers->m_script_globals, program, &ctx);
 
-			tls_ctx->m_script_thread           = og_thread;
-			tls_ctx->m_is_script_thread_active = og_thread != nullptr;
+			*tls_ctx->getScriptThreadPtr()           = og_thread;
+			*tls_ctx->getScriptThreadActivePtr() = og_thread != nullptr;
 
 			if constexpr (!std::is_same_v<Ret, void>)
 			{

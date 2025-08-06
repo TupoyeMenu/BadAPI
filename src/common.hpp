@@ -57,6 +57,13 @@
 
 #include "core/settings.hpp"
 
+
+namespace offsets
+{
+	inline uint32_t tls_context_allocator_offset;
+	inline uint32_t tls_context_thread_offset;
+};
+
 #include <ped/CPed.hpp>
 #include <script/types.hpp>
 

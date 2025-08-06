@@ -66,7 +66,13 @@ namespace big
 
 	void native_invoker::begin_call()
 	{
+		m_thread_lock.lock();
+
+		if (m_call_started)
+			LOG(FATAL) << "Began native call while another call was in process, did you forget to call end_call?";
+
 		m_call_context.reset();
+		m_call_started = true;
 	}
 
 	void native_invoker::end_call(rage::scrNativeHash hash)
@@ -82,13 +88,13 @@ namespace big
 		{
 			rage::scrNativeHandler handler = m_handler_cache.at(i);
 
-			auto tls_ctx = legacy::rage::tlsContext::get();
-			auto og_thread = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread);
-			bool og_thread_running = CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active);
+			auto tls_ctx = rage::tlsContext::get();
+			void* og_thread = *tls_ctx->getScriptThreadPtr();
+			bool og_thread_running = *tls_ctx->getScriptThreadActivePtr();
 			if (!og_thread)
 			{
-				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = g_main_script_thread;
-				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = true;
+				*tls_ctx->getScriptThreadPtr() = g_main_script_thread;
+				*tls_ctx->getScriptThreadActivePtr() = true;
 			}
 
 			// return address checks are no longer a thing
@@ -97,13 +103,16 @@ namespace big
 
 			if (!og_thread)
 			{
-				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_script_thread) = og_thread;
-				CROSS_CLASS_ACCESS(legacy::rage::tlsContext, enhanced::rage::tlsContext, tls_ctx, ->m_is_script_thread_active) = og_thread_running;
+				*tls_ctx->getScriptThreadPtr() = og_thread;
+				*tls_ctx->getScriptThreadActivePtr() = og_thread_running;
 			}
 		}
 		catch(const std::out_of_range& ex)
 		{
 			LOG(WARNING) << "Failed to find " << HEX_TO_UPPER(hash) << " native's handler.";
 		}
+
+		m_call_started = false;
+		m_thread_lock.unlock();
 	}
 }
