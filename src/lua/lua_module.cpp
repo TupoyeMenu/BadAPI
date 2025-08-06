@@ -13,7 +13,6 @@
 #include "bindings/network.hpp"
 #include "bindings/scr_patch.hpp"
 #include "bindings/script.hpp"
-#include "bindings/self.hpp"
 #include "bindings/stats.hpp"
 #include "bindings/tunables.hpp"
 #include "bindings/vector.hpp"
@@ -272,7 +271,6 @@ namespace big
 		lua::imgui::bind(m_state, m_state.globals());
 		lua::imguitextselect::bind(m_state);
 		lua::entities::bind(m_state);
-		lua::self::bind(m_state);
 		lua::stats::bind(m_state);
 	}
 
