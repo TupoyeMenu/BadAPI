@@ -1,5 +1,4 @@
 #pragma once
-#include "bindings/gui.hpp"
 #include "gta/script/script.hpp"
 #include "lua/bindings/scr_patch.hpp"
 #include "lua_patch.hpp"

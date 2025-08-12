@@ -131,6 +131,35 @@ ImGuiWindowFlags =
 	ChildMenu    = nil,        -- Don't use! For internal use by BeginMenu()
 }
 
+---@enum ImGuiConfigFlags
+ImGuiConfigFlags =
+{
+	None                   = 0,
+	NavEnableKeyboard      = nil, -- Master keyboard navigation enable flag. Enable full Tabbing + directional arrows + space/enter to activate.
+	NavEnableGamepad       = nil, -- Master gamepad navigation enable flag. Backend also needs to set ImGuiBackendFlags_HasGamepad.
+	NoMouse                = nil, -- Instruct dear imgui to disable mouse inputs and interactions.
+	NoMouseCursorChange    = nil, -- Instruct backend to not alter mouse cursor shape and visibility. Use if the backend cursor changes are interfering with yours and you don't want to use SetMouseCursor() to change mouse cursor. You may want to honor requests from imgui by reading GetMouseCursor() yourself instead.
+	NoKeyboard             = nil, -- Instruct dear imgui to disable keyboard inputs and interactions. This is done by ignoring keyboard events and clearing existing states.
+	DockingEnable          = nil, -- Docking enable flags.
+	ViewportsEnable        = nil, -- Viewport enable flags (require both ImGuiBackendFlags_PlatformHasViewports + ImGuiBackendFlags_RendererHasViewports set by the respective backends)
+	IsSRGB                 = nil, -- Application is SRGB-aware.
+	IsTouchScreen          = nil, -- Application is using a touch screen instead of a mouse.
+}
+
+---@enum ImGuiBackendFlags
+ImGuiBackendFlags =
+{
+	None                  = 0,
+	HasGamepad            = nil, -- Backend Platform supports gamepad and currently has one connected.
+	HasMouseCursors       = nil, -- Backend Platform supports honoring GetMouseCursor() value to change the OS cursor shape.
+	HasSetMousePos        = nil, -- Backend Platform supports io.WantSetMousePos requests to reposition the OS mouse position (only used if io.ConfigNavMoveSetMousePos is set).
+	RendererHasVtxOffset  = nil, -- Backend Renderer supports ImDrawCmd::VtxOffset. This enables output of large meshes (64K+ vertices) while still using 16-bit indices.
+	RendererHasTextures   = nil, -- Backend Renderer supports ImTextureData requests to create/update/destroy textures. This enables incremental texture updates and texture reloads. See https://github.com/ocornut/imgui/blob/master/docs/BACKENDS.md for instructions on how to upgrade your custom backend.
+	PlatformHasViewports  = nil, -- Backend Platform supports multiple viewports.
+	HasMouseHoveredViewport=nil, -- Backend Platform supports calling io.AddMouseViewportEvent() with the viewport under the mouse. IF POSSIBLE, ignore viewports with the ImGuiViewportFlags_NoInputs flag (Win32 backend, GLFW 3.30+ backend can do this, SDL backend cannot). If this cannot be done, Dear ImGui needs to use a flawed heuristic to find the viewport under.
+	RendererHasViewports  = nil, -- Backend Renderer supports multiple viewports.
+}
+
 ---@enum ImGuiCol
 ImGuiCol =
 {
@@ -195,6 +224,14 @@ ImGuiCol =
 	NavWindowingDimBg = nil,  -- Darken/colorize entire screen behind the CTRL+TAB window list, when active
 	ModalWindowDimBg = nil,   -- Darken/colorize entire screen behind a modal window, when one is active
 	COUNT = nil,
+}
+
+---@enum ImGuiMouseSource
+ImGuiMouseSource =
+{
+	Mouse = nil, -- Input is coming from an actual mouse.
+	TouchScreen = nil, -- Input is coming from a touch screen (no hovering prior to initial press, less precise initial press aiming, dual-axis wheeling possible).
+	Pen = nil, -- Input is coming from a pressure/magnetic pen (often used in conjunction with high-sampling rates).
 }
 
 ---@enum ImGuiCond
@@ -299,6 +336,19 @@ ImGuiItemFlags =
 	AllowDuplicateId = nil, -- Allow submitting an item with the same identifier as an item already submitted this frame without triggering a warning tooltip if io.ConfigDebugHighlightIdConflicts is set.
 };
 
+---@enum ImGuiDockNodeFlags
+ImGuiDockNodeFlags =
+{
+	None = nil,
+	KeepAliveOnly = nil, -- Don't display the dockspace node but keep it alive. Windows docked into this dockspace node won't be undocked.
+	NoDockingOverCentralNode = nil, -- Disable docking over the Central Node, which will be always kept empty.
+	PassthruCentralNode = nil, -- Enable passthru dockspace: 1) DockSpace() will render a ImGuiCol_WindowBg background covering everything excepted the Central Node when empty. Meaning the host window should probably use SetNextWindowBgAlpha(0.0f) prior to Begin() when using this. 2) When Central Node is empty: let inputs pass-through + won't display a DockingEmptyBg background. See demo for details.
+	NoDockingSplit = nil, -- Disable other windows/nodes from splitting this node.
+	NoResize = nil, -- Disable resizing node using the splitter/separators. Useful with programmatically setup dockspaces.
+	AutoHideTabBar = nil, -- Tab bar will automatically hide when there is a single window in the dock node.
+	NoUndocking = nil -- Disable undocking this node.
+}
+
 ---@enum ImGuiSliderFlags
 ImGuiSliderFlags =
 {
@@ -386,6 +436,32 @@ ImGuiFocusedFlags =
 ---@class ImVec2
 ---@field x number
 ---@field y number
+ImVec2 = {}
+
+---@return ImVec2
+function ImVec2:new() end
+
+---@param x number
+---@param y number
+---@return ImVec2
+function ImVec2:new(x,y) end
+
+---@class ImVec4
+---@field x number
+---@field y number
+---@field z number
+---@field w number
+ImVec4 = {}
+
+---@return ImVec4
+function ImVec4:new() end
+
+---@param x number
+---@param y number
+---@param z number
+---@param w number
+---@return ImVec4
+function ImVec4:new(x,y,z,w) end
 
 ---@class ImGuiStyle
 ---@field Alpha float  Global alpha applies to everything in Dear ImGui.
@@ -442,6 +518,133 @@ ImGuiFocusedFlags =
 ---@field AntiAliasedFill boolean  Enable anti-aliased edges around filled shapes (rounded rectangles, circles, etc.). Disable if you are really tight on CPU/GPU. Latched at the beginning of the frame (copied to ImDrawList).
 ---@field CurveTessellationTol float  Tessellation tolerance when using PathBezierCurveTo() without a specific number of segments. Decrease for highly tessellated curves (higher quality, more polygons), increase to reduce quality.
 ---@field CircleTessellationMaxError float  Maximum error (in pixels) allowed when using AddCircle()/AddCircleFilled() or drawing rounded corner rectangles with no explicit segment count specified. Decrease for higher quality but more geometry.
+---@field Colors table<ImGuiCol, ImVec4>  Maximum error (in pixels) allowed when using AddCircle()/AddCircleFilled() or drawing rounded corner rectangles with no explicit segment count specified. Decrease for higher quality but more geometry.
+
+---@class ImFontAtlas
+--TODO
+
+---@class ImFont
+ImFont = {}
+
+function ImFont.IsGlyphInFont(c) end
+function ImFont.IsLoaded() end
+function ImFont.GetDebugName() end
+
+---@class ImGuiKeyData
+---@field Down boolean True for if key is down
+---@field DownDuration number Duration the key has been down (<0.0f: not pressed, 0.0f: just pressed, >0.0f: time held)
+---@field DownDurationPrev number Last frame duration the key has been down
+---@field AnalogValue number 0.0f..1.0f for gamepad values
+
+---@class ImGuiIO
+---@field ConfigFlags ImGuiConfigFlags|integer;             // = 0              // See ImGuiConfigFlags_ enum. Set by user/application. Keyboard/Gamepad navigation options, etc.
+---@field BackendFlags ImGuiBackendFlags|integer   See ImGuiBackendFlags_ enum. Set by backend (imgui_impl_xxx files or custom backend) to communicate features supported by the backend.
+---@field DisplaySize ImVec2       Main display size, in pixels (== GetMainViewport()->Size). May change every frame.
+---@field DisplayFramebufferScale ImVec2       Main display density. For retina display where window coordinates are different from framebuffer coordinates. This will affect font density + will end up in ImDrawData::FramebufferScale.
+---@field DeltaTime number        Time elapsed since last frame, in seconds. May change every frame.
+---@field IniSavingRate number        Minimum time between saving positions/sizes to .ini file, in seconds.
+---@field IniFilename string  Path to .ini file (important: default "imgui.ini" is relative to current working dir!). Set NULL to disable automatic .ini loading/saving or if you want to manually call LoadIniSettingsXXX() / SaveIniSettingsXXX() functions.
+---@field LogFilename string  Path to .log file (default parameter to ImGui::LogToFile when no file is specified).
+---@field UserData any        Store your own data.
+---@field Fonts ImFontAtlas Font atlas: load, rasterize and pack one or more fonts into a single texture.
+---@field FontDefault ImFont      Font to use on NewFrame(). Use NULL to uses Fonts->Fonts[0].
+---@field FontAllowUserScaling boolean        [OBSOLETE] Allow user scaling text of individual window with CTRL+Wheel.
+---@field ConfigNavSwapGamepadButtons boolean        Swap Activate<>Cancel (A<>B) buttons, matching typical "Nintendo/Japanese style" gamepad layout.
+---@field ConfigNavMoveSetMousePos boolean        Directional/tabbing navigation teleports the mouse cursor. May be useful on TV/console systems where moving a virtual mouse is difficult. Will update io.MousePos and set io.WantSetMousePos=true.
+---@field ConfigNavCaptureKeyboard boolean        Sets io.WantCaptureKeyboard when io.NavActive is set.
+---@field ConfigNavEscapeClearFocusItem boolean        Pressing Escape can clear focused item + navigation id/highlight. Set to false if you want to always keep highlight on.
+---@field ConfigNavEscapeClearFocusWindow boolean        Pressing Escape can clear focused window as well (super set of io.ConfigNavEscapeClearFocusItem).
+---@field ConfigNavCursorVisibleAuto boolean        Using directional navigation key makes the cursor visible. Mouse click hides the cursor.
+---@field ConfigNavCursorVisibleAlways boolean        Navigation cursor is always visible.
+---@field ConfigDockingNoSplit boolean        Simplified docking mode: disable window splitting, so docking is limited to merging multiple windows together into tab-bars.
+---@field ConfigDockingWithShift boolean        Enable docking with holding Shift key (reduce visual noise, allows dropping in wider space)
+---@field ConfigDockingAlwaysTabBar boolean        [BETA] [FIXME: This currently creates regression with auto-sizing and general overhead] Make every single floating window display within a docking node.
+---@field ConfigDockingTransparentPayload boolean        [BETA] Make window or viewport transparent when docking and only display docking boxes on the target viewport. Useful if rendering of multiple viewport cannot be synced. Best used with ConfigViewportsNoAutoMerge.
+---@field ConfigViewportsNoAutoMerge boolean        Set to make all floating imgui windows always create their own viewport. Otherwise, they are merged into the main host viewports when overlapping it. May also set ImGuiViewportFlags_NoAutoMerge on individual viewport.
+---@field ConfigViewportsNoTaskBarIcon boolean        Disable default OS task bar icon flag for secondary viewports. When a viewport doesn't want a task bar icon, ImGuiViewportFlags_NoTaskBarIcon will be set on it.
+---@field ConfigViewportsNoDecoration boolean        Disable default OS window decoration flag for secondary viewports. When a viewport doesn't want window decorations, ImGuiViewportFlags_NoDecoration will be set on it. Enabling decoration can create subsequent issues at OS levels (e.g. minimum window size).
+---@field ConfigViewportsNoDefaultParent boolean        Disable default OS parenting to main viewport for secondary viewports. By default, viewports are marked with ParentViewportId = <main_viewport>, expecting the platform backend to setup a parent/child relationship between the OS windows (some backend may ignore this). Set to true if you want the default to be 0, then all viewports will be top-level OS windows.
+---@field ConfigDpiScaleFonts boolean        [EXPERIMENTAL] Automatically overwrite style.FontScaleDpi when Monitor DPI changes. This will scale fonts but _NOT_ scale sizes/padding for now.
+---@field ConfigDpiScaleViewports boolean        [EXPERIMENTAL] Scale Dear ImGui and Platform Windows when Monitor DPI changes.
+---@field MouseDrawCursor boolean        Request ImGui to draw a mouse cursor for you (if you are on a platform without a mouse cursor). Cannot be easily renamed to 'io.ConfigXXX' because this is frequently used by backend implementations.
+---@field ConfigMacOSXBehaviors boolean        Swap Cmd<>Ctrl keys + OS X style text editing cursor movement using Alt instead of Ctrl, Shortcuts using Cmd/Super instead of Ctrl, Line/Text Start and End using Cmd+Arrows instead of Home/End, Double click selects by word instead of selecting whole text, Multi-selection in lists uses Cmd/Super instead of Ctrl.
+---@field ConfigInputTrickleEventQueue boolean        Enable input queue trickling: some types of events submitted during the same frame (e.g. button down + up) will be spread over multiple frames, improving interactions with low framerates.
+---@field ConfigInputTextCursorBlink boolean        Enable blinking cursor (optional as some users consider it to be distracting).
+---@field ConfigInputTextEnterKeepActive boolean        [BETA] Pressing Enter will keep item active and select contents (single-line only).
+---@field ConfigDragClickToInputText boolean        [BETA] Enable turning DragXXX widgets into text input with a simple mouse click-release (without moving). Not desirable on devices without a keyboard.
+---@field ConfigWindowsResizeFromEdges boolean        Enable resizing of windows from their edges and from the lower-left corner. This requires ImGuiBackendFlags_HasMouseCursors for better mouse cursor feedback. (This used to be a per-window ImGuiWindowFlags_ResizeFromAnySide flag)
+---@field ConfigWindowsMoveFromTitleBarOnly boolean        Enable allowing to move windows only when clicking on their title bar. Does not apply to windows without a title bar.
+---@field ConfigWindowsCopyContentsWithCtrlC boolean        [EXPERIMENTAL] CTRL+C copy the contents of focused window into the clipboard. Experimental because: (1) has known issues with nested Begin/End pairs (2) text output quality varies (3) text output is in submission order rather than spatial order.
+---@field ConfigScrollbarScrollByPage boolean        Enable scrolling page by page when clicking outside the scrollbar grab. When disabled, always scroll to clicked location. When enabled, Shift+Click scrolls to clicked location.
+---@field ConfigMemoryCompactTimer number        Timer (in seconds) to free transient windows/tables memory buffers when unused. Set to -1.0f to disable.
+---@field MouseDoubleClickTime number        Time for a double-click, in seconds.
+---@field MouseDoubleClickMaxDist number        Distance threshold to stay in to validate a double-click, in pixels.
+---@field MouseDragThreshold number        Distance threshold before considering we are dragging.
+---@field KeyRepeatDelay number        When holding a key/button, time before it starts repeating, in seconds (for buttons in Repeat mode, etc.).
+---@field KeyRepeatRate number        When holding a key/button, rate at which it repeats, in seconds.
+---@field ConfigErrorRecovery boolean        Enable error recovery support. Some errors won't be detected and lead to direct crashes if recovery is disabled.
+---@field ConfigErrorRecoveryEnableAssert boolean        Enable asserts on recoverable error. By default call IM_ASSERT() when returning from a failing IM_ASSERT_USER_ERROR()
+---@field ConfigErrorRecoveryEnableDebugLog boolean        Enable debug log output on recoverable errors.
+---@field ConfigErrorRecoveryEnableTooltip boolean        Enable tooltip on recoverable errors. The tooltip include a way to enable asserts if they were disabled.
+---@field ConfigDebugIsDebuggerPresent boolean        Enable various tools calling IM_DEBUG_BREAK().
+---@field ConfigDebugHighlightIdConflicts boolean        Highlight and show an error message popup when multiple items have conflicting identifiers.
+---@field ConfigDebugHighlightIdConflictsShowItemPicker boolean        Show "Item Picker" button in aforementioned popup.
+---@field ConfigDebugBeginReturnValueOnce boolean        First-time calls to Begin()/BeginChild() will return false. NEEDS TO BE SET AT APPLICATION BOOT TIME if you don't want to miss windows.
+---@field ConfigDebugBeginReturnValueLoop boolean        Some calls to Begin()/BeginChild() will return false. Will cycle through window depths then repeat. Suggested use: add "io.ConfigDebugBeginReturnValue = io.KeyShift" in your main loop then occasionally press SHIFT. Windows should be flickering while running.
+---@field ConfigDebugIgnoreFocusLoss boolean        Ignore io.AddFocusEvent(false), consequently not calling io.ClearInputKeys()/io.ClearInputMouse() in input processing.
+---@field ConfigDebugIniSettings boolean        Save .ini data with extra comments (particularly helpful for Docking, but makes saving slower)
+---@field BackendPlatformName string
+---@field BackendRendererName string
+---@field BackendPlatformUserData any        User data for platform backend
+---@field BackendRendererUserData any        User data for renderer backend
+---@field BackendLanguageUserData any        User data for non C++ programming language backend
+---@field WantCaptureMouse boolean        Set when Dear ImGui will use mouse inputs, in this case do not dispatch them to your main game/application (either way, always pass on mouse inputs to imgui). (e.g. unclicked mouse is hovering over an imgui window, widget is active, mouse was clicked over an imgui window, etc.).
+---@field WantCaptureKeyboard boolean        Set when Dear ImGui will use keyboard inputs, in this case do not dispatch them to your main game/application (either way, always pass keyboard inputs to imgui). (e.g. InputText active, or an imgui window is focused and navigation is enabled, etc.).
+---@field WantTextInput boolean        Mobile/console: when set, you may display an on-screen keyboard. This is set by Dear ImGui when it wants textual keyboard input to happen (e.g. when a InputText widget is active).
+---@field WantSetMousePos boolean        MousePos has been altered, backend should reposition mouse on next frame. Rarely used! Set only when io.ConfigNavMoveSetMousePos is enabled.
+---@field WantSaveIniSettings boolean        When manual .ini load/save is active (io.IniFilename == NULL), this will be set to notify your application that you can call SaveIniSettingsToMemory() and save yourself. Important: clear io.WantSaveIniSettings yourself after saving!
+---@field NavActive boolean        Keyboard/Gamepad navigation is currently allowed (will handle ImGuiKey_NavXXX events) = a window is focused and it doesn't use the ImGuiWindowFlags_NoNavInputs flag.
+---@field NavVisible boolean        Keyboard/Gamepad navigation highlight is visible and allowed (will handle ImGuiKey_NavXXX events).
+---@field Framerate number        Estimate of application framerate (rolling average over 60 frames, based on io.DeltaTime), in frame per second. Solely for convenience. Slow applications may not want to use a moving average or may want to reset underlying buffers occasionally.
+---@field MetricsRenderVertices integer         Vertices output during last call to Render()
+---@field MetricsRenderIndices integer         Indices output during last call to Render() = number of triangles * 3
+---@field MetricsRenderWindows integer         Number of visible windows
+---@field MetricsActiveWindows integer         Number of active windows
+---@field MouseDelta ImVec2       Mouse delta. Note that this is zero if either current or previous position are invalid (-FLT_MAX,-FLT_MAX), so a disappearing/reappearing mouse won't have a huge delta.
+---@field MousePos ImVec2       Mouse position, in pixels. Set to ImVec2(-FLT_MAX, -FLT_MAX) if mouse is unavailable (on another screen, etc.)
+---@field MouseDown table<integer, boolean>; Mouse buttons: 0=left, 1=right, 2=middle + extras (ImGuiMouseButton_COUNT == 5). Dear ImGui mostly uses left and right buttons. Other buttons allow us to track if the mouse is being used by your application + available to user as a convenience via IsMouse** API.
+---@field MouseWheel number        Mouse wheel Vertical: 1 unit scrolls about 5 lines text. >0 scrolls Up, <0 scrolls Down. Hold SHIFT to turn vertical scroll into horizontal scroll.
+---@field MouseWheelH number        Mouse wheel Horizontal. >0 scrolls Left, <0 scrolls Right. Most users don't have a mouse with a horizontal wheel, may not be filled by all backends.
+---@field MouseSource ImGuiMouseSource|integer  Mouse actual input peripheral (Mouse/TouchScreen/Pen).
+---@field MouseHoveredViewport integer      (Optional) Modify using io.AddMouseViewportEvent(). With multi-viewports: viewport the OS mouse is hovering. If possible _IGNORING_ viewports with the ImGuiViewportFlags_NoInputs flag is much better (few backends can handle that). Set io.BackendFlags |= ImGuiBackendFlags_HasMouseHoveredViewport if you can provide this info. If you don't imgui will infer the value using the rectangles and last focused time of the viewports it knows about (ignoring other OS windows).
+---@field KeyCtrl boolean        Keyboard modifier down: Control
+---@field KeyShift boolean        Keyboard modifier down: Shift
+---@field KeyAlt boolean        Keyboard modifier down: Alt
+---@field KeySuper boolean        Keyboard modifier down: Cmd/Super/Windows
+---@field KeyMods integer  Key mods flags (any of ImGuiMod_Ctrl/ImGuiMod_Shift/ImGuiMod_Alt/ImGuiMod_Super flags, same as io.KeyCtrl/KeyShift/KeyAlt/KeySuper but merged into flags. Read-only, updated by NewFrame()
+---@field KeysData table<integer,ImGuiKeyData> Key state for all known keys. MUST use 'key - ImGuiKey_NamedKey_BEGIN' as index. Use IsKeyXXX() functions to access this.
+---@field WantCaptureMouseUnlessPopupClose boolean        Alternative to WantCaptureMouse: (WantCaptureMouse == true && WantCaptureMouseUnlessPopupClose == false) when a click over void is expected to close a popup.
+---@field MousePosPrev ImVec2       Previous mouse position (note that MouseDelta is not necessary == MousePos-MousePosPrev, in case either position is invalid)
+---@field MouseClickedPos table<integer,ImVec2> Position at time of clicking
+---@field MouseClickedTime table<integer,number> Time of last click (used to figure out double-click)
+---@field MouseClicked table<integer,boolean> Mouse button went from !Down to Down (same as MouseClickedCount[x] != 0)
+---@field MouseDoubleClicked table<integer,boolean> Has mouse button been double-clicked? (same as MouseClickedCount[x] == 2)
+---@field MouseClickedCount table<integer,integer> == 0 (not clicked), == 1 (same as MouseClicked[]), == 2 (double-clicked), == 3 (triple-clicked) etc. when going from !Down to Down
+---@field MouseClickedLastCount table<integer,integer> Count successive number of clicks. Stays valid after mouse release. Reset after another click is done.
+---@field MouseReleased table<integer,boolean> Mouse button went from Down to !Down
+---@field MouseReleasedTime table<integer,number> Time of last released (rarely used! but useful to handle delayed single-click when trying to disambiguate them from double-click).
+---@field MouseDownOwned table<integer,boolean> Track if button was clicked inside a dear imgui window or over void blocked by a popup. We don't request mouse capture from the application if click started outside ImGui bounds.
+---@field MouseDownOwnedUnlessPopupClose table<integer,boolean> Track if button was clicked inside a dear imgui window.
+---@field MouseWheelRequestAxisSwap boolean        On a non-Mac system, holding SHIFT requests WheelY to perform the equivalent of a WheelX event. On a Mac system this is already enforced by the system.
+---@field MouseCtrlLeftAsRightClick boolean        (OSX) Set to true when the current click was a Ctrl+click that spawned a simulated right click
+---@field MouseDownDuration table<integer, float> Duration the mouse button has been down (0.0f == just clicked)
+---@field MouseDownDurationPrev table<integer, float> Previous time the mouse button has been down
+---@field MouseDragMaxDistanceAbs table<integer, ImVec2> Maximum distance, absolute, on each axis, of how much mouse has traveled from the clicking point
+---@field MouseDragMaxDistanceSqr table<integer, float> Squared maximum distance of how much mouse has traveled from the clicking point (used for moving thresholds)
+---@field PenPressure number        Touch/Pen pressure (0.0f to 1.0f, should be >0.0f only when MouseDown[0] == true). Helper storage currently unused by Dear ImGui.
+---@field AppFocusLost boolean        Only modify via AddFocusEvent()
+---@field AppAcceptingEvents boolean        Only modify via SetAppAcceptingEvents()
+---@field InputQueueSurrogate integer    For AddInputCharacterUTF16()
 
 
 ---@class ImGuiInputTextCallbackData
@@ -478,6 +681,12 @@ function ImGuiInputTextCallbackData:HasSelection() end
 --#region ImGui Bindings
 ImGui = {}
 
+function ImGui.ShowDemoWindow() end
+
+---@param open boolean
+---@return boolean open
+function ImGui.ShowDemoWindow(open) end
+
 ---@param name string
 ---@return boolean
 function ImGui.Begin(name) end
@@ -489,14 +698,14 @@ function ImGui.Begin(name, flags) end
 
 ---@param name string
 ---@param open boolean
----@return boolean
+---@return boolean open
 ---@return boolean
 function ImGui.Begin(name, open) end
 
 ---@param name string
 ---@param open boolean
 ---@param flags integer
----@return boolean
+---@return boolean open
 ---@return boolean
 function ImGui.Begin(name, open, flags) end
 
@@ -2225,14 +2434,14 @@ function ImGui.CollapsingHeader(label, flags) end
 ---@param label string
 ---@param open boolean
 ---@return boolean
----@return boolean
+---@return boolean open
 function ImGui.CollapsingHeader(label, open) end
 
 ---@param label string
 ---@param open boolean
 ---@param flags integer
 ---@return boolean
----@return boolean
+---@return boolean open
 function ImGui.CollapsingHeader(label, open, flags) end
 
 ---@param is_open boolean
@@ -2341,19 +2550,19 @@ function ImGui.EndMenu() end
 function ImGui.MenuItem(label) end
 
 ---@param label string
----@param shortcut string
+---@param shortcut string?
 ---@return boolean
 function ImGui.MenuItem(label, shortcut) end
 
 ---@param label string
----@param shortcut string
+---@param shortcut string?
 ---@param selected boolean
 ---@return boolean
 ---@return boolean
 function ImGui.MenuItem(label, shortcut, selected) end
 
 ---@param label string
----@param shortcut string
+---@param shortcut string?
 ---@param selected boolean
 ---@param enabled boolean
 ---@return boolean
@@ -2643,14 +2852,14 @@ function ImGui.BeginTabItem(label, flags) end
 
 ---@param label string
 ---@param open boolean
----@return boolean
+---@return boolean open
 ---@return boolean
 function ImGui.BeginTabItem(label, open) end
 
 ---@param label string
 ---@param open boolean
 ---@param flags integer
----@return boolean
+---@return boolean open
 ---@return boolean
 function ImGui.BeginTabItem(label, open, flags) end
 
@@ -2658,6 +2867,50 @@ function ImGui.EndTabItem() end
 
 ---@param tab_or_docked_window_label string
 function ImGui.SetTabItemClosed(tab_or_docked_window_label) end
+
+---@param dockspace_id integer
+---@return integer
+function ImGui.DockSpace(dockspace_id) end
+
+---@param dockspace_id integer
+---@param size_x number
+---@param size_y number
+---@return integer
+function ImGui.DockSpace(dockspace_id, size_x, size_y) end
+
+---@param dockspace_id integer
+---@param size_x number
+---@param size_y number
+---@param flags ImGuiDockNodeFlags|integer
+---@return integer
+function ImGui.DockSpace(dockspace_id, size_x, size_y, flags) end
+
+---@return integer
+function ImGui.DockSpaceOverViewport() end
+
+---@return integer
+---@param dockspace_id integer
+function ImGui.DockSpaceOverViewport(dockspace_id) end
+
+---@return integer
+---@param dockspace_id integer
+---@param viewport nil Unused
+---@param flags ImGuiDockNodeFlags|integer
+function ImGui.DockSpaceOverViewport(dockspace_id, viewport, flags) end
+
+---@param dockspace_id integer
+function ImGui.SetNextWindowDockID(dockspace_id) end
+
+---@param dockspace_id integer
+---@param cond ImGuiCond|integer
+function ImGui.SetNextWindowDockID(dockspace_id, cond) end
+
+---@return integer
+function ImGui.GetWindowDockID() end
+
+---@return boolean
+function ImGui.IsWindowDocked() end
+
 
 function ImGui.BeginDisabled() end
 
@@ -2786,6 +3039,9 @@ function ImGui.BeginChildFrame(id, sizeX, sizeY, flags) end
 
 function ImGui.EndChildFrame() end
 
+---@return ImGuiIO
+function ImGui.GetIO() end
+
 ---@return ImGuiStyle
 function ImGui.GetStyle() end
 
@@ -2849,6 +3105,8 @@ function ImGui.IsMouseHoveringRect(min_x, min_y, max_x, max_y, clip) end
 ---@return number
 ---@return number
 function ImGui.GetMousePos() end
+
+function ImGui.TeleportMousePos(x, y) end
 
 ---@return number
 ---@return number

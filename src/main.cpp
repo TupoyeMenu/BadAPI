@@ -119,7 +119,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 
 			    anti_cheat_bypass::init();
 			    g_script_mgr.add_script(std::make_unique<script>(&backend::loop, "backend"));
-			    g_script_mgr.add_script(std::make_unique<script>(&gui::script_func, "gui"));
 			    LOG(INFO) << "Scripts registered.";
 
 			    g_hooking->enable();

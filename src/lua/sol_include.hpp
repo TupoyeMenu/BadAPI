@@ -7,6 +7,7 @@
 #define SOL_SAFE_GETTER 1
 #define SOL_NO_CHECK_NUMBER_PRECISION 1
 #define SOL_EXCEPTIONS_SAFE_PROPAGATION 1
+#define SOL_CONTAINERS_START 0
 
 // This is intended to be disabled.
 // Allow functions to be called without giving all of its args.

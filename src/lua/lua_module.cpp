@@ -4,7 +4,6 @@
 #include "bindings/event.hpp"
 #include "bindings/global_table.hpp"
 #include "bindings/globals.hpp"
-#include "bindings/gui.hpp"
 #include "bindings/imgui.hpp"
 #include "bindings/imguitextselect.hpp"
 #include "bindings/locals.hpp"
@@ -261,7 +260,6 @@ namespace big
 		lua::script::bind(m_state);
 		lua::scr_patch::bind(m_state);
 		lua::native::bind(m_state);
-		lua::gui::bind(m_state);
 		lua::network::bind(m_state);
 		lua::tunables::bind(m_state);
 		lua::locals::bind(m_state);

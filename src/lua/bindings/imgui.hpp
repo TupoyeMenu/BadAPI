@@ -1,9 +1,21 @@
 #pragma once
 #include "imgui.h"
+#include "imgui_internal.h"
+#include "lua/sol_include.hpp"
 
 namespace lua::imgui
 {
 	// Main
+	inline void ShowDemoWindow()
+	{
+		ImGui::ShowDemoWindow();
+	}
+	inline bool ShowDemoWindow(bool open)
+	{
+		ImGui::ShowDemoWindow(&open);
+		return open;
+	}
+
 	inline ImGuiIO& GetIO()
 	{
 		return ImGui::GetIO();
@@ -2498,6 +2510,49 @@ namespace lua::imgui
 		ImGui::SetTabItemClosed(tab_or_docked_window_label.c_str());
 	}
 
+	// DockSpace
+	inline int DockSpace(int dockspace_id)
+	{
+		return ImGui::DockSpace(dockspace_id);
+	}
+	inline int DockSpace(int dockspace_id, float size_x, float size_y)
+	{
+		return ImGui::DockSpace(dockspace_id, ImVec2(size_x, size_y));
+	}
+	inline int DockSpace(int dockspace_id, float size_x, float size_y, int flags)
+	{
+		return ImGui::DockSpace(dockspace_id, ImVec2(size_x, size_y), flags);
+	}
+	inline int DockSpaceOverViewport()
+	{
+		return ImGui::DockSpaceOverViewport();
+	}
+	inline int DockSpaceOverViewport(int dockspace_id)
+	{
+		return ImGui::DockSpaceOverViewport(dockspace_id);
+	}
+	inline int DockSpaceOverViewport(int dockspace_id, sol::reference, int flags)
+	{
+		return ImGui::DockSpaceOverViewport(dockspace_id, NULL, flags);
+	}
+	inline void SetNextWindowDockID(int dockspace_id)
+	{
+		ImGui::SetNextWindowDockID(dockspace_id);
+	}
+	inline void SetNextWindowDockID(int dockspace_id, int cond)
+	{
+		ImGui::SetNextWindowDockID(dockspace_id, cond);
+	}
+	// TODO: SetNextWindowClass?
+	inline int GetWindowDockID()
+	{
+		return ImGui::GetWindowDockID();
+	}
+	inline bool IsWindowDocked()
+	{
+		return ImGui::IsWindowDocked();
+	}
+
 	// Drag and Drop
 	// TODO: Drag and Drop ==> UNSUPPORTED
 
@@ -2715,6 +2770,10 @@ namespace lua::imgui
 	{
 		const auto vec2{ImGui::GetMousePos()};
 		return std::make_tuple(vec2.x, vec2.y);
+	}
+	inline void TeleportMousePos(float x, float y)
+	{
+		ImGui::TeleportMousePos({x,y});
 	}
 	inline std::tuple<float, float> GetMousePosOnOpeningCurrentPopup()
 	{
@@ -2984,8 +3043,8 @@ namespace lua::imgui
 		);
 
 		luaGlobals.new_usertype<ImGuiIO>("ImGuiIO",
-			"ConfigFlags", &ImGuiIO::ConfigFlags, // TODO
-			"BackendFlags", &ImGuiIO::BackendFlags, // TODO
+			"ConfigFlags", &ImGuiIO::ConfigFlags,
+			"BackendFlags", &ImGuiIO::BackendFlags,
 			"DisplaySize", &ImGuiIO::DisplaySize,
 			"DisplayFramebufferScale", &ImGuiIO::DisplayFramebufferScale,
 			"DeltaTime", &ImGuiIO::DeltaTime,
@@ -2995,7 +3054,6 @@ namespace lua::imgui
 			"UserData", &ImGuiIO::UserData,
 			"Fonts", &ImGuiIO::Fonts,
 			"FontGlobalScale", &ImGuiIO::FontGlobalScale,
-			"FontAllowUserScaling", &ImGuiIO::FontAllowUserScaling, // [OBSOLETE]
 			"FontDefault", &ImGuiIO::FontDefault,
 			"ConfigNavSwapGamepadButtons", &ImGuiIO::ConfigNavSwapGamepadButtons,
 			"ConfigNavMoveSetMousePos", &ImGuiIO::ConfigNavMoveSetMousePos,
@@ -3112,6 +3170,13 @@ namespace lua::imgui
 		
 		luaGlobals.new_usertype<ImGuiStyle>("ImGuiStyle", "Alpha", &ImGuiStyle::Alpha, "DisabledAlpha", &ImGuiStyle::DisabledAlpha, "WindowPadding", &ImGuiStyle::WindowPadding, "WindowRounding", &ImGuiStyle::WindowRounding, "WindowBorderSize", &ImGuiStyle::WindowBorderSize, "WindowBorderHoverPadding", &ImGuiStyle::WindowBorderHoverPadding, "WindowMinSize", &ImGuiStyle::WindowMinSize, "WindowTitleAlign", &ImGuiStyle::WindowTitleAlign, "WindowMenuButtonPosition", &ImGuiStyle::WindowMenuButtonPosition, "ChildRounding", &ImGuiStyle::ChildRounding, "ChildBorderSize", &ImGuiStyle::ChildBorderSize, "PopupRounding", &ImGuiStyle::PopupRounding, "PopupBorderSize", &ImGuiStyle::PopupBorderSize, "FramePadding", &ImGuiStyle::FramePadding, "FrameRounding", &ImGuiStyle::FrameRounding, "FrameBorderSize", &ImGuiStyle::FrameBorderSize, "ItemSpacing", &ImGuiStyle::ItemSpacing, "ItemInnerSpacing", &ImGuiStyle::ItemInnerSpacing, "CellPadding", &ImGuiStyle::CellPadding, "TouchExtraPadding", &ImGuiStyle::TouchExtraPadding, "IndentSpacing", &ImGuiStyle::IndentSpacing, "ColumnsMinSpacing", &ImGuiStyle::ColumnsMinSpacing, "ScrollbarSize", &ImGuiStyle::ScrollbarSize, "ScrollbarRounding", &ImGuiStyle::ScrollbarRounding, "GrabMinSize", &ImGuiStyle::GrabMinSize, "GrabRounding", &ImGuiStyle::GrabRounding, "LogSliderDeadzone", &ImGuiStyle::LogSliderDeadzone, "ImageBorderSize", &ImGuiStyle::ImageBorderSize, "TabRounding", &ImGuiStyle::TabRounding, "TabBorderSize", &ImGuiStyle::TabBorderSize, "TabCloseButtonMinWidthSelected", &ImGuiStyle::TabCloseButtonMinWidthSelected, "TabCloseButtonMinWidthUnselected", &ImGuiStyle::TabCloseButtonMinWidthUnselected, "TabBarBorderSize", &ImGuiStyle::TabBarBorderSize, "TabBarOverlineSize", &ImGuiStyle::TabBarOverlineSize, "TableAngledHeadersAngle", &ImGuiStyle::TableAngledHeadersAngle, "TableAngledHeadersTextAlign", &ImGuiStyle::TableAngledHeadersTextAlign, "TreeLinesFlags", &ImGuiStyle::TreeLinesFlags, "TreeLinesSize", &ImGuiStyle::TreeLinesSize, "TreeLinesRounding", &ImGuiStyle::TreeLinesRounding, "ColorButtonPosition", &ImGuiStyle::ColorButtonPosition, "ButtonTextAlign", &ImGuiStyle::ButtonTextAlign, "SelectableTextAlign", &ImGuiStyle::SelectableTextAlign, "SeparatorTextBorderSize", &ImGuiStyle::SeparatorTextBorderSize, "SeparatorTextAlign", &ImGuiStyle::SeparatorTextAlign, "SeparatorTextPadding", &ImGuiStyle::SeparatorTextPadding, "DisplayWindowPadding", &ImGuiStyle::DisplayWindowPadding, "DisplaySafeAreaPadding", &ImGuiStyle::DisplaySafeAreaPadding, "DockingSeparatorSize", &ImGuiStyle::DockingSeparatorSize, "MouseCursorScale", &ImGuiStyle::MouseCursorScale, "AntiAliasedLines", &ImGuiStyle::AntiAliasedLines, "AntiAliasedLinesUseTex", &ImGuiStyle::AntiAliasedLinesUseTex, "AntiAliasedFill", &ImGuiStyle::AntiAliasedFill, "CurveTessellationTol", &ImGuiStyle::CurveTessellationTol, "CircleTessellationMaxError", &ImGuiStyle::CircleTessellationMaxError, "Colors", &ImGuiStyle::Colors, "HoverStationaryDelay", &ImGuiStyle::HoverStationaryDelay, "HoverDelayShort", &ImGuiStyle::HoverDelayShort, "HoverDelayNormal", &ImGuiStyle::HoverDelayNormal, "HoverFlagsForTooltipMouse", &ImGuiStyle::HoverFlagsForTooltipMouse, "HoverFlagsForTooltipNav", &ImGuiStyle::HoverFlagsForTooltipNav, "ScaleAllSizes", &ImGuiStyle::ScaleAllSizes);
 
+		luaGlobals.new_usertype<ImGuiKeyData>("ImGuiKeyData",
+			"Down", &ImGuiKeyData::Down,
+			"DownDuration", &ImGuiKeyData::DownDuration,
+			"DownDurationPrev", &ImGuiKeyData::DownDurationPrev,
+			"AnalogValue", &ImGuiKeyData::AnalogValue
+		);
+
 		luaGlobals.new_usertype<ImGuiListClipper>("ImGuiListClipper", sol::constructors<ImGuiListClipper()>(), "Begin", &ImGuiListClipper::Begin, "Step", &ImGuiListClipper::Step, "IncludeItemsByIndex", &ImGuiListClipper::IncludeItemsByIndex, "SeekCursorForItem", &ImGuiListClipper::SeekCursorForItem, "DisplayStart", &ImGuiListClipper::DisplayStart, "DisplayEnd", &ImGuiListClipper::DisplayEnd);
 
 		luaGlobals.new_usertype<ImGuiInputTextCallbackData>("ImGuiInputTextCallbackData", sol::no_constructor, "EventFlag", sol::readonly(&ImGuiInputTextCallbackData::EventFlag), "Flags", sol::readonly(&ImGuiInputTextCallbackData::Flags), "UserData", sol::readonly(&ImGuiInputTextCallbackData::UserData), "EventChar", &ImGuiInputTextCallbackData::EventChar, "EventKey", sol::readonly(&ImGuiInputTextCallbackData::EventKey), "Buf", sol::readonly(&ImGuiInputTextCallbackData::Buf), "BufTextLen", &ImGuiInputTextCallbackData::BufTextLen, "BufSize", sol::readonly(&ImGuiInputTextCallbackData::BufSize), "BufDirty", sol::writeonly_property(&ImGuiInputTextCallbackData::BufDirty), "CursorPos", &ImGuiInputTextCallbackData::CursorPos, "SelectionStart", &ImGuiInputTextCallbackData::SelectionStart, "SelectionEnd", &ImGuiInputTextCallbackData::SelectionEnd, "DeleteChars", &ImGuiInputTextCallbackData::DeleteChars, "InsertChars", &ImGuiInputTextCallbackData::InsertChars, "SelectAll", &ImGuiInputTextCallbackData::SelectAll, "ClearSelection", &ImGuiInputTextCallbackData::ClearSelection, "HasSelection", &ImGuiInputTextCallbackData::HasSelection);
@@ -3192,9 +3257,46 @@ namespace lua::imgui
 		luaGlobals.new_enum("ImGuiHoveredFlags", "None", ImGuiHoveredFlags_None, "ChildWindows", ImGuiHoveredFlags_ChildWindows, "RootWindow", ImGuiHoveredFlags_RootWindow, "AnyWindow", ImGuiHoveredFlags_AnyWindow, "NoPopupHierarchy", ImGuiHoveredFlags_NoPopupHierarchy, "DockHierarchy", ImGuiHoveredFlags_DockHierarchy, "AllowWhenBlockedByPopup", ImGuiHoveredFlags_AllowWhenBlockedByPopup, "AllowWhenBlockedByActiveItem", ImGuiHoveredFlags_AllowWhenBlockedByActiveItem, "AllowWhenOverlappedByItem", ImGuiHoveredFlags_AllowWhenOverlappedByItem, "AllowWhenOverlappedByWindow", ImGuiHoveredFlags_AllowWhenOverlappedByWindow, "AllowWhenOverlapped", ImGuiHoveredFlags_AllowWhenOverlapped, "AllowWhenDisabled", ImGuiHoveredFlags_AllowWhenDisabled, "RectOnly", ImGuiHoveredFlags_RectOnly, "RootAndChildWindows", ImGuiHoveredFlags_RootAndChildWindows, "ForTooltip", ImGuiHoveredFlags_ForTooltip, "Stationary", ImGuiHoveredFlags_Stationary, "DelayNone", ImGuiHoveredFlags_DelayNone, "DelayShort", ImGuiHoveredFlags_DelayShort, "DelayNormal", ImGuiHoveredFlags_DelayNormal, "NoSharedDelay", ImGuiHoveredFlags_NoSharedDelay);
 #pragma endregion Hovered Flags
 
+#pragma region Mouse Source
+		luaGlobals.new_enum("ImGuiMouseSource",
+			"Mouse", ImGuiMouseSource_Mouse,
+			"TouchScreen", ImGuiMouseSource_TouchScreen,
+			"Pen", ImGuiMouseSource_Pen
+		);
+#pragma endregion Mouse Source
+
 #pragma region Cond
 		luaGlobals.new_enum("ImGuiCond", "None", ImGuiCond_None, "Always", ImGuiCond_Always, "Once", ImGuiCond_Once, "FirstUseEver", ImGuiCond_FirstUseEver, "Appearing", ImGuiCond_Appearing);
 #pragma endregion Cond
+
+#pragma region ConfigFlags
+		luaGlobals.new_enum("ImGuiConfigFlags",
+			"None", ImGuiConfigFlags_None,
+			"NavEnableKeyboard", ImGuiConfigFlags_NavEnableKeyboard,
+			"NavEnableGamepad", ImGuiConfigFlags_NavEnableGamepad,
+			"NoMouse", ImGuiConfigFlags_NoMouse,
+			"NoMouseCursorChange", ImGuiConfigFlags_NoMouseCursorChange,
+			"NoKeyboard", ImGuiConfigFlags_NoKeyboard,
+			"DockingEnable", ImGuiConfigFlags_DockingEnable,
+			"ViewportsEnable", ImGuiConfigFlags_ViewportsEnable,
+			"IsSRGB", ImGuiConfigFlags_IsSRGB,
+			"IsTouchScreen", ImGuiConfigFlags_IsTouchScreen
+		);
+#pragma endregion ConfigFlags
+
+#pragma region BackendFlags
+		luaGlobals.new_enum("ImGuiBackendFlags",
+			"None", ImGuiBackendFlags_None,
+			"HasGamepad", ImGuiBackendFlags_HasGamepad,
+			"HasMouseCursors", ImGuiBackendFlags_HasMouseCursors,
+			"HasSetMousePos", ImGuiBackendFlags_HasSetMousePos,
+			"RendererHasVtxOffset", ImGuiBackendFlags_RendererHasVtxOffset,
+			"RendererHasTextures", ImGuiBackendFlags_RendererHasTextures,
+			"PlatformHasViewports", ImGuiBackendFlags_PlatformHasViewports,
+			"HasMouseHoveredViewport", ImGuiBackendFlags_HasMouseHoveredViewport,
+			"RendererHasViewports", ImGuiBackendFlags_RendererHasViewports
+		);
+#pragma endregion BackendFlags
 
 #pragma region Col
 		luaGlobals.new_enum("ImGuiCol", "Text", ImGuiCol_Text, "TextDisabled", ImGuiCol_TextDisabled, "WindowBg", ImGuiCol_WindowBg, "ChildBg", ImGuiCol_ChildBg, "PopupBg", ImGuiCol_PopupBg, "Border", ImGuiCol_Border, "BorderShadow", ImGuiCol_BorderShadow, "FrameBg", ImGuiCol_FrameBg, "FrameBgHovered", ImGuiCol_FrameBgHovered, "FrameBgActive", ImGuiCol_FrameBgActive, "TitleBg", ImGuiCol_TitleBg, "TitleBgActive", ImGuiCol_TitleBgActive, "TitleBgCollapsed", ImGuiCol_TitleBgCollapsed, "MenuBarBg", ImGuiCol_MenuBarBg, "ScrollbarBg", ImGuiCol_ScrollbarBg, "ScrollbarGrab", ImGuiCol_ScrollbarGrab, "ScrollbarGrabHovered", ImGuiCol_ScrollbarGrabHovered, "ScrollbarGrabActive", ImGuiCol_ScrollbarGrabActive, "CheckMark", ImGuiCol_CheckMark, "SliderGrab", ImGuiCol_SliderGrab, "SliderGrabActive", ImGuiCol_SliderGrabActive, "Button", ImGuiCol_Button, "ButtonHovered", ImGuiCol_ButtonHovered, "ButtonActive", ImGuiCol_ButtonActive, "Header", ImGuiCol_Header, "HeaderHovered", ImGuiCol_HeaderHovered, "HeaderActive", ImGuiCol_HeaderActive, "Separator", ImGuiCol_Separator, "SeparatorHovered", ImGuiCol_SeparatorHovered, "SeparatorActive", ImGuiCol_SeparatorActive, "ResizeGrip", ImGuiCol_ResizeGrip, "ResizeGripHovered", ImGuiCol_ResizeGripHovered, "ResizeGripActive", ImGuiCol_ResizeGripActive, "Tab", ImGuiCol_Tab, "TabHovered", ImGuiCol_TabHovered, "TabSelected", ImGuiCol_TabSelected, "TabDimmed", ImGuiCol_TabDimmed, "TabDimmedSelected", ImGuiCol_TabDimmedSelected, "PlotLines", ImGuiCol_PlotLines, "PlotLinesHovered", ImGuiCol_PlotLinesHovered, "PlotHistogram", ImGuiCol_PlotHistogram, "PlotHistogramHovered", ImGuiCol_PlotHistogramHovered, "TableHeaderBg", ImGuiCol_TableHeaderBg, "TableBorderStrong", ImGuiCol_TableBorderStrong, "TableBorderLight", ImGuiCol_TableBorderLight, "TableRowBg", ImGuiCol_TableRowBg, "TableRowBgAlt", ImGuiCol_TableRowBgAlt, "TextSelectedBg", ImGuiCol_TextSelectedBg, "DragDropTarget", ImGuiCol_DragDropTarget, "NavCursor", ImGuiCol_NavCursor, "NavWindowingHighlight", ImGuiCol_NavWindowingHighlight, "NavWindowingDimBg", ImGuiCol_NavWindowingDimBg, "ModalWindowDimBg", ImGuiCol_ModalWindowDimBg, "COUNT", ImGuiCol_COUNT);
@@ -3223,6 +3325,19 @@ namespace lua::imgui
 #pragma region Item Flags
 		luaGlobals.new_enum("ImGuiItemFlags", "None", ImGuiItemFlags_None, "NoTabStop", ImGuiItemFlags_NoTabStop, "NoNav", ImGuiItemFlags_NoNav, "NoNavDefaultFocus", ImGuiItemFlags_NoNavDefaultFocus, "ButtonRepeat", ImGuiItemFlags_ButtonRepeat, "AutoClosePopups,", ImGuiItemFlags_AutoClosePopups, "AllowDuplicateId", ImGuiItemFlags_AllowDuplicateId);
 #pragma endregion Item Flags
+
+#pragma region Dock Node Flags
+		luaGlobals.new_enum("ImGuiDockNodeFlags",
+			"None", ImGuiDockNodeFlags_None,
+			"KeepAliveOnly", ImGuiDockNodeFlags_KeepAliveOnly,
+			"NoDockingOverCentralNode", ImGuiDockNodeFlags_NoDockingOverCentralNode,
+			"PassthruCentralNode", ImGuiDockNodeFlags_PassthruCentralNode,
+			"NoDockingSplit", ImGuiDockNodeFlags_NoDockingSplit,
+			"NoResize,", ImGuiDockNodeFlags_NoResize,
+			"AutoHideTabBar", ImGuiDockNodeFlags_AutoHideTabBar,
+			"NoUndocking", ImGuiDockNodeFlags_NoUndocking
+		);
+#pragma endregion Dock Node Flags
 
 #pragma region Slider Flags
 		luaGlobals.new_enum("ImGuiSliderFlags", 
@@ -3512,6 +3627,7 @@ namespace lua::imgui
 #pragma endregion Main
 
 #pragma region Windows
+		ImGui.set_function("ShowDemoWindow", sol::overload(sol::resolve<void()>(ShowDemoWindow), sol::resolve<bool(bool)>(ShowDemoWindow)));
 		ImGui.set_function("Begin", sol::overload(sol::resolve<bool(const std::string&)>(Begin), sol::resolve<bool(const std::string&, int)>(Begin), sol::resolve<std::tuple<bool, bool>(const std::string&, bool)>(Begin), sol::resolve<std::tuple<bool, bool>(const std::string&, bool, int)>(Begin)));
 		ImGui.set_function("End", End);
 #pragma endregion Windows
@@ -3790,6 +3906,14 @@ namespace lua::imgui
 		ImGui.set_function("SetTabItemClosed", SetTabItemClosed);
 #pragma endregion Tab Bars, Tabs
 
+#pragma region DockSpace
+		ImGui.set_function("DockSpace", sol::overload(sol::resolve<int(int)>(DockSpace), sol::resolve<int(int, float, float)>(DockSpace), sol::resolve<int(int, float, float, int)>(DockSpace)));
+		ImGui.set_function("DockSpaceOverViewport", sol::overload(sol::resolve<int()>(DockSpaceOverViewport), sol::resolve<int(int)>(DockSpaceOverViewport), sol::resolve<int(int, sol::reference, int)>(DockSpaceOverViewport)));
+		ImGui.set_function("SetNextWindowDockID", sol::overload(sol::resolve<void(int)>(SetNextWindowDockID), sol::resolve<void(int, int)>(SetNextWindowDockID)));
+		ImGui.set_function("GetWindowDockID", GetWindowDockID);
+		ImGui.set_function("IsWindowDocked", IsWindowDocked);
+#pragma endregion DockSpace
+
 #pragma region Disabling
 		ImGui.set_function("BeginDisabled", sol::overload(sol::resolve<void()>(BeginDisabled), sol::resolve<void(bool)>(BeginDisabled)));
 		ImGui.set_function("EndDisabled", EndDisabled);
@@ -3851,6 +3975,7 @@ namespace lua::imgui
 #pragma region Inputs Utilities : Mouse
 		ImGui.set_function("IsMouseHoveringRect", sol::overload(sol::resolve<bool(float, float, float, float)>(IsMouseHoveringRect), sol::resolve<bool(float, float, float, float, bool)>(IsMouseHoveringRect)));
 		ImGui.set_function("GetMousePos", GetMousePos);
+		ImGui.set_function("TeleportMousePos", TeleportMousePos); // internal
 		ImGui.set_function("GetMousePosOnOpeningCurrentPopup", GetMousePosOnOpeningCurrentPopup);
 		ImGui.set_function("IsMouseDragging", sol::overload(sol::resolve<bool(int)>(IsMouseDragging), sol::resolve<bool(int, float)>(IsMouseDragging)));
 		ImGui.set_function("GetMouseDragDelta", sol::overload(sol::resolve<std::tuple<float, float>()>(GetMouseDragDelta), sol::resolve<std::tuple<float, float>(int)>(GetMouseDragDelta), sol::resolve<std::tuple<float, float>(int, float)>(GetMouseDragDelta)));
