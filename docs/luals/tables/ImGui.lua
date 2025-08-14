@@ -44,6 +44,35 @@ ImGuiTreeNodeFlags =
 	DrawLinesToNodes     = nil, -- Horizontal lines to child nodes. Vertical line drawn down to bottom-most child node. Slower (for large trees).
 }
 
+---@enum ImGuiSelectableFlags
+ImGuiSelectableFlags =
+{
+	None               = 0,
+	NoAutoClosePopups  = nil, -- Clicking this doesn't close parent popup window (overrides ImGuiItemFlags_AutoClosePopups)
+	SpanAllColumns     = nil, -- Frame will span all columns of its container table (text will still fit in current column)
+	AllowDoubleClick   = nil, -- Generate press events on double clicks too
+	Disabled           = nil, -- Cannot be selected, display grayed out text
+	AllowOverlap       = nil, -- (WIP) Hit testing to allow subsequent widgets to overlap this one
+	Highlight          = nil, -- Make the item be displayed as if it is hovered
+}
+
+---@enum ImGuiPopupFlags
+ImGuiPopupFlags =
+{
+	None                    = 0,
+	MouseButtonLeft         = 0,  -- For BeginPopupContext*(): open on Left Mouse release. Guaranteed to always be == 0 (same as ImGuiMouseButton_Left)
+	MouseButtonRight        = 1,  -- For BeginPopupContext*(): open on Right Mouse release. Guaranteed to always be == 1 (same as ImGuiMouseButton_Right)
+	MouseButtonMiddle       = 2,  -- For BeginPopupContext*(): open on Middle Mouse release. Guaranteed to always be == 2 (same as ImGuiMouseButton_Middle)
+	MouseButtonMask_        = 0x1F,
+	MouseButtonDefault_     = 1,
+	NoReopen                = nil, -- For OpenPopup*(), BeginPopupContext*(): don't reopen same popup if already open (won't reposition, won't reinitialize navigation)
+	NoOpenOverExistingPopup = nil, -- For OpenPopup*(), BeginPopupContext*(): don't open if there's already a popup at the same level of the popup stack
+	NoOpenOverItems         = nil, -- For BeginPopupContextWindow(): don't return true when hovering items, only when hovering empty space
+	AnyPopupId              = nil, -- For IsPopupOpen(): ignore the ImGuiID parameter and test for any popup.
+	AnyPopupLevel           = nil, -- For IsPopupOpen(): search/test at any level of the popup stack (default test in the current level)
+	AnyPopup                = nil,
+}
+
 ---@enum ImGuiTableColumnFlags
 ImGuiTableColumnFlags =
 {
@@ -280,6 +309,7 @@ ImGuiInputTextFlags =
 	CallbackAlways      = nil, -- Callback on each iteration. User code may query cursor position, modify text buffer.
 	CallbackCharFilter  = nil, -- Callback on character inputs to replace or discard them. Modify 'EventChar' to replace or discard, or return 1 in callback to discard.
 	CallbackResize      = nil, -- Callback on buffer capacity changes request (beyond 'buf_size' parameter value), allowing the string to grow. Notify when the string wants to be resized (for string types which hold a cache of their Size). You will be provided a new BufSize in the callback and NEED to honor it. (see misc/cpp/imgui_stdlib.h for an example of using this)
+	CallbackEdit        = nil, -- Callback on any edit. Note that InputText() already returns true on edit + you can always use IsItemEdited(). The callback is useful to manipulate the underlying buffer while focus is active.
 }
 
 ---@enum ImGuiStyleVar

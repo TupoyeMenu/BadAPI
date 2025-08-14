@@ -2062,18 +2062,15 @@ namespace lua::imgui
 	}
 	inline bool Selectable(const std::string& label, bool selected)
 	{
-		ImGui::Selectable(label.c_str(), &selected);
-		return selected;
+		return ImGui::Selectable(label.c_str(), selected);
 	}
 	inline bool Selectable(const std::string& label, bool selected, int flags)
 	{
-		ImGui::Selectable(label.c_str(), &selected, flags);
-		return selected;
+		return ImGui::Selectable(label.c_str(), selected, flags);
 	}
 	inline bool Selectable(const std::string& label, bool selected, int flags, float sizeX, float sizeY)
 	{
-		ImGui::Selectable(label.c_str(), &selected, flags, {sizeX, sizeY});
-		return selected;
+		return ImGui::Selectable(label.c_str(), selected, flags, {sizeX, sizeY});
 	}
 
 	// Widgets: List Boxes
