@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.24)
 
 # Crosscompiling
 include(cmake/crosscompile.cmake)
@@ -7,12 +7,16 @@ project(BadAPI CXX ASM_MASM)
 
 set(SRC_DIR "${PROJECT_SOURCE_DIR}/src")
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # Fetch modules
 message("\nFetching modules")
 include(cmake/minhook.cmake)
 include(cmake/async-logger.cmake)
 include(cmake/json.cmake)
 include(cmake/luajit.cmake)
+include(cmake/zlib.cmake)
+include(cmake/libarchive.cmake)
 
 message("\nFetching custom modules")
 include(cmake/imgui.cmake)
@@ -54,7 +58,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 target_precompile_headers(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_DIR}/common.hpp")
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE minhook AsyncLogger dbghelp imgui imguitextselect libluajit d3dcompiler dwmapi winmm psapi dxgi)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE minhook AsyncLogger dbghelp imgui imguitextselect libluajit zlibstatic archive_static d3dcompiler dwmapi winmm psapi dxgi)
 
 add_compile_definitions(
     "_CRT_SECURE_NO_WARNINGS"

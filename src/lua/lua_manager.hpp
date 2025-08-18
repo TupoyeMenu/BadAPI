@@ -18,7 +18,10 @@ namespace big
 		lua_manager(folder scripts_folder, folder scripts_config_folder);
 		~lua_manager();
 
+		void load_archive(const std::filesystem::path& file_path);
+
 		void load_all_files();
+		void load_file(const std::filesystem::path& file_path, const std::string_view& content);
 		void load_file(const std::filesystem::path& file_path);
 		void unload_module();
 

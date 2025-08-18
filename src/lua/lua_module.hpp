@@ -44,6 +44,7 @@ namespace big
 
 		void init_lua_api(folder& scripts_folder);
 
+		void load_and_call_script(const std::filesystem::path& file_path, const std::string_view& content);
 		void load_and_call_script(const std::filesystem::path& file_path);
 
 		inline void for_each_script(auto func)

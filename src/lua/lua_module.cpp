@@ -272,6 +272,16 @@ namespace big
 		lua::stats::bind(m_state);
 	}
 
+	void lua_module::load_and_call_script(const std::filesystem::path& file_path, const std::string_view& content)
+	{
+		auto result = m_state.safe_script(content, &sol::script_pass_on_error, file_path.filename().string(), sol::load_mode::text);
+
+		if (result.valid())
+		{
+			LOG(INFO) << "Loaded " << file_path.filename().string();
+		}
+	}
+
 	void lua_module::load_and_call_script(const std::filesystem::path& file_path)
 	{
 		auto result = m_state.safe_script_file(file_path.string(), &sol::script_pass_on_error, sol::load_mode::text);
