@@ -6,6 +6,7 @@ set(ENABLE_CAT OFF)
 set(ENABLE_UNZIP OFF)
 set(ENABLE_TEST OFF)
 set(ENABLE_INSTALL OFF)
+set(ENABLE_WERROR OFF)
 set(BUILD_SHARED_LIBS OFF)
 
 FetchContent_Declare(
@@ -17,7 +18,6 @@ FetchContent_Declare(
 message("libarchive")
 FetchContent_MakeAvailable(libarchive)
 
-set_property(TARGET archive_static PROPERTY COMPILE_WARNING_AS_ERROR OFF)
 target_compile_definitions(archive_static PRIVATE
     "_CRT_SECURE_NO_WARNINGS"
 )
