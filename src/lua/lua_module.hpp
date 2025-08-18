@@ -1,7 +1,6 @@
 #pragma once
 #include "gta/script/script.hpp"
 #include "lua/bindings/scr_patch.hpp"
-#include "lua_patch.hpp"
 
 namespace big
 {
@@ -21,7 +20,6 @@ namespace big
 
 	public:
 		std::unordered_map<rage::joaat_t, std::shared_ptr<script>> m_registered_scripts;
-		std::vector<std::unique_ptr<lua_patch>> m_registered_patches;
 		std::vector<std::unique_ptr<lua::scr_patch::scr_patch>> m_registered_script_patches;
 
 		std::unordered_map<rage::joaat_t, std::unordered_map<rage::joaat_t, sol::protected_function>> m_event_callbacks;

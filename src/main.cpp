@@ -22,7 +22,6 @@
 #include "renderer/renderer_dx11.hpp"
 #include "renderer/renderer_dx12.hpp"
 #include "services/anti_cheat_bypass/anti_cheat_bypass.hpp"
-#include "services/players/player_service.hpp"
 #include "services/script_patcher/script_patcher_service.hpp"
 #include "services/tunables/tunables_service.hpp"
 #include "thread_pool.hpp"
@@ -112,7 +111,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    g_native_invoker.cache_handlers();
 			    LOG(INFO) << "Native handlers cached.";
 
-			    auto player_service_instance         = std::make_unique<player_service>();
 			    auto tunables_service_instance       = std::make_unique<tunables_service>();
 			    auto script_patcher_service_instance = std::make_unique<script_patcher_service>();
 			    LOG(INFO) << "Script Patcher initialized.";
@@ -155,8 +153,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    LOG(INFO) << "Tunables Service reset.";
 			    script_patcher_service_instance.reset();
 			    LOG(INFO) << "Script Patcher Service reset.";
-			    player_service_instance.reset();
-			    LOG(INFO) << "Player Service reset.";
 
 			    hooking_instance.reset();
 			    LOG(INFO) << "Hooking uninitialized.";

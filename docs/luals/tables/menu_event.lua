@@ -8,5 +8,7 @@
 ---@field MenuUnloaded string Event that is triggered when we unload.. whatever this is. **Example Usage:** ```lua event.register_handler(menu_event.MenuUnloaded, function ()     log.info("Menu unloaded.") end) ```
 ---@field Wndproc string Event that is triggered when Wndproc is called **Example Usage:** ```lua event.register_handler(menu_event.Wndproc, function (hwnd, msg, wparam, lparam)     if msg == 132 then return end     log.debug("hwnd = " .. tostring(hwnd) .. ", msg = " .. tostring(msg) .. ", wparam = " .. tostring(wparam) .. ", lparam = " .. tostring(lparam)) end) ```
 ---@field Draw string Called every frame, you can draw ImGui here.
+---@field EarlyDraw string Called before `menu_event.Draw`.
+---@field HandleJoinRequest string 
 ---@field LuaInitFinished string Called when lua_manager has finished constructing and all lua files have been loaded.
 menu_event = {}

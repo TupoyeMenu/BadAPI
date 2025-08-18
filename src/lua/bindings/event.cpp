@@ -81,6 +81,15 @@ namespace lua::event
 
 	// Lua API: Field
 	// Table: menu_event
+	// Field: EarlyDraw: string
+	// Called before `menu_event.Draw`.
+
+	// Lua API: Field
+	// Table: menu_event
+	// Field: HandleJoinRequest: string
+
+	// Lua API: Field
+	// Table: menu_event
 	// Field: LuaInitFinished: string
 	// Called when lua_manager has finished constructing and all lua files have been loaded.
 
@@ -146,8 +155,10 @@ namespace lua::event
 		        {"PlayerMgrInit", "PlayerMgrInit"},
 		        {"MenuUnloaded", "MenuUnloaded"},
 		        {"Wndproc", "Wndproc"},
+		        {"EarlyDraw", "EarlyDraw"},
 		        {"Draw", "Draw"},
 		        {"LuaInitFinished", "LuaInitFinished"},
+		        {"HandleJoinRequest", "HandleJoinRequest"},
 		    });
 
 

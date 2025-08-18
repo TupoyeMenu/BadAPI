@@ -1,7 +1,6 @@
 #include "network.hpp"
 
 #include "gta/pointers.hpp"
-#include "services/players/player_service.hpp"
 #include "gta/script/natives.hpp"
 
 namespace lua::network
@@ -51,31 +50,6 @@ namespace lua::network
 		big::g_pointers->m_give_pickup_rewards(1 << player, reward);
 	}
 
-	// Lua API: Function
-	// Table: network
-	// Name: get_selected_player
-	// Returns: integer: Returns the index of the currently selected player in the GUI.
-	static int get_selected_player()
-	{
-		if (big::g_player_service->get_selected()->is_valid())
-			return big::g_player_service->get_selected()->id();
-
-		return -1;
-	}
-
-	// Lua API: Function
-	// Table: network
-	// Name: is_player_flagged_as_modder
-	// Param: player_idx: integer: Index of the player.
-	// Returns: boolean: Returns true if the given player is flagged as a modder.
-	static bool is_player_flagged_as_modder(int player_idx)
-	{
-		if (auto player = big::g_player_service->get_by_id(player_idx))
-			return player->is_modder;
-
-		return false;
-	}
-
 	void bind(sol::state& state)
 	{
 		auto ns = state["network"].get_or_create<sol::table>();
@@ -83,7 +57,5 @@ namespace lua::network
 		ns["trigger_script_event"]                     = trigger_script_event;
 		ns["is_session_started"]                       = is_session_started;
 		ns["give_pickup_rewards"]                      = give_pickup_rewards;
-		ns["get_selected_player"]                      = get_selected_player;
-		ns["is_player_flagged_as_modder"]              = is_player_flagged_as_modder;
 	}
 }

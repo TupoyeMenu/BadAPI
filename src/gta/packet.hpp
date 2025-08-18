@@ -1,8 +1,6 @@
 #pragma once
 #include "gta/net_game_event.hpp"
 
-#include "services/players/player_service.hpp"
-
 namespace big
 {
 	class packet

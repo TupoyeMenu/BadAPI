@@ -52,8 +52,6 @@ namespace lua::global_table
 		return sol::make_object(state_, path);
 	}
 
-	ImVec4 vec4_array[ImGuiCol_COUNT];
-
 	void bind(sol::state& state)
 	{
 		state["joaat"]         = rage::joaat;
@@ -61,7 +59,5 @@ namespace lua::global_table
 		state["include"]       = include;
 		state["dofile"]        = include;
 		state["get_dll_path"]  = get_dll_path;
-
-		state["vec4_array"]  = &vec4_array;
 	}
 }

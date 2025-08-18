@@ -1,12 +1,9 @@
 #include "common.hpp"
 #include "core/data/packet_types.hpp"
-#include "gta/gta_util.hpp"
 #include "gta/net_game_event.hpp"
-#include "gta/packet.hpp"
 #include "hooking/hooking.hpp"
 #include "lua/lua_manager.hpp"
 #include "network/netConnection.hpp"
-#include "services/players/player_service.hpp"
 
 #include <network/Network.hpp>
 #include <network/P2pSecurity.hpp>
