@@ -29,16 +29,22 @@ namespace big
 
 	void detour_hook::create_hook()
 	{
+		if (m_target == nullptr)
+		{
+			LOGF(FATAL, "Failed to create hook '{}' because it's target is NULL", m_name);
+			return;
+		}
+
 		fix_hook_address();
 
-		if (auto status = MH_CreateHook(m_target, m_detour, &m_original); status == MH_OK)
-		{
-			LOG(INFO) << "Created hook '" << m_name << "'.";
-		}
-		else
+		auto status = MH_CreateHook(m_target, m_detour, &m_original);
+		if (status != MH_OK)
 		{
 			LOGF(FATAL, "Failed to create hook '{}' at 0x{:X} (error: {})", m_name, reinterpret_cast<std::uintptr_t>(m_target), MH_StatusToString(status));
+			return;
 		}
+
+		LOG(INFO) << "Created hook '" << m_name << "'.";
 	}
 
 	detour_hook::~detour_hook() noexcept

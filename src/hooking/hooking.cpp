@@ -30,9 +30,9 @@ namespace big
 		if (!g_is_enhanced)
 		{
 			detour_hook_helper::add<hooks::terminate_game>("Terminate Game", (void*)g_pointers->m_terminate_game); // Inlined in enhanced
-			detour_hook_helper::add<hooks::handle_join_request>("HJR", (void*)g_pointers->m_handle_join_request);
+			detour_hook_helper::add<hooks::handle_join_request>("Handle Join Request", (void*)g_pointers->m_handle_join_request);
 		}
-		detour_hook_helper::add<hooks::receive_net_message>("RNM", (void*)g_pointers->m_receive_net_message);
+		detour_hook_helper::add<hooks::receive_net_message>("Receive Net Message", (void*)g_pointers->m_receive_net_message);
 
 		detour_hook_helper::add<hooks::prepare_metric_for_sending>("Prepare Metric For Sending", (void*)g_pointers->m_prepare_metric_for_sending);
 
@@ -40,9 +40,9 @@ namespace big
 		detour_hook_helper::add<hooks::init_native_tables>("Init Native Tables", (void*)g_pointers->m_init_native_tables);
 		detour_hook_helper::add<hooks::script_vm>("Script VM", (void*)g_pointers->m_script_vm);
 
-		detour_hook_helper::add<hooks::network_player_mgr_init>("NPMI", (void*)g_pointers->m_network_player_mgr_init);
-		detour_hook_helper::add<hooks::network_player_mgr_shutdown>("NPMS", (void*)g_pointers->m_network_player_mgr_shutdown);
-		detour_hook_helper::add<hooks::assign_physical_index>("API", (void*)g_pointers->m_assign_physical_index);
+		detour_hook_helper::add<hooks::network_player_mgr_init>("Network Player Mgr Init", (void*)g_pointers->m_network_player_mgr_init);
+		detour_hook_helper::add<hooks::network_player_mgr_shutdown>("Network Player Mgr Shutdown", (void*)g_pointers->m_network_player_mgr_shutdown);
+		detour_hook_helper::add<hooks::assign_physical_index>("Assign Physical Index", (void*)g_pointers->m_assign_physical_index);
 
 		g_hooking = this;
 	}
