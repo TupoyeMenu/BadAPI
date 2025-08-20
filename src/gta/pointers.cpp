@@ -342,8 +342,8 @@ namespace big
 		main_batch.add("tlsContext thread offset", "48 8B F9 E8 ? ? ? ? FF 47", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			offsets::tls_context_thread_offset = *ptr.add(4).rip().add(16).as<uint32_t*>();
 		});
-		main_batch.add("tlsContext thread offset", "E8 ? ? ? ? 4C 8B B0 ? ? ? ? 40", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			offsets::tls_context_thread_offset = *ptr.add(1).rip().add(22).as<uint32_t*>();
+		main_batch.add("tlsContext thread offset", "F3 45 0F 58 DC E8", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			offsets::tls_context_thread_offset = *ptr.add(6).rip().add(22).as<uint32_t*>();
 		});
 
 		main_batch.add("Allocator", "48 8D 1D ? ? ? ? A8 08", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
