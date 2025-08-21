@@ -9,7 +9,7 @@ stats = {}
 ---```lua
 ---integer = stats.get_character_index()
 ---```
----@return integer The current multiplayer character index (0 or 1).
+---@return integer # The current multiplayer character index (0 or 1).
 function stats.get_character_index() end
 
 
@@ -18,7 +18,7 @@ function stats.get_character_index() end
 ---boolean = stats.get_bool(stat_hash)
 ---```
 ---@param stat_hash integer the stat hash.
----@return boolean The value of the given stat.
+---@return boolean # The value of the given stat.
 function stats.get_bool(stat_hash) end
 
 
@@ -27,7 +27,7 @@ function stats.get_bool(stat_hash) end
 ---boolean = stats.get_bool(stat_name)
 ---```
 ---@param stat_name string the stat name.
----@return boolean The value of the given stat.
+---@return boolean # The value of the given stat.
 function stats.get_bool(stat_name) end
 
 
@@ -37,7 +37,7 @@ function stats.get_bool(stat_name) end
 ---```
 ---@param stat_hash integer the stat hash.
 ---@param bit_index integer bit index.
----@return boolean The value of the given stat.
+---@return boolean # The value of the given stat.
 function stats.get_bool_masked(stat_hash, bit_index) end
 
 
@@ -47,7 +47,7 @@ function stats.get_bool_masked(stat_hash, bit_index) end
 ---```
 ---@param stat_name string the stat name.
 ---@param bit_index integer bit index.
----@return boolean The value of the given stat.
+---@return boolean # The value of the given stat.
 function stats.get_bool_masked(stat_name, bit_index) end
 
 
@@ -56,7 +56,7 @@ function stats.get_bool_masked(stat_name, bit_index) end
 ---float = stats.get_float(stat_hash)
 ---```
 ---@param stat_hash integer the stat hash.
----@return float The value of the given stat.
+---@return float # The value of the given stat.
 function stats.get_float(stat_hash) end
 
 
@@ -65,7 +65,7 @@ function stats.get_float(stat_hash) end
 ---float = stats.get_float(stat_name)
 ---```
 ---@param stat_name string the stat name.
----@return float The value of the given stat.
+---@return float # The value of the given stat.
 function stats.get_float(stat_name) end
 
 
@@ -74,7 +74,7 @@ function stats.get_float(stat_name) end
 ---integer = stats.get_int(stat_hash)
 ---```
 ---@param stat_hash integer the stat hash.
----@return integer The value of the given stat.
+---@return integer # The value of the given stat.
 function stats.get_int(stat_hash) end
 
 
@@ -83,7 +83,7 @@ function stats.get_int(stat_hash) end
 ---integer = stats.get_int(stat_name)
 ---```
 ---@param stat_name string the stat name.
----@return integer The value of the given stat.
+---@return integer # The value of the given stat.
 function stats.get_int(stat_name) end
 
 
@@ -94,7 +94,7 @@ function stats.get_int(stat_name) end
 ---@param stat_hash integer the stat hash.
 ---@param bit_start integer bit start.
 ---@param bit_size integer bit size.
----@return integer The value of the given stat.
+---@return integer # The value of the given stat.
 function stats.get_masked_int(stat_hash, bit_start, bit_size) end
 
 
@@ -105,7 +105,7 @@ function stats.get_masked_int(stat_hash, bit_start, bit_size) end
 ---@param stat_name string the stat name.
 ---@param bit_index integer bit index.
 ---@param bit_size integer bit size.
----@return integer The value of the given stat.
+---@return integer # The value of the given stat.
 function stats.get_masked_int(stat_name, bit_index, bit_size) end
 
 
@@ -115,7 +115,7 @@ function stats.get_masked_int(stat_name, bit_index, bit_size) end
 ---```
 ---@param stat_hash integer the stat hash.
 ---@param new_value boolean the new value for the stat.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_bool(stat_hash, new_value) end
 
 
@@ -125,7 +125,7 @@ function stats.set_bool(stat_hash, new_value) end
 ---```
 ---@param stat_name string the stat name.
 ---@param new_value boolean the new value for the stat.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_bool(stat_name, new_value) end
 
 
@@ -136,7 +136,7 @@ function stats.set_bool(stat_name, new_value) end
 ---@param stat_hash integer the stat hash.
 ---@param new_value boolean the new value for the stat.
 ---@param bit_index integer bit_index.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_bool_masked(stat_hash, new_value, bit_index) end
 
 
@@ -147,7 +147,7 @@ function stats.set_bool_masked(stat_hash, new_value, bit_index) end
 ---@param stat_name string the stat name.
 ---@param new_value boolean the new value for the stat.
 ---@param bit_index integer bit_index.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_bool_masked(stat_name, new_value, bit_index) end
 
 
@@ -157,7 +157,7 @@ function stats.set_bool_masked(stat_name, new_value, bit_index) end
 ---```
 ---@param stat_hash integer the stat hash.
 ---@param new_value float the new value for the stat.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_float(stat_hash, new_value) end
 
 
@@ -167,7 +167,7 @@ function stats.set_float(stat_hash, new_value) end
 ---```
 ---@param stat_name string the stat name.
 ---@param new_value float the new value for the stat.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_float(stat_name, new_value) end
 
 
@@ -177,7 +177,7 @@ function stats.set_float(stat_name, new_value) end
 ---```
 ---@param stat_hash integer the stat hash.
 ---@param new_value integer the new value for the stat.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_int(stat_hash, new_value) end
 
 
@@ -187,7 +187,7 @@ function stats.set_int(stat_hash, new_value) end
 ---```
 ---@param stat_name string the stat name.
 ---@param new_value integer the new value for the stat.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_int(stat_name, new_value) end
 
 
@@ -199,7 +199,7 @@ function stats.set_int(stat_name, new_value) end
 ---@param new_value integer the new value for the stat.
 ---@param bit_start integer bit_start.
 ---@param bit_size integer bit_size.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_masked_int(stat_hash, new_value, bit_start, bit_size) end
 
 
@@ -211,7 +211,7 @@ function stats.set_masked_int(stat_hash, new_value, bit_start, bit_size) end
 ---@param new_value integer the new value for the stat.
 ---@param bit_start integer bit_start.
 ---@param bit_size integer bit_size.
----@return boolean True if succeeded.
+---@return boolean # True if succeeded.
 function stats.set_masked_int(stat_name, new_value, bit_start, bit_size) end
 
 
@@ -220,7 +220,7 @@ function stats.set_masked_int(stat_name, new_value, bit_start, bit_size) end
 ---boolean = stats.get_packed_stat_bool(index)
 ---```
 ---@param index int packed stat's index
----@return boolean Value of the stat.
+---@return boolean # Value of the stat.
 function stats.get_packed_stat_bool(index) end
 
 
@@ -238,7 +238,7 @@ function stats.set_packed_stat_bool(index, value) end
 ---int = stats.get_packed_stat_int(index)
 ---```
 ---@param index int packed stat's index.
----@return int Value of the stat.
+---@return int # Value of the stat.
 function stats.get_packed_stat_int(index) end
 
 

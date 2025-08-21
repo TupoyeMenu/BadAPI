@@ -8,7 +8,7 @@ internal_script = {}
 ---```lua
 ---string = internal_script:name()
 ---```
----@return string Name of this script
+---@return string # Name of this script
 function internal_script:name() end
 
 
@@ -16,7 +16,7 @@ function internal_script:name() end
 ---```lua
 ---boolean = internal_script:is_enabled()
 ---```
----@return boolean Will this script be executed
+---@return boolean # Will this script be executed
 function internal_script:is_enabled() end
 
 
@@ -31,7 +31,7 @@ function internal_script:set_enabled() end
 ---```lua
 ---boolean = internal_script:is_toggleable()
 ---```
----@return boolean Can `set_enabled` be used
+---@return boolean # Can `set_enabled` be used
 function internal_script:is_toggleable() end
 
 
@@ -39,7 +39,7 @@ function internal_script:is_toggleable() end
 ---```lua
 ---boolean = internal_script:is_done()
 ---```
----@return boolean Has this script finished executing
+---@return boolean # Has this script finished executing
 function internal_script:is_done() end
 
 

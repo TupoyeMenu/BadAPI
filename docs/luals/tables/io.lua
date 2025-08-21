@@ -9,7 +9,7 @@ io = {}
 ---boolean = io.exists(filename)
 ---```
 ---@param filename string
----@return boolean exists: True if the passed file path exists
+---@return boolean # exists: True if the passed file path exists
 function io.exists(filename) end
 
 

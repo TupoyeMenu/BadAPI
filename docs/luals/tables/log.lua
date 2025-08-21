@@ -44,7 +44,7 @@ function log.fatal(...) end
 ---```lua
 ---table<integer, LogMessage> = log.get_log_messages()
 ---```
----@return table<integer, LogMessage> An array of LogMessages
+---@return table<integer, LogMessage> # An array of LogMessages
 function log.get_log_messages() end
 
 

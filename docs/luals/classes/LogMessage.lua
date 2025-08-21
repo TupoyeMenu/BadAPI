@@ -9,7 +9,7 @@ LogMessage = {}
 ---```lua
 ---integer = LogMessage:Level()
 ---```
----@return integer 
+---@return integer
 function LogMessage:Level() end
 
 
@@ -18,7 +18,7 @@ function LogMessage:Level() end
 ---```lua
 ---string = LogMessage:Message()
 ---```
----@return string 
+---@return string
 function LogMessage:Message() end
 
 

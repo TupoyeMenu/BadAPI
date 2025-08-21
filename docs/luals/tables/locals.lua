@@ -10,7 +10,7 @@ locals = {}
 ---```
 ---@param script string The name of the script
 ---@param index integer Index of the script local.
----@return integer The value of the given local.
+---@return integer # The value of the given local.
 function locals.get_int(script, index) end
 
 
@@ -20,7 +20,7 @@ function locals.get_int(script, index) end
 ---```
 ---@param script string The name of the script
 ---@param index integer Index of the script local.
----@return integer The value of the given local.
+---@return integer # The value of the given local.
 function locals.get_uint(script, index) end
 
 
@@ -30,7 +30,7 @@ function locals.get_uint(script, index) end
 ---```
 ---@param script string The name of the script
 ---@param index integer Index of the script local.
----@return float The value of the given local.
+---@return float # The value of the given local.
 function locals.get_float(script, index) end
 
 
@@ -40,7 +40,7 @@ function locals.get_float(script, index) end
 ---```
 ---@param script string The name of the script
 ---@param index integer Index of the script local.
----@return Vector3 The value of the given local.
+---@return Vector3 # The value of the given local.
 function locals.get_vec3(script, index) end
 
 
@@ -90,7 +90,7 @@ function locals.set_vec3(script, index, val) end
 ---```
 ---@param script string The name of the script
 ---@param index integer Index of the script local.
----@return integer The pointer to the given local.
+---@return integer # The pointer to the given local.
 function locals.get_pointer(script, index) end
 
 

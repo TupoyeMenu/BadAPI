@@ -9,7 +9,7 @@ tunables = {}
 ---integer = tunables.get_int(tunable_name)
 ---```
 ---@param tunable_name string The name of the tunable.
----@return integer The value of the given tunable.
+---@return integer # The value of the given tunable.
 function tunables.get_int(tunable_name) end
 
 
@@ -18,7 +18,7 @@ function tunables.get_int(tunable_name) end
 ---float = tunables.get_float(tunable_name)
 ---```
 ---@param tunable_name string The name of the tunable.
----@return float The value of the given tunable.
+---@return float # The value of the given tunable.
 function tunables.get_float(tunable_name) end
 
 
@@ -27,7 +27,7 @@ function tunables.get_float(tunable_name) end
 ---boolean = tunables.get_bool(tunable_name)
 ---```
 ---@param tunable_name string The name of the tunable.
----@return boolean The value of the given tunable.
+---@return boolean # The value of the given tunable.
 function tunables.get_bool(tunable_name) end
 
 
@@ -36,7 +36,7 @@ function tunables.get_bool(tunable_name) end
 ---integer = tunables.get_int(tunable_joaated_value)
 ---```
 ---@param tunable_joaated_value integer The joaated value of the tunable.
----@return integer The value of the given tunable.
+---@return integer # The value of the given tunable.
 function tunables.get_int(tunable_joaated_value) end
 
 
@@ -45,7 +45,7 @@ function tunables.get_int(tunable_joaated_value) end
 ---float = tunables.get_float(tunable_joaated_value)
 ---```
 ---@param tunable_joaated_value integer The joaated value of the tunable.
----@return float The value of the given tunable.
+---@return float # The value of the given tunable.
 function tunables.get_float(tunable_joaated_value) end
 
 
@@ -54,7 +54,7 @@ function tunables.get_float(tunable_joaated_value) end
 ---boolean = tunables.get_bool(tunable_joaated_value)
 ---```
 ---@param tunable_joaated_value integer The joaated value of the tunable.
----@return boolean The value of the given tunable.
+---@return boolean # The value of the given tunable.
 function tunables.get_bool(tunable_joaated_value) end
 
 

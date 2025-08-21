@@ -8,7 +8,7 @@ script = {}
 ---```lua
 ---integer = script.yield()
 ---```
----@return integer 0
+---@return integer # 0
 function script.yield() end
 
 
@@ -17,7 +17,7 @@ function script.yield() end
 ---integer = script.sleep(ms)
 ---```
 ---@param ms number time to sleep for, in milliseconds
----@return integer time slept for
+---@return integer # time slept for
 function script.sleep(ms) end
 
 
@@ -51,7 +51,7 @@ function script.sleep(ms) end
 ---```
 ---@param name string name of your new looped script
 ---@param func function function that will be executed in a forever loop.
----@return internal_script Script utils for this script
+---@return internal_script # Script utils for this script
 function script.register_looped(name, func) end
 
 
@@ -84,7 +84,7 @@ function script.register_looped(name, func) end
 ---internal_script = script.run_in_fiber(func)
 ---```
 ---@param func function function that will be executed once in the fiber pool.
----@return internal_script Script utils for this script
+---@return internal_script # Script utils for this script
 function script.run_in_fiber(func) end
 
 
@@ -94,7 +94,7 @@ function script.run_in_fiber(func) end
 ---boolean = script.remove(script_name)
 ---```
 ---@param script_name string The name of the script.
----@return boolean true if we removed the script
+---@return boolean # true if we removed the script
 function script.remove(script_name) end
 
 

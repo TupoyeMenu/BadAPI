@@ -22,7 +22,7 @@ function text_select:new(getLineAtIdx, getNumLines, enableWordWrap) end
 ---```lua
 ---boolean = text_select:hasSelection()
 ---```
----@return boolean 
+---@return boolean
 function text_select:hasSelection() end
 
 

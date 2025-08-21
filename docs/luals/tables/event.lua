@@ -22,7 +22,7 @@ function event.register_handler(menu_event, identifier, func) end
 ---```
 ---@param menu_event string The menu_event.
 ---@param identifier string A unique identifier for the event you want to remove.
----@return boolean true if we removed the handler.
+---@return boolean # true if we removed the handler.
 function event.remove(menu_event, identifier) end
 
 

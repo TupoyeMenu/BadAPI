@@ -265,7 +265,10 @@ class Function:
 
 
         if self.return_type is not None and len(self.return_type) > 0:
-            s += f"---@return {self.return_type} {self.return_description}\n"
+            s += f"---@return {self.return_type}"
+            if self.return_description:
+                s += f" # {self.return_description}"
+            s += "\n"
 
         s += f"function {prefix}{self.name}({parameters_str}) end\n"
         s += "\n"

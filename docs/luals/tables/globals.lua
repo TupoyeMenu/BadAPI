@@ -10,7 +10,7 @@ globals = {}
 ---integer = globals.get_int(global)
 ---```
 ---@param global integer index of the global
----@return integer value of the global
+---@return integer # value of the global
 function globals.get_int(global) end
 
 
@@ -20,7 +20,7 @@ function globals.get_int(global) end
 ---integer = globals.get_uint(global)
 ---```
 ---@param global integer index of the global
----@return integer value of the global
+---@return integer # value of the global
 function globals.get_uint(global) end
 
 
@@ -30,7 +30,7 @@ function globals.get_uint(global) end
 ---float = globals.get_float(global)
 ---```
 ---@param global integer index of the global
----@return float value of the global
+---@return float # value of the global
 function globals.get_float(global) end
 
 
@@ -40,7 +40,7 @@ function globals.get_float(global) end
 ---string = globals.get_string(global)
 ---```
 ---@param global integer index of the global
----@return string value of the global
+---@return string # value of the global
 function globals.get_string(global) end
 
 
@@ -50,7 +50,7 @@ function globals.get_string(global) end
 ---Vector3 = globals.get_vec3(global)
 ---```
 ---@param global integer index of the global
----@return Vector3 value of the global
+---@return Vector3 # value of the global
 function globals.get_vec3(global) end
 
 
@@ -110,7 +110,7 @@ function globals.set_vec3(global, param) end
 ---integer = globals.get_pointer(global)
 ---```
 ---@param global integer index of the global
----@return integer value of the global
+---@return integer # value of the global
 function globals.get_pointer(global) end
 
 
