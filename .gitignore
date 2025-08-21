@@ -10,3 +10,6 @@ build/
 *.ipch
 *.gch
 *.pch
+
+# Generated files
+src/version.cpp
