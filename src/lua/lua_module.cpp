@@ -8,6 +8,7 @@
 #include "bindings/imguitextselect.hpp"
 #include "bindings/locals.hpp"
 #include "bindings/log.hpp"
+#include "bindings/menu.hpp"
 #include "bindings/native.hpp"
 #include "bindings/network.hpp"
 #include "bindings/scr_patch.hpp"
@@ -259,6 +260,7 @@ namespace big
 		lua::globals::bind(m_state);
 		lua::script::bind(m_state);
 		lua::scr_patch::bind(m_state);
+		lua::menu::bind(m_state);
 		lua::native::bind(m_state);
 		lua::network::bind(m_state);
 		lua::tunables::bind(m_state);

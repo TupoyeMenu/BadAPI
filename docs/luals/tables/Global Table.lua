@@ -11,12 +11,14 @@
 function joaat(str) end
 
 
+---A case sensitive version of `joaat`.
 ---**Example Usage:**
 ---```lua
----string = get_dll_path()
+---integer = literal_joaat(str)
 ---```
----@return string The path to the DLL of whatever this is.
-function get_dll_path() end
+---@param str string The case sensitive string that needs to be joaat hashed.
+---@return integer The joaat hashed input string.
+function literal_joaat(str) end
 
 
 

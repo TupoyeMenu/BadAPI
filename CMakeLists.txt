@@ -3,11 +3,16 @@ cmake_minimum_required(VERSION 3.24)
 # Crosscompiling
 include(cmake/crosscompile.cmake)
 
-project(BadAPI CXX ASM_MASM)
+project(BadAPI 
+    VERSION 0.1.0
+    LANGUAGES CXX ASM_MASM
+)
 
 set(SRC_DIR "${PROJECT_SOURCE_DIR}/src")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(cmake/version.cmake)
 
 # Fetch modules
 message("\nFetching modules")
