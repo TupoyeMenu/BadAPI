@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.24)
 include(cmake/crosscompile.cmake)
 
 project(BadAPI 
-    VERSION 0.1.0
+    VERSION 0.1.1
     LANGUAGES CXX ASM_MASM
 )
 
