@@ -1,20 +1,4 @@
 ---@meta
----@alias float number
----@alias int integer
----@alias Hash integer
----@alias BlipHandle integer
----@alias CamHandle integer
----@alias EntityHandle integer
----@alias FireId integer
----@alias InteriorHandle integer
----@alias ObjectHandle integer
----@alias PedHandle integer
----@alias PickupHandle integer
----@alias PlayerHandle integer
----@alias ScrHandle integer
----@alias VehicleHandle integer
----@alias Any any
----@alias Vector3 vec3
 
 NETWORK = {}
 ---@return string
@@ -2280,7 +2264,7 @@ function NETWORK.NETWORK_CLAN_IS_ROCKSTAR_CLAN(clanDesc, bufferSize) end
 
 ---@param clanDesc number
 ---@param bufferSize int
----@param formattedTag char
+---@param formattedTag string
 function NETWORK.NETWORK_CLAN_GET_UI_FORMATTED_TAG(clanDesc, bufferSize, formattedTag) end
 
 
@@ -2357,9 +2341,8 @@ function NETWORK.NETWORK_CLAN_HAS_CREWINFO_METADATA_BEEN_RECEIVED() end
 
 
 ---@param netHandle number
----@param txdName char
+---@param txdName string
 ---@return boolean
----@return char txdName
 function NETWORK.NETWORK_CLAN_GET_EMBLEM_TXD_NAME(netHandle, txdName) end
 
 

@@ -572,14 +572,29 @@ for class_name, class_ in classes.items():
     f.close()
 
 
-commands_file_name = f"../docs/lua/types.lua"
+commands_file_name = f"../docs/luals/types.lua"
 f = open(commands_file_name, "w")
 
 f.write(
     """
 ---@meta
 
+---@diagnostic disable: lowercase-global
 ---@alias float number
----@alias Vector3 table
+---@alias int integer
+---@alias Hash integer
+---@alias BlipHandle integer
+---@alias CamHandle integer
+---@alias EntityHandle integer
+---@alias FireId integer
+---@alias InteriorHandle integer
+---@alias ObjectHandle integer
+---@alias PedHandle integer
+---@alias PickupHandle integer
+---@alias PlayerHandle integer
+---@alias ScrHandle integer
+---@alias VehicleHandle integer
+---@alias Any any
+---@alias Vector3 vec3
     """
 )

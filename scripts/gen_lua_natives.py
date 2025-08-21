@@ -9,6 +9,11 @@ hpp_lua_native_wrappers_print_buf = ""
 
 class Arg:
     def __init__(self, name, type_):
+        if name == "end":
+            name = "end_"
+        if name == "repeat":
+            name = "repeat_"
+
         self.name = name
         self.type_ = type_.replace("BOOL", "boolean")
         self.type_ = self.type_.replace("Blip", "BlipHandle")
@@ -25,12 +30,13 @@ class Arg:
             self.is_any_ptr = True
         else:
             self.is_any_ptr = False
-        if self.type_ == "const char*":
+        if "char*" in self.type_:
             self.type_ = self.type_.replace("const char*", "string")
+            self.type_ = self.type_.replace("char*", "string")
             self.is_string = True
         else:
             self.is_string = False
-        self.is_pointer_arg = "*" in self.type_ and "const char" not in self.type_
+        self.is_pointer_arg = "*" in self.type_
         self.type_no_star = self.type_.replace("*", "")
 
     def __str__(self) -> str:
@@ -43,7 +49,7 @@ class NativeFunc:
         self.lua_name = lua_name
         self.cpp_name = cpp_name
         self.args = args
-        self.return_type = return_type.replace("BOOL", "boolean").replace("Any*", "uintptr_t").replace("const char*", "string").replace("Blip", "BlipHandle").replace("Cam", "CamHandle").replace("Entity", "EntityHandle").replace("Interior", "InteriorHandle").replace("Object", "ObjectHandle").replace("Ped", "PedHandle").replace("Pickup", "PickupHandle").replace("Player", "PlayerHandle").replace("Vehicle", "VehicleHandle")
+        self.return_type = return_type.replace("BOOL", "boolean").replace("Any*", "number").replace("const char*", "string").replace("Blip", "BlipHandle").replace("Cam", "CamHandle").replace("Entity", "EntityHandle").replace("Interior", "InteriorHandle").replace("Object", "ObjectHandle").replace("Ped", "PedHandle").replace("Pickup", "PickupHandle").replace("Player", "PlayerHandle").replace("Vehicle", "VehicleHandle")
 
         self.out_params = []
         if self.return_type != "void":
@@ -196,22 +202,6 @@ def generate_native_binding_cpp_and_hpp_files(functions_per_namespaces):
 
         file_buffer = ""
         file_buffer += "---@meta\n"
-        file_buffer += "---@alias float number\n"
-        file_buffer += "---@alias int integer\n"
-        file_buffer += "---@alias Hash integer\n"
-        file_buffer += "---@alias BlipHandle integer\n"
-        file_buffer += "---@alias CamHandle integer\n"
-        file_buffer += "---@alias EntityHandle integer\n"
-        file_buffer += "---@alias FireId integer\n"
-        file_buffer += "---@alias InteriorHandle integer\n"
-        file_buffer += "---@alias ObjectHandle integer\n"
-        file_buffer += "---@alias PedHandle integer\n"
-        file_buffer += "---@alias PickupHandle integer\n"
-        file_buffer += "---@alias PlayerHandle integer\n"
-        file_buffer += "---@alias ScrHandle integer\n"
-        file_buffer += "---@alias VehicleHandle integer\n"
-        file_buffer += "---@alias Any any\n"
-        file_buffer += "---@alias Vector3 vec3\n"
         file_buffer += "\n"
         file_buffer += namespace_name + r" = {}" + "\n"
 

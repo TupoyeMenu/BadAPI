@@ -1,20 +1,4 @@
 ---@meta
----@alias float number
----@alias int integer
----@alias Hash integer
----@alias BlipHandle integer
----@alias CamHandle integer
----@alias EntityHandle integer
----@alias FireId integer
----@alias InteriorHandle integer
----@alias ObjectHandle integer
----@alias PedHandle integer
----@alias PickupHandle integer
----@alias PlayerHandle integer
----@alias ScrHandle integer
----@alias VehicleHandle integer
----@alias Any any
----@alias Vector3 vec3
 
 SOCIALCLUB = {}
 ---@return int
@@ -52,9 +36,8 @@ function SOCIALCLUB.SC_INBOX_MESSAGE_GET_DATA_BOOL(p0, p1) end
 
 ---@param p0 int
 ---@param context string
----@param out char
+---@param out string
 ---@return boolean
----@return char out
 function SOCIALCLUB.SC_INBOX_MESSAGE_GET_DATA_STRING(p0, context, out) end
 
 
@@ -189,9 +172,8 @@ function SOCIALCLUB.SC_GAMERDATA_GET_BOOL(name) end
 
 
 ---@param name string
----@param value char
+---@param value string
 ---@return boolean
----@return char value
 function SOCIALCLUB.SC_GAMERDATA_GET_STRING(name, value) end
 
 
@@ -236,9 +218,8 @@ function SOCIALCLUB.SC_PROFANITY_GET_STRING_STATUS(token) end
 
 
 ---@param token int
----@param outProfaneWord char
+---@param outProfaneWord string
 ---@return boolean
----@return char outProfaneWord
 function SOCIALCLUB.SC_PROFANITY_GET_PROFANE_WORD(token, outProfaneWord) end
 
 
@@ -341,15 +322,13 @@ function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_EXTRA_DATA_FLOAT(p0, p1) end
 
 
 ---@param p0 string
----@param p1 char
+---@param p1 string
 ---@return boolean
----@return char p1
 function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_EXTRA_DATA_STRING(p0, p1) end
 
 
----@param p0 char
+---@param p0 string
 ---@return boolean
----@return char p0
 function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_DISPLAY_NAME(p0) end
 
 
@@ -380,17 +359,15 @@ function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_EXTRA_DATA_FLOAT_FOR_TYPE(p0, p1, p2)
 
 
 ---@param p0 string
----@param p1 char
+---@param p1 string
 ---@param p2 string
 ---@return boolean
----@return char p1
 function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_EXTRA_DATA_STRING_FOR_TYPE(p0, p1, p2) end
 
 
----@param p0 char
+---@param p0 string
 ---@param p1 string
 ---@return boolean
----@return char p0
 function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_DISPLAY_NAME_FOR_TYPE(p0, p1) end
 
 
@@ -417,16 +394,14 @@ function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_EXTRA_DATA_FLOAT_BY_ID(p0, p1, p2) en
 
 ---@param p0 int
 ---@param p1 string
----@param p2 char
+---@param p2 string
 ---@return boolean
----@return char p2
 function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_EXTRA_DATA_STRING_BY_ID(p0, p1, p2) end
 
 
 ---@param p0 int
----@param p1 char
+---@param p1 string
 ---@return boolean
----@return char p1
 function SOCIALCLUB.SC_COMMUNITY_EVENT_GET_DISPLAY_NAME_BY_ID(p0, p1) end
 
 

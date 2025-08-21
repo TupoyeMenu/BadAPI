@@ -1,20 +1,4 @@
 ---@meta
----@alias float number
----@alias int integer
----@alias Hash integer
----@alias BlipHandle integer
----@alias CamHandle integer
----@alias EntityHandle integer
----@alias FireId integer
----@alias InteriorHandle integer
----@alias ObjectHandle integer
----@alias PedHandle integer
----@alias PickupHandle integer
----@alias PlayerHandle integer
----@alias ScrHandle integer
----@alias VehicleHandle integer
----@alias Any any
----@alias Vector3 vec3
 
 DATAFILE = {}
 ---@param requestId int
@@ -149,7 +133,7 @@ function DATAFILE.DATAFILE_FLUSH_MISSION_HEADER() end
 
 
 ---@param p0 int
----@return uintptr_t
+---@return number
 function DATAFILE.DATAFILE_GET_FILE_DICT(p0) end
 
 
@@ -180,7 +164,7 @@ function DATAFILE.DATAFILE_DELETE_FOR_ADDITIONAL_DATA_FILE(p0) end
 
 
 ---@param p0 Any
----@return uintptr_t
+---@return number
 function DATAFILE.DATAFILE_GET_FILE_DICT_FOR_ADDITIONAL_DATA_FILE(p0) end
 
 
@@ -218,13 +202,13 @@ function DATAFILE.DATADICT_SET_VECTOR(objectData, key, valueX, valueY, valueZ) e
 
 ---@param objectData number
 ---@param key string
----@return uintptr_t
+---@return number
 function DATAFILE.DATADICT_CREATE_DICT(objectData, key) end
 
 
 ---@param objectData number
 ---@param key string
----@return uintptr_t
+---@return number
 function DATAFILE.DATADICT_CREATE_ARRAY(objectData, key) end
 
 
@@ -260,13 +244,13 @@ function DATAFILE.DATADICT_GET_VECTOR(objectData, key) end
 
 ---@param objectData number
 ---@param key string
----@return uintptr_t
+---@return number
 function DATAFILE.DATADICT_GET_DICT(objectData, key) end
 
 
 ---@param objectData number
 ---@param key string
----@return uintptr_t
+---@return number
 function DATAFILE.DATADICT_GET_ARRAY(objectData, key) end
 
 
@@ -304,7 +288,7 @@ function DATAFILE.DATAARRAY_ADD_VECTOR(arrayData, valueX, valueY, valueZ) end
 
 
 ---@param arrayData number
----@return uintptr_t
+---@return number
 function DATAFILE.DATAARRAY_ADD_DICT(arrayData) end
 
 
@@ -340,7 +324,7 @@ function DATAFILE.DATAARRAY_GET_VECTOR(arrayData, arrayIndex) end
 
 ---@param arrayData number
 ---@param arrayIndex int
----@return uintptr_t
+---@return number
 function DATAFILE.DATAARRAY_GET_DICT(arrayData, arrayIndex) end
 
 

@@ -1,20 +1,4 @@
 ---@meta
----@alias float number
----@alias int integer
----@alias Hash integer
----@alias BlipHandle integer
----@alias CamHandle integer
----@alias EntityHandle integer
----@alias FireId integer
----@alias InteriorHandle integer
----@alias ObjectHandle integer
----@alias PedHandle integer
----@alias PickupHandle integer
----@alias PlayerHandle integer
----@alias ScrHandle integer
----@alias VehicleHandle integer
----@alias Any any
----@alias Vector3 vec3
 
 HUD = {}
 ---@param string string
@@ -837,8 +821,8 @@ function HUD.SET_TEXT_LINE_HEIGHT_MULT(lineHeightMult) end
 
 
 ---@param start float
----@param end float
-function HUD.SET_TEXT_WRAP(start, end) end
+---@param end_ float
+function HUD.SET_TEXT_WRAP(start, end_) end
 
 
 ---@param p0 int
