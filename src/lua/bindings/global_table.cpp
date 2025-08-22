@@ -35,11 +35,32 @@ namespace lua::global_table
 		}
 	};
 
+	// Lua API: Function
+	// Table: Global Table
+	// Name: info
+	// Param: ...: any
+	// Logs an informational message. Same as `log.info`.
+	static void print(sol::variadic_args va, sol::this_state state)
+	{
+		sol::function tostring = sol::state_view(state)["tostring"];
+		auto stream = LOG(INFO);
+		int i = 0;
+		for (auto v : va)
+		{
+			if (i == 0)
+				stream << tostring(v).get<const std::string&>();
+			else
+				stream << "	" << tostring(v).get<const std::string&>();
+			i++;
+		}
+	}
+
 	void bind(sol::state& state)
 	{
 		state["joaat"]         = rage::joaat;
 		state["literal_joaat"] = rage::literal_joaat;
 		state["include"]       = include;
 		state["dofile"]        = include;
+		state["print"]         = print;
 	}
 }
