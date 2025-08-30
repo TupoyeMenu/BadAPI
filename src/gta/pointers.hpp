@@ -109,6 +109,9 @@ namespace big
 		PVOID m_gta_thread_vtable{};
 
 		rage::sysMemAllocator* m_allocator{};
+
+		PVOID m_gta_thread_create{};
+		PVOID m_gta_thread_kill{};
 	};
 
 	inline pointers* g_pointers{};

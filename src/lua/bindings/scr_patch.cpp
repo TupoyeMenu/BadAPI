@@ -53,7 +53,7 @@ namespace lua::scr_patch
 	{
 		auto scr_patch_ut = state.new_usertype<scr_patch>("scr_patch", sol::constructors<scr_patch(const std::string&, const std::string&, const std::string&, const int, sol::table, sol::this_state)>());
 
-		scr_patch_ut["enable_patch"]  = &scr_patch::enable;
-		scr_patch_ut["disable_patch"] = &scr_patch::disable;
+		scr_patch_ut["enable"]  = &scr_patch::enable;
+		scr_patch_ut["disable"] = &scr_patch::disable;
 	}
 }

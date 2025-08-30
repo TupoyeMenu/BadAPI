@@ -353,6 +353,20 @@ namespace big
 			m_allocator = ptr.add(3).rip().as<rage::sysMemAllocator*>();
 		});
 
+		main_batch.add("GTA Thread Create", "8B 4B 1C 48 8D 53 08", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_gta_thread_create = ptr.add(8).rip().as<PVOID>();
+		});
+		main_batch.add("GTA Thread Create", "66 0f 7F 74 24 30 31", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_gta_thread_create = ptr.sub(0x14).as<PVOID>();
+		});
+
+		main_batch.add("GTA Thread Kill", "48 89 5C 24 ? 57 48 83 EC 20 48 83 B9 ? ? ? ? ? 48 8B D9 74 14", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_gta_thread_kill = ptr.as<PVOID>();
+		});
+		main_batch.add("GTA Thread Kill", "56 57 48 83 EC ? 48 89 CE 48 83 B9 ? 01 00 00 00 74", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
+			m_gta_thread_kill = ptr.as<PVOID>();
+		});
+
 		main_batch.run(memory::module(""));
 
 		LPCWSTR lpClassName = g_is_enhanced ? L"sgaWindow" : L"grcWindow";

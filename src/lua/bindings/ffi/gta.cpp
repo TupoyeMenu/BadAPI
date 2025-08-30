@@ -47,3 +47,18 @@ extern "C" __declspec(dllexport) CNetworkPlayerMgr* get_network_player_mgr()
 	return big::gta_util::get_network_player_mgr();
 }
 
+extern "C" __declspec(dllexport) rage::scrProgramTable* get_script_program_table()
+{
+	return big::g_pointers->m_script_program_table;
+}
+
+extern "C" __declspec(dllexport) rage::atArray<rage::scrThread*>* get_script_threads()
+{
+	return big::g_pointers->m_script_threads;
+}
+
+extern "C" __declspec(dllexport) int64_t** get_script_globals()
+{
+	return big::g_pointers->m_script_globals;
+}
+

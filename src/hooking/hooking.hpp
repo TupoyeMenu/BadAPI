@@ -22,9 +22,12 @@ namespace big
 		static BOOL set_cursor_pos(int x, int y);
 
 		static bool prepare_metric_for_sending(rage::json_serializer* bit_buffer, int unk, int time, rage::rlMetric* metric);
+
 		static bool init_native_tables(rage::scrProgram* program);
 		static rage::eThreadState script_vm(uint64_t* start_stack, uint64_t** scr_globals, rage::scrProgram* program, rage::scrThreadContext* ctx);
 		static void update_script_threads();
+		static uint32_t gta_thread_create(uint64_t p1, uint64_t p2, uint32_t p3, int p4);
+		static rage::eThreadState gta_thread_kill(GtaThread* thread);
 
 		static bool network_player_mgr_init(CNetworkPlayerMgr* _this, uint64_t a2, uint32_t a3, uint32_t a4[4]);
 		static void network_player_mgr_shutdown(CNetworkPlayerMgr* _this);

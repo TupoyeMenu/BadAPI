@@ -3,10 +3,8 @@
 #include "bindings/entities.hpp"
 #include "bindings/event.hpp"
 #include "bindings/global_table.hpp"
-#include "bindings/globals.hpp"
 #include "bindings/imgui.hpp"
 #include "bindings/imguitextselect.hpp"
-#include "bindings/locals.hpp"
 #include "bindings/log.hpp"
 #include "bindings/menu.hpp"
 #include "bindings/native.hpp"
@@ -257,14 +255,12 @@ namespace big
 		sandbox_lua_loads(scripts_folder);
 
 		lua::log::bind(m_state);
-		lua::globals::bind(m_state);
 		lua::script::bind(m_state);
 		lua::scr_patch::bind(m_state);
 		lua::menu::bind(m_state);
 		lua::native::bind(m_state);
 		lua::network::bind(m_state);
 		lua::tunables::bind(m_state);
-		lua::locals::bind(m_state);
 		lua::event::bind(m_state);
 		lua::vector::bind(m_state);
 		lua::global_table::bind(m_state);

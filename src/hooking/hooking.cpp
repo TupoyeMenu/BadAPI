@@ -39,6 +39,9 @@ namespace big
 		detour_hook_helper::add<hooks::run_script_threads>("Script hook", (void*)g_pointers->m_run_script_threads);
 		detour_hook_helper::add<hooks::init_native_tables>("Init Native Tables", (void*)g_pointers->m_init_native_tables);
 		detour_hook_helper::add<hooks::script_vm>("Script VM", (void*)g_pointers->m_script_vm);
+		detour_hook_helper::add<hooks::gta_thread_create>("GTA Thread Create", (void*)g_pointers->m_gta_thread_create);
+		detour_hook_helper::add<hooks::gta_thread_kill>("GTA Thread Kill", (void*)g_pointers->m_gta_thread_kill);
+
 
 		detour_hook_helper::add<hooks::network_player_mgr_init>("Network Player Mgr Init", (void*)g_pointers->m_network_player_mgr_init);
 		detour_hook_helper::add<hooks::network_player_mgr_shutdown>("Network Player Mgr Shutdown", (void*)g_pointers->m_network_player_mgr_shutdown);
