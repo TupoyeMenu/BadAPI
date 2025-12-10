@@ -930,14 +930,6 @@ function ImGui.GetContentRegionMax() end
 function ImGui.GetContentRegionAvail() end
 
 ---@return number
----@return number
-function ImGui.GetWindowContentRegionMin() end
-
----@return number
----@return number
-function ImGui.GetWindowContentRegionMax() end
-
----@return number
 function ImGui.GetScrollX() end
 
 ---@return number
@@ -1218,8 +1210,8 @@ function ImGui.ImageButton() end
 
 ---@param label string
 ---@param v boolean
----@return boolean
----@return boolean
+---@return boolean v
+---@return boolean pressed
 function ImGui.Checkbox(label, v) end
 
 ---@return boolean
