@@ -196,16 +196,6 @@ namespace big
 			m_give_pickup_rewards = ptr.add(6).rip().as<decltype(m_give_pickup_rewards)>();
 		});
 
-		main_batch.add("Blame Explode", "0F 85 EE 00 00 00 84 C0", -1, 3521, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_blame_explode = ptr;
-		});
-		main_batch.add("Blame Explode", "0F 85 EF 00 00 00 84 C0", 3570, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_blame_explode = ptr;
-		});
-		main_batch.add("Blame Explode", "0F 85 d3 00 00 00 84", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			m_blame_explode = ptr;
-		});
-
 		main_batch.add("Patch blocked explosions", "E8 ? ? ? ? 48 8D 4C 24 20 E8 ? ? ? ? 4C 8D 9C 24 80 01 00 00", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_explosion_patch = ptr.sub(12);
 		});

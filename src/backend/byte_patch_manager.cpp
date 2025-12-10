@@ -20,8 +20,6 @@ namespace big
 	static void init()
 	{
 		// Patch blocked explosions
-		explosion_anti_cheat_bypass::m_can_blame_others =
-		    memory::byte_patch::make(g_pointers->m_blame_explode.as<uint16_t*>(), 0xE990).get();
 		explosion_anti_cheat_bypass::m_can_use_blocked_explosions =
 		    memory::byte_patch::make(g_pointers->m_explosion_patch.as<uint16_t*>(), 0x9090).get();
 

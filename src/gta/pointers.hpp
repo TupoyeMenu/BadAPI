@@ -64,7 +64,6 @@ namespace big
 		functions::give_pickup_rewards m_give_pickup_rewards{};
 		functions::send_network_damage m_send_network_damage{};
 
-		memory::handle m_blame_explode{};
 		memory::handle m_explosion_patch{};
 
 		functions::queue_packet m_queue_packet{};
