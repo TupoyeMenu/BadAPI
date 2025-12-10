@@ -272,11 +272,17 @@ namespace big
 		main_batch.add("Handle Join Request", "48 8B C4 48 89 58 08 4C 89 48 20 4C 89 40 18 48 89 50 10 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 18", -1, 3521, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_handle_join_request = ptr.as<PVOID>();
 		});
-		main_batch.add("Handle Join Request", "4C 8B F1 45 33 ED 48 8D 4D", 3570, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+		main_batch.add("Handle Join Request", "4C 8B F1 45 33 ED 48 8D 4D", 3570, 3586, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_handle_join_request = ptr.sub(0x2D).as<PVOID>();
 		});
+		main_batch.add("Handle Join Request", "48 81 EC E8 03 00 00 4C 8B F1", 3717, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_handle_join_request = ptr.sub(0x26).as<PVOID>();
+		});
 
-		main_batch.add("Write Join Response Data", "E8 ? ? ? ? 41 8B DF 84 C0 74 06", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
+		main_batch.add("Write Join Response Data", "E8 ? ? ? ? 41 8B DF 84 C0 74 06", -1, 3586, eGameBranch::Legacy, [this](memory::handle ptr) {
+			m_write_join_response_data = ptr.add(1).rip().as<functions::write_join_response_data>();
+		});
+		main_batch.add("Write Join Response Data", "E8 ? ? ? ? 84 C0 75 0A 44 89 23", 3717, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_write_join_response_data = ptr.add(1).rip().as<functions::write_join_response_data>();
 		});
 
