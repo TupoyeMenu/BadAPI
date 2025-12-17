@@ -100,8 +100,6 @@ namespace big
 		bool* m_needs_be_restart{};
 		bool* m_is_be_banned{};
 
-		uint8_t* m_battleye_status_update_patch{};
-
 		PVOID m_prepare_metric_for_sending{};
 
 		bool* m_natives_registered{};

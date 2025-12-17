@@ -54,7 +54,5 @@ namespace big
 		int m_fsl_version = -1;
 		bool m_fsl_provides_local_saves = false;
 		bool m_fsl_provides_be_bypass = false;
-	public:
-		inline static memory::byte_patch* m_battleye_status_update_patch;
 	};
 }

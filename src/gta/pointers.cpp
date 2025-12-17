@@ -302,9 +302,6 @@ namespace big
 			m_needs_be_restart  = ptr.add(3).rip().add(8).add(4).add(8).as<bool*>();
 			m_is_be_banned      = ptr.add(3).rip().add(8).add(4).add(8).add(4).as<bool*>();
 		});
-		main_batch.add("BattlEye Status Update Patch", "80 B9 92 0A 00 00 01", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			m_battleye_status_update_patch = ptr.sub(0x26).as<uint8_t*>();
-		});
 
 		main_batch.add("Prepare Metric For Sending", "48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 48 89 78 20 41 56 48 83 EC 30 49 8B F0 4C", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			m_prepare_metric_for_sending = ptr.as<PVOID>();
