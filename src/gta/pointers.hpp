@@ -102,7 +102,6 @@ namespace big
 
 		PVOID m_prepare_metric_for_sending{};
 
-		bool* m_natives_registered{};
 		PVOID m_gta_thread_vtable{};
 
 		rage::sysMemAllocator* m_allocator{};

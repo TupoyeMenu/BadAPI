@@ -317,13 +317,6 @@ namespace big
 			m_gta_thread_vtable = ptr.add(7).rip().as<PVOID>();
 		});
 
-		main_batch.add("Natives Registered", "48 8B CB 40 88 2D ? ? ? ? 48", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
-			m_natives_registered = ptr.add(6).rip().as<bool*>();
-		});
-		main_batch.add("Natives Registered", "C6 05 ? ? ? ? ? 48 89 F1 0F 28 74", -1, -1, eGameBranch::Enhanced, [this](memory::handle ptr) {
-			m_natives_registered = ptr.add(3).rip().as<bool*>();
-		});
-
 		main_batch.add("tlsContext allocator offset", "4C 8B C2 B9", -1, -1, eGameBranch::Legacy, [this](memory::handle ptr) {
 			// Multiple results but they all point to the same offset.
 			offsets::tls_context_allocator_offset = *ptr.add(4).as<uint32_t*>();

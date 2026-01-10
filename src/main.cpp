@@ -101,8 +101,11 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			    auto hooking_instance = std::make_unique<hooking>();
 			    LOG(INFO) << "Hooking initialized.";
 
-			    while (!*g_pointers->m_natives_registered)
-				    std::this_thread::sleep_for(50ms);
+			    while (g_pointers->m_script_threads->size() == 0)
+			    {
+				    LOG(VERBOSE) << "Natives not initialised yet. Waiting 5s and trying again.";
+				    std::this_thread::sleep_for(5s);
+			    }
 
 			    auto script_program_instance = std::make_unique<big_program>("BadAPIInternal");
 			    create_script_thread("BadAPIInternal");
