@@ -281,6 +281,12 @@ namespace lua::native
 		PAD::ALLOW_ALTERNATIVE_SCRIPT_CONTROLS_LAYOUT(control);
 	}
 
+	static int LUA_NATIVE_PAD_GET_GAMEPAD_TYPE_()
+	{
+		auto retval = PAD::_GET_GAMEPAD_TYPE();
+		return retval;
+	}
+
 	void init_native_binding_PAD(sol::state& L)
 	{
 		auto PAD = L["PAD"].get_or_create<sol::table>();
@@ -333,5 +339,6 @@ namespace lua::native
 		PAD.set_function("SWITCH_PC_SCRIPTED_CONTROLS", LUA_NATIVE_PAD_SWITCH_PC_SCRIPTED_CONTROLS);
 		PAD.set_function("SHUTDOWN_PC_SCRIPTED_CONTROLS", LUA_NATIVE_PAD_SHUTDOWN_PC_SCRIPTED_CONTROLS);
 		PAD.set_function("ALLOW_ALTERNATIVE_SCRIPT_CONTROLS_LAYOUT", LUA_NATIVE_PAD_ALLOW_ALTERNATIVE_SCRIPT_CONTROLS_LAYOUT);
+		PAD.set_function("GET_GAMEPAD_TYPE_", LUA_NATIVE_PAD_GET_GAMEPAD_TYPE_);
 	}
 }

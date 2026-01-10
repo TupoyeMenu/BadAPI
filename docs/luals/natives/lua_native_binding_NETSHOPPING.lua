@@ -151,6 +151,11 @@ function NETSHOPPING.NET_GAMESERVER_CHECKOUT_START(transactionId) end
 
 
 ---@param transactionId int
+---@return boolean
+function NETSHOPPING.NET_GAMESERVER_CHECKOUT_PENDING(transactionId) end
+
+
+---@param transactionId int
 ---@param categoryHash Hash
 ---@param itemHash Hash
 ---@param actionTypeHash Hash

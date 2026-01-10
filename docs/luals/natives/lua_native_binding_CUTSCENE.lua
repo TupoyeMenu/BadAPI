@@ -57,6 +57,12 @@ function CUTSCENE.REMOVE_CUT_FILE(cutsceneName) end
 
 
 ---@param cutsceneName string
+---@param index int
+---@return Vector3
+function CUTSCENE.GET_CUT_FILE_OFFSET(cutsceneName, index) end
+
+
+---@param cutsceneName string
 ---@return int
 function CUTSCENE.GET_CUT_FILE_CONCAT_COUNT(cutsceneName) end
 
@@ -227,8 +233,8 @@ function CUTSCENE.SET_CUTSCENE_MULTIHEAD_FADE_MANUAL(p0) end
 function CUTSCENE.IS_MULTIHEAD_FADE_UP() end
 
 
----@param p0 boolean
-function CUTSCENE.NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(p0) end
+---@param toggle boolean
+function CUTSCENE.NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(toggle) end
 
 
 ---@param p0 boolean

@@ -583,6 +583,10 @@ function PLAYER.SET_PLAYER_LOCKON(player, toggle) end
 function PLAYER.SET_PLAYER_TARGETING_MODE(targetMode) end
 
 
+---@return int
+function PLAYER.GET_PLAYER_TARGETING_MODE() end
+
+
 ---@param targetLevel int
 function PLAYER.SET_PLAYER_TARGET_LEVEL(targetLevel) end
 
@@ -994,8 +998,8 @@ function PLAYER.GET_PLAYER_PARACHUTE_SMOKE_TRAIL_COLOR(player, r, g, b) end
 
 
 ---@param player PlayerHandle
----@param flags int
-function PLAYER.SET_PLAYER_PHONE_PALETTE_IDX(player, flags) end
+---@param idx int
+function PLAYER.SET_PLAYER_PHONE_PALETTE_IDX(player, idx) end
 
 
 ---@param player PlayerHandle

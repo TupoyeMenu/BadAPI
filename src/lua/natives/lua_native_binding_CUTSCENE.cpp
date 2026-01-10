@@ -68,6 +68,12 @@ namespace lua::native
 		CUTSCENE::REMOVE_CUT_FILE(cutsceneName.is<const char*>() ? cutsceneName.as<const char*>() : nullptr);
 	}
 
+	static Vector3 LUA_NATIVE_CUTSCENE_GET_CUT_FILE_OFFSET(sol::stack_object cutsceneName, int index)
+	{
+		auto retval = CUTSCENE::GET_CUT_FILE_OFFSET(cutsceneName.is<const char*>() ? cutsceneName.as<const char*>() : nullptr, index);
+		return retval;
+	}
+
 	static int LUA_NATIVE_CUTSCENE_GET_CUT_FILE_CONCAT_COUNT(sol::stack_object cutsceneName)
 	{
 		auto retval = CUTSCENE::GET_CUT_FILE_CONCAT_COUNT(cutsceneName.is<const char*>() ? cutsceneName.as<const char*>() : nullptr);
@@ -253,9 +259,9 @@ namespace lua::native
 		return retval;
 	}
 
-	static void LUA_NATIVE_CUTSCENE_NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(bool p0)
+	static void LUA_NATIVE_CUTSCENE_NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(bool toggle)
 	{
-		CUTSCENE::NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(p0);
+		CUTSCENE::NETWORK_SET_MOCAP_CUTSCENE_CAN_BE_SKIPPED(toggle);
 	}
 
 	static void LUA_NATIVE_CUTSCENE_SET_CAR_GENERATORS_CAN_UPDATE_DURING_CUTSCENE(bool p0)
@@ -321,6 +327,7 @@ namespace lua::native
 		CUTSCENE.set_function("REQUEST_CUT_FILE", LUA_NATIVE_CUTSCENE_REQUEST_CUT_FILE);
 		CUTSCENE.set_function("HAS_CUT_FILE_LOADED", LUA_NATIVE_CUTSCENE_HAS_CUT_FILE_LOADED);
 		CUTSCENE.set_function("REMOVE_CUT_FILE", LUA_NATIVE_CUTSCENE_REMOVE_CUT_FILE);
+		CUTSCENE.set_function("GET_CUT_FILE_OFFSET", LUA_NATIVE_CUTSCENE_GET_CUT_FILE_OFFSET);
 		CUTSCENE.set_function("GET_CUT_FILE_CONCAT_COUNT", LUA_NATIVE_CUTSCENE_GET_CUT_FILE_CONCAT_COUNT);
 		CUTSCENE.set_function("START_CUTSCENE", LUA_NATIVE_CUTSCENE_START_CUTSCENE);
 		CUTSCENE.set_function("START_CUTSCENE_AT_COORDS", LUA_NATIVE_CUTSCENE_START_CUTSCENE_AT_COORDS);

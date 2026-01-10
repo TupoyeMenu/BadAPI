@@ -1619,6 +1619,15 @@ function STATS.PLAYSTATS_MISSION_VOTE(p0) end
 function STATS.PLAYSTATS_NJVS_VOTE(p0) end
 
 
+---@param victimPed PedHandle
+---@param killerPed PedHandle
+---@param mentalState int
+---@param revengeKill boolean
+---@param victimKvK int
+---@param killerKvK int
+function STATS.PLAYSTATS_DEATH_INFO_(victimPed, killerPed, mentalState, revengeKill, victimKvK, killerKvK) end
+
+
 ---@param p0 Any
 ---@param p1 Any
 ---@param p2 Any
@@ -1778,5 +1787,21 @@ function STATS.PLAYSTATS_PIMENU_NAV_(data) end
 
 ---@param data number
 function STATS.PLAYSTATS_RECOVER_VEHICLE_(data) end
+
+
+---@param data number
+function STATS.PLAYSTATS_SCRIPT_EVENT_FPOM_(data) end
+
+
+---@param p0 number
+function STATS.PLAYSTATS_LOBBY_EXIT_(p0) end
+
+
+---@param p0 number
+function STATS.PLAYSTATS_LOBBY_STARTED_(p0) end
+
+
+---@param p0 number
+function STATS.PLAYSTATS_CREATOR_END_(p0) end
 
 

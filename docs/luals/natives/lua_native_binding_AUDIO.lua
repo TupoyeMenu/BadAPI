@@ -504,6 +504,11 @@ function AUDIO.IS_ANIMAL_VOCALIZATION_PLAYING(pedHandle) end
 function AUDIO.SET_ANIMAL_MOOD(animal, mood) end
 
 
+---@param pedHandle PedHandle
+---@param audioEvent string
+function AUDIO.PLAY_PED_AUDIO_EVENT_ANIM(pedHandle, audioEvent) end
+
+
 ---@return boolean
 function AUDIO.IS_MOBILE_PHONE_RADIO_ACTIVE() end
 
@@ -1319,8 +1324,21 @@ function AUDIO.SET_AUDIO_SPECIAL_EFFECT_MODE(mode) end
 function AUDIO.SET_PORTAL_SETTINGS_OVERRIDE(p0, p1) end
 
 
+---@param interiorNameHash Hash
+---@param roomIndex int
+---@param doorIndex int
+---@param newPortalSettingsName string
+function AUDIO.SET_INDIVIDUAL_PORTAL_SETTINGS_OVERRIDE(interiorNameHash, roomIndex, doorIndex, newPortalSettingsName) end
+
+
 ---@param p0 string
 function AUDIO.REMOVE_PORTAL_SETTINGS_OVERRIDE(p0) end
+
+
+---@param interiorNameHash Hash
+---@param roomIndex int
+---@param doorIndex int
+function AUDIO.REMOVE_INDIVIDUAL_PORTAL_SETTINGS_OVERRIDE(interiorNameHash, roomIndex, doorIndex) end
 
 
 function AUDIO.STOP_SMOKE_GRENADE_EXPLOSION_SOUNDS() end

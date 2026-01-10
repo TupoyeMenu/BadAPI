@@ -70,6 +70,10 @@ function NETWORK.NETWORK_HAVE_ONLINE_PRIVILEGES() end
 
 
 ---@return boolean
+function NETWORK.NETWORK_MULTIPLAYER_CROSSPLAY_NOT_ALLOWED_() end
+
+
+---@return boolean
 function NETWORK.NETWORK_HAS_AGE_RESTRICTIONS() end
 
 
@@ -212,6 +216,20 @@ function NETWORK.NETWORK_CAN_ACCESS_MULTIPLAYER(loadingState) end
 
 
 ---@return boolean
+function NETWORK.NETWORK_CHECK_CAN_ACCESS_AND_ALERT() end
+
+
+---@param accessCode int
+---@return string
+function NETWORK.NETWORK_GET_ACCESS_CODE_LABEL_HEADING_(accessCode) end
+
+
+---@param accessCode int
+---@return string
+function NETWORK.NETWORK_GET_ACCESS_CODE_LABEL_BODY_(accessCode) end
+
+
+---@return boolean
 function NETWORK.NETWORK_IS_MULTIPLAYER_DISABLED() end
 
 
@@ -289,12 +307,6 @@ function NETWORK.NETWORK_SESSION_IS_PRIVATE() end
 ---@param leaveReason int
 ---@return boolean
 function NETWORK.NETWORK_SESSION_LEAVE_INCLUDING_REASON_(leaveFlags, leaveReason) end
-
-
----@param p0 boolean
----@param p1 boolean
----@return boolean
-function NETWORK.NETWORK_SESSION_END(p0, p1) end
 
 
 ---@param p0 Any
@@ -1330,6 +1342,38 @@ function NETWORK.NETWORK_REGISTER_HIGH_FREQUENCY_PLAYER_BROADCAST_VARIABLES(p0, 
 function NETWORK.NETWORK_FINISH_BROADCASTING_DATA() end
 
 
+---@param scriptNameHash Hash
+---@param instance int
+---@param positionHash Hash
+---@param handlerNum int
+---@return int
+function NETWORK.NETWORK_GET_HOST_BROADCAST_DATA_SIZE_UNSYNCED_(scriptNameHash, instance, positionHash, handlerNum) end
+
+
+---@param scriptNameHash Hash
+---@param instance int
+---@param positionHash Hash
+---@param handlerNum int
+---@return int
+function NETWORK.NETWORK_GET_PLAYER_BROADCAST_DATA_SIZE_UNSYNCED_(scriptNameHash, instance, positionHash, handlerNum) end
+
+
+---@param scriptNameHash Hash
+---@param instance int
+---@param positionHash Hash
+---@param handlerNum int
+---@return int
+function NETWORK.NETWORK_GET_BROADCAST_DATA_HOST_UPDATE_SIZE_(scriptNameHash, instance, positionHash, handlerNum) end
+
+
+---@param scriptNameHash Hash
+---@param instance int
+---@param positionHash Hash
+---@param handlerNum int
+---@return int
+function NETWORK.NETWORK_GET_BROADCAST_DATA_PLAYER_UPDATE_SIZE_(scriptNameHash, instance, positionHash, handlerNum) end
+
+
 ---@return boolean
 function NETWORK.NETWORK_HAS_RECEIVED_HOST_BROADCAST_DATA() end
 
@@ -1390,6 +1434,11 @@ function NETWORK.NETWORK_GET_HOST_OF_THIS_SCRIPT() end
 ---@param position_hash int
 ---@return PlayerHandle
 function NETWORK.NETWORK_GET_HOST_OF_SCRIPT(scriptName, instance_id, position_hash) end
+
+
+---@param threadId int
+---@return PlayerHandle
+function NETWORK.NETWORK_GET_HOST_OF_THREAD(threadId) end
 
 
 function NETWORK.NETWORK_SET_MISSION_FINISHED() end
@@ -1896,12 +1945,27 @@ function NETWORK.NETWORK_IGNORE_REMOTE_WAYPOINTS() end
 
 ---@param communicationType int
 ---@return boolean
-function NETWORK.NETWORK_DOES_COMMUNICATION_GROUP_EXIST_(communicationType) end
+function NETWORK.NETWORK_DOES_COMMUNICATION_GROUP_HAVE_PERMISSION_(communicationType) end
+
+
+---@param communicationType int
+---@return boolean
+function NETWORK.NETWORK_DOES_COMMUNICATION_GROUP_HAVE_SETTINGS_ENABLED_(communicationType) end
 
 
 ---@param communicationType int
 ---@return int
 function NETWORK.NETWORK_GET_COMMUNICATION_GROUP_FLAGS_(communicationType) end
+
+
+---@param communicationType int
+---@return int
+function NETWORK.NETWORK_GET_COMMUNICATION_GROUP_DEFAULT_FLAGS_(communicationType) end
+
+
+---@param communicationType int
+---@return int
+function NETWORK.NETWORK_GET_COMMUNICATION_GROUP_VALUE_(communicationType) end
 
 
 ---@param communicationType int
@@ -2455,6 +2519,14 @@ function NETWORK.ARE_CUTSCENE_ENTITIES_NETWORKED() end
 function NETWORK.SET_NETWORK_ID_PASS_CONTROL_IN_TUTORIAL(netId, state) end
 
 
+---@param toggle boolean
+function NETWORK.NETWORK_SET_TUTORIAL_SPECIAL_SESSION_(toggle) end
+
+
+---@return boolean
+function NETWORK.NETWORK_IS_SPECIAL_TUTORIAL_SESSION_() end
+
+
 ---@param netId int
 ---@return boolean
 function NETWORK.IS_NETWORK_ID_OWNED_BY_PARTICIPANT(netId) end
@@ -2696,8 +2768,8 @@ function NETWORK.NETWORK_SET_OBJECT_SCOPE_DISTANCE(object, range) end
 function NETWORK.NETWORK_ALLOW_CLONING_WHILE_IN_TUTORIAL(p0, p1) end
 
 
----@param p0 Any
-function NETWORK.NETWORK_SET_TASK_CUTSCENE_INSCOPE_MULTIPLER(p0) end
+---@param multiplier float
+function NETWORK.NETWORK_SET_TASK_CUTSCENE_INSCOPE_MULTIPLER(multiplier) end
 
 
 ---@param netHandle int
@@ -3112,6 +3184,14 @@ function NETWORK.NETWORK_OVERRIDE_CLOCK_RATE(ms) end
 function NETWORK.NETWORK_CLEAR_CLOCK_TIME_OVERRIDE() end
 
 
+---@param startGlobalTransition boolean
+---@param transitionTime int
+function NETWORK.NETWORK_CLEAR_CLOCK_SYNC_TIME_OVERRIDE_(startGlobalTransition, transitionTime) end
+
+
+function NETWORK.NETWORK_SYNC_CLOCK_TIME_OVERRIDE() end
+
+
 ---@return boolean
 function NETWORK.NETWORK_IS_CLOCK_TIME_OVERRIDDEN() end
 
@@ -3410,13 +3490,6 @@ function NETWORK.NETWORK_ENABLE_EXTRA_VEHICLE_ORIENTATION_BLEND_CHECKS(netId, to
 function NETWORK.NETWORK_DISABLE_PROXIMITY_MIGRATION(netID) end
 
 
----@param id int
-function NETWORK.NETWORK_SET_PROPERTY_ID(id) end
-
-
-function NETWORK.NETWORK_CLEAR_PROPERTY_ID() end
-
-
 ---@param p0 int
 function NETWORK.NETWORK_SET_PLAYER_MENTAL_STATE(p0) end
 
@@ -3437,6 +3510,10 @@ function NETWORK.NETWORK_HAS_CACHED_PLAYER_HEAD_BLEND_DATA(player) end
 ---@param player PlayerHandle
 ---@return boolean
 function NETWORK.NETWORK_APPLY_CACHED_PLAYER_HEAD_BLEND_DATA(ped, player) end
+
+
+---@param toggle boolean
+function NETWORK.NETWORK_SET_IGNORE_VEHICLE_RAMMED_BY_NON_VEHICLE_(toggle) end
 
 
 ---@return int
@@ -4250,6 +4327,10 @@ function NETWORK.NETWORK_GET_HIGHEST_RELIABLE_RESEND_COUNT(player) end
 function NETWORK.NETWORK_REPORT_CODE_TAMPER() end
 
 
+---@param p0 number
+function NETWORK.NETWORK_GET_DUMP_OF_ASSET_VERIFIER_(p0) end
+
+
 ---@param entity EntityHandle
 ---@return Vector3
 function NETWORK.NETWORK_GET_LAST_ENTITY_POS_RECEIVED_OVER_NETWORK(entity) end
@@ -4285,6 +4366,10 @@ function NETWORK.NETWORK_GET_NET_STATISTICS_INFO(p0) end
 ---@param player PlayerHandle
 ---@return int
 function NETWORK.NETWORK_GET_PLAYER_ACCOUNT_ID(player) end
+
+
+---@return boolean
+function NETWORK.NETWORK_HAS_SC_MEMBERSHIP() end
 
 
 ---@param p0 Any

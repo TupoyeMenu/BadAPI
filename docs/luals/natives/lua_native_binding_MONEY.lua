@@ -678,7 +678,8 @@ function MONEY.NETWORK_SPENT_NO_COPS(p0, p1, p2, p3) end
 ---@param p3 Any
 ---@param p4 Any
 ---@param p5 Any
-function MONEY.NETWORK_SPENT_CARGO_SOURCING(p0, p1, p2, p3, p4, p5) end
+---@param p6 Any
+function MONEY.NETWORK_SPENT_CARGO_SOURCING(p0, p1, p2, p3, p4, p5, p6) end
 
 
 ---@param p0 Any
@@ -2069,7 +2070,8 @@ function MONEY.NETWORK_EARN_PROGRESS_HUB_(p0, p1) end
 ---@param cost int
 ---@param warehouseId int
 ---@param warehouseSlot int
-function MONEY.NETWORK_SPENT_AIR_FREIGHT_(hangarCargoSourcingPrice, fromBank, fromBankAndWallet, cost, warehouseId, warehouseSlot) end
+---@param p6 Any
+function MONEY.NETWORK_SPENT_AIR_FREIGHT_(hangarCargoSourcingPrice, fromBank, fromBankAndWallet, cost, warehouseId, warehouseSlot, p6) end
 
 
 ---@param amount int

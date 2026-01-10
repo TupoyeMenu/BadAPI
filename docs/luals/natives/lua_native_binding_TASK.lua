@@ -51,8 +51,7 @@ function TASK.TASK_OPEN_VEHICLE_DOOR(ped, vehicle, timeOut, seat, speed) end
 ---@param speed float
 ---@param flag int
 ---@param overrideEntryClipsetName string
----@param p7 Any
-function TASK.TASK_ENTER_VEHICLE(ped, vehicle, timeout, seat, speed, flag, overrideEntryClipsetName, p7) end
+function TASK.TASK_ENTER_VEHICLE(ped, vehicle, timeout, seat, speed, flag, overrideEntryClipsetName) end
 
 
 ---@param ped PedHandle
@@ -600,6 +599,10 @@ function TASK.CLEAR_SEQUENCE_TASK(taskSequenceId) end
 ---@param taskSequenceId int
 ---@param repeat_ boolean
 function TASK.SET_SEQUENCE_TO_REPEAT(taskSequenceId, repeat_) end
+
+
+---@param taskSequenceId int
+function TASK.SET_SEQUENCE_PREVENT_MIGRATION(taskSequenceId) end
 
 
 ---@param ped PedHandle
@@ -1835,6 +1838,11 @@ function TASK.IS_WAYPOINT_PLAYBACK_GOING_ON_FOR_PED(ped) end
 function TASK.GET_PED_WAYPOINT_PROGRESS(ped) end
 
 
+---@param ped PedHandle
+---@param progress int
+function TASK.SET_PED_WAYPOINT_PROGRESS(ped, progress) end
+
+
 ---@param p0 Any
 ---@return float
 function TASK.GET_PED_WAYPOINT_DISTANCE(p0) end
@@ -1975,6 +1983,11 @@ function TASK.GET_VEHICLE_WAYPOINT_TARGET_POINT(vehicle) end
 
 ---@param vehicle VehicleHandle
 function TASK.VEHICLE_WAYPOINT_PLAYBACK_PAUSE(vehicle) end
+
+
+---@param vehicle VehicleHandle
+---@return boolean
+function TASK.VEHICLE_WAYPOINT_PLAYBACK_GET_IS_PAUSED(vehicle) end
 
 
 ---@param vehicle VehicleHandle
@@ -2137,6 +2150,11 @@ function TASK.SET_TASK_MOVE_NETWORK_ENABLE_COLLISION_ON_NETWORK_CLONE_WHEN_FIXED
 ---@param ped PedHandle
 ---@param enable boolean
 function TASK.SET_SCRIPT_TASK_ENABLE_COLLISION_ON_NETWORK_CLONE_WHEN_FIXED_(ped, enable) end
+
+
+---@param ped PedHandle
+---@param enable boolean
+function TASK.SET_AMBIENT_PED_ENABLE_COLLISION_ON_NETWORK_CLONE_WHEN_FIXED_(ped, enable) end
 
 
 ---@param ped PedHandle

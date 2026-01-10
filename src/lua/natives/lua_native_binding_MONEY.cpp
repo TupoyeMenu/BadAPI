@@ -570,9 +570,9 @@ namespace lua::native
 		MONEY::NETWORK_SPENT_NO_COPS(p0, p1, p2, p3);
 	}
 
-	static void LUA_NATIVE_MONEY_NETWORK_SPENT_CARGO_SOURCING(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5)
+	static void LUA_NATIVE_MONEY_NETWORK_SPENT_CARGO_SOURCING(Any p0, Any p1, Any p2, Any p3, Any p4, Any p5, Any p6)
 	{
-		MONEY::NETWORK_SPENT_CARGO_SOURCING(p0, p1, p2, p3, p4, p5);
+		MONEY::NETWORK_SPENT_CARGO_SOURCING(p0, p1, p2, p3, p4, p5, p6);
 	}
 
 	static void LUA_NATIVE_MONEY_NETWORK_SPENT_REQUEST_JOB(Any p0, bool p1, bool p2, Any p3)
@@ -1677,9 +1677,9 @@ namespace lua::native
 		MONEY::_NETWORK_EARN_PROGRESS_HUB(p0, p1);
 	}
 
-	static void LUA_NATIVE_MONEY_NETWORK_SPENT_AIR_FREIGHT_(int hangarCargoSourcingPrice, bool fromBank, bool fromBankAndWallet, int cost, int warehouseId, int warehouseSlot)
+	static void LUA_NATIVE_MONEY_NETWORK_SPENT_AIR_FREIGHT_(int hangarCargoSourcingPrice, bool fromBank, bool fromBankAndWallet, int cost, int warehouseId, int warehouseSlot, Any p6)
 	{
-		MONEY::_NETWORK_SPENT_AIR_FREIGHT(hangarCargoSourcingPrice, fromBank, fromBankAndWallet, cost, warehouseId, warehouseSlot);
+		MONEY::_NETWORK_SPENT_AIR_FREIGHT(hangarCargoSourcingPrice, fromBank, fromBankAndWallet, cost, warehouseId, warehouseSlot, p6);
 	}
 
 	static void LUA_NATIVE_MONEY_NETWORK_SPENT_SKIP_CARGO_SOURCE_SETUP_(int amount, bool fromBank, bool fromBankAndWallet, int cost)

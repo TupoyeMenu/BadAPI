@@ -1099,6 +1099,12 @@ namespace lua::native
 		return retval;
 	}
 
+	static bool LUA_NATIVE_MISC_IS_XBOXPC_VERSION_()
+	{
+		auto retval = (bool)MISC::_IS_XBOXPC_VERSION();
+		return retval;
+	}
+
 	static bool LUA_NATIVE_MISC_IS_AUSSIE_VERSION()
 	{
 		auto retval = (bool)MISC::IS_AUSSIE_VERSION();
@@ -2079,6 +2085,7 @@ namespace lua::native
 		MISC.set_function("IS_PS3_VERSION", LUA_NATIVE_MISC_IS_PS3_VERSION);
 		MISC.set_function("IS_PC_VERSION", LUA_NATIVE_MISC_IS_PC_VERSION);
 		MISC.set_function("IS_STEAM_VERSION", LUA_NATIVE_MISC_IS_STEAM_VERSION);
+		MISC.set_function("IS_XBOXPC_VERSION_", LUA_NATIVE_MISC_IS_XBOXPC_VERSION_);
 		MISC.set_function("IS_AUSSIE_VERSION", LUA_NATIVE_MISC_IS_AUSSIE_VERSION);
 		MISC.set_function("IS_JAPANESE_VERSION", LUA_NATIVE_MISC_IS_JAPANESE_VERSION);
 		MISC.set_function("IS_XBOX_PLATFORM", LUA_NATIVE_MISC_IS_XBOX_PLATFORM);

@@ -156,3 +156,17 @@ function FIRE.IS_EXPLOSION_IN_ANGLED_AREA(explosionType, x1, y1, z1, x2, y2, z2,
 function FIRE.GET_OWNER_OF_EXPLOSION_IN_ANGLED_AREA(explosionType, x1, y1, z1, x2, y2, z2, radius) end
 
 
+---@param expect boolean
+---@param player PlayerHandle
+function FIRE.NETWORK_EXPECT_EXPLOSION_EVENTS_FOR_PLAYER_(expect, player) end
+
+
+---@return int
+function FIRE.GET_MAXIMUM_NUMBER_OF_WATER_CANNONS_() end
+
+
+---@param index int
+---@return Vector3
+function FIRE.GET_WATER_CANNON_COORDS_(index) end
+
+

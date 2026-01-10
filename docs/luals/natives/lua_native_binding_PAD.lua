@@ -260,3 +260,7 @@ function PAD.SHUTDOWN_PC_SCRIPTED_CONTROLS() end
 function PAD.ALLOW_ALTERNATIVE_SCRIPT_CONTROLS_LAYOUT(control) end
 
 
+---@return int
+function PAD.GET_GAMEPAD_TYPE_() end
+
+

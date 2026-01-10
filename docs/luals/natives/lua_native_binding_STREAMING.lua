@@ -554,8 +554,21 @@ function STREAMING.REMOVE_MODEL_FROM_CREATOR_BUDGET(modelHash) end
 function STREAMING.GET_USED_CREATOR_BUDGET() end
 
 
+---@param modelHash Hash
+---@return float
+function STREAMING.GET_MODEL_ADDITIONAL_COST_(modelHash) end
+
+
+---@param modelHash Hash
+---@return float
+function STREAMING.GET_TOTAL_MODEL_COST_(modelHash) end
+
+
 ---@param name string
 ---@param toggle boolean
 function STREAMING.SET_ISLAND_ENABLED(name, toggle) end
+
+
+function STREAMING.SET_SPHERICAL_STREAM_DISTANT_HILODS_THIS_FRAME_() end
 
 

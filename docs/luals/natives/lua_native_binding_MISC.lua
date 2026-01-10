@@ -1185,6 +1185,10 @@ function MISC.IS_STEAM_VERSION() end
 
 
 ---@return boolean
+function MISC.IS_XBOXPC_VERSION_() end
+
+
+---@return boolean
 function MISC.IS_AUSSIE_VERSION() end
 
 

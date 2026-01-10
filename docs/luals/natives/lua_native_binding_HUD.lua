@@ -1355,6 +1355,14 @@ function HUD.IS_WAYPOINT_ACTIVE() end
 function HUD.SET_NEW_WAYPOINT(x, y) end
 
 
+---@return int
+function HUD.GET_WAYPOINT_CLEAR_ON_ARRIVAL_MODE() end
+
+
+---@param mode int
+function HUD.SET_WAYPOINT_CLEAR_ON_ARRIVAL_MODE(mode) end
+
+
 ---@param blip BlipHandle
 ---@param toggle boolean
 function HUD.SET_BLIP_BRIGHT(blip, toggle) end
@@ -1446,8 +1454,8 @@ function HUD.SET_FAKE_PAUSEMAP_PLAYER_POSITION_THIS_FRAME(x, y) end
 
 ---@param x float
 ---@param y float
----@param p2 Any
-function HUD.SET_FAKE_GPS_PLAYER_POSITION_THIS_FRAME(x, y, p2) end
+---@param z float
+function HUD.SET_FAKE_GPS_PLAYER_POSITION_THIS_FRAME(x, y, z) end
 
 
 ---@return boolean
@@ -1783,6 +1791,11 @@ function HUD.IS_SCRIPTED_HUD_COMPONENT_HIDDEN_THIS_FRAME(id) end
 
 ---@param id int
 function HUD.HIDE_HUD_COMPONENT_THIS_FRAME(id) end
+
+
+---@param id int
+---@return boolean
+function HUD.IS_HUD_COMPONENT_HIDDEN_THIS_FRAME(id) end
 
 
 ---@param id int

@@ -24,6 +24,11 @@ function VEHICLE.SET_VEHICLE_ALLOW_HOMING_MISSLE_LOCKON(vehicle, toggle, p2) end
 
 
 ---@param vehicle VehicleHandle
+---@return boolean
+function VEHICLE.GET_VEHICLE_ALLOW_HOMING_MISSLE_LOCKON_SYNCED_(vehicle) end
+
+
+---@param vehicle VehicleHandle
 ---@param canBeLockedOn boolean
 ---@param p2 boolean
 function VEHICLE.SET_VEHICLE_ALLOW_HOMING_MISSLE_LOCKON_SYNCED(vehicle, canBeLockedOn, p2) end
@@ -1197,6 +1202,16 @@ function VEHICLE.GET_TRAIN_CARRIAGE(train, trailerNumber) end
 
 
 ---@param train VehicleHandle
+---@param toggle boolean
+function VEHICLE.SET_MAKE_TRAIN_SCAN_FOR_BLOCKING_ENTITIES_(train, toggle) end
+
+
+---@param name string
+---@return int
+function VEHICLE.GET_MISSION_TRAIN_CONFIG_INDEX_BY_NAME_(name) end
+
+
+---@param train VehicleHandle
 ---@return boolean
 function VEHICLE.IS_MISSION_TRAIN(train) end
 
@@ -2233,6 +2248,11 @@ function VEHICLE.SET_VEHICLE_USES_LARGE_REAR_RAMP(vehicle, toggle) end
 ---@param vehicle VehicleHandle
 ---@param toggle boolean
 function VEHICLE.SET_VEHICLE_RUDDER_BROKEN(vehicle, toggle) end
+
+
+---@param vehicle VehicleHandle
+---@param toggle boolean
+function VEHICLE.SET_VEHICLE_TAIL_BROKEN(vehicle, toggle) end
 
 
 ---@param vehicle VehicleHandle
