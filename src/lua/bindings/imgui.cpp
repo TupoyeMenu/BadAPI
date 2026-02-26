@@ -3425,7 +3425,7 @@ namespace lua::imgui
 #pragma endregion Selectable Flags
 
 #pragma region Popup Flags
-		luaGlobals.new_enum("ImGuiPopupFlags", "None", ImGuiPopupFlags_None, "MouseButtonLeft", ImGuiPopupFlags_MouseButtonLeft, "MouseButtonRight", ImGuiPopupFlags_MouseButtonRight, "MouseButtonMiddle", ImGuiPopupFlags_MouseButtonMiddle, "MouseButtonMask_", ImGuiPopupFlags_MouseButtonMask_, "MouseButtonDefault_", ImGuiPopupFlags_MouseButtonDefault_, "NoReopen", ImGuiPopupFlags_NoReopen, "NoOpenOverExistingPopup", ImGuiPopupFlags_NoOpenOverExistingPopup, "NoOpenOverItems", ImGuiPopupFlags_NoOpenOverItems, "AnyPopupId", ImGuiPopupFlags_AnyPopupId, "AnyPopupLevel", ImGuiPopupFlags_AnyPopupLevel, "AnyPopup", ImGuiPopupFlags_AnyPopup);
+		luaGlobals.new_enum("ImGuiPopupFlags", "None", ImGuiPopupFlags_None, "MouseButtonLeft", ImGuiPopupFlags_MouseButtonLeft, "MouseButtonRight", ImGuiPopupFlags_MouseButtonRight, "MouseButtonMiddle", ImGuiPopupFlags_MouseButtonMiddle, "NoReopen", ImGuiPopupFlags_NoReopen, "NoOpenOverExistingPopup", ImGuiPopupFlags_NoOpenOverExistingPopup, "NoOpenOverItems", ImGuiPopupFlags_NoOpenOverItems, "AnyPopupId", ImGuiPopupFlags_AnyPopupId, "AnyPopupLevel", ImGuiPopupFlags_AnyPopupLevel, "AnyPopup", ImGuiPopupFlags_AnyPopup);
 #pragma endregion Popup Flags
 
 #pragma region Table Flags

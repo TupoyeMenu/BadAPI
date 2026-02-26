@@ -2,8 +2,9 @@ include(FetchContent)
 FetchContent_Declare(
     imguitextselect
     GIT_REPOSITORY https://github.com/AidanSun05/ImGuiTextSelect.git
-    GIT_TAG        6e7b369a1c3783189a75fb9f1e44e939987b3953
+    GIT_TAG        afb8a11910be6c77ac4b4535f694e14f5bbb5bc3
     GIT_PROGRESS TRUE
+    SOURCE_SUBDIR "why" # Force cmake to not use CMakeFiles included in the repo
 )
 
 message("ImGuiTextSelect")

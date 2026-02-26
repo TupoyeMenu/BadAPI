@@ -63,8 +63,6 @@ ImGuiPopupFlags =
 	MouseButtonLeft         = 0,  -- For BeginPopupContext*(): open on Left Mouse release. Guaranteed to always be == 0 (same as ImGuiMouseButton_Left)
 	MouseButtonRight        = 1,  -- For BeginPopupContext*(): open on Right Mouse release. Guaranteed to always be == 1 (same as ImGuiMouseButton_Right)
 	MouseButtonMiddle       = 2,  -- For BeginPopupContext*(): open on Middle Mouse release. Guaranteed to always be == 2 (same as ImGuiMouseButton_Middle)
-	MouseButtonMask_        = 0x1F,
-	MouseButtonDefault_     = 1,
 	NoReopen                = nil, -- For OpenPopup*(), BeginPopupContext*(): don't reopen same popup if already open (won't reposition, won't reinitialize navigation)
 	NoOpenOverExistingPopup = nil, -- For OpenPopup*(), BeginPopupContext*(): don't open if there's already a popup at the same level of the popup stack
 	NoOpenOverItems         = nil, -- For BeginPopupContextWindow(): don't return true when hovering items, only when hovering empty space
@@ -971,6 +969,12 @@ function ImGui.SetScrollFromPosY(localY) end
 ---@param centerYRatio number
 function ImGui.SetScrollFromPosY(localY, centerYRatio) end
 
+---@param font ImFont
+---@param font_size_unscaled number
+function ImGui.PushFont(font, font_size_unscaled) end
+
+function ImGui.PopFont() end
+
 ---@param idx integer
 ---@param col integer
 function ImGui.PushStyleColor(idx, col) end
@@ -1007,6 +1011,9 @@ function ImGui.PopStyleVar(count) end
 ---@return number
 ---@return number
 function ImGui.GetStyleColorVec4(idx) end
+
+---@return ImFont
+function ImGui.GetFont() end
 
 ---@return number
 function ImGui.GetFontSize() end
