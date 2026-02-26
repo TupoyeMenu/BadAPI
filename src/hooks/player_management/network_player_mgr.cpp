@@ -10,13 +10,19 @@ namespace big
 	{
 		bool result = g_hooking->get_original<hooks::network_player_mgr_init>()(_this, a2, a3, a4);
 
-		g_lua_manager->trigger_event<"PlayerMgrInit">((uint64_t)_this);
+		if (g_lua_manager) [[likely]]
+		{
+			g_lua_manager->trigger_event<"PlayerMgrInit">((uint64_t)_this);
+		}
 
 		return result;
 	}
 
 	void hooks::network_player_mgr_shutdown(CNetworkPlayerMgr* _this)
 	{
-		g_lua_manager->trigger_event<"PlayerMgrShutdown">((uint64_t)_this);
+		if (g_lua_manager) [[likely]]
+		{
+			g_lua_manager->trigger_event<"PlayerMgrShutdown">((uint64_t)_this);
+		}
 	}
 }

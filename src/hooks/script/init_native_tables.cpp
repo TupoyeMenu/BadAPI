@@ -15,7 +15,10 @@ namespace big
 			g_script_patcher_service->on_script_load(program);
 			g_native_hooks->hook_program(program);
 
-			g_lua_manager->trigger_event<"InitNativeTables">((uint64_t)program);
+			if (g_lua_manager) [[likely]]
+			{
+				g_lua_manager->trigger_event<"InitNativeTables">((uint64_t)program);
+			}
 		}
 
 		return ret;

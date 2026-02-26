@@ -29,7 +29,7 @@ namespace big
 
 		if (new_index == static_cast<uint8_t>(-1))
 		{
-			if (net_player_data)
+			if (net_player_data && g_lua_manager)
 			{
 				g_lua_manager->trigger_event<"PlayerLeave">(net_player_data->m_name, (uint64_t)player);
 			}
@@ -38,7 +38,7 @@ namespace big
 		}
 
 		const auto result = g_hooking->get_original<hooks::assign_physical_index>()(netPlayerMgr, player, new_index);
-		if (net_player_data)
+		if (net_player_data && g_lua_manager)
 		{
 			g_lua_manager->trigger_event<"PlayerJoin">(net_player_data->m_name, CROSS_CLASS_ACCESS(legacy::CNetGamePlayer, enhanced::CNetGamePlayer, player, ->m_PlayerIndex), (uint64_t)player);
 		}

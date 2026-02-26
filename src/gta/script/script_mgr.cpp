@@ -44,7 +44,7 @@ namespace big
 
 	static void lua_manager_tick()
 	{
-		if(g_lua_manager)
+		if(g_lua_manager) [[likely]]
 		{
 			g_lua_manager->for_each_module([](const std::shared_ptr<lua_module>& module) {
 				module->tick_scripts();

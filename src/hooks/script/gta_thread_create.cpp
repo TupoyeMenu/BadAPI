@@ -7,7 +7,10 @@ namespace big
 	{
 		const uint32_t thread_id = g_hooking->get_original<gta_thread_create>()(p1, p2, p3, p4);
 
-		g_lua_manager->trigger_event<"GTAThreadCreate">(thread_id);
+		if (g_lua_manager) [[likely]]
+		{
+			g_lua_manager->trigger_event<"GTAThreadCreate">(thread_id);
+		}
 
 		return thread_id;
 	}

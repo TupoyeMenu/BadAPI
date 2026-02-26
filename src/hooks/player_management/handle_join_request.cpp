@@ -19,9 +19,14 @@ namespace big
 	 */
 	bool hooks::handle_join_request(Network* network, rage::snSession* session, rage::rlGamerInfo* player_info, CJoinRequestContext* ctx, BOOL is_transition_session)
 	{
-		auto event_ret = g_lua_manager->trigger_event<"HandleJoinRequest", bool>((uint64_t)network, (uint64_t)session, (uint64_t)player_info, (uint64_t)ctx, (int)is_transition_session);
-		if (event_ret.has_value())
-			return event_ret.value();
+		if (g_lua_manager) [[likely]]
+		{
+			auto event_ret = g_lua_manager->trigger_event<"HandleJoinRequest", bool>((uint64_t)network, (uint64_t)session, (uint64_t)player_info, (uint64_t)ctx, (int)is_transition_session);
+			if (event_ret.has_value())
+			{
+				return event_ret.value();
+			}
+		}
 
 		return g_hooking->get_original<hooks::handle_join_request>()(network, session, player_info, ctx, is_transition_session);
 	}

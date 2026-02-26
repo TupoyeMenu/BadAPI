@@ -178,9 +178,14 @@ namespace big
 			return g_hooking->get_original<hooks::receive_net_message>()(a1, net_cxn_mgr, event);
 		}
 
-		auto event_ret = g_lua_manager->trigger_event<"ReceiveNetMessage", bool>((uint64_t)a1, (uint64_t)net_cxn_mgr, (uint64_t)event, (uint32_t)msgType, (uint64_t)&buffer);
-		if (event_ret.has_value())
-			return event_ret.value();
+		if (g_lua_manager) [[likely]]
+		{
+			auto event_ret = g_lua_manager->trigger_event<"ReceiveNetMessage", bool>((uint64_t)a1, (uint64_t)net_cxn_mgr, (uint64_t)event, (uint32_t)msgType, (uint64_t)&buffer);
+			if (event_ret.has_value())
+			{
+				return event_ret.value();
+			}
+		}
 
 
 		int sec_id               = 0;
